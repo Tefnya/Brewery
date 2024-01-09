@@ -1,5 +1,6 @@
 package net.satisfy.brewery.block.barrel;
 
+import net.minecraft.world.entity.player.Player;
 import net.satisfy.brewery.block.brewingstation.BrewingstationBlock;
 import net.satisfy.brewery.util.BreweryUtil;
 import net.minecraft.Util;
@@ -46,6 +47,14 @@ public class BigBarrelRightBlock extends BrewingstationBlock {
         } else {
             return doubleBlockHalf == DoubleBlockHalf.LOWER && direction == Direction.DOWN && !blockState.canSurvive(levelAccessor, blockPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(blockState, direction, blockState2, levelAccessor, blockPos, blockPos2);
         }
+    }
+
+    @Override
+    public void playerWillDestroy(Level level, BlockPos blockPos, BlockState blockState, Player player) {
+        if(blockState.getValue(HALF).equals(DoubleBlockHalf.UPPER)) {
+            blockPos = blockPos.below();
+        }
+        super.playerWillDestroy(level, blockPos, blockState, player);
     }
 
     @Override

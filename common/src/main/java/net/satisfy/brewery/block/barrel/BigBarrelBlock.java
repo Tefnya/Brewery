@@ -124,19 +124,24 @@ public class BigBarrelBlock extends FacingBlock {
         }
     }
 
+    @Override
+    public void playerWillDestroy(Level level, BlockPos blockPos, BlockState blockState, Player player) {
+        if(blockState.getValue(HALF).equals(DoubleBlockHalf.UPPER)) {
+            blockPos = blockPos.below();
+        }
+        super.playerWillDestroy(level, blockPos, blockState, player);
+    }
+
     private void destroyBlockAndSurrounding(Level level, Player player, BlockPos pos) {
         BlockState blockState = level.getBlockState(pos);
         BlockEntity blockEntity = level.getBlockEntity(pos);
 
-        // Destroy the block itself
         level.destroyBlock(pos, true);
 
-        // Destroy the block entity if it exists
         if (blockEntity != null) {
             level.removeBlockEntity(pos);
         }
 
-        // Destroy surrounding blocks
         destroySurroundingBlocks(level, player, pos);
     }
 

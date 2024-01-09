@@ -1,0 +1,14 @@
+{
+  "type": "brewery:brewing",
+  "ingredients": [
+    {
+      "item": "brewery:hops"
+    },
+    {
+      "item": "minecraft:popped_chorus_fruit"
+    }
+  ],
+  "result": {
+    "item": "brewery:beer_chorus"
+  }
+}

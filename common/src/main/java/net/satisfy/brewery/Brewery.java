@@ -10,7 +10,7 @@ import net.satisfy.brewery.entity.beer_elemental.BeerElementalEntity;
 import net.satisfy.brewery.event.*;
 import net.satisfy.brewery.networking.BreweryNetworking;
 import net.satisfy.brewery.registry.*;
-import net.satisfy.brewery.sound.SoundRegistry;
+import net.satisfy.brewery.registry.SoundRegistry;
 import net.satisfy.brewery.util.BreweryIdentifier;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;

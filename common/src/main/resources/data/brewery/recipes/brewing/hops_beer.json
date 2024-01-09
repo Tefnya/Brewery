@@ -1,0 +1,14 @@
+{
+  "type": "brewery:brewing",
+  "ingredients": [
+    {
+      "item": "brewery:hops"
+    },
+    {
+      "item": "brewery:hops"
+    }
+  ],
+  "result": {
+    "item": "brewery:beer_hops"
+  }
+}

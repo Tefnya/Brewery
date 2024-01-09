@@ -53,10 +53,42 @@
       "brewery:cabinet_close"
     ]
   },
-  "timer_ticking": {
-    "subtitle": "brewery.sound.timer_ticking",
+  "brewstation_timer": {
+    "subtitle": "brewery.sound.brewstation_timer",
     "sounds": [
-      "brewery:timer_ticking"
+      "brewery:brewstation_timer_loop"
+    ]
+  },
+  "brewstation_whistle": {
+    "subtitle": "brewery.sound.brewstation_whistle",
+    "sounds": [
+      "brewery:brewstation_whistle1",
+      "brewery:brewstation_whistle2",
+      "brewery:brewstation_whistle3"
+    ]
+  },
+  "brewstation_ambient": {
+    "subtitle": "brewery.sound.brewstation_ambient",
+    "sounds": [
+      "brewery:brewstation_ambient"
+    ]
+  },
+  "brewstation_kettle": {
+    "subtitle": "brewery.sound.brewstation_kettle",
+    "sounds": [
+      "brewery:brewstation_kettle"
+    ]
+  },
+  "brewstation_oven": {
+    "subtitle": "brewery.sound.brewstation_oven",
+    "sounds": [
+      "brewery:brewstation_oven"
+    ]
+  },
+  "brewstation_process_failed": {
+    "subtitle": "brewery.sound.brewstation_process_failed",
+    "sounds": [
+      "brewery:brewstation_process_failed"
     ]
   }
 }

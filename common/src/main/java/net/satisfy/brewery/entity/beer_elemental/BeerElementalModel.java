@@ -16,7 +16,6 @@ import java.util.Arrays;
 import static net.satisfy.brewery.Brewery.MOD_ID;
 
 public class BeerElementalModel<T extends Monster> extends EntityModel<T> {
-
     public static final ModelLayerLocation BEER_ELEMENTAL_MODEL_LAYER = new ModelLayerLocation(new ResourceLocation(MOD_ID, "beer_elemental"), "main");
     private final ModelPart[] upperBodyParts;
 
@@ -127,16 +126,15 @@ public class BeerElementalModel<T extends Monster> extends EntityModel<T> {
 
     @Override
     public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float age, float headYaw, float headPitch) {
-        // f is a multiplier for the rotation of the upper body parts, it gets inverted on each "layer" of parts.
-        float f = age * Mth.PI * 0.02F; // Starts at 0 degrees, 0.05 revolutions per second.
+        float f = age * Mth.PI * 0.02F;
         for(int i = 0; i < 4; ++i) {
-            upperBodyParts[i].y = Mth.cos((i * 2.0F + age) * 0.25F) - 2.0F; // Y values on the outer rings move in a scaled cos wave, offset by their height on the model.
-            upperBodyParts[i].x = Mth.cos(f) * 9.0F; // xz essentially just giving them a point f times around the circle.
+            upperBodyParts[i].y = Mth.cos((i * 2.0F + age) * 0.25F) - 2.0F;
+            upperBodyParts[i].x = Mth.cos(f) * 9.0F;
             upperBodyParts[i].z = Mth.sin(f) * 9.0F;
-            f += 90 * Mth.DEG_TO_RAD; // The parts are spaced 90 degrees from each other
+            f += 90 * Mth.DEG_TO_RAD;
         }
 
-        f = age * Mth.PI * 0.02F + 45 * Mth.DEG_TO_RAD; // Starts at 45 degrees, 0.015 revolutions per second.
+        f = age * Mth.PI * 0.02F + 45 * Mth.DEG_TO_RAD;
         for(int i = 4; i < 8; ++i) {
             upperBodyParts[i].y = Mth.cos((i * 2.0F + age) * 0.25F) + 2.0F;
             upperBodyParts[i].x = Mth.cos(f) * 7.0F;
@@ -145,7 +143,7 @@ public class BeerElementalModel<T extends Monster> extends EntityModel<T> {
         }
 
 
-        f = age * Mth.PI * -0.02F + 27 * Mth.DEG_TO_RAD; // Starts at 27 degrees, 0.025 revolutions per second.
+        f = age * Mth.PI * -0.02F + 27 * Mth.DEG_TO_RAD;
         for(int i = 8; i < 12; ++i) {
             upperBodyParts[i].y = Mth.cos((i * 1.5F + age) * 0.5F) + 11.0F;
             upperBodyParts[i].x = Mth.cos(f) * 5.0F;

@@ -1,4 +1,4 @@
-package net.satisfy.brewery.sound;
+package net.satisfy.brewery.registry;
 
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.Registrar;
@@ -17,6 +17,12 @@ public class SoundRegistry {
     public static final RegistrySupplier<SoundEvent> BEER_ELEMENTAL_AMBIENT = create("beer_elemental_ambient");
     public static final RegistrySupplier<SoundEvent> BEER_ELEMENTAL_HURT = create("beer_elemental_hurt");
     public static final RegistrySupplier<SoundEvent> BEER_ELEMENTAL_DEATH = create("beer_elemental_death");
+    public static final RegistrySupplier<SoundEvent> BREWSTATION_AMBIENT = create("brewstation_ambient");
+    public static final RegistrySupplier<SoundEvent> BREWSTATION_KETTLE = create("brewstation_kettle");
+    public static final RegistrySupplier<SoundEvent> BREWSTATION_OVEN = create("brewstation_oven");
+    public static final RegistrySupplier<SoundEvent> BREWSTATION_PROCESS_FAILED = create("brewstation_process_failed");
+    public static final RegistrySupplier<SoundEvent> BREWSTATION_TIMER_LOOP = create("brewstation_timer");
+    public static final RegistrySupplier<SoundEvent> BREWSTATION_WHISTLE = create("brewstation_whistle");
 
     private static RegistrySupplier<SoundEvent> create(String name) {
         final ResourceLocation id = new BreweryIdentifier(name);

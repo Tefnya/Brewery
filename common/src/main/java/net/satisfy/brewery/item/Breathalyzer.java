@@ -2,7 +2,7 @@ package net.satisfy.brewery.item;
 
 import net.satisfy.brewery.effect.alcohol.AlcoholLevel;
 import net.satisfy.brewery.effect.alcohol.AlcoholPlayer;
-import net.satisfy.brewery.sound.SoundRegistry;
+import net.satisfy.brewery.registry.SoundRegistry;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;

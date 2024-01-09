@@ -1,7 +1,7 @@
 package net.satisfy.brewery.entity.beer_elemental;
 
 import net.satisfy.brewery.entity.beer_elemental_barrel.BeerElementalAttackEntity;
-import net.satisfy.brewery.sound.SoundRegistry;
+import net.satisfy.brewery.registry.SoundRegistry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;

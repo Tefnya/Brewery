@@ -1,18 +1,14 @@
 package net.satisfy.brewery.block.brewingstation;
 
-import net.satisfy.brewery.entity.BrewstationBlockEntity;
-import net.satisfy.brewery.block.property.BrewMaterial;
-import net.satisfy.brewery.block.property.Liquid;
-import net.satisfy.brewery.registry.BlockStateRegistry;
-import net.satisfy.brewery.registry.ObjectRegistry;
-import net.satisfy.brewery.util.BreweryUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -37,6 +33,12 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.satisfy.brewery.block.property.BrewMaterial;
+import net.satisfy.brewery.block.property.Liquid;
+import net.satisfy.brewery.entity.BrewstationBlockEntity;
+import net.satisfy.brewery.registry.BlockStateRegistry;
+import net.satisfy.brewery.registry.ObjectRegistry;
+import net.satisfy.brewery.util.BreweryUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -73,10 +75,12 @@ public class BrewKettleBlock extends BrewingstationBlock implements EntityBlock 
                 ItemStack returnStack = brewKettleEntity.removeIngredient();
                 if (returnStack != null) {
                     player.addItem(returnStack);
+                    level.playSound(null, blockPos, SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS, 1.0F, 1.0F);
                     //brewKettleEntity.updateInClientWorld();
                     level.sendBlockUpdated(blockPos, blockState, blockState, Block.UPDATE_CLIENTS);
                     return InteractionResult.SUCCESS;
                 }
+
                 return InteractionResult.CONSUME;
             }
             if (itemStack.getItem() == ObjectRegistry.BEER_MUG.get().asItem()) { //BEER
@@ -117,12 +121,35 @@ public class BrewKettleBlock extends BrewingstationBlock implements EntityBlock 
             InteractionResult interactionResult = brewKettleEntity.addIngredient(itemStack);
             if (interactionResult == InteractionResult.SUCCESS) {
                 //brewKettleEntity.updateInClientWorld();
+                level.playSound(null, blockPos, SoundEvents.ITEM_FRAME_ADD_ITEM, SoundSource.PLAYERS, 1.0F, 1.0F);
                 level.sendBlockUpdated(blockPos, blockState, blockState, Block.UPDATE_CLIENTS);
             }
             return interactionResult;
         }
         return super.use(blockState, level, blockPos, player, interactionHand, blockHitResult);
     }
+
+    @Override
+    public void animateTick(BlockState blockState, Level level, BlockPos blockPos, RandomSource randomSource) {
+        if (blockState.getValue(LIQUID) == Liquid.OVERFLOWING) {
+            double x = blockPos.getX() + 0.5;
+            double y = blockPos.getY() + 0.95;
+            double z = blockPos.getZ() + 0.5;
+
+            if (randomSource.nextDouble() < 0.1D) {
+                level.playLocalSound(x, y, z, SoundEvents.BUBBLE_COLUMN_UPWARDS_AMBIENT, SoundSource.BLOCKS, 1.0F, 1.0F, false);
+            }
+
+            double offset = 0.2;
+            double offsetX = randomSource.nextDouble() * offset - offset / 2;
+            double offsetY = randomSource.nextDouble() * 0.1D;
+            double offsetZ = randomSource.nextDouble() * offset - offset / 2;
+
+            level.addParticle(ParticleTypes.BUBBLE, x + offsetX, y + offsetY, z + offsetZ, 0.0, 0.0, 0.0);
+            level.addParticle(ParticleTypes.BUBBLE_POP, x + offsetX, y + offsetY, z + offsetZ, 0.0, 0.0, 0.0);
+        }
+    }
+
 
     @Override
     public void stepOn(Level level, BlockPos blockPos, BlockState blockState, Entity entity) {

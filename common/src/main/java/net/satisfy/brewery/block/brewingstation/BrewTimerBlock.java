@@ -1,5 +1,11 @@
 package net.satisfy.brewery.block.brewingstation;
 
+import com.mojang.math.Vector3f;
+import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.satisfy.brewery.block.property.BrewMaterial;
 import net.satisfy.brewery.registry.BlockStateRegistry;
 import net.satisfy.brewery.util.BreweryUtil;
@@ -48,9 +54,25 @@ public class BrewTimerBlock extends BrewingstationBlock {
 
     public void animateTick(BlockState blockState, Level level, BlockPos blockPos, RandomSource randomSource) {
         if (blockState.getValue(TIME)) {
+            double x = blockPos.getX() + 0.5;
+            double y = blockPos.getY() + 1.2;
+            double z = blockPos.getZ() + 0.5;
 
+            DustParticleOptions redDust = new DustParticleOptions(new Vector3f(1.0F, 0.0F, 0.0F), 1.0F);
+
+            for (int i = 0; i < 4; i++) {
+                double offsetX = randomSource.nextDouble() * 0.6D - 0.3D;
+                double offsetZ = randomSource.nextDouble() * 0.6D - 0.3D;
+                level.addParticle(redDust, x + offsetX, y, z + offsetZ, 1.0, 0.0, 0.0);
+            }
+
+            if (randomSource.nextDouble() < 0.1D) {
+                level.playLocalSound(x, y, z, SoundEvents.LLAMA_CHEST, SoundSource.BLOCKS, 1.0F, 1.0F, false);
+            }
         }
     }
+
+
 
     @Override
     public @NotNull VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {

@@ -1,11 +1,12 @@
 package net.satisfy.brewery.block.brewingstation;
 
-import net.satisfy.brewery.block.property.BrewMaterial;
-import net.satisfy.brewery.registry.BlockStateRegistry;
-import net.satisfy.brewery.util.BreweryUtil;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
@@ -22,6 +23,9 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.satisfy.brewery.block.property.BrewMaterial;
+import net.satisfy.brewery.registry.BlockStateRegistry;
+import net.satisfy.brewery.util.BreweryUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -88,6 +92,38 @@ public class BrewWhistleBlock extends BrewingstationBlock {
         super.createBlockStateDefinition(builder);
         builder.add(MATERIAL, WHISTLE, HALF);
     }
+
+    @Override
+    public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource rand) {
+        if (!state.getValue(WHISTLE)) {
+            return;
+        }
+
+        Direction direction = state.getValue(FACING);
+
+        double offsetX = 0.5 + direction.getStepX() * 0.7;
+        double offsetY = 1.0;
+        double offsetZ = 0.5 + direction.getStepZ() * 0.7;
+
+        double x = pos.getX() + offsetX;
+        double y = pos.getY() + offsetY;
+        double z = pos.getZ() + offsetZ;
+
+        double speedX = direction.getStepX() * 0.05;
+        double speedY = 0.0;
+        double speedZ = direction.getStepZ() * 0.05;
+
+        for (int i = 0; i < 3; i++) {
+            double particleX = x + rand.nextGaussian() * 0.01;
+            double particleY = y;
+            double particleZ = z + rand.nextGaussian() * 0.01;
+            world.addParticle(ParticleTypes.LARGE_SMOKE, particleX, particleY, particleZ, speedX, speedY, speedZ);
+        }
+
+        world.playLocalSound(x, y, z, SoundEvents.FIREWORK_ROCKET_LAUNCH, SoundSource.BLOCKS, 1.0F, 1.0F, false);
+    }
+
+
 
     static {
         WHISTLE = BlockStateRegistry.WHISTLE;

@@ -57,11 +57,13 @@ public class BrewOvenBlock extends BrewingstationBlock {
         return super.use(blockState, level, blockPos, player, interactionHand, blockHitResult);
     }
 
+    @Override
     public void animateTick(BlockState blockState, Level level, BlockPos blockPos, RandomSource randomSource) {
+        double x = blockPos.getX() + 0.5D;
+        double y = blockPos.getY();
+        double z = blockPos.getZ() + 0.5D;
+
         if (blockState.getValue(HEAT) != Heat.OFF) {
-            double x = blockPos.getX() + 0.5D;
-            double y = blockPos.getY();
-            double z = blockPos.getZ() + 0.5D;
             if (randomSource.nextDouble() < 0.1D) {
                 level.playLocalSound(x, y, z, SoundEvents.FURNACE_FIRE_CRACKLE, SoundSource.BLOCKS, 1.0F, 1.0F, false);
             }
@@ -70,12 +72,24 @@ public class BrewOvenBlock extends BrewingstationBlock {
             Direction.Axis axis = direction.getAxis();
             double h = randomSource.nextDouble() * 0.6D - 0.3D;
             double i = axis == Direction.Axis.X ? direction.getStepX() * 0.52D : h;
-            double j = randomSource.nextDouble() * 10.0D / 16.0D;
+            double j = randomSource.nextDouble() * 6.5D / 16.5D; // Adjusted for reduced height
             double k = axis == Direction.Axis.Z ? direction.getStepZ() * 0.52D : h;
-            level.addParticle(ParticleTypes.SMOKE, x + i, y + j, z + k, 0.0, 0.0, 0.0);
-            level.addParticle(ParticleTypes.FLAME, x + i, y + j, z + k, 0.0, 0.0, 0.0);
+
+            if (blockState.getValue(HEAT) == Heat.WEAK) {
+                if (randomSource.nextDouble() < 0.1D) {
+                    level.playLocalSound(x, y, z, SoundEvents.SMOKER_SMOKE, SoundSource.BLOCKS, 1.0F, 1.0F, false);
+                }
+
+                for (int l = 0; l < 10; l++) {
+                    level.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, x + i, y + j, z + k, 0.0, 0.0, 0.0);
+                }
+            } else {
+                level.addParticle(ParticleTypes.SMOKE, x + i, y + j, z + k, 0.0, 0.0, 0.0);
+                level.addParticle(ParticleTypes.FLAME, x + i, y + j, z + k, 0.0, 0.0, 0.0);
+            }
         }
     }
+
 
     @SuppressWarnings("deprecation")
     @Override

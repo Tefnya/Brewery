@@ -38,6 +38,10 @@ public class Brewery {
         SoundEventsRegistry.init();
         RecipeTypeRegistry.init();
         registerEvents();
+
+        ParticleSpawnEvent particleSpawnEvent = new ParticleSpawnEvent();
+        PlayerEvent.ATTACK_ENTITY.register(particleSpawnEvent);
+        //TODO? Placeholder
     }
 
     public static void commonSetup(){

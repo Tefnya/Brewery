@@ -5,7 +5,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.satisfy.brewery.registry.BlockEntityRegistry;
-/*
+
 public class SideBoardBlockEntity extends ChestBlockEntity {
     public SideBoardBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(BlockEntityRegistry.SIDEBOARD.get(), blockPos, blockState);
@@ -16,5 +16,3 @@ public class SideBoardBlockEntity extends ChestBlockEntity {
         return Component.translatable("container.sideboard");
     }
 }
-
-*/

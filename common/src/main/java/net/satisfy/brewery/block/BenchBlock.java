@@ -79,7 +79,7 @@ public class BenchBlock extends LineConnectingBlock {
                 Block.box(0.0, 5.0, 2.0, 16.0, 7.0, 14.0)
         };
         BOTTOM_SINGLE_SHAPE = new VoxelShape[]{
-                Shapes.or(Block.box(3.0, 0.0, 2.0, 13.0, 5.0, 4.0), Block.box(3.0, 0.0, 12.0, 13.0, 5.0, 14.0)),
+                Shapes.or(Block.box(12.0, 0.0, 3.0, 14.0, 5.0, 13.0), Block.box(12.0, 0.0, 3.0, 14.0, 5.0, 13.0)),
                 Shapes.or(Block.box(2.0, 0.0, 3.0, 4.0, 5.0, 13.0), Block.box(12.0, 0.0, 3.0, 14.0, 5.0, 13.0))
         };
         BOTTOM_MULTI_SHAPE = new VoxelShape[]{

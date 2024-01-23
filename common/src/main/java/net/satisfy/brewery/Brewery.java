@@ -27,16 +27,16 @@ public class Brewery {
     public static void init() {
         LOGGER.debug("Initiate " + MOD_ID);
         BrewEvents.loadClass();
-        ObjectRegistry.register();
-        EffectRegistry.registerEffects();
+        ObjectRegistry.init();
+        BlockEntityRegistry.init();
+        MobEffectRegistry.init();
         CommonEvents.init();
         BreweryNetworking.registerC2SPackets();
-        SoundRegistry.registerSounds();
+        SoundRegistry.init();
         SiloBlock.registerDryers();
-        EntityRegistry.register();
+        EntityRegistry.init();
         SoundEventsRegistry.init();
-        RecipeRegistry.registerRecipes();
-        BlockEntityRegistry.registerBlockEntities();
+        RecipeTypeRegistry.init();
         registerEvents();
     }
 

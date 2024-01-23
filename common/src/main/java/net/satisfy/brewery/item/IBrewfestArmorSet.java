@@ -1,8 +1,8 @@
 package net.satisfy.brewery.item;
 
 import com.google.common.collect.ImmutableMap;
-import net.satisfy.brewery.registry.EffectRegistry;
-import net.satisfy.brewery.registry.MaterialRegistry;
+import net.satisfy.brewery.registry.MobEffectRegistry;
+import net.satisfy.brewery.registry.ArmorMaterialRegistry;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
@@ -14,11 +14,11 @@ import java.util.Objects;
 
 public interface IBrewfestArmorSet {
 
-    MobEffectInstance hardDrinkingEffect = new MobEffectInstance(EffectRegistry.HARDDRINKING.get(), 14 * 20, 1);
+    MobEffectInstance hardDrinkingEffect = new MobEffectInstance(MobEffectRegistry.HARDDRINKING.get(), 14 * 20, 1);
 
     Map<ArmorMaterial, MobEffectInstance> MATERIAL_TO_EFFECT_MAP =
             (new ImmutableMap.Builder<ArmorMaterial, MobEffectInstance>())
-                    .put(MaterialRegistry.BREWFEST_ARMOR, hardDrinkingEffect)
+                    .put(ArmorMaterialRegistry.BREWFEST_ARMOR, hardDrinkingEffect)
                     .build();
 
     default boolean hasBrewfestSet(Player player) {
@@ -27,7 +27,7 @@ public interface IBrewfestArmorSet {
 
     default void checkForSet(Player player) {
         if (hasBrewfestSet(player)) {
-            addStatusEffectForMaterial(player, new MobEffectInstance(EffectRegistry.HARDDRINKING.get(), 14 * 20, 2));
+            addStatusEffectForMaterial(player, new MobEffectInstance(MobEffectRegistry.HARDDRINKING.get(), 14 * 20, 2));
         }
         hasBrewfest(player);
     }
@@ -45,7 +45,7 @@ public interface IBrewfestArmorSet {
     }
 
     private boolean hasCorrectBrewfest(ArmorMaterial material, Player player) {
-        if (material.equals(MaterialRegistry.BREWFEST_ARMOR)) {
+        if (material.equals(ArmorMaterialRegistry.BREWFEST_ARMOR)) {
             int slot = 1;
             if (!player.getInventory().getArmor(slot).isEmpty()) {
                 ArmorItem armor = (ArmorItem) player.getInventory().getArmor(slot).getItem();
@@ -76,7 +76,7 @@ public interface IBrewfestArmorSet {
     }
 
     private static boolean isBrewfestBoots(ArmorItem armorItem) {
-        return armorItem.getMaterial() == MaterialRegistry.BREWFEST_ARMOR;
+        return armorItem.getMaterial() == ArmorMaterialRegistry.BREWFEST_ARMOR;
     }
 
     static boolean hasBrewfestLeggings(Player player) {
@@ -89,7 +89,7 @@ public interface IBrewfestArmorSet {
     }
 
     private static boolean isBrewfestLeggings(ArmorItem armorItem) {
-        return armorItem.getMaterial() == MaterialRegistry.BREWFEST_LEATHER;
+        return armorItem.getMaterial() == ArmorMaterialRegistry.BREWFEST_LEATHER;
     }
 
     static boolean hasBrewfestBreastplate(Player player) {
@@ -102,7 +102,7 @@ public interface IBrewfestArmorSet {
     }
 
     private static boolean isBrewfestBreastplate(ArmorItem armorItem) {
-        return armorItem.getMaterial() == MaterialRegistry.BREWFEST_ARMOR || armorItem.getMaterial() == MaterialRegistry.BREWFEST_DRESS;
+        return armorItem.getMaterial() == ArmorMaterialRegistry.BREWFEST_ARMOR || armorItem.getMaterial() == ArmorMaterialRegistry.BREWFEST_DRESS;
     }
 
     static boolean hasBrewfestHelmet(Player player) {
@@ -116,6 +116,6 @@ public interface IBrewfestArmorSet {
 
 
     private static boolean isBrewfestHelmet(ArmorItem armorItem) {
-        return armorItem.getMaterial() == MaterialRegistry.BREWFEST_LEATHER;
+        return armorItem.getMaterial() == ArmorMaterialRegistry.BREWFEST_LEATHER;
     }
 }

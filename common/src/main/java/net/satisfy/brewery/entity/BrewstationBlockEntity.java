@@ -10,7 +10,7 @@ import net.satisfy.brewery.item.DrinkBlockItem;
 import net.satisfy.brewery.registry.BlockEntityRegistry;
 import net.satisfy.brewery.registry.BlockStateRegistry;
 import net.satisfy.brewery.registry.ObjectRegistry;
-import net.satisfy.brewery.registry.RecipeRegistry;
+import net.satisfy.brewery.registry.RecipeTypeRegistry;
 import net.satisfy.brewery.util.BreweryMath;
 import net.satisfy.brewery.util.BreweryUtil;
 import net.satisfy.brewery.util.ImplementedInventory;
@@ -108,7 +108,7 @@ public class BrewstationBlockEntity extends BlockEntity implements ImplementedIn
     public void tick(Level level, BlockPos blockPos, BlockState blockState, BrewstationBlockEntity blockEntity) {
         if (level.isClientSide) return;
         if (!this.beer.isEmpty()) return;
-        Recipe<?> recipe = level.getRecipeManager().getRecipeFor(RecipeRegistry.BREWING_RECIPE_TYPE.get(), this, level).orElse(null);
+        Recipe<?> recipe = level.getRecipeManager().getRecipeFor(RecipeTypeRegistry.BREWING_RECIPE_TYPE.get(), this, level).orElse(null);
         if (!canBrew(recipe)) {
             endBrewing();
             return;

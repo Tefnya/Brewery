@@ -5,7 +5,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.satisfy.brewery.effect.alcohol.AlcoholPlayer;
 import net.satisfy.brewery.effect.alcohol.AlcoholManager;
 import net.satisfy.brewery.client.BreweryClient;
-import net.satisfy.brewery.registry.EffectRegistry;
+import net.satisfy.brewery.registry.MobEffectRegistry;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Camera;
@@ -31,7 +31,7 @@ public class FogRendererMixin {
     private static float drunkColor(ClientLevel.ClientLevelData levelData) {
         Player player = BreweryClient.getPlayer();
         if (player instanceof AlcoholPlayer alcoholPlayer && alcoholPlayer.getAlcohol().isBlackout()) {
-            MobEffectInstance effect = player.getEffect(EffectRegistry.BLACKOUT.get());
+            MobEffectInstance effect = player.getEffect(MobEffectRegistry.BLACKOUT.get());
             if (effect != null && effect.getDuration() <= AlcoholManager.BEGIN_TIME) {
                 if (effect.getDuration() < 10) {
                     return  1.0F - (float)effect.getDuration() / 10.0F;
@@ -48,7 +48,7 @@ public class FogRendererMixin {
     private static void drunkFog(Camera camera, FogRenderer.FogMode fogMode, float f, boolean bl, float g, CallbackInfo ci) {
         Entity entity = camera.getEntity();
         if (entity instanceof LivingEntity livingEntity && entity instanceof AlcoholPlayer alcoholPlayer && alcoholPlayer.getAlcohol().isBlackout()) {
-            MobEffectInstance effect = livingEntity.getEffect(EffectRegistry.BLACKOUT.get());
+            MobEffectInstance effect = livingEntity.getEffect(MobEffectRegistry.BLACKOUT.get());
             if (effect != null) {
                 int time = effect.getDuration();
                 if (time <= AlcoholManager.BEGIN_TIME) {

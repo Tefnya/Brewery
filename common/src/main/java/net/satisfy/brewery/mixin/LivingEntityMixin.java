@@ -1,7 +1,7 @@
 package net.satisfy.brewery.mixin;
 
 import com.google.common.collect.Maps;
-import net.satisfy.brewery.registry.EffectRegistry;
+import net.satisfy.brewery.registry.MobEffectRegistry;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -57,9 +57,9 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Inject(method = "checkTotemDeathProtection", at = @At("HEAD"), cancellable = true)
     public void inject1(DamageSource damageSource, CallbackInfoReturnable<Boolean> callback) {
-        if (this.hasEffect(EffectRegistry.SURVIVALIST.get())) {
+        if (this.hasEffect(MobEffectRegistry.SURVIVALIST.get())) {
             this.setHealth(1.0F);
-            this.removeEffect(EffectRegistry.SURVIVALIST.get());
+            this.removeEffect(MobEffectRegistry.SURVIVALIST.get());
             this.removeAllEffects();
             this.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 900, 1));
             this.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 100, 1));
@@ -71,8 +71,8 @@ public abstract class LivingEntityMixin extends Entity {
 
     @ModifyVariable(method = "travel", at = @At("LOAD"), name = "f2", ordinal = 0, index = 8)
     public float inject2(float value) {
-        if (this.hasStatusEffect(EffectRegistry.SLIDING.get()) && this.isOnGround()) {
-            MobEffectInstance slidingEffect = this.getEffect(EffectRegistry.SLIDING.get());
+        if (this.hasStatusEffect(MobEffectRegistry.SLIDING.get()) && this.isOnGround()) {
+            MobEffectInstance slidingEffect = this.getEffect(MobEffectRegistry.SLIDING.get());
             if (slidingEffect != null) {
                 int amplifier = slidingEffect.getAmplifier();
                 return (((amplifier/(-300f))+1)*0.98f);

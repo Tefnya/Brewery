@@ -6,7 +6,7 @@ import net.satisfy.brewery.effect.alcohol.AlcoholLevel;
 import net.satisfy.brewery.effect.alcohol.AlcoholManager;
 import net.satisfy.brewery.effect.alcohol.AlcoholPlayer;
 import net.satisfy.brewery.networking.BreweryNetworking;
-import net.satisfy.brewery.registry.EffectRegistry;
+import net.satisfy.brewery.registry.MobEffectRegistry;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffect;
@@ -29,7 +29,7 @@ public class DrunkEffect extends MobEffect {
             }
             alcoholLevel.sober();
             if (!alcoholLevel.isSober()) {
-                livingEntity.addEffect(new MobEffectInstance(EffectRegistry.DRUNK.get(), AlcoholManager.DRUNK_TIME, alcoholLevel.getDrunkenness() - 1, false, alcoholLevel.isDrunk()));
+                livingEntity.addEffect(new MobEffectInstance(MobEffectRegistry.DRUNK.get(), AlcoholManager.DRUNK_TIME, alcoholLevel.getDrunkenness() - 1, false, alcoholLevel.isDrunk()));
             }
             if (livingEntity instanceof ServerPlayer serverPlayer) {
                 AlcoholManager.syncAlcohol(serverPlayer, alcoholLevel);
@@ -62,7 +62,7 @@ public class DrunkEffect extends MobEffect {
     }
 
     private int getDrunkAmplifier(LivingEntity livingEntity) {
-        MobEffectInstance effect = livingEntity.getEffect(EffectRegistry.DRUNK.get());
+        MobEffectInstance effect = livingEntity.getEffect(MobEffectRegistry.DRUNK.get());
         return effect != null ? effect.getAmplifier() : 0;
     }
 

@@ -3,7 +3,7 @@ package net.satisfy.brewery.recipe;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
-import net.satisfy.brewery.registry.RecipeRegistry;
+import net.satisfy.brewery.registry.RecipeTypeRegistry;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -69,12 +69,12 @@ public class BrewingRecipe implements Recipe<Container> {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return RecipeRegistry.BREWING_RECIPE_SERIALIZER.get();
+        return RecipeTypeRegistry.BREWING_RECIPE_SERIALIZER.get();
     }
 
     @Override
     public RecipeType<?> getType() {
-        return RecipeRegistry.BREWING_RECIPE_TYPE.get();
+        return RecipeTypeRegistry.BREWING_RECIPE_TYPE.get();
     }
 
     @Override

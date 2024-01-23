@@ -67,7 +67,7 @@ public class EntityRegistry {
         return ENTITY_TYPES.register(new BreweryIdentifier(path), type);
     }
 
-    public static void register() {
+    public static void init() {
 
     }
 }

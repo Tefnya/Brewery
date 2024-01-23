@@ -29,7 +29,7 @@ public class SoundRegistry {
         return SOUND_EVENTS.register(id, () -> new SoundEvent(id));
     }
 
-    public static void registerSounds() {
+    public static void init() {
         Brewery.LOGGER.debug("Register " + SoundRegistry.class);
     }
 }

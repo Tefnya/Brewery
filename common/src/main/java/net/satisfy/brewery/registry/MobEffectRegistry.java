@@ -14,7 +14,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 
 import java.util.function.Supplier;
 
-public class EffectRegistry {
+public class MobEffectRegistry {
 
     private static final DeferredRegister<MobEffect> MOB_EFFECTS = DeferredRegister.create(Brewery.MOD_ID, Registry.MOB_EFFECT_REGISTRY);
     private static final Registrar<MobEffect> MOB_EFFECTS_REGISTRAR = MOB_EFFECTS.getRegistrar();
@@ -38,7 +38,7 @@ public class EffectRegistry {
         return MOB_EFFECTS_REGISTRAR.register(new BreweryIdentifier(name), effect);
     }
 
-    public static void registerEffects(){
+    public static void init(){
         Brewery.LOGGER.debug("Mob effects");
         MOB_EFFECTS.register();
     }

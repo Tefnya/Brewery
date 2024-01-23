@@ -7,7 +7,7 @@ import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ArmorMaterials;
 import net.minecraft.world.item.crafting.Ingredient;
 
-public class MaterialRegistry {
+public class ArmorMaterialRegistry {
     private static final Ingredient WOOL_REPAIR_INGREDIENT = Ingredient.of(ItemTags.WOOL);
     public static final ArmorMaterial BREWFEST_ARMOR = new ArmorMaterial() {
         @Override

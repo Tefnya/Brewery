@@ -42,6 +42,8 @@ public class Brewery {
 
         ParticleSpawnEvent particleSpawnEvent = new ParticleSpawnEvent();
         PlayerEvent.ATTACK_ENTITY.register(particleSpawnEvent);
+        HealingTouchEvent healingTouchEvent = new HealingTouchEvent();
+        PlayerEvent.ATTACK_ENTITY.register(healingTouchEvent);
         //TODO? Placeholder
     }
 

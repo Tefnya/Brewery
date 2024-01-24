@@ -8,6 +8,7 @@ import net.satisfy.brewery.block.SiloBlock;
 import net.satisfy.brewery.block.brew_event.BrewEvents;
 import net.satisfy.brewery.entity.beer_elemental.BeerElementalEntity;
 import net.satisfy.brewery.event.*;
+import net.satisfy.brewery.event.partyeffect.ParticleSpawnEvent;
 import net.satisfy.brewery.networking.BreweryNetworking;
 import net.satisfy.brewery.registry.*;
 import net.satisfy.brewery.registry.SoundRegistry;

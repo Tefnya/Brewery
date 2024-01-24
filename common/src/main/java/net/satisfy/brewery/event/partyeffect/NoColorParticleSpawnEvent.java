@@ -1,9 +1,8 @@
-package net.satisfy.brewery.event;
+package net.satisfy.brewery.event.partyeffect;
 
-import com.mojang.math.Vector3f;
 import dev.architectury.event.EventResult;
 import dev.architectury.event.events.common.PlayerEvent;
-import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -17,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-public class ParticleSpawnEvent implements PlayerEvent.AttackEntity {
+public class NoColorParticleSpawnEvent implements PlayerEvent.AttackEntity {
     private final Random random = new Random();
 
     @Override
@@ -28,14 +27,7 @@ public class ParticleSpawnEvent implements PlayerEvent.AttackEntity {
                     float r = random.nextFloat();
                     float g = random.nextFloat();
                     float b = random.nextFloat();
-                    float scale = 1.0f;
-
-                    double offsetX = (random.nextDouble() - 0.5) * entity.getBbWidth();
-                    double offsetY = (random.nextDouble() - 0.5) * entity.getBbHeight();
-                    double offsetZ = (random.nextDouble() - 0.5) * entity.getBbWidth();
-
-                    DustParticleOptions particleOptions = new DustParticleOptions(new Vector3f(r, g, b), scale);
-                    level.addParticle(particleOptions, entity.getX() + offsetX, entity.getY() + offsetY + entity.getBbHeight() / 2.0, entity.getZ() + offsetZ, 0, 0, 0);
+                    level.addParticle(ParticleTypes.FIREWORK, entity.getX(), entity.getY() + entity.getBbHeight() / 2.0, entity.getZ(), r - 0.5, g - 0.5, b - 0.5);
                 }
 
                 level.playSound(null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.FIREWORK_ROCKET_BLAST, SoundSource.PLAYERS, 1.0F, 1.0F);

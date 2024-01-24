@@ -1,4 +1,4 @@
-package net.satisfy.brewery.event;
+package net.satisfy.brewery.event.partyeffect;
 
 import dev.architectury.event.EventResult;
 import dev.architectury.event.events.common.PlayerEvent;

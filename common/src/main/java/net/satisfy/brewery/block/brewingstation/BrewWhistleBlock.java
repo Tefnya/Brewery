@@ -99,25 +99,26 @@ public class BrewWhistleBlock extends BrewingstationBlock {
             return;
         }
 
+        if (state.getValue(HALF) != DoubleBlockHalf.UPPER) {
+            return;
+        }
+
         Direction direction = state.getValue(FACING);
 
-        double offsetX = 0.5 + direction.getStepX() * 0.7;
-        double offsetY = 1.0;
-        double offsetZ = 0.5 + direction.getStepZ() * 0.7;
+        double offsetX = 0.5 + direction.getStepX() * 0.6;
+        double offsetY = 0.8;
+        double offsetZ = 0.5 + direction.getStepZ() * 0.6;
 
         double x = pos.getX() + offsetX;
         double y = pos.getY() + offsetY;
         double z = pos.getZ() + offsetZ;
 
-        double speedX = direction.getStepX() * 0.05;
-        double speedY = 0.0;
-        double speedZ = direction.getStepZ() * 0.05;
+        double speedX = direction.getStepX() * 0.1 + (rand.nextFloat() - 0.5) * 0.05;
+        double speedY = 0.5;
+        double speedZ = direction.getStepZ() * 0.1 + (rand.nextFloat() - 0.5) * 0.05;
 
-        for (int i = 0; i < 3; i++) {
-            double particleX = x + rand.nextGaussian() * 0.01;
-            double particleY = y;
-            double particleZ = z + rand.nextGaussian() * 0.01;
-            world.addParticle(ParticleTypes.LARGE_SMOKE, particleX, particleY, particleZ, speedX, speedY, speedZ);
+        for (int i = 0; i < 5; i++) { // More particles for a denser effect
+            world.addParticle(ParticleTypes.LARGE_SMOKE, x, y, z, speedX, speedY, speedZ);
         }
 
         world.playLocalSound(x, y, z, SoundEvents.FIREWORK_ROCKET_LAUNCH, SoundSource.BLOCKS, 1.0F, 1.0F, false);

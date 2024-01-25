@@ -1,8 +1,5 @@
 package net.satisfy.brewery.block.barrel;
 
-import net.minecraft.world.entity.player.Player;
-import net.satisfy.brewery.block.brewingstation.BrewingstationBlock;
-import net.satisfy.brewery.util.BreweryUtil;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -19,13 +16,14 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.satisfy.brewery.util.BreweryUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
-public class BigBarrelRightBlock extends BrewingstationBlock {
+public class BigBarrelRightBlock extends AbstractBarrelBlock {
     public static final EnumProperty<DoubleBlockHalf> HALF;
 
     public BigBarrelRightBlock(Properties properties) {
@@ -49,13 +47,6 @@ public class BigBarrelRightBlock extends BrewingstationBlock {
         }
     }
 
-    @Override
-    public void playerWillDestroy(Level level, BlockPos blockPos, BlockState blockState, Player player) {
-        if(blockState.getValue(HALF).equals(DoubleBlockHalf.UPPER)) {
-            blockPos = blockPos.below();
-        }
-        super.playerWillDestroy(level, blockPos, blockState, player);
-    }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {

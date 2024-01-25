@@ -118,13 +118,15 @@ public class BrewKettleBlock extends BrewingstationBlock implements EntityBlock 
                 return InteractionResult.CONSUME;
             }
             //ITEM
-            InteractionResult interactionResult = brewKettleEntity.addIngredient(itemStack);
-            if (interactionResult == InteractionResult.SUCCESS) {
-                //brewKettleEntity.updateInClientWorld();
-                level.playSound(null, blockPos, SoundEvents.ITEM_FRAME_ADD_ITEM, SoundSource.PLAYERS, 1.0F, 1.0F);
-                level.sendBlockUpdated(blockPos, blockState, blockState, Block.UPDATE_CLIENTS);
+            if (blockState.getValue(LIQUID) != Liquid.BEER) {
+                InteractionResult interactionResult = brewKettleEntity.addIngredient(itemStack);
+                if (interactionResult == InteractionResult.SUCCESS) {
+                    //brewKettleEntity.updateInClientWorld();
+                    level.playSound(null, blockPos, SoundEvents.ITEM_FRAME_ADD_ITEM, SoundSource.PLAYERS, 1.0F, 1.0F);
+                    level.sendBlockUpdated(blockPos, blockState, blockState, Block.UPDATE_CLIENTS);
+                }
+                return interactionResult;
             }
-            return interactionResult;
         }
         return super.use(blockState, level, blockPos, player, interactionHand, blockHitResult);
     }

@@ -25,7 +25,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
-public class BigBarrelRightHeadBlock extends BrewingstationBlock {
+public class BigBarrelRightHeadBlock extends AbstractBarrelBlock {
     public static final EnumProperty<DoubleBlockHalf> HALF;
 
     public BigBarrelRightHeadBlock(Properties properties) {
@@ -40,6 +40,7 @@ public class BigBarrelRightHeadBlock extends BrewingstationBlock {
         }
     }
 
+
     public @NotNull BlockState updateShape(BlockState blockState, Direction direction, BlockState blockState2, LevelAccessor levelAccessor, BlockPos blockPos, BlockPos blockPos2) {
         DoubleBlockHalf doubleBlockHalf = blockState.getValue(HALF);
         if (direction.getAxis() == Direction.Axis.Y && doubleBlockHalf == DoubleBlockHalf.LOWER == (direction == Direction.UP)) {
@@ -49,13 +50,6 @@ public class BigBarrelRightHeadBlock extends BrewingstationBlock {
         }
     }
 
-    @Override
-    public void playerWillDestroy(Level level, BlockPos blockPos, BlockState blockState, Player player) {
-        if(blockState.getValue(HALF).equals(DoubleBlockHalf.UPPER)) {
-            blockPos = blockPos.below();
-        }
-        super.playerWillDestroy(level, blockPos, blockState, player);
-    }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {

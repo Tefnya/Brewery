@@ -49,6 +49,27 @@ public class BigBarrelBlock extends FacingBlock {
         }
     }
 
+    @Override
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
+        super.onRemove(state, level, pos, newState, isMoving);
+        checkAndRemoveBarrelBlocks(level, pos);
+    }
+
+    private void checkAndRemoveBarrelBlocks(Level level, BlockPos pos) {
+        BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
+        for (int dx = -1; dx <= 1; dx++) {
+            for (int dy = -1; dy <= 1; dy++) {
+                for (int dz = -1; dz <= 1; dz++) {
+                    mutablePos.set(pos.getX() + dx, pos.getY() + dy, pos.getZ() + dz);
+                    BlockState state = level.getBlockState(mutablePos);
+                    if (state.getBlock() instanceof AbstractBarrelBlock) {
+                        level.removeBlock(mutablePos, false);
+                    }
+                }
+            }
+        }
+    }
+
     public @NotNull BlockState updateShape(BlockState blockState, Direction direction, BlockState blockState2, LevelAccessor levelAccessor, BlockPos blockPos, BlockPos blockPos2) {
         DoubleBlockHalf doubleBlockHalf = blockState.getValue(HALF);
         if (direction.getAxis() == Direction.Axis.Y && doubleBlockHalf == DoubleBlockHalf.LOWER == (direction == Direction.UP)) {
@@ -102,56 +123,6 @@ public class BigBarrelBlock extends FacingBlock {
         level.setBlock(backPos, ObjectRegistry.BARREL_MAIN_HEAD.get().defaultBlockState().setValue(FACING, facing), 3);
         level.setBlock(sidePos, ObjectRegistry.BARREL_RIGHT.get().defaultBlockState().setValue(FACING, facing), 3);
         level.setBlock(diagonalPos, ObjectRegistry.BARREL_HEAD_RIGHT.get().defaultBlockState().setValue(FACING, facing), 3);
-    }
-
-
-    @Override
-    public void playerDestroy(Level level, Player player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack stack) {
-        super.playerDestroy(level, player, pos, state, blockEntity, stack);
-
-        Direction facing = state.getValue(FACING);
-
-        if (state.getValue(HALF) == DoubleBlockHalf.LOWER) {
-            destroyBlockAndSurrounding(level, player, pos);
-            destroyBlockAndSurrounding(level, player, pos.above());
-            destroyBlockAndSurrounding(level, player, pos.above().relative(facing));
-            destroyBlockAndSurrounding(level, player, pos.above().relative(facing.getCounterClockWise()));
-        } else {
-            destroyBlockAndSurrounding(level, player, pos);
-            destroyBlockAndSurrounding(level, player, pos.below());
-            destroyBlockAndSurrounding(level, player, pos.below().relative(facing));
-            destroyBlockAndSurrounding(level, player, pos.below().relative(facing.getClockWise()));
-        }
-    }
-
-    @Override
-    public void playerWillDestroy(Level level, BlockPos blockPos, BlockState blockState, Player player) {
-        if(blockState.getValue(HALF).equals(DoubleBlockHalf.UPPER)) {
-            blockPos = blockPos.below();
-        }
-        super.playerWillDestroy(level, blockPos, blockState, player);
-    }
-
-    private void destroyBlockAndSurrounding(Level level, Player player, BlockPos pos) {
-        BlockState blockState = level.getBlockState(pos);
-        BlockEntity blockEntity = level.getBlockEntity(pos);
-
-        level.destroyBlock(pos, true);
-
-        if (blockEntity != null) {
-            level.removeBlockEntity(pos);
-        }
-
-        destroySurroundingBlocks(level, player, pos);
-    }
-
-    private void destroySurroundingBlocks(Level level, Player player, BlockPos pos) {
-        Direction facing = level.getBlockState(pos).getValue(FACING);
-
-        destroyBlockAndSurrounding(level, player, pos.relative(facing));
-        destroyBlockAndSurrounding(level, player, pos.relative(facing.getCounterClockWise()));
-        destroyBlockAndSurrounding(level, player, pos.relative(facing).above());
-        destroyBlockAndSurrounding(level, player, pos.relative(facing.getCounterClockWise()).above());
     }
 
 

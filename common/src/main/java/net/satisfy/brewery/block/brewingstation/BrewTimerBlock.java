@@ -8,6 +8,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.satisfy.brewery.block.property.BrewMaterial;
 import net.satisfy.brewery.registry.BlockStateRegistry;
+import net.satisfy.brewery.registry.SoundEventRegistry;
 import net.satisfy.brewery.util.BreweryUtil;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
@@ -65,6 +66,7 @@ public class BrewTimerBlock extends BrewingstationBlock {
                 double offsetZ = randomSource.nextDouble() * 0.6D - 0.3D;
                 level.addParticle(redDust, x + offsetX, y, z + offsetZ, 1.0, 0.0, 0.0);
             }
+            level.playLocalSound(x, y, z, SoundEventRegistry.BREWSTATION_TIMER_LOOP.get(), SoundSource.BLOCKS, 1.0F, 1.0F, false);
         }
     }
 

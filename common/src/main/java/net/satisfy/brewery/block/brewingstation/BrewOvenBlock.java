@@ -3,6 +3,7 @@ package net.satisfy.brewery.block.brewingstation;
 import net.satisfy.brewery.block.property.BrewMaterial;
 import net.satisfy.brewery.block.property.Heat;
 import net.satisfy.brewery.registry.BlockStateRegistry;
+import net.satisfy.brewery.registry.SoundEventRegistry;
 import net.satisfy.brewery.util.BreweryUtil;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
@@ -79,7 +80,7 @@ public class BrewOvenBlock extends BrewingstationBlock {
                 if (randomSource.nextDouble() < 0.2D) {
                     for (int l = 0; l < 5; l++) {
                         if (randomSource.nextDouble() < 0.2D) {
-                            level.playLocalSound(x, y, z, SoundEvents.BLASTFURNACE_FIRE_CRACKLE, SoundSource.BLOCKS, 1.0F, 1.0F, false);
+                            level.playLocalSound(x, y, z, SoundEventRegistry.BREWSTATION_OVEN.get(), SoundSource.BLOCKS, 1.0F, 1.0F, false);
                         }
                         level.addParticle(ParticleTypes.CAMPFIRE_SIGNAL_SMOKE, x + i, y + j, z + k, 0.0, 0.01, 0.0);
                     }

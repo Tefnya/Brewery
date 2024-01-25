@@ -11,7 +11,6 @@ import net.satisfy.brewery.event.*;
 import net.satisfy.brewery.event.partyeffect.ParticleSpawnEvent;
 import net.satisfy.brewery.networking.BreweryNetworking;
 import net.satisfy.brewery.registry.*;
-import net.satisfy.brewery.registry.SoundRegistry;
 import net.satisfy.brewery.util.BreweryIdentifier;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
@@ -33,10 +32,9 @@ public class Brewery {
         MobEffectRegistry.init();
         CommonEvents.init();
         BreweryNetworking.registerC2SPackets();
-        SoundRegistry.init();
         SiloBlock.registerDryers();
         EntityRegistry.init();
-        SoundEventsRegistry.init();
+        SoundEventRegistry.init();
         RecipeTypeRegistry.init();
         registerEvents();
 
@@ -44,7 +42,6 @@ public class Brewery {
         PlayerEvent.ATTACK_ENTITY.register(particleSpawnEvent);
         HealingTouchEvent healingTouchEvent = new HealingTouchEvent();
         PlayerEvent.ATTACK_ENTITY.register(healingTouchEvent);
-        //TODO? Placeholder
     }
 
     public static void commonSetup(){

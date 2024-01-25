@@ -25,6 +25,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.satisfy.brewery.block.property.BrewMaterial;
 import net.satisfy.brewery.registry.BlockStateRegistry;
+import net.satisfy.brewery.registry.SoundEventRegistry;
 import net.satisfy.brewery.util.BreweryUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -121,7 +122,7 @@ public class BrewWhistleBlock extends BrewingstationBlock {
             world.addParticle(ParticleTypes.LARGE_SMOKE, x, y, z, speedX, speedY, speedZ);
         }
 
-        world.playLocalSound(x, y, z, SoundEvents.FIREWORK_ROCKET_LAUNCH, SoundSource.BLOCKS, 1.0F, 1.0F, false);
+        world.playLocalSound(x, y, z, SoundEventRegistry.BREWSTATION_WHISTLE.get(), SoundSource.BLOCKS, 1.0F, 1.0F, false);
     }
 
 

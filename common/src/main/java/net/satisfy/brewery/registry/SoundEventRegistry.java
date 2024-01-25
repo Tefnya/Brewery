@@ -3,16 +3,20 @@ package net.satisfy.brewery.registry;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.Registrar;
 import dev.architectury.registry.registries.RegistrySupplier;
-import net.satisfy.brewery.Brewery;
-import net.satisfy.brewery.util.BreweryIdentifier;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
+import net.satisfy.brewery.Brewery;
+import net.satisfy.brewery.util.BreweryIdentifier;
 
-public class SoundRegistry {
+public class SoundEventRegistry {
 
-    public static Registrar<SoundEvent> SOUND_EVENTS = DeferredRegister.create(Brewery.MOD_ID, Registry.SOUND_EVENT_REGISTRY).getRegistrar();
+    private static final Registrar<SoundEvent> SOUND_EVENTS = DeferredRegister.create(Brewery.MOD_ID, Registry.SOUND_EVENT_REGISTRY).getRegistrar();
 
+    public static final RegistrySupplier<SoundEvent> DRAWER_OPEN = create("drawer_open");
+    public static final RegistrySupplier<SoundEvent> DRAWER_CLOSE = create("drawer_close");
+    public static final RegistrySupplier<SoundEvent> CABINET_OPEN = create("cabinet_open");
+    public static final RegistrySupplier<SoundEvent> CABINET_CLOSE = create("cabinet_close");
     public static final RegistrySupplier<SoundEvent> BREATH = create("breath");
     public static final RegistrySupplier<SoundEvent> BEER_ELEMENTAL_AMBIENT = create("beer_elemental_ambient");
     public static final RegistrySupplier<SoundEvent> BEER_ELEMENTAL_HURT = create("beer_elemental_hurt");
@@ -24,12 +28,13 @@ public class SoundRegistry {
     public static final RegistrySupplier<SoundEvent> BREWSTATION_TIMER_LOOP = create("brewstation_timer");
     public static final RegistrySupplier<SoundEvent> BREWSTATION_WHISTLE = create("brewstation_whistle");
 
+
     private static RegistrySupplier<SoundEvent> create(String name) {
         final ResourceLocation id = new BreweryIdentifier(name);
         return SOUND_EVENTS.register(id, () -> new SoundEvent(id));
     }
 
     public static void init() {
-        Brewery.LOGGER.debug("Register " + SoundRegistry.class);
+        Brewery.LOGGER.debug("Registering Sounds for " + Brewery.MOD_ID);
     }
 }

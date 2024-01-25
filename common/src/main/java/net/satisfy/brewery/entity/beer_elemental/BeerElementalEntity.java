@@ -1,7 +1,6 @@
 package net.satisfy.brewery.entity.beer_elemental;
 
 import net.satisfy.brewery.entity.beer_elemental_barrel.BeerElementalAttackEntity;
-import net.satisfy.brewery.registry.SoundRegistry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
@@ -16,6 +15,7 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import net.satisfy.brewery.registry.SoundEventRegistry;
 
 import java.util.EnumSet;
 
@@ -47,7 +47,7 @@ public class BeerElementalEntity extends Monster {
 
         if (level.isClientSide) {
             if (random.nextInt(24) == 0 && !isSilent())
-                level.playLocalSound(getX(), getY(), getZ(), SoundRegistry.BEER_ELEMENTAL_AMBIENT.get(), getSoundSource(), 1.0F + random.nextFloat(), 0.3F + random.nextFloat() * 0.7F, false);
+                level.playLocalSound(getX(), getY(), getZ(), SoundEventRegistry.BEER_ELEMENTAL_AMBIENT.get(), getSoundSource(), 1.0F + random.nextFloat(), 0.3F + random.nextFloat() * 0.7F, false);
 
             for(int i = 0; i < 2; i++) {
                 double velocityX = (random.nextDouble() - 0.5) * 0.1;
@@ -96,17 +96,17 @@ public class BeerElementalEntity extends Monster {
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundRegistry.BEER_ELEMENTAL_AMBIENT.get();
+        return SoundEventRegistry.BEER_ELEMENTAL_AMBIENT.get();
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSource) {
-        return SoundRegistry.BEER_ELEMENTAL_HURT.get();
+        return SoundEventRegistry.BEER_ELEMENTAL_HURT.get();
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundRegistry.BEER_ELEMENTAL_DEATH.get();
+        return SoundEventRegistry.BEER_ELEMENTAL_DEATH.get();
     }
 
 

@@ -65,10 +65,6 @@ public class BrewTimerBlock extends BrewingstationBlock {
                 double offsetZ = randomSource.nextDouble() * 0.6D - 0.3D;
                 level.addParticle(redDust, x + offsetX, y, z + offsetZ, 1.0, 0.0, 0.0);
             }
-
-            if (randomSource.nextDouble() < 0.1D) {
-                level.playLocalSound(x, y, z, SoundEvents.LLAMA_CHEST, SoundSource.BLOCKS, 1.0F, 1.0F, false);
-            }
         }
     }
 

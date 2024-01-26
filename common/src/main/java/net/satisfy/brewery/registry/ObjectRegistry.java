@@ -51,13 +51,13 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> HOPS_CROP = registerWithoutItem("hops_crop", () -> new HopsCropHeadBlock(getBushSettings().randomTicks()));
     public static final RegistrySupplier<Block> HOPS_CROP_BODY = registerWithoutItem("hops_crop_body", () -> new HopsCropBodyBlock(getBushSettings().randomTicks()));
     public static final RegistrySupplier<Item> HOPS_SEEDS = registerItem("hops_seeds", () -> new BlockItem(HOPS_CROP.get(), getSettings()));
-    public static final RegistrySupplier<Item> HOPS = registerItem("hops", () -> new IngredientItem(getSettings().food(Foods.APPLE)));
+    public static final RegistrySupplier<Item> HOPS = registerItem("hops", () -> new Item(getSettings().food(Foods.APPLE)));
     public static final RegistrySupplier<Block> BARLEY_CROP = registerWithoutItem("barley_crop", () -> new BarleyCropBlock(getBushSettings()));
     public static final RegistrySupplier<Item> BARLEY_SEEDS = registerItem("barley_seeds", () -> new BlockItem(BARLEY_CROP.get(), getSettings()));
-    public static final RegistrySupplier<Item> BARLEY = registerItem("barley", () -> new IngredientItem(getSettings().food(Foods.APPLE)));
+    public static final RegistrySupplier<Item> BARLEY = registerItem("barley", () -> new Item(getSettings().food(Foods.APPLE)));
     public static final RegistrySupplier<Block> CORN_CROP = registerWithoutItem("corn_crop", () -> new CornCropBlock(getBushSettings()));
     public static final RegistrySupplier<Item> CORN_SEEDS = registerItem("corn_seeds", () -> new BlockItem(CORN_CROP.get(), getSettings()));
-    public static final RegistrySupplier<Item> CORN = registerItem("corn", () -> new IngredientItem(getSettings().food(Foods.APPLE)));
+    public static final RegistrySupplier<Item> CORN = registerItem("corn", () -> new Item(getSettings().food(Foods.APPLE)));
     public static final RegistrySupplier<Block> DRIED_WHEAT = registerWithItem("dried_wheat", () -> new BagBlock(BlockBehaviour.Properties.copy(Blocks.HAY_BLOCK)));
     public static final RegistrySupplier<Block> DRIED_BARLEY = registerWithItem("dried_barley", () -> new BagBlock(BlockBehaviour.Properties.copy(Blocks.HAY_BLOCK)));
     public static final RegistrySupplier<Block> DRIED_CORN = registerWithItem("dried_corn", () -> new BagBlock(BlockBehaviour.Properties.copy(Blocks.HAY_BLOCK)));
@@ -65,26 +65,18 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> TABLE = registerWithItem("table", () -> new TableBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
     public static final RegistrySupplier<Block> PATTERNED_WOOL = registerWithItem("patterned_wool", () -> new Block(BlockBehaviour.Properties.copy(Blocks.BLACK_WOOL)));
     public static final RegistrySupplier<Block> PATTERNED_CARPET = registerWithItem("patterned_carpet", () -> new CarpetBlock(BlockBehaviour.Properties.copy(Blocks.BLACK_CARPET)));
-
-
     public static final RegistrySupplier<Block> CABINET = registerWithItem( "cabinet", () -> new StorageBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).strength(2.0F, 3.0F).sound(SoundType.WOOD), SoundEventRegistry.CABINET_OPEN.get(), SoundEventRegistry.CABINET_CLOSE.get()));
     public static final RegistrySupplier<Block> DRAWER = registerWithItem("drawer", () -> new StorageBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).strength(2.0F, 3.0F).sound(SoundType.WOOD), SoundEventRegistry.DRAWER_OPEN.get(), SoundEventRegistry.DRAWER_CLOSE.get()));
     public static final RegistrySupplier<Block> BAR_COUNTER = registerWithItem("bar_counter", () -> new BarCounterBlock(BlockBehaviour.Properties.of(Material.WOOD).requiresCorrectToolForDrops().strength(3.5F).sound(SoundType.WOOD).noOcclusion()));
     public static final RegistrySupplier<Block> SIDEBOARD = registerWithItem("sideboard", () -> new SideBoardBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).strength(2.5f).sound(SoundType.WOOD)));
     public static final RegistrySupplier<Block> WALL_CABINET = registerWithItem("wall_cabinet", () -> new WallStorageBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).strength(2.0F, 3.0F).sound(SoundType.WOOD), SoundEventRegistry.CABINET_OPEN.get(), SoundEventRegistry.CABINET_CLOSE.get()));
-
-
-
-
     public static final RegistrySupplier<Item> BREATHALYZER = registerItem("breathalyzer", () -> new Breathalyzer(getSettings()));
-
     public static final RegistrySupplier<Block> WOODEN_BREWINGSTATION = registerWithItem("wooden_brewingstation", () -> new BrewKettleBlock(BrewMaterial.WOOD, BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
     public static final RegistrySupplier<Block> COPPER_BREWINGSTATION = registerWithItem("copper_brewingstation", () -> new BrewKettleBlock(BrewMaterial.COPPER, BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
     public static final RegistrySupplier<Block> NETHERITE_BREWINGSTATION = registerWithItem("netherite_brewingstation", () -> new BrewKettleBlock(BrewMaterial.NETHERITE, BlockBehaviour.Properties.copy(Blocks.NETHERITE_BLOCK)));
     public static final RegistrySupplier<Block> BREW_WHISTLE = registerWithoutItem("brew_whistle", () -> new BrewWhistleBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
     public static final RegistrySupplier<Block> BREW_OVEN = registerWithoutItem("brew_oven", () -> new BrewOvenBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
     public static final RegistrySupplier<Block> BREW_TIMER = registerWithoutItem("brew_timer", () -> new BrewTimerBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
-
     public static final RegistrySupplier<Block> SILO_WOOD = registerWithItem("silo_wood", () -> new SiloBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion()));
     public static final RegistrySupplier<Block> SILO_COPPER = registerWithItem("silo_copper", () -> new SiloBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion()));
     public static final RegistrySupplier<Block> BARREL_MAIN = registerWithItem("barrel_main", () -> new BigBarrelBlock(BlockBehaviour.Properties.of(Material.WOOD).strength(2.0f, 3.0f).sound(SoundType.WOOD)));
@@ -97,12 +89,12 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> BEER_WHEAT = registerWithItemeverage("beer_wheat", () -> new BeverageBlock(getMugSettings()), MobEffects.DAMAGE_BOOST, 30 * 20);
     public static final RegistrySupplier<Block> BEER_HOPS = registerWithItemeverage("beer_hops", () -> new BeverageBlock(getMugSettings()), MobEffects.LUCK, 30 * 20);
     public static final RegistrySupplier<Block> BEER_BARLEY = registerWithItemeverage("beer_barley", () -> new BeverageBlock(getMugSettings()), MobEffects.DIG_SPEED, 30 * 20);
-    public static final RegistrySupplier<Block> BEER_CHORUS = registerWithItemeverage("beer_chorus", () -> new BeverageBlock(getMugSettings()), MobEffectRegistry.TELEPORT.get(), 5 * 20);
-    public static final RegistrySupplier<Block> WHISKEY_MAGGOALLAN = registerWithItemeverage("whiskey_maggoallan", () -> new BeverageBlock(getBeverageSettings()), MobEffectRegistry.GRAVEDIGGER.get(), 2 * 20);
-    public static final RegistrySupplier<Block> WHISKEY_HADARILABEL = registerWithItemeverage("whiskey_hadarilabel", () -> new BeverageBlock(getBeverageSettings()), MobEffectRegistry.HEARTHSTONE.get(), 2 * 20);
-    public static final RegistrySupplier<Block> WHISKEY_LILITUSINGLEMALT = registerWithItemeverage("whiskey_lilitusinglemalt", () -> new BeverageBlock(getBeverageSettings()), MobEffectRegistry.CUDDLYWARM.get(), 30 * 20);
-    public static final RegistrySupplier<Block> WHISKEY_JOJANNIK = registerWithItemeverage("whiskey_jojannik", () -> new BeverageBlock(getBeverageSettings()), MobEffectRegistry.SURVIVALIST.get(), 30 * 20);
-    public static final RegistrySupplier<Block> WHISKEY_CRISTELWALKER = registerWithItemeverage("whiskey_cristelwalker", () -> new BeverageBlock(getBeverageSettings()), MobEffectRegistry.SLIDING.get(), 30 * 20);
+    public static final RegistrySupplier<Block> BEER_CHORUS = registerWithItemeverage("beer_chorus", () -> new BeverageBlock(getMugSettings()), MobEffects.DIG_SPEED, 5 * 20);
+    public static final RegistrySupplier<Block> WHISKEY_MAGGOALLAN = registerWithItemeverage("whiskey_maggoallan", () -> new BeverageBlock(getBeverageSettings()), MobEffectRegistry.HEALINGTOUCH.get(), 30 * 20);
+    public static final RegistrySupplier<Block> WHISKEY_HADARILABEL = registerWithItemeverage("whiskey_hadarilabel", () -> new BeverageBlock(getBeverageSettings()), MobEffectRegistry.RENEWINGTOUCH.get(), 30 * 20);
+    public static final RegistrySupplier<Block> WHISKEY_LILITUSINGLEMALT = registerWithItemeverage("whiskey_lilitusinglemalt", () -> new BeverageBlock(getBeverageSettings()), MobEffectRegistry.PARTYSTARTER.get(), 30 * 20);
+    public static final RegistrySupplier<Block> WHISKEY_JOJANNIK = registerWithItemeverage("whiskey_jojannik", () -> new BeverageBlock(getBeverageSettings()), MobEffectRegistry.TOXICTOUCH.get(), 30 * 20);
+    public static final RegistrySupplier<Block> WHISKEY_CRISTELWALKER = registerWithItemeverage("whiskey_cristelwalker", () -> new BeverageBlock(getBeverageSettings()), MobEffectRegistry.PROTECTIVETOUCH.get(), 30 * 20);
     public static final RegistrySupplier<Item> PORK_KNUCKLE = registerItem("pork_knuckle", () -> new SaturatedItem(getFoodItemSettings(12, 1.2f, MobEffectRegistry.SATURATED.get(), 9000)));
     public static final RegistrySupplier<Item> FRIED_CHICKEN = registerItem("fried_chicken", () -> new SaturatedItem(getFoodItemSettings(12, 1.2f, MobEffectRegistry.SATURATED.get(), 9000)));
     public static final RegistrySupplier<Item> HALF_CHICKEN = registerItem("half_chicken", () -> new SaturatedItem(getFoodItemSettings(8, 1.0f, MobEffectRegistry.SATURATED.get(), 6000)));

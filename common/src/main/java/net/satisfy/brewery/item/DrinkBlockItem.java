@@ -113,9 +113,6 @@ public class DrinkBlockItem extends BlockItem {
                 }
             }
         }
-        tooltip.add(Component.empty());
-        tooltip.add(Component.translatable("tooltip.brewery.effect" + this.getDescriptionId()).withStyle(ChatFormatting.BLUE));
-        tooltip.add(Component.empty());
         tooltip.add(Component.translatable("tooltip.brewery.canbeplaced").withStyle(ChatFormatting.ITALIC, ChatFormatting.GRAY));
     }
 

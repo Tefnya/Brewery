@@ -48,6 +48,7 @@ public class BreweryFabricVillagers {
         });
         TradeOfferHelper.registerVillagerOffers(BREWER, 5, factories -> {
             factories.add(new BreweryVillagerUtil.SellItemFactory(ObjectRegistry.BREWFEST_HAT.get(), 10, 1, 10));
+            factories.add(new BreweryVillagerUtil.SellItemFactory(ObjectRegistry.BREWFEST_HAT_RED.get(), 10, 1, 10));
             factories.add(new BreweryVillagerUtil.SellItemFactory(ObjectRegistry.BREWFEST_REGALIA.get(), 10, 1, 10));
             factories.add(new BreweryVillagerUtil.SellItemFactory(ObjectRegistry.BREWFEST_DRESS.get(), 10, 1, 10));
             factories.add(new BreweryVillagerUtil.SellItemFactory(ObjectRegistry.BREWFEST_BLOUSE.get(), 10, 1, 10));

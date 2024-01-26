@@ -145,7 +145,7 @@ public class BrewstationBlockEntity extends BlockEntity implements ImplementedIn
     }
 
     private void brew(Recipe<?> recipe) {
-        Brewery.LOGGER.warn("Brewing!!!");
+        Brewery.LOGGER.warn("Brewing!");
 
         ItemStack resultSack = recipe.getResultItem();
         DrinkBlockItem.addQuality(resultSack, this.solved);
@@ -159,8 +159,6 @@ public class BrewstationBlockEntity extends BlockEntity implements ImplementedIn
         if (this.level != null) {
             BlockState blockState = this.level.getBlockState(this.getBlockPos());
             this.level.setBlockAndUpdate(this.getBlockPos(), blockState.setValue(BlockStateRegistry.LIQUID, Liquid.BEER));
-
-            //Todo:
             BlockPos ovenPos = BrewHelper.getBlock(ObjectRegistry.BREW_OVEN.get(), this.components, level);
             BlockState ovenState = this.level.getBlockState(ovenPos);
             this.level.setBlockAndUpdate(ovenPos, ovenState.setValue(BlockStateRegistry.HEAT, Heat.OFF));

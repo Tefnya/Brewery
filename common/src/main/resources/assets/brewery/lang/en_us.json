@@ -75,6 +75,12 @@
   "block.brewery.beer_barley": "Barley Beer",
   "block.brewery.beer_chorus": "Chorus Beer",
   "block.brewery.beer_hops": "Hops Beer",
+  "block.brewery.cabinet": "Cabinet",
+  "block.brewery.drawer": "Drawer",
+  "block.brewery.sideboard": "Sideboard",
+  "block.brewery.wall_cabinet": "Wall Cabinet",
+  "item.brewery.brewfest_hat_red": "Brewfest Hat",
+
   "block.brewery.whiskey_maggoallan": "Bottle of MaggoAllan Whiskey",
   "block.brewery.whiskey_hadarilabel": "Bottle of HadariLabel Whiskey",
   "block.brewery.whiskey_lilitusinglemalt": "Bottle of Lilitu Single Malt Whiskey",
@@ -177,5 +183,11 @@
   "brewery.advancement.get_saturated": "Mhmmm, delicious",
   "brewery.advancement.get_saturated.desc": "Don't ask where it comes from, just eat",
   "brewery.advancement.eat_everything.title": "Oktoberfest-Buffet",
-  "brewery.advancement.eat_everything.desc": "Delight in a mix of distinctive meals"
+  "brewery.advancement.eat_everything.desc": "Delight in a mix of distinctive meals",
+  "effect.brewery.healingtouch": "Healing Touch",
+  "effect.brewery.renevingtouch": "Reneving Touch",
+  "effect.brewery.partystarter": "Partystarter",
+  "effect.brewery.toxictouch": "Toxic Touch",
+  "effect.brewery.protectivetouch": "Protective Touch"
+
 }

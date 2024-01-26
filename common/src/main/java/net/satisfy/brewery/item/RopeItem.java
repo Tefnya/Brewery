@@ -35,7 +35,6 @@ public class RopeItem extends Item {
         if (player != null && (blockState.is(BlockTags.FENCES) || blockState.is(Blocks.TRIPWIRE_HOOK))) {
             if (level.isClientSide) return InteractionResult.SUCCESS;
             InteractionHand hand = useOnContext.getHand();
-            //try to get rope
             RopeKnotEntity knot = RopeKnotEntity.getHopRopeKnotEntity(level, blockPos);
             if (knot != null) {
                 if (knot.interact(player, hand) == InteractionResult.CONSUME) {
@@ -43,12 +42,9 @@ public class RopeItem extends Item {
                 }
                 return InteractionResult.PASS;
             }
-            //create new rope
-            //RopeKnotEntity hopRopeKnotEntity = RopeKnotEntity.create(level, blockPos);
             knot = RopeKnotEntity.create(level, blockPos);
             knot.setTicksFrozen((byte) 0);
             level.addFreshEntity(knot);
-            //wait because Entity has to exist
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
@@ -63,7 +59,5 @@ public class RopeItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level world, @NotNull List<Component> tooltip, TooltipFlag context) {
         tooltip.add(Component.translatable("tooltip.brewery.rope_1").withStyle(ChatFormatting.GRAY, ChatFormatting.ITALIC));
-        tooltip.add(Component.empty());
-        tooltip.add(Component.translatable("tooltip.brewery.rope_2").withStyle(ChatFormatting.BLUE));
     }
 }

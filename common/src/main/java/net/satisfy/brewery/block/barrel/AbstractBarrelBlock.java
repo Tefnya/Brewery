@@ -52,5 +52,4 @@ public abstract class AbstractBarrelBlock extends HorizontalDirectionalBlock {
         super.createBlockStateDefinition(builder);
         builder.add(FACING);
     }
-
 }

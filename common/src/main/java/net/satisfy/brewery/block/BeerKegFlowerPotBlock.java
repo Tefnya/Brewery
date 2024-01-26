@@ -120,9 +120,6 @@ public class BeerKegFlowerPotBlock extends FacingBlock implements EntityBlock {
     @Override
     public void appendHoverText(ItemStack itemStack, BlockGetter world, List<Component> tooltip, TooltipFlag tooltipContext) {
         tooltip.add(Component.translatable("tooltip.brewery.canbeplaced").withStyle(ChatFormatting.ITALIC, ChatFormatting.GRAY));
-        tooltip.add(Component.empty());
-        tooltip.add(Component.translatable("tooltip.brewery.flowerpot").withStyle(ChatFormatting.ITALIC, ChatFormatting.GRAY));
-
     }
 
     static {

@@ -138,7 +138,7 @@ public class BrewKettleBlock extends BrewingstationBlock implements EntityBlock 
             double y = blockPos.getY() + 0.95;
             double z = blockPos.getZ() + 0.5;
 
-            if (randomSource.nextDouble() < 0.1D) {
+            if (randomSource.nextDouble() < 0.3D) {
                 level.playLocalSound(x, y, z, SoundEvents.BUBBLE_COLUMN_UPWARDS_AMBIENT, SoundSource.BLOCKS, 1.0F, 1.0F, false);
             }
 

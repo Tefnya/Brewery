@@ -39,6 +39,9 @@ public class BrewTimerBlock extends BrewingstationBlock {
 
     public static final Map<Direction, VoxelShape> SHAPE;
 
+    private long lastSoundTime = 0;
+
+
     public BrewTimerBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.defaultBlockState().setValue(MATERIAL, BrewMaterial.WOOD).setValue(TIME, false));
@@ -61,12 +64,16 @@ public class BrewTimerBlock extends BrewingstationBlock {
 
             DustParticleOptions redDust = new DustParticleOptions(new Vector3f(1.0F, 0.0F, 0.0F), 1.0F);
 
+            long currentTime = System.currentTimeMillis();
+            if (currentTime - lastSoundTime >= 900) {
+                level.playLocalSound(x, y, z, SoundEventRegistry.BREWSTATION_TIMER_LOOP.get(), SoundSource.BLOCKS, 1.0F, 1.0F, false);
+                lastSoundTime = currentTime;
+            }
             for (int i = 0; i < 4; i++) {
                 double offsetX = randomSource.nextDouble() * 0.6D - 0.3D;
                 double offsetZ = randomSource.nextDouble() * 0.6D - 0.3D;
                 level.addParticle(redDust, x + offsetX, y, z + offsetZ, 1.0, 0.0, 0.0);
             }
-            level.playLocalSound(x, y, z, SoundEventRegistry.BREWSTATION_TIMER_LOOP.get(), SoundSource.BLOCKS, 1.0F, 1.0F, false);
         }
     }
 

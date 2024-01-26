@@ -1,10 +1,5 @@
 package net.satisfy.brewery.block.brewingstation;
 
-import net.satisfy.brewery.block.property.BrewMaterial;
-import net.satisfy.brewery.block.property.Heat;
-import net.satisfy.brewery.registry.BlockStateRegistry;
-import net.satisfy.brewery.registry.SoundEventRegistry;
-import net.satisfy.brewery.util.BreweryUtil;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -27,6 +22,11 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.satisfy.brewery.block.property.BrewMaterial;
+import net.satisfy.brewery.block.property.Heat;
+import net.satisfy.brewery.registry.BlockStateRegistry;
+import net.satisfy.brewery.registry.SoundEventRegistry;
+import net.satisfy.brewery.util.BreweryUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -37,6 +37,8 @@ public class BrewOvenBlock extends BrewingstationBlock {
     public static final EnumProperty<Heat> HEAT;
     private static final Supplier<VoxelShape> voxelShapeSupplier;
     public static final Map<Direction, VoxelShape> SHAPE;
+    private long lastSoundTime = 0;
+
 
     public BrewOvenBlock(Properties properties) {
         super(properties);
@@ -77,11 +79,13 @@ public class BrewOvenBlock extends BrewingstationBlock {
             double k = axis == Direction.Axis.Z ? direction.getStepZ() * 0.62D : h;
 
             if (blockState.getValue(HEAT) == Heat.WEAK) {
+                long currentTime = System.currentTimeMillis();
+                if (currentTime - lastSoundTime >= 9500) {
+                    level.playLocalSound(x, y, z, SoundEventRegistry.BREWSTATION_OVEN.get(), SoundSource.BLOCKS, 0.70F, 1.0F, false);
+                    lastSoundTime = currentTime;
+                }
                 if (randomSource.nextDouble() < 0.2D) {
                     for (int l = 0; l < 5; l++) {
-                        if (randomSource.nextDouble() < 0.2D) {
-                            level.playLocalSound(x, y, z, SoundEventRegistry.BREWSTATION_OVEN.get(), SoundSource.BLOCKS, 1.0F, 1.0F, false);
-                        }
                         level.addParticle(ParticleTypes.CAMPFIRE_SIGNAL_SMOKE, x + i, y + j, z + k, 0.0, 0.01, 0.0);
                     }
                 }

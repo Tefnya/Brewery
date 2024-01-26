@@ -214,6 +214,7 @@ public class ConnectivityHandler {
                     extraData = be.modifyExtraData(extraData);
 
                     splitMultiAndInvalidate(part, cache);
+                    // Modify Part
                     part.setController(origin);
                     part.preventConnectivityUpdate();
                     cache.put(pos, be);

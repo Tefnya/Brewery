@@ -82,6 +82,7 @@
   "block.brewery.whiskey_cristelwalker": "Bottle of CristelWalker Whiskey",
   "tooltip.brewery.canbeplacedwalls": "Can be placed on Walls",
   "tooltip.brewery.canbeplaced": "Can be placed",
+  "tooltip.brewery.beer_quality": "Beer Quality: %s",
   "tooltip.brewery.thankyou_1": "A reward for completing all Achievements",
   "tooltip.brewery.thankyou_2": "When placed:",
   "tooltip.brewery.thankyou_3": "Thank you for playing Brewery!",

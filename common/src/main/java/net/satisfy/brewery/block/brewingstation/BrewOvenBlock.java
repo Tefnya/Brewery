@@ -1,10 +1,5 @@
 package net.satisfy.brewery.block.brewingstation;
 
-import net.satisfy.brewery.block.property.BrewMaterial;
-import net.satisfy.brewery.block.property.Heat;
-import net.satisfy.brewery.registry.BlockStateRegistry;
-import net.satisfy.brewery.registry.SoundEventRegistry;
-import net.satisfy.brewery.util.BreweryUtil;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -27,6 +22,11 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.satisfy.brewery.block.property.BrewMaterial;
+import net.satisfy.brewery.block.property.Heat;
+import net.satisfy.brewery.registry.BlockStateRegistry;
+import net.satisfy.brewery.registry.SoundEventRegistry;
+import net.satisfy.brewery.util.BreweryUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -60,11 +60,11 @@ public class BrewOvenBlock extends BrewingstationBlock {
 
     @Override
     public void animateTick(BlockState blockState, Level level, BlockPos blockPos, RandomSource randomSource) {
-        double x = blockPos.getX() + 0.5D;
-        double y = blockPos.getY() + 0.7D;
-        double z = blockPos.getZ() + 0.5D;
-
         if (blockState.getValue(HEAT) != Heat.OFF) {
+            double x = blockPos.getX() + 0.5D;
+            double y = blockPos.getY() + 0.7D;
+            double z = blockPos.getZ() + 0.5D;
+
             if (randomSource.nextDouble() < 0.1D) {
                 level.playLocalSound(x, y, z, SoundEvents.FURNACE_FIRE_CRACKLE, SoundSource.BLOCKS, 1.0F, 1.0F, false);
             }
@@ -103,7 +103,7 @@ public class BrewOvenBlock extends BrewingstationBlock {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        builder.add(MATERIAL ,HEAT);
+        builder.add(HEAT);
     }
 
     static {

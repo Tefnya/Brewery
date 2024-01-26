@@ -6,17 +6,21 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffectUtil;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.satisfy.brewery.effect.alcohol.AlcoholManager;
+import net.satisfy.brewery.registry.ObjectRegistry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -38,13 +42,25 @@ public class DrinkBlockItem extends BlockItem {
         return ItemUtils.startUsingInstantly(level, player, interactionHand);
     }
 
+    @Override
+    public @NotNull ItemStack finishUsingItem(ItemStack itemStack, Level level, LivingEntity livingEntity) {
+        ItemStack returnStack = super.finishUsingItem(itemStack, level, livingEntity);
+        if (livingEntity instanceof Player player && !player.isCreative()) {
+            player.addItem(new ItemStack(ObjectRegistry.BEER_MUG.get()));
+        }
+        if (livingEntity instanceof ServerPlayer serverPlayer) {
+            AlcoholManager.drinkAlcohol(serverPlayer);
+        }
+        return returnStack;
+    }
+
     public static void addQuality(ItemStack itemStack, int quality) {
         CompoundTag nbtData = new CompoundTag();
         nbtData.putInt("brewery.beer_quality", Math.min(Math.max(quality, 0), 3));
         itemStack.setTag(nbtData);
     }
 
-    public void addCount(ItemStack resultSack, int solved) {//TODO maybe overrite
+    public void addCount(ItemStack resultSack, int solved) {
         resultSack.setCount(solved);
     }
 
@@ -113,6 +129,12 @@ public class DrinkBlockItem extends BlockItem {
                 }
             }
         }
+
+        if (stack.getTag() != null && stack.getTag().contains("brewery.beer_quality")) {
+            tooltip.add(Component.empty());
+            tooltip.add(Component.translatable("tooltip.brewery.beer_quality", stack.getTag().getInt("brewery.beer_quality")).withStyle(ChatFormatting.GOLD));
+        }
+
         tooltip.add(Component.empty());
         tooltip.add(Component.translatable("tooltip.brewery.effect" + this.getDescriptionId()).withStyle(ChatFormatting.BLUE));
         tooltip.add(Component.empty());

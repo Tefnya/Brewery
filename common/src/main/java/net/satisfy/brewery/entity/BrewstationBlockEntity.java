@@ -1,19 +1,5 @@
 package net.satisfy.brewery.entity;
 
-import net.satisfy.brewery.Brewery;
-import net.satisfy.brewery.block.brew_event.BrewEvent;
-import net.satisfy.brewery.block.brew_event.BrewEvents;
-import net.satisfy.brewery.block.brew_event.BrewHelper;
-import net.satisfy.brewery.block.property.Heat;
-import net.satisfy.brewery.block.property.Liquid;
-import net.satisfy.brewery.item.DrinkBlockItem;
-import net.satisfy.brewery.registry.BlockEntityRegistry;
-import net.satisfy.brewery.registry.BlockStateRegistry;
-import net.satisfy.brewery.registry.ObjectRegistry;
-import net.satisfy.brewery.registry.RecipeTypeRegistry;
-import net.satisfy.brewery.util.BreweryMath;
-import net.satisfy.brewery.util.BreweryUtil;
-import net.satisfy.brewery.util.ImplementedInventory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
@@ -31,10 +17,28 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.state.BlockState;
+import net.satisfy.brewery.Brewery;
+import net.satisfy.brewery.block.brew_event.BrewEvent;
+import net.satisfy.brewery.block.brew_event.BrewEvents;
+import net.satisfy.brewery.block.brew_event.BrewHelper;
+import net.satisfy.brewery.block.property.Heat;
+import net.satisfy.brewery.block.property.Liquid;
+import net.satisfy.brewery.item.DrinkBlockItem;
+import net.satisfy.brewery.recipe.BrewingRecipe;
+import net.satisfy.brewery.registry.BlockEntityRegistry;
+import net.satisfy.brewery.registry.BlockStateRegistry;
+import net.satisfy.brewery.registry.ObjectRegistry;
+import net.satisfy.brewery.registry.RecipeTypeRegistry;
+import net.satisfy.brewery.util.BreweryMath;
+import net.satisfy.brewery.util.BreweryUtil;
+import net.satisfy.brewery.util.ImplementedInventory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class BrewstationBlockEntity extends BlockEntity implements ImplementedInventory, BlockEntityTicker<BrewstationBlockEntity> {
     @NotNull
@@ -124,7 +128,7 @@ public class BrewstationBlockEntity extends BlockEntity implements ImplementedIn
             return;
         } else if (timeLeft >= MIN_TIME_FOR_EVENT && timeToNextEvent <= 0 && runningEvents.size() < BrewEvents.BREW_EVENTS.size()) {
             BrewEvent event = BrewHelper.getRdmEvent(this);
-            Brewery.LOGGER.warn("Starting event!" + BrewEvents.getId(event).getPath());
+            Brewery.LOGGER.info("Starting event!" + BrewEvents.getId(event).getPath());
             event.start(this.components, level);
             runningEvents.add(event);
             totalEvents++;
@@ -139,17 +143,20 @@ public class BrewstationBlockEntity extends BlockEntity implements ImplementedIn
     }
 
     private boolean canBrew(Recipe<?> recipe) {
-        return recipe != null && this.level != null &&
+        if (recipe == null || this.level == null)
+            return false;
+        return recipe instanceof BrewingRecipe brewingRecipe &&
+                this.level.getBlockState(this.getBlockPos()).getValue(BlockStateRegistry.MATERIAL).getLevel() >= brewingRecipe.getMaterial().getLevel() &&
                 this.level.getBlockState(this.getBlockPos()).getValue(BlockStateRegistry.LIQUID) != Liquid.EMPTY &&
                 this.level.getBlockState(BrewHelper.getBlock(ObjectRegistry.BREW_OVEN.get(), this.components, this.level)).getValue(BlockStateRegistry.HEAT) != Heat.OFF;
     }
 
     private void brew(Recipe<?> recipe) {
-        Brewery.LOGGER.warn("Brewing!!!");
+        Brewery.LOGGER.info("Brewing!!!");
 
         ItemStack resultSack = recipe.getResultItem();
-        DrinkBlockItem.addQuality(resultSack, this.solved);
         if (resultSack.getItem() instanceof DrinkBlockItem drinkItem) {
+            DrinkBlockItem.addQuality(resultSack, this.solved);
             drinkItem.addCount(resultSack, this.solved);
         }
         this.beer = resultSack;
@@ -160,7 +167,6 @@ public class BrewstationBlockEntity extends BlockEntity implements ImplementedIn
             BlockState blockState = this.level.getBlockState(this.getBlockPos());
             this.level.setBlockAndUpdate(this.getBlockPos(), blockState.setValue(BlockStateRegistry.LIQUID, Liquid.BEER));
 
-            //Todo:
             BlockPos ovenPos = BrewHelper.getBlock(ObjectRegistry.BREW_OVEN.get(), this.components, level);
             BlockState ovenState = this.level.getBlockState(ovenPos);
             this.level.setBlockAndUpdate(ovenPos, ovenState.setValue(BlockStateRegistry.HEAT, Heat.OFF));

@@ -23,7 +23,7 @@ public interface ImplementedInventory extends WorldlyContainer {
     // SidedInventory
 
     @Override
-    default int @NotNull [] getSlotsForFace(Direction side) { //TODO OW
+    default int @NotNull [] getSlotsForFace(Direction side) {
         int[] result = new int[getContainerSize()];
         for (int i = 0; i < result.length; i++)
             result[i] = i;

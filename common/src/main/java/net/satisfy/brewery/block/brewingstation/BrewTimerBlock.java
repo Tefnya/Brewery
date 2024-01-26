@@ -1,18 +1,11 @@
 package net.satisfy.brewery.block.brewingstation;
 
 import com.mojang.math.Vector3f;
-import net.minecraft.core.particles.DustParticleOptions;
-import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.satisfy.brewery.block.property.BrewMaterial;
-import net.satisfy.brewery.registry.BlockStateRegistry;
-import net.satisfy.brewery.registry.SoundEventRegistry;
-import net.satisfy.brewery.util.BreweryUtil;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -27,6 +20,10 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.satisfy.brewery.block.property.BrewMaterial;
+import net.satisfy.brewery.registry.BlockStateRegistry;
+import net.satisfy.brewery.registry.SoundEventRegistry;
+import net.satisfy.brewery.util.BreweryUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -80,7 +77,7 @@ public class BrewTimerBlock extends BrewingstationBlock {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        builder.add(MATERIAL, TIME);
+        builder.add(TIME);
     }
 
     static {

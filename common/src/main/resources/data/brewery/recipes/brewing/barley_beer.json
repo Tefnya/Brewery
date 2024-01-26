@@ -8,6 +8,7 @@
       "item": "brewery:dried_barley"
     }
   ],
+  "material": "WOOD",
   "result": {
     "item": "brewery:beer_barley"
   }

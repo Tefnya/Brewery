@@ -8,6 +8,7 @@
       "item": "brewery:dried_wheat"
     }
   ],
+  "material": "WOOD",
   "result": {
     "item": "brewery:beer_wheat"
   }

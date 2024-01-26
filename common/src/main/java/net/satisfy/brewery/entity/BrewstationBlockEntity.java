@@ -128,7 +128,7 @@ public class BrewstationBlockEntity extends BlockEntity implements ImplementedIn
             return;
         } else if (timeLeft >= MIN_TIME_FOR_EVENT && timeToNextEvent <= 0 && runningEvents.size() < BrewEvents.BREW_EVENTS.size()) {
             BrewEvent event = BrewHelper.getRdmEvent(this);
-            Brewery.LOGGER.info("Starting event!" + BrewEvents.getId(event).getPath());
+            Brewery.LOGGER.warn("Starting event!" + BrewEvents.getId(event).getPath());
             event.start(this.components, level);
             runningEvents.add(event);
             totalEvents++;

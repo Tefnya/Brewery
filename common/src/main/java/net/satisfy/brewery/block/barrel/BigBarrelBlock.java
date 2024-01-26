@@ -50,6 +50,14 @@ public class BigBarrelBlock extends FacingBlock {
     }
 
     @Override
+    public void playerDestroy(Level level, Player player, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity, ItemStack itemStack) {
+        super.playerDestroy(level, player, blockPos, blockState, blockEntity, itemStack);
+        if (!level.isClientSide() && blockState.getValue(HALF) == DoubleBlockHalf.UPPER ) {
+            ItemStack barrelDrop = new ItemStack(ObjectRegistry.BARREL_MAIN.get());
+            popResource(level, blockPos, barrelDrop);
+        }
+    }
+    @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
         super.onRemove(state, level, pos, newState, isMoving);
         checkAndRemoveBarrelBlocks(level, pos);

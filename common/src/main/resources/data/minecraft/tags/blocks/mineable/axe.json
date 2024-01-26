@@ -4,7 +4,10 @@
     "brewery:bench",
     "brewery:table",
     "brewery:bar_counter",
-    "brewery:big_barrel",
+    "brewery:barrel_head_right",
+    "brewery:barrel_main_head",
+    "brewery:barrel_right",
+    "brewery:barrel_main",
     "brewery:wooden_brewingstation",
     "brewery:silo_wood",
     "brewery:beer_standard"

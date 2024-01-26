@@ -38,10 +38,17 @@ public class Brewery {
         RecipeTypeRegistry.init();
         registerEvents();
 
-        ParticleSpawnEvent particleSpawnEvent = new ParticleSpawnEvent();
-        PlayerEvent.ATTACK_ENTITY.register(particleSpawnEvent);
+
         HealingTouchEvent healingTouchEvent = new HealingTouchEvent();
         PlayerEvent.ATTACK_ENTITY.register(healingTouchEvent);
+        RenewingTouchEvent renewingTouchEvent = new RenewingTouchEvent();
+        PlayerEvent.ATTACK_ENTITY.register(renewingTouchEvent);
+        ToxicTouchEvent toxicTouchEvent = new ToxicTouchEvent();
+        PlayerEvent.ATTACK_ENTITY.register(toxicTouchEvent);
+        PartyStarterEvent partyStarterEvent = new PartyStarterEvent();
+        PlayerEvent.ATTACK_ENTITY.register(partyStarterEvent);
+        ProtectiveTouchEvent protectiveTouchEvent = new ProtectiveTouchEvent();
+        PlayerEvent.ATTACK_ENTITY.register(protectiveTouchEvent);
     }
 
     public static void commonSetup(){

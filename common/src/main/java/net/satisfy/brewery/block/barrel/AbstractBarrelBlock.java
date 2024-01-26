@@ -1,15 +1,20 @@
 package net.satisfy.brewery.block.barrel;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.satisfy.brewery.registry.ObjectRegistry;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class AbstractBarrelBlock extends HorizontalDirectionalBlock {
 
@@ -21,7 +26,19 @@ public abstract class AbstractBarrelBlock extends HorizontalDirectionalBlock {
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
         super.onRemove(state, level, pos, newState, isMoving);
-        checkAndRemoveBarrelBlocks(level, pos);
+        if (!level.isClientSide()) {
+            checkAndRemoveBarrelBlocks(level, pos);
+        }
+
+    }
+
+    @Override
+    public void playerDestroy(Level level, Player player, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity, ItemStack itemStack) {
+        super.playerDestroy(level, player, blockPos, blockState, blockEntity, itemStack);
+        if (!level.isClientSide()) {
+            ItemStack barrelDrop = new ItemStack(ObjectRegistry.BARREL_MAIN.get());
+            popResource(level, blockPos, barrelDrop);
+        }
     }
 
     private void checkAndRemoveBarrelBlocks(Level level, BlockPos pos) {
@@ -52,5 +69,4 @@ public abstract class AbstractBarrelBlock extends HorizontalDirectionalBlock {
         super.createBlockStateDefinition(builder);
         builder.add(FACING);
     }
-
 }

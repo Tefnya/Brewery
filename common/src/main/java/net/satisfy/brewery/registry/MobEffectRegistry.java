@@ -6,6 +6,7 @@ import dev.architectury.registry.registries.Registrar;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.satisfy.brewery.Brewery;
 import net.satisfy.brewery.effect.*;
+import net.satisfy.brewery.event.RenewingTouchEvent;
 import net.satisfy.brewery.util.BreweryIdentifier;
 import net.minecraft.core.Registry;
 import net.minecraft.world.effect.MobEffect;
@@ -21,14 +22,13 @@ public class MobEffectRegistry {
 
     public static final RegistrySupplier<MobEffect> DRUNK;
     public static final RegistrySupplier<MobEffect> BLACKOUT;
-    public static final RegistrySupplier<MobEffect> TELEPORT;
     public static final RegistrySupplier<MobEffect> SATURATED;
-    public static final RegistrySupplier<MobEffect> CUDDLYWARM;
-    public static final RegistrySupplier<MobEffect> HEARTHSTONE;
-    public static final RegistrySupplier<MobEffect> SLIDING;
-    public static final RegistrySupplier<MobEffect> GRAVEDIGGER;
-    public static final RegistrySupplier<MobEffect> SURVIVALIST;
+    public static final RegistrySupplier<MobEffect> RENEWINGTOUCH;
+    public static final RegistrySupplier<MobEffect> TOXICTOUCH;
+    public static final RegistrySupplier<MobEffect> HEALINGTOUCH;
+    public static final RegistrySupplier<MobEffect> PROTECTIVETOUCH;
     public static final RegistrySupplier<MobEffect> HARDDRINKING;
+    public static final RegistrySupplier<MobEffect> PARTYSTARTER;
 
 
     private static RegistrySupplier<MobEffect> registerEffect(String name, Supplier<MobEffect> effect){
@@ -47,13 +47,11 @@ public class MobEffectRegistry {
         DRUNK = registerEffect("drunk", DrunkEffect::new);
         HARDDRINKING = registerEffect("harddrinking", HarddrinkingEffect::new);
         BLACKOUT = registerEffect("blackout", () -> new BlackoutEffect().setFactorDataFactory(() -> new MobEffectInstance.FactorData(22)));
-        TELEPORT = registerEffect("teleport", TeleportEffect::new);
         SATURATED = registerEffect("saturated", SaturatedEffect::new);
-        CUDDLYWARM = registerEffect("cuddlywarm", CuddlyWarmEffect::new);
-        HEARTHSTONE = registerEffect("hearthstone", HearthstoneEffect::new);
-        SLIDING = registerEffect("sliding", SlidingEffect::new);
-        GRAVEDIGGER = registerEffect("gravedigger", GravediggerEffect::new);
-        SURVIVALIST = registerEffect("survivalist", () -> new SurvivalistEffect(MobEffectCategory.BENEFICIAL, 0x90F891));
-
+        TOXICTOUCH = registerEffect("toxictouch", () -> new ToxicTouchEffect(MobEffectCategory.BENEFICIAL, 0x90F891));
+        RENEWINGTOUCH = registerEffect("renevingtouch", () -> new RenewingTouchEffect(MobEffectCategory.BENEFICIAL, 0x90F891));
+        HEALINGTOUCH = registerEffect("healingtouch", () -> new HealingTouchEffect(MobEffectCategory.BENEFICIAL, 0x90F891));
+        PROTECTIVETOUCH = registerEffect("protectivetouch", () -> new ProtectiveTouchEffect(MobEffectCategory.BENEFICIAL, 0x90F891));
+        PARTYSTARTER = registerEffect("partystarter", () -> new PartystarterEffect(MobEffectCategory.BENEFICIAL, 0x90F891));
     }
 }

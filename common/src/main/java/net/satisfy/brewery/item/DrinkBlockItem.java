@@ -129,15 +129,10 @@ public class DrinkBlockItem extends BlockItem {
                 }
             }
         }
-
         if (stack.getTag() != null && stack.getTag().contains("brewery.beer_quality")) {
             tooltip.add(Component.empty());
             tooltip.add(Component.translatable("tooltip.brewery.beer_quality", stack.getTag().getInt("brewery.beer_quality")).withStyle(ChatFormatting.GOLD));
         }
-
-        tooltip.add(Component.empty());
-        tooltip.add(Component.translatable("tooltip.brewery.effect" + this.getDescriptionId()).withStyle(ChatFormatting.BLUE));
-        tooltip.add(Component.empty());
         tooltip.add(Component.translatable("tooltip.brewery.canbeplaced").withStyle(ChatFormatting.ITALIC, ChatFormatting.GRAY));
     }
 

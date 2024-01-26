@@ -36,7 +36,7 @@ public class BrewWhistleBlock extends BrewingstationBlock {
     public static final BooleanProperty WHISTLE;
     public static final EnumProperty<DoubleBlockHalf> HALF;
     private static final Supplier<VoxelShape> bottomVoxelShapeSupplier;
-
+    private long lastSoundTime = 0;
     private static final Supplier<VoxelShape> topVoxelShapeSupplier;
 
     public static final Map<Direction, VoxelShape> BOTTOM_SHAPE;
@@ -103,6 +103,7 @@ public class BrewWhistleBlock extends BrewingstationBlock {
             return;
         }
 
+
         Direction direction = state.getValue(FACING);
 
         double offsetX = 0.5 + direction.getStepX() * 0.6;
@@ -117,11 +118,14 @@ public class BrewWhistleBlock extends BrewingstationBlock {
         double speedY = 0.5;
         double speedZ = direction.getStepZ() * 0.1 + (rand.nextFloat() - 0.5) * 0.05;
 
-        for (int i = 0; i < 5; i++) { // More particles for a denser effect
+        for (int i = 0; i < 5; i++) {
             world.addParticle(ParticleTypes.LARGE_SMOKE, x, y, z, speedX, speedY, speedZ);
         }
-
-        world.playLocalSound(x, y, z, SoundEventRegistry.BREWSTATION_WHISTLE.get(), SoundSource.BLOCKS, 1.0F, 1.0F, false);
+        long currentTime = System.currentTimeMillis();
+        if (currentTime - lastSoundTime >= 3000) {
+            world.playLocalSound(x, y, z, SoundEventRegistry.BREWSTATION_WHISTLE.get(), SoundSource.BLOCKS, 1.0F, 1.0F, false);
+            lastSoundTime = currentTime;
+        }
     }
 
 

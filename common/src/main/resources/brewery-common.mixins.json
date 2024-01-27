@@ -15,6 +15,7 @@
   ],
   "mixins": [
     "AlcoholPlayerMixin",
+    "MobFollowPlayerMixin",
     "PlayerMixin",
     "StoneCutterMixin",
     "rope.ServerEntityMixin"

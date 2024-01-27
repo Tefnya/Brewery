@@ -7,6 +7,8 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -51,6 +53,7 @@ public class BrewstationBlockEntity extends BlockEntity implements ImplementedIn
     private int totalEvents;
     private NonNullList<ItemStack> ingredients;
     private ItemStack beer = ItemStack.EMPTY;
+    private final SoundEvent spawnEntitySound = SoundEventRegistry.BREWSTATION_PROCESS_FAILED.get();
 
     public BrewstationBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(BlockEntityRegistry.BREWINGSTATION_BLOCK_ENTITY.get(), blockPos, blockState);
@@ -188,6 +191,9 @@ public class BrewstationBlockEntity extends BlockEntity implements ImplementedIn
                 BeerElementalEntity beerElemental = new BeerElementalEntity(EntityRegistry.BEER_ELEMENTAL.get(), this.level);
                 beerElemental.setPos(spawnPos.getX(), spawnPos.getY(), spawnPos.getZ());
                 this.level.addFreshEntity(beerElemental);
+
+                this.level.playSound(null, spawnPos, spawnEntitySound, SoundSource.BLOCKS, 1.0F, 1.0F);
+
             }
         }
     }

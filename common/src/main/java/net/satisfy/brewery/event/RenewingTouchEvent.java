@@ -18,7 +18,7 @@ public class RenewingTouchEvent implements PlayerEvent.AttackEntity {
     @Override
     public EventResult attack(Player player, Level level, Entity target, InteractionHand hand, @Nullable EntityHitResult result) {
         if (player.hasEffect(MobEffectRegistry.RENEWINGTOUCH.get())) {
-            if (target instanceof LivingEntity && player.isShiftKeyDown()) {
+            if (target instanceof LivingEntity) {
                 ((LivingEntity) target).addEffect(new MobEffectInstance(MobEffects.REGENERATION, 200, 1));
 
                 level.addParticle(ParticleTypes.COMPOSTER, target.getX(), target.getY() + target.getBbHeight() / 2.5, target.getZ(), 0, 0, 0);

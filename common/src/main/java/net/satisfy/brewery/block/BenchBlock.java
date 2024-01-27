@@ -35,7 +35,7 @@ public class BenchBlock extends LineConnectingBlock {
     }
 
     @Override
-    public @NotNull VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
         boolean isX = state.getValue(FACING).getAxis() == Direction.Axis.X;
         Direction direction = state.getValue(FACING);
 
@@ -46,7 +46,7 @@ public class BenchBlock extends LineConnectingBlock {
             return isX ? TOP_SHAPE[0] : TOP_SHAPE[1];
         }
 
-        int i;
+        int i = 0;
         LineConnectingType type = state.getValue(TYPE);
 
         if ((direction == Direction.NORTH && type == LineConnectingType.LEFT) || (direction == Direction.SOUTH && type == LineConnectingType.RIGHT)) {
@@ -57,8 +57,6 @@ public class BenchBlock extends LineConnectingBlock {
             i = 2;
         } else if ((direction == Direction.EAST && type == LineConnectingType.LEFT) || (direction == Direction.WEST && type == LineConnectingType.RIGHT)) {
             i = 3;
-        } else {
-            i = 0;
         }
         return Shapes.or(isX ? TOP_SHAPE[0] : TOP_SHAPE[1], BOTTOM_MULTI_SHAPE[i]);
     }
@@ -83,10 +81,10 @@ public class BenchBlock extends LineConnectingBlock {
                 Shapes.or(Block.box(2.0, 0.0, 3.0, 4.0, 5.0, 13.0), Block.box(12.0, 0.0, 3.0, 14.0, 5.0, 13.0))
         };
         BOTTOM_MULTI_SHAPE = new VoxelShape[]{
-                Block.box(2.0, 0.0, 3.0, 4.0, 5.0, 13.0),
-                Block.box(12.0, 0.0, 3.0, 14.0, 5.0, 13.0),
-                Block.box(3.0, 0.0, 2.0, 13.0, 5.0, 4.0),
-                Block.box(3.0, 0.0, 12.0, 13.0, 5.0, 14.0),
+                Block.box(3.0, 0.0, 3.0, 7.0, 5.0, 13.0),  // left X
+                Block.box(5.0, 0.0, 3.0, 13.0, 5.0, 13.0), // left Z
+                Block.box(3.0, 0.0, 5.0, 13.0, 5.0, 13.0), // right X
+                Block.box(3.0, 0.0, 3.0, 13.0, 5.0, 7.0),  // right Z
         };
     }
 

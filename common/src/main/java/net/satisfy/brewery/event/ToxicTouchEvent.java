@@ -18,12 +18,12 @@ public class ToxicTouchEvent implements PlayerEvent.AttackEntity {
     @Override
     public EventResult attack(Player player, Level level, Entity target, InteractionHand hand, @Nullable EntityHitResult result) {
         if (player.hasEffect(MobEffectRegistry.TOXICTOUCH.get())) {
-            if (target instanceof LivingEntity && player.isShiftKeyDown()) {
+            if (target instanceof LivingEntity) {
                 ((LivingEntity) target).addEffect(new MobEffectInstance(MobEffects.POISON, 300, 2));
 
                 level.addParticle(ParticleTypes.SCRAPE, target.getX(), target.getY() + target.getBbHeight() / 2, target.getZ(), 0, 0, 0);
 
-                return EventResult.interruptFalse();
+                return EventResult.pass();
             }
         }
 

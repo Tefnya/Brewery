@@ -15,8 +15,8 @@ public class BreweryLoottableInjector {
         if (name.startsWith(prefix)) {
             String file = name.substring(name.indexOf(prefix) + prefix.length());
             switch (file) {
-                case "village_taiga_house", "woodland_mansion", "pillager_outpost",
-                        "village_desert_house", "village/plains_house", "village_savanna_house" ->
+                case "village/village_taiga_house", "woodland_mansion", "pillager_outpost",
+                        "village/village_desert_house", "village/village_plains_house", "village/village_savanna_house" ->
                         context.addPool(getPool(file));
                 default -> {
                 }

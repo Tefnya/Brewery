@@ -30,7 +30,7 @@ import org.jetbrains.annotations.Nullable;
 public class SiloBlockEntity extends BlockEntity implements IMultiBlockEntityContainer.Inventory, ImplementedInventory, MenuProvider, BlockEntityTicker<SiloBlockEntity> {
     private static final int MAX_WIDTH = 3;
     private static final int MAX_HEIGHT = 9;
-    public static final int MAX_CAPACITY = MAX_WIDTH * MAX_WIDTH * MAX_HEIGHT; //STACKS
+    public static final int MAX_CAPACITY = MAX_WIDTH * MAX_WIDTH * MAX_HEIGHT;
     private static final int DRY_TIME = 10 * 20;
     protected BlockPos controller;
     protected boolean updateConnectivity;
@@ -250,9 +250,6 @@ public class SiloBlockEntity extends BlockEntity implements IMultiBlockEntityCon
         }
     }
 
-
-    // MultiBlockEntity
-
     @Override
     public Direction.Axis getMainConnectionAxis() {
         return Direction.Axis.Y;
@@ -331,7 +328,6 @@ public class SiloBlockEntity extends BlockEntity implements IMultiBlockEntityCon
         this.times = compoundTag.contains("Times") ? compoundTag.getIntArray("Times") : new int[MAX_CAPACITY];
     }
 
-    // Menu
     @Override
     public @NotNull Component getDisplayName() {
         return Component.empty();

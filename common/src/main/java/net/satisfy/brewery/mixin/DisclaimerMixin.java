@@ -48,14 +48,16 @@ public abstract class DisclaimerMixin extends Screen {
                 }
             }, this.font));
         }
-
         for (int y = disclaimers.length; y > 0; y--) {
             String info = disclaimers[disclaimers.length - y];
             int width = this.font.width(info);
             int x = (this.width - width) / 2;
-            this.font.draw(poseStack, Component.literal(info).withStyle(ChatFormatting.YELLOW), x, this.height - this.font.lineHeight * y - 4, 0xFFFF55);
-        }
 
+            poseStack.pushPose();
+            poseStack.translate(0.0, 0.0, 2);
+            this.font.draw(poseStack, Component.literal(info).withStyle(ChatFormatting.WHITE), x, this.height - this.font.lineHeight * y - 4, 0xFFFF55);
+            poseStack.popPose();
+        }
         super.render(poseStack, i, j, f);
     }
 

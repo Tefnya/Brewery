@@ -16,7 +16,7 @@ public class HealingTouchEvent implements PlayerEvent.AttackEntity {
     @Override
     public EventResult attack(Player player, Level level, Entity target, InteractionHand hand, @Nullable EntityHitResult result) {
         if (player.hasEffect(MobEffectRegistry.HEALINGTOUCH.get())) {
-            if (target instanceof LivingEntity && player.isShiftKeyDown()) {
+            if (target instanceof LivingEntity) {
                 ((LivingEntity) target).heal(6.0f);
                 level.addParticle(ParticleTypes.HEART, target.getX(), target.getY() + target.getBbHeight() / 2.5, target.getZ(), 0, 0, 0);
                 level.addParticle(ParticleTypes.HEART, target.getX(), target.getY() + target.getBbHeight() / 2, target.getZ(), 0, 0, 0);

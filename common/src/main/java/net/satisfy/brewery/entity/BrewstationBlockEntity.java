@@ -1,19 +1,5 @@
 package net.satisfy.brewery.entity;
 
-import net.satisfy.brewery.Brewery;
-import net.satisfy.brewery.block.brew_event.BrewEvent;
-import net.satisfy.brewery.block.brew_event.BrewEvents;
-import net.satisfy.brewery.block.brew_event.BrewHelper;
-import net.satisfy.brewery.block.property.Heat;
-import net.satisfy.brewery.block.property.Liquid;
-import net.satisfy.brewery.item.DrinkBlockItem;
-import net.satisfy.brewery.registry.BlockEntityRegistry;
-import net.satisfy.brewery.registry.BlockStateRegistry;
-import net.satisfy.brewery.registry.ObjectRegistry;
-import net.satisfy.brewery.registry.RecipeTypeRegistry;
-import net.satisfy.brewery.util.BreweryMath;
-import net.satisfy.brewery.util.BreweryUtil;
-import net.satisfy.brewery.util.ImplementedInventory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
@@ -23,6 +9,7 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -31,10 +18,25 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.state.BlockState;
+import net.satisfy.brewery.Brewery;
+import net.satisfy.brewery.block.brew_event.BrewEvent;
+import net.satisfy.brewery.block.brew_event.BrewEvents;
+import net.satisfy.brewery.block.brew_event.BrewHelper;
+import net.satisfy.brewery.block.property.Heat;
+import net.satisfy.brewery.block.property.Liquid;
+import net.satisfy.brewery.entity.beer_elemental.BeerElementalEntity;
+import net.satisfy.brewery.item.DrinkBlockItem;
+import net.satisfy.brewery.registry.*;
+import net.satisfy.brewery.util.BreweryMath;
+import net.satisfy.brewery.util.BreweryUtil;
+import net.satisfy.brewery.util.ImplementedInventory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class BrewstationBlockEntity extends BlockEntity implements ImplementedInventory, BlockEntityTicker<BrewstationBlockEntity> {
     @NotNull
@@ -153,7 +155,7 @@ public class BrewstationBlockEntity extends BlockEntity implements ImplementedIn
             drinkItem.addCount(resultSack, this.solved);
         }
         this.beer = resultSack;
-
+        spawnElementals();
         endBrewing();
 
         if (this.level != null) {
@@ -173,6 +175,17 @@ public class BrewstationBlockEntity extends BlockEntity implements ImplementedIn
             }
         }
 
+    }
+
+    private void spawnElementals() {
+        if (this.solved == 0 && this.level != null && this.level.random.nextDouble() >= 0.5D) {
+            BlockPos spawnPos = BrewHelper.getBlock(ObjectRegistry.BREW_OVEN.get(), this.components, level);
+            if (spawnPos != null) {
+                BeerElementalEntity beerElemental = new BeerElementalEntity(EntityRegistry.BEER_ELEMENTAL.get(), this.level);
+                beerElemental.setPos(spawnPos.getX(), spawnPos.getY(), spawnPos.getZ());
+                this.level.addFreshEntity(beerElemental);
+            }
+        }
     }
 
     public void endBrewing(){

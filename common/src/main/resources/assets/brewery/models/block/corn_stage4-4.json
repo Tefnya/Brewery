@@ -1,31 +1,6 @@
 {
-	"credit": "Made by Satisfy",
-	"ambientocclusion": false,
-	"texture_size": [16, 32],
+	"parent": "brewery:block/tall_crop",
 	"textures": {
-		"0": "brewery:block/corn_stage4-4",
-		"particle": "brewery:block/corn_stage4-4"
-	},
-	"elements": [
-		{
-			"from": [0.8, -1, 8],
-			"to": [15.2, 31, 8],
-			"shade": false,
-			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8], "rescale": true},
-			"faces": {
-				"north": {"uv": [0, 0, 16, 16], "texture": "#0"},
-				"south": {"uv": [0, 0, 16, 16], "texture": "#0"}
-			}
-		},
-		{
-			"from": [8, -1, 0.8],
-			"to": [8, 31, 15.2],
-			"shade": false,
-			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8], "rescale": true},
-			"faces": {
-				"east": {"uv": [0, 0, 16, 16], "texture": "#0"},
-				"west": {"uv": [0, 0, 16, 16], "texture": "#0"}
-			}
-		}
-	]
+		"crop": "brewery:block/corn_stage4-4"
+	}
 }

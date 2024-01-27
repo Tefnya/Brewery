@@ -33,7 +33,7 @@
 			"faces": {
 				"north": {"uv": [0, 2, 14, 0], "texture": "#6"},
 				"east": {"uv": [14, 2, 0, 0], "texture": "#6"},
-				"up": {"uv": [1, 2, 15, 16], "rotation": 90, "texture": "#9"},
+				"up": {"uv": [0, 15, 14, 1], "rotation": 90, "texture": "#9"},
 				"down": {"uv": [0, 14, 14, 0], "rotation": 270, "texture": "#7"}
 			}
 		},
@@ -120,6 +120,7 @@
 			"name": "basin_1",
 			"origin": [8, 8, 8],
 			"color": 0,
+			"nbt": "{}",
 			"children": [0, 1, 2, 3, 4, 5]
 		}
 	]

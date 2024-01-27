@@ -4,7 +4,8 @@
 		"17": "brewery:block/brewing_station/netherite/netherite_brewing_station_whistle_tube",
 		"18": "brewery:block/brewing_station/netherite/netherite_brewing_station_whistle_mouth",
 		"19": "brewery:block/brewing_station/netherite/netherite_brewing_station_whistle_top",
-		"20": "brewery:block/brewing_station/netherite/netherite_brewing_station_whistle_bottom"
+		"20": "brewery:block/brewing_station/netherite/netherite_brewing_station_whistle_bottom",
+		"particle": "brewery:block/brewing_station/netherite/netherite_brewing_station_whistle_bottom"
 	},
 	"elements": [
 		{
@@ -114,6 +115,7 @@
 			"name": "whistle",
 			"origin": [8, 25, 8],
 			"color": 0,
+			"nbt": "{}",
 			"children": [0, 1, 2, 3, 4]
 		}
 	]

@@ -6,7 +6,8 @@
 		"7": "brewery:block/brewing_station/netherite/netherite_brewing_station_side_3",
 		"8": "brewery:block/brewing_station/netherite/netherite_brewing_station_top_4",
 		"9": "brewery:block/brewing_station/netherite/netherite_brewing_station_bottom_1",
-		"10": "brewery:block/brewing_station/netherite/netherite_brewing_station_side_bottom_1"
+		"10": "brewery:block/brewing_station/netherite/netherite_brewing_station_side_bottom_1",
+		"particle": "brewery:block/brewing_station/netherite/netherite_brewing_station_bottom_2"
 	},
 	"elements": [
 		{
@@ -90,6 +91,7 @@
 			"name": "basin_3_whistle",
 			"origin": [8, 8, 8],
 			"color": 0,
+			"nbt": "{}",
 			"children": [0, 1, 2, 3]
 		}
 	]

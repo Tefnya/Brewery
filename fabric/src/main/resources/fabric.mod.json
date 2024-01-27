@@ -23,6 +23,9 @@
     ],
     "doapi": [
       "net.satisfy.brewery.util.api.BreweryDoAPI"
+    ],
+    "rei_client": [
+      "net.satisfy.brewery.fabric.rei.BreweryREIClientPluginFabric"
     ]
   },
   "mixins": [

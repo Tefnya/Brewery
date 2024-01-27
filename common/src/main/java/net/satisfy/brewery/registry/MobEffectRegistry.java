@@ -29,6 +29,8 @@ public class MobEffectRegistry {
     public static final RegistrySupplier<MobEffect> PROTECTIVETOUCH;
     public static final RegistrySupplier<MobEffect> HARDDRINKING;
     public static final RegistrySupplier<MobEffect> PARTYSTARTER;
+    public static final RegistrySupplier<MobEffect> SNOWWHITE;
+    public static final RegistrySupplier<MobEffect> PINTCHARISMA;
 
 
     private static RegistrySupplier<MobEffect> registerEffect(String name, Supplier<MobEffect> effect){
@@ -53,5 +55,8 @@ public class MobEffectRegistry {
         HEALINGTOUCH = registerEffect("healingtouch", () -> new HealingTouchEffect(MobEffectCategory.BENEFICIAL, 0x90F891));
         PROTECTIVETOUCH = registerEffect("protectivetouch", () -> new ProtectiveTouchEffect(MobEffectCategory.BENEFICIAL, 0x90F891));
         PARTYSTARTER = registerEffect("partystarter", () -> new PartystarterEffect(MobEffectCategory.BENEFICIAL, 0x90F891));
+        SNOWWHITE = registerEffect("snowwhite", () -> new SnowWhiteEffect(MobEffectCategory.BENEFICIAL, 0x90F891));
+        PINTCHARISMA = registerEffect("pintcharisma", () -> new PintCharismaEffect(MobEffectCategory.BENEFICIAL, 0x90F891));
+
     }
 }

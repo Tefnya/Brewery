@@ -86,10 +86,10 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Item> ROPE = registerItem("rope", () -> new RopeItem(getSettings()));
     public static final RegistrySupplier<Block> HANGING_ROPE = registerWithoutItem("hanging_rope", () -> new HangingRope(BlockBehaviour.Properties.copy(Blocks.CYAN_WOOL)));
     public static final RegistrySupplier<Block> BEER_MUG = registerWithItem("beer_mug", () -> new BeerKegFlowerPotBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD)));
-    public static final RegistrySupplier<Block> BEER_WHEAT = registerWithItemeverage("beer_wheat", () -> new BeverageBlock(getMugSettings()), MobEffects.DAMAGE_BOOST, 30 * 20);
-    public static final RegistrySupplier<Block> BEER_HOPS = registerWithItemeverage("beer_hops", () -> new BeverageBlock(getMugSettings()), MobEffects.LUCK, 30 * 20);
-    public static final RegistrySupplier<Block> BEER_BARLEY = registerWithItemeverage("beer_barley", () -> new BeverageBlock(getMugSettings()), MobEffects.DIG_SPEED, 30 * 20);
-    public static final RegistrySupplier<Block> BEER_CHORUS = registerWithItemeverage("beer_chorus", () -> new BeverageBlock(getMugSettings()), MobEffects.DIG_SPEED, 5 * 20);
+    public static final RegistrySupplier<Block> BEER_WHEAT = registerWithItemeverage("beer_wheat", () -> new BeverageBlock(getMugSettings()), MobEffectRegistry.SNOWWHITE.get(), 30 * 20);
+    public static final RegistrySupplier<Block> BEER_HOPS = registerWithItemeverage("beer_hops", () -> new BeverageBlock(getMugSettings()), MobEffectRegistry.PARTYSTARTER.get(), 30 * 20);
+    public static final RegistrySupplier<Block> BEER_BARLEY = registerWithItemeverage("beer_barley", () -> new BeverageBlock(getMugSettings()), MobEffectRegistry.PINTCHARISMA.get(), 30 * 20);
+    public static final RegistrySupplier<Block> BEER_CHORUS = registerWithItemeverage("beer_chorus", () -> new BeverageBlock(getMugSettings()), MobEffects.LEVITATION, 5 * 20);
     public static final RegistrySupplier<Block> WHISKEY_MAGGOALLAN = registerWithItemeverage("whiskey_maggoallan", () -> new BeverageBlock(getBeverageSettings()), MobEffectRegistry.HEALINGTOUCH.get(), 30 * 20);
     public static final RegistrySupplier<Block> WHISKEY_HADARILABEL = registerWithItemeverage("whiskey_hadarilabel", () -> new BeverageBlock(getBeverageSettings()), MobEffectRegistry.RENEWINGTOUCH.get(), 30 * 20);
     public static final RegistrySupplier<Block> WHISKEY_LILITUSINGLEMALT = registerWithItemeverage("whiskey_lilitusinglemalt", () -> new BeverageBlock(getBeverageSettings()), MobEffectRegistry.PARTYSTARTER.get(), 30 * 20);

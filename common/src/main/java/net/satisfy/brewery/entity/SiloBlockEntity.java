@@ -1,18 +1,12 @@
 package net.satisfy.brewery.entity;
 
-import net.satisfy.brewery.block.SiloBlock;
-import net.satisfy.brewery.registry.BlockEntityRegistry;
-import net.satisfy.brewery.util.BreweryUtil;
-import net.satisfy.brewery.util.ImplementedInventory;
-import net.satisfy.brewery.util.silo.ConnectivityHandler;
-import net.satisfy.brewery.util.silo.IMultiBlockEntityContainer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -23,6 +17,13 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.satisfy.brewery.block.SiloBlock;
+import net.satisfy.brewery.registry.BlockEntityRegistry;
+import net.satisfy.brewery.util.BreweryUtil;
+import net.satisfy.brewery.util.ImplementedInventory;
+import net.satisfy.brewery.util.silo.ConnectivityHandler;
+import net.satisfy.brewery.util.silo.IMultiBlockEntityContainer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -52,8 +53,7 @@ public class SiloBlockEntity extends BlockEntity implements IMultiBlockEntityCon
 
     @Override
     public boolean isController() {
-        return controller == null || this.worldPosition.getX() == controller.getX()
-                && this.worldPosition.getY() == controller.getY() && this.worldPosition.getZ() == controller.getZ();
+        return controller == null || this.worldPosition.equals(controller);
     }
 
     @Override
@@ -63,9 +63,10 @@ public class SiloBlockEntity extends BlockEntity implements IMultiBlockEntityCon
 
     @Override
     public void setController(BlockPos controller) {
-        if (level.isClientSide || controller.equals(this.controller))
+        if (this.level.isClientSide || controller.equals(this.controller))
             return;
         this.controller = controller;
+        Containers.dropContents(this.level, this.worldPosition, this);
     }
 
     @Override
@@ -101,7 +102,7 @@ public class SiloBlockEntity extends BlockEntity implements IMultiBlockEntityCon
         if (updateConnectivity)
             updateConnectivity();
         dry();
-        //tryDropFinish();
+        tryDropFinish(blockState);
     }
 
     public void updateConnectivity() {
@@ -114,20 +115,13 @@ public class SiloBlockEntity extends BlockEntity implements IMultiBlockEntityCon
     }
 
     public boolean tryAddItem(ItemStack itemStack) {
-        for (int slot = 0; slot < this.getCapacity(); slot++)
+        boolean added = false;
+        for (int slot = 0; !itemStack.isEmpty() && slot < this.getCapacity(); slot++)
             if (this.getItem(slot).isEmpty()) {
-                this.setItem(slot, itemStack.copy());
-                itemStack.setCount(0);
-                return true;
-            }/*
-            else if (BreweryUtil.canMergeItems(freshStack, itemStack)) {
-                int free = itemStack.getMaxStackSize() - freshStack.getCount();
-                int count = Math.min(itemStack.getCount(), free);
-                itemStack.shrink(count);
-                freshStack.grow(count);
+                this.setItem(slot, itemStack.split(1));
+                added = true;
             }
-             */
-        return false;
+        return added;
     }
 
     public ItemStack tryRemoveItem() {
@@ -142,9 +136,11 @@ public class SiloBlockEntity extends BlockEntity implements IMultiBlockEntityCon
     @Override
     public void notifyMultiUpdated() {
         BlockState state = this.getBlockState();
-        if (SiloBlock.isSilo(state)) { // safety
+        if (SiloBlock.isSilo(state) && level != null) {
             state = state.setValue(SiloBlock.BOTTOM, getController().getY() == getBlockPos().getY());
             state = state.setValue(SiloBlock.TOP, getController().getY() + height - 1 == getBlockPos().getY());
+            state = state.setValue(SiloBlock.OPEN, level.getBlockState(getController()).getValue(BlockStateProperties.OPEN));
+            state = state.setValue(BlockStateProperties.HORIZONTAL_FACING, level.getBlockState(getController()).getValue(BlockStateProperties.HORIZONTAL_FACING));
             level.setBlock(worldPosition, state, 6);
         }
         if (isController())
@@ -175,7 +171,7 @@ public class SiloBlockEntity extends BlockEntity implements IMultiBlockEntityCon
                                     zOffset == 0 ? SiloBlock.Shape.NORTH_EAST : zOffset == 2 ? SiloBlock.Shape.SOUTH_EAST : SiloBlock.Shape.EAST;
                             default -> SiloBlock.Shape.NONE;
                         };
-                    level.setBlock(pos, blockState.setValue(SiloBlock.SHAPE, shape), 23);
+                    level.setBlockAndUpdate(pos, blockState.setValue(SiloBlock.SHAPE, shape));
                 }
             }
         }
@@ -200,17 +196,16 @@ public class SiloBlockEntity extends BlockEntity implements IMultiBlockEntityCon
         }
     }
 
-    private void tryDropFinish() {
-        if (!this.isOpen() || this.level == null)
+    private void tryDropFinish(BlockState blockState) {
+        if (this.level == null || !blockState.getValue(SiloBlock.OPEN))
             return;
         for (int finish = MAX_CAPACITY; finish < MAX_CAPACITY + this.getCapacity(); finish++) {
             ItemStack finishStack = this.getItem(finish);
             if (!finishStack.isEmpty()) {
-                RandomSource rdm = RandomSource.create();
-                Direction direction = BreweryUtil.HORIZONTAL_DIRECTIONS[rdm.nextInt(BreweryUtil.HORIZONTAL_DIRECTIONS.length)];
+                Direction direction = blockState.getValue(BlockStateProperties.HORIZONTAL_FACING);
                 double x = switch (direction) {
-                    case EAST -> 0;
-                    case WEST -> width;
+                    case EAST -> width;
+                    case WEST -> 0;
                     default -> width / 2.0;
                 };
                 double z = switch (direction) {
@@ -222,10 +217,6 @@ public class SiloBlockEntity extends BlockEntity implements IMultiBlockEntityCon
                 return;
             }
         }
-    }
-
-    private boolean isOpen() {
-        return true; //TODO weg
     }
 
     public static void dropStack(Level level, double x, double y, double z, ItemStack itemStack, Direction direction) {
@@ -240,6 +231,22 @@ public class SiloBlockEntity extends BlockEntity implements IMultiBlockEntityCon
             ItemEntity itemEntity = new ItemEntity(level, j, k, l, itemStack.split(level.random.nextInt(21) + 10));
             itemEntity.setDeltaMovement(level.random.triangle(direction.getStepX() * 0.4, 0.11485000171139836), level.random.triangle(-0.2, 0.11485000171139836), level.random.triangle(direction.getStepZ() * 0.4, 0.11485000171139836));
             level.addFreshEntity(itemEntity);
+        }
+    }
+
+    public void open(boolean open) {
+        if (!this.isController())
+            return;
+        for (int yOffset = 0; yOffset < height; yOffset++) {
+            for (int xOffset = 0; xOffset < width; xOffset++) {
+                for (int zOffset = 0; zOffset < width; zOffset++) {
+                    BlockPos pos = this.worldPosition.offset(xOffset, yOffset, zOffset);
+                    BlockState blockState = this.level.getBlockState(pos);
+                    if (!SiloBlock.isSilo(blockState))
+                        continue;
+                    level.setBlockAndUpdate(pos, blockState.setValue(SiloBlock.OPEN, open));
+                }
+            }
         }
     }
 
@@ -282,7 +289,7 @@ public class SiloBlockEntity extends BlockEntity implements IMultiBlockEntityCon
     }
 
     public int getCapacity() {
-        return this.width * this.width * this.height;
+        return !isController() ? 0 : this.width * this.width * this.height;
     }
 
     // Inventory
@@ -295,26 +302,6 @@ public class SiloBlockEntity extends BlockEntity implements IMultiBlockEntityCon
     @Override
     public boolean hasInventory() {
         return isController();
-    }
-
-    // SidedInventory
-
-    @Override
-    public int @NotNull [] getSlotsForFace(Direction side) {
-        int[] result = new int[getCapacity() * 2];
-        for (int slot = 0; slot < result.length; slot++)
-            result[slot] = slot < getCapacity() ? slot : MAX_CAPACITY + slot - getCapacity();
-        return result;
-    }
-
-    @Override
-    public boolean canPlaceItemThroughFace(int slot, ItemStack itemStack, @Nullable Direction direction) {
-        return direction == Direction.UP && SiloBlock.isDryItem(itemStack) && slot < this.getCapacity() && this.getItem(slot).isEmpty();
-    }
-
-    @Override
-    public boolean canTakeItemThroughFace(int slot, ItemStack itemStack, Direction direction) {
-        return direction != Direction.UP && slot >= MAX_CAPACITY && slot - MAX_CAPACITY < this.getCapacity();
     }
 
     // NBT
@@ -356,5 +343,4 @@ public class SiloBlockEntity extends BlockEntity implements IMultiBlockEntityCon
     public AbstractContainerMenu createMenu(int i, net.minecraft.world.entity.player.Inventory inventory, Player player) {
         return null;
     }
-
 }

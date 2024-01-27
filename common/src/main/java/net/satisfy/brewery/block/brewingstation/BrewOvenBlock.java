@@ -62,11 +62,11 @@ public class BrewOvenBlock extends BrewingstationBlock {
 
     @Override
     public void animateTick(BlockState blockState, Level level, BlockPos blockPos, RandomSource randomSource) {
-        double x = blockPos.getX() + 0.5D;
-        double y = blockPos.getY() + 0.7D;
-        double z = blockPos.getZ() + 0.5D;
-
         if (blockState.getValue(HEAT) != Heat.OFF) {
+            double x = blockPos.getX() + 0.5D;
+            double y = blockPos.getY() + 0.7D;
+            double z = blockPos.getZ() + 0.5D;
+
             if (randomSource.nextDouble() < 0.1D) {
                 level.playLocalSound(x, y, z, SoundEvents.FURNACE_FIRE_CRACKLE, SoundSource.BLOCKS, 1.0F, 1.0F, false);
             }
@@ -107,7 +107,7 @@ public class BrewOvenBlock extends BrewingstationBlock {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        builder.add(MATERIAL ,HEAT);
+        builder.add(HEAT);
     }
 
     static {

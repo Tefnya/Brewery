@@ -74,7 +74,7 @@ public class BrewTimerBlock extends BrewingstationBlock {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        builder.add(MATERIAL, TIME, ACTIVATED, PRESSED);
+        builder.add(TIME, ACTIVATED, PRESSED);
     }
 
     @Override

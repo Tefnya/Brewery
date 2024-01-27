@@ -1,7 +1,6 @@
 package net.satisfy.brewery.mixin;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.satisfy.brewery.Brewery;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.client.gui.components.PlainTextButton;
@@ -9,6 +8,7 @@ import net.minecraft.client.gui.screens.LevelLoadingScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.RandomSource;
+import net.satisfy.brewery.Brewery;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -23,7 +23,7 @@ public abstract class DisclaimerMixin extends Screen {
     @Unique
     private static final Component[] DISCLAIMERS;
     @Unique
-    private final Component disclaimer = Component.translatable("disclaimer.brewery.disclaimer", DISCLAIMERS[RandomSource.create().nextInt(0, DISCLAIMERS.length)]).withStyle(ChatFormatting.YELLOW);
+    private final Component disclaimer = DISCLAIMERS[RandomSource.create().nextInt(0, DISCLAIMERS.length)];
     @Unique
     private boolean added = false;
 
@@ -33,11 +33,13 @@ public abstract class DisclaimerMixin extends Screen {
 
     @Inject(method = "render", at = @At(value = "TAIL"))
     public void renderDisclaimer(PoseStack poseStack, int i, int j, float f, CallbackInfo ci) {
+        String[] disclaimers = this.disclaimer.getString().split("\n");
         if (!this.added) {
             this.added = true;
-            int width = this.font.width(disclaimer);
+            Component title = Component.translatable("disclaimer.brewery.disclaimer").withStyle(ChatFormatting.YELLOW);
+            int width = this.font.width(title);
             int x = (this.width - width) / 2;
-            this.addRenderableWidget(new PlainTextButton(x, this.height - this.font.lineHeight - 4, width, 10, disclaimer, (button) -> {
+            this.addRenderableWidget(new PlainTextButton(x, this.height - this.font.lineHeight * (disclaimers.length + 1) - 4, width, 10, title, (button) -> {
                 String url = "https://www.who.int/news-room/fact-sheets/detail/alcohol";
                 try {
                     Util.getPlatform().openUrl(new URL(url));
@@ -46,6 +48,14 @@ public abstract class DisclaimerMixin extends Screen {
                 }
             }, this.font));
         }
+
+        for (int y = disclaimers.length; y > 0; y--) {
+            String info = disclaimers[disclaimers.length - y];
+            int width = this.font.width(info);
+            int x = (this.width - width) / 2;
+            this.font.draw(poseStack, Component.literal(info).withStyle(ChatFormatting.YELLOW), x, this.height - this.font.lineHeight * y - 4, 0xFFFF55);
+        }
+
         super.render(poseStack, i, j, f);
     }
 

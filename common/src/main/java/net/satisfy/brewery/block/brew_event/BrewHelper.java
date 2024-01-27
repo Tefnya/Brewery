@@ -1,10 +1,5 @@
 package net.satisfy.brewery.block.brew_event;
 
-import net.satisfy.brewery.Brewery;
-import net.satisfy.brewery.block.brewingstation.BrewKettleBlock;
-import net.satisfy.brewery.entity.BrewstationBlockEntity;
-import net.satisfy.brewery.block.property.Liquid;
-import net.satisfy.brewery.registry.BlockStateRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -13,6 +8,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.satisfy.brewery.Brewery;
+import net.satisfy.brewery.block.brewingstation.BrewKettleBlock;
+import net.satisfy.brewery.block.property.Liquid;
+import net.satisfy.brewery.entity.BrewstationBlockEntity;
+import net.satisfy.brewery.registry.BlockStateRegistry;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -22,20 +22,6 @@ import java.util.Set;
 import java.util.function.Supplier;
 
 public class BrewHelper {
-
-    @Nullable
-    public static BlockState getState(Class<?> clazz, Set<BlockPos> components, Level level){
-        BlockPos pos = getBlock(clazz, components, level);
-
-        return pos == null ? null : level.getBlockState(pos);
-    }
-
-    @Nullable
-    public static BlockState getState(Block block, Set<BlockPos> components, Level level){
-        BlockPos pos = getBlock(block, components, level);
-
-        return pos == null ? null : level.getBlockState(pos);
-    }
 
     @Nullable
     public static BlockPos getBlock(Block block, Set<BlockPos> components, Level level) {
@@ -112,13 +98,13 @@ public class BrewHelper {
 
     public static void checkRunningEvents(BrewstationBlockEntity entity){
         Set<BrewEvent> eventSet = entity.getRunningEvents();
-        if(eventSet.isEmpty()) return;
+        if (eventSet.isEmpty()) return;
         Iterator<BrewEvent> iterator = eventSet.iterator();
         while (iterator.hasNext()) {
             BrewEvent event = iterator.next();
-            if(event != null){
+            if (event != null) {
                 event.tick(entity);
-                if(event.isFinish(entity.getComponents(), entity.getLevel())){
+                if (event.isFinish(entity.getComponents(), entity.getLevel())) {
                     endEvent(entity, iterator, event);
                     entity.growSolved();
                 }

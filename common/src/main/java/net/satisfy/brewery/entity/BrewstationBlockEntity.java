@@ -9,7 +9,6 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -24,9 +23,12 @@ import net.satisfy.brewery.block.brew_event.BrewEvents;
 import net.satisfy.brewery.block.brew_event.BrewHelper;
 import net.satisfy.brewery.block.property.Heat;
 import net.satisfy.brewery.block.property.Liquid;
-import net.satisfy.brewery.entity.beer_elemental.BeerElementalEntity;
 import net.satisfy.brewery.item.DrinkBlockItem;
-import net.satisfy.brewery.registry.*;
+import net.satisfy.brewery.recipe.BrewingRecipe;
+import net.satisfy.brewery.registry.BlockEntityRegistry;
+import net.satisfy.brewery.registry.BlockStateRegistry;
+import net.satisfy.brewery.registry.ObjectRegistry;
+import net.satisfy.brewery.registry.RecipeTypeRegistry;
 import net.satisfy.brewery.util.BreweryMath;
 import net.satisfy.brewery.util.BreweryUtil;
 import net.satisfy.brewery.util.ImplementedInventory;
@@ -141,26 +143,30 @@ public class BrewstationBlockEntity extends BlockEntity implements ImplementedIn
     }
 
     private boolean canBrew(Recipe<?> recipe) {
-        return recipe != null && this.level != null &&
+        if (recipe == null || this.level == null)
+            return false;
+        return recipe instanceof BrewingRecipe brewingRecipe &&
+                this.level.getBlockState(this.getBlockPos()).getValue(BlockStateRegistry.MATERIAL).getLevel() >= brewingRecipe.getMaterial().getLevel() &&
                 this.level.getBlockState(this.getBlockPos()).getValue(BlockStateRegistry.LIQUID) != Liquid.EMPTY &&
                 this.level.getBlockState(BrewHelper.getBlock(ObjectRegistry.BREW_OVEN.get(), this.components, this.level)).getValue(BlockStateRegistry.HEAT) != Heat.OFF;
     }
 
     private void brew(Recipe<?> recipe) {
-        Brewery.LOGGER.warn("Brewing!");
+        Brewery.LOGGER.info("Brewing!!!");
 
         ItemStack resultSack = recipe.getResultItem();
-        DrinkBlockItem.addQuality(resultSack, this.solved);
         if (resultSack.getItem() instanceof DrinkBlockItem drinkItem) {
+            DrinkBlockItem.addQuality(resultSack, this.solved);
             drinkItem.addCount(resultSack, this.solved);
         }
         this.beer = resultSack;
-        spawnElementals();
+
         endBrewing();
 
         if (this.level != null) {
             BlockState blockState = this.level.getBlockState(this.getBlockPos());
             this.level.setBlockAndUpdate(this.getBlockPos(), blockState.setValue(BlockStateRegistry.LIQUID, Liquid.BEER));
+
             BlockPos ovenPos = BrewHelper.getBlock(ObjectRegistry.BREW_OVEN.get(), this.components, level);
             BlockState ovenState = this.level.getBlockState(ovenPos);
             this.level.setBlockAndUpdate(ovenPos, ovenState.setValue(BlockStateRegistry.HEAT, Heat.OFF));
@@ -175,17 +181,6 @@ public class BrewstationBlockEntity extends BlockEntity implements ImplementedIn
             }
         }
 
-    }
-
-    private void spawnElementals() {
-        if (this.solved == 0 && this.level != null && this.level.random.nextDouble() >= 0.5D) {
-            BlockPos spawnPos = BrewHelper.getBlock(ObjectRegistry.BREW_OVEN.get(), this.components, level);
-            if (spawnPos != null) {
-                BeerElementalEntity beerElemental = new BeerElementalEntity(EntityRegistry.BEER_ELEMENTAL.get(), this.level);
-                beerElemental.setPos(spawnPos.getX(), spawnPos.getY(), spawnPos.getZ());
-                this.level.addFreshEntity(beerElemental);
-            }
-        }
     }
 
     public void endBrewing(){

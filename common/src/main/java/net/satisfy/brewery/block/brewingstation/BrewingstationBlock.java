@@ -16,6 +16,7 @@ import net.satisfy.brewery.Brewery;
 import net.satisfy.brewery.block.property.BrewMaterial;
 import net.satisfy.brewery.entity.BrewstationBlockEntity;
 import net.satisfy.brewery.registry.BlockStateRegistry;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class BrewingstationBlock extends HorizontalDirectionalBlock {
@@ -32,7 +33,7 @@ public class BrewingstationBlock extends HorizontalDirectionalBlock {
     }
 
     @Override
-    public ItemStack getCloneItemStack(BlockGetter getter, BlockPos pos, BlockState state) {
+    public @NotNull ItemStack getCloneItemStack(BlockGetter getter, BlockPos pos, BlockState state) {
         if (this.getClass() != BrewKettleBlock.class) {
             BrewstationBlockEntity blockEntity = getController(pos, getter);
             if (blockEntity != null) {
@@ -79,6 +80,6 @@ public class BrewingstationBlock extends HorizontalDirectionalBlock {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        builder.add(FACING);
+        builder.add(FACING, MATERIAL);
     }
 }

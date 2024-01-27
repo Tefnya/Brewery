@@ -55,7 +55,7 @@ public class BrewKettleBlock extends BrewingstationBlock implements EntityBlock 
     public BrewKettleBlock(BrewMaterial brewMaterial, Properties properties) {
         super(properties);
         this.brewMaterial = brewMaterial;
-        this.registerDefaultState(this.defaultBlockState().setValue(LIQUID, Liquid.EMPTY));
+        this.registerDefaultState(this.defaultBlockState().setValue(MATERIAL, brewMaterial).setValue(LIQUID, Liquid.EMPTY));
     }
 
     @SuppressWarnings("deprecation")

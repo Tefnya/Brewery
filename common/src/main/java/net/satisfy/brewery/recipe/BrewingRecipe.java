@@ -3,7 +3,6 @@ package net.satisfy.brewery.recipe;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
-import net.satisfy.brewery.registry.RecipeTypeRegistry;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -13,17 +12,26 @@ import net.minecraft.world.entity.player.StackedContents;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
+import net.satisfy.brewery.block.property.BrewMaterial;
+import net.satisfy.brewery.registry.RecipeTypeRegistry;
+import org.jetbrains.annotations.NotNull;
 
 public class BrewingRecipe implements Recipe<Container> {
 
     private final ResourceLocation identifier;
     private final NonNullList<Ingredient> ingredients;
     private final ItemStack output;
+    private final BrewMaterial material;
 
-    public BrewingRecipe(ResourceLocation identifier, NonNullList<Ingredient> ingredients, ItemStack output) {
+    public BrewingRecipe(ResourceLocation identifier, NonNullList<Ingredient> ingredients, ItemStack output, BrewMaterial material) {
         this.identifier = identifier;
         this.ingredients = ingredients;
         this.output = output;
+        this.material = material;
+    }
+
+    public BrewMaterial getMaterial() {
+        return material;
     }
 
     @Override
@@ -42,12 +50,12 @@ public class BrewingRecipe implements Recipe<Container> {
     }
 
     @Override
-    public ItemStack assemble(Container inventory) {
+    public @NotNull ItemStack assemble(Container inventory) {
         return ItemStack.EMPTY;
     }
 
     @Override
-    public NonNullList<Ingredient> getIngredients() {
+    public @NotNull NonNullList<Ingredient> getIngredients() {
         return this.ingredients;
     }
 
@@ -58,22 +66,22 @@ public class BrewingRecipe implements Recipe<Container> {
     }
 
     @Override
-    public ItemStack getResultItem() {
+    public @NotNull ItemStack getResultItem() {
         return this.output.copy();
     }
 
     @Override
-    public ResourceLocation getId() {
+    public @NotNull ResourceLocation getId() {
         return this.identifier;
     }
 
     @Override
-    public RecipeSerializer<?> getSerializer() {
+    public @NotNull RecipeSerializer<?> getSerializer() {
         return RecipeTypeRegistry.BREWING_RECIPE_SERIALIZER.get();
     }
 
     @Override
-    public RecipeType<?> getType() {
+    public @NotNull RecipeType<?> getType() {
         return RecipeTypeRegistry.BREWING_RECIPE_TYPE.get();
     }
 
@@ -85,14 +93,15 @@ public class BrewingRecipe implements Recipe<Container> {
     public static class Serializer implements RecipeSerializer<BrewingRecipe> {
 
         @Override
-        public BrewingRecipe fromJson(ResourceLocation resourceLocation, JsonObject jsonObject) {
+        public @NotNull BrewingRecipe fromJson(ResourceLocation resourceLocation, JsonObject jsonObject) {
             final var ingredients = deserializeIngredients(GsonHelper.getAsJsonArray(jsonObject, "ingredients"));
             if (ingredients.isEmpty()) {
                 throw new JsonParseException("No ingredients for Brewing");
             } else if (ingredients.size() > 3) {
                 throw new JsonParseException("Too many ingredients for Brewing");
             } else {
-                return new BrewingRecipe(resourceLocation, ingredients, ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(jsonObject, "result")));
+                BrewMaterial brewMaterial = BrewMaterial.valueOf(jsonObject.get("material").getAsString());
+                return new BrewingRecipe(resourceLocation, ingredients, ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(jsonObject, "result")), brewMaterial);
             }
         }
 
@@ -108,10 +117,10 @@ public class BrewingRecipe implements Recipe<Container> {
         }
 
         @Override
-        public BrewingRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
+        public @NotNull BrewingRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
             final var ingredients = NonNullList.withSize(buf.readVarInt(), Ingredient.EMPTY);
             ingredients.replaceAll(ignored -> Ingredient.fromNetwork(buf));
-            return new BrewingRecipe(id, ingredients, buf.readItem());
+            return new BrewingRecipe(id, ingredients, buf.readItem(), buf.readEnum(BrewMaterial.class));
         }
 
         @Override
@@ -120,8 +129,8 @@ public class BrewingRecipe implements Recipe<Container> {
             for (Ingredient ingredient : recipe.ingredients) {
                 ingredient.toNetwork(buf);
             }
-
             buf.writeItem(recipe.output);
+            buf.writeEnum(recipe.material);
         }
     }
 }

@@ -1,22 +1,42 @@
 package net.satisfy.brewery.effect.alcohol;
 
 import dev.architectury.networking.NetworkManager;
-import net.satisfy.brewery.networking.BreweryNetworking;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
+import net.satisfy.brewery.networking.BreweryNetworking;
+import net.satisfy.brewery.registry.MobEffectRegistry;
 
 public class AlcoholManager {
     public static final int BEGIN_TIME = 10 * 20;
     public static final int WANDER_AROUND = 5 * 20;
     public static final int FALL_DOWN = 7 * 20;
     public static final int DRUNK_TIME = 30 * 20;
+
+    public static void drinkAlcohol(ServerPlayer serverPlayer) {
+        if (serverPlayer instanceof AlcoholPlayer alcoholPlayer) {
+            AlcoholLevel alcoholLevel = alcoholPlayer.getAlcohol();
+            alcoholLevel.drink();
+
+            serverPlayer.addEffect(new MobEffectInstance(MobEffectRegistry.DRUNK.get(), AlcoholManager.DRUNK_TIME, alcoholLevel.getDrunkenness() - 1, false, alcoholLevel.isDrunk()));
+            if (alcoholLevel.isBlackout()) {
+                if (!serverPlayer.hasEffect(MobEffectRegistry.BLACKOUT.get())) {
+                    serverPlayer.addEffect(new MobEffectInstance(MobEffectRegistry.BLACKOUT.get(), 15 * 20, 0, false, false));
+                    serverPlayer.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 13 * 20, 0, false, false));
+                }
+            }
+
+            AlcoholManager.syncAlcohol(serverPlayer, alcoholLevel);
+        }
+    }
 
     public static void syncAlcohol(ServerPlayer serverPlayer, AlcoholLevel alcoholLevel) {
         FriendlyByteBuf buffer = BreweryNetworking.createPacketBuf();

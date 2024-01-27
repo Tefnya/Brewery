@@ -1,10 +1,6 @@
 package net.satisfy.brewery.block;
 
 import de.cristelknight.doapi.common.block.FacingBlock;
-import net.satisfy.brewery.entity.SiloBlockEntity;
-import net.satisfy.brewery.registry.BlockEntityRegistry;
-import net.satisfy.brewery.registry.ObjectRegistry;
-import net.satisfy.brewery.util.silo.ConnectivityHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.StringRepresentable;
@@ -34,6 +30,10 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.satisfy.brewery.entity.SiloBlockEntity;
+import net.satisfy.brewery.registry.BlockEntityRegistry;
+import net.satisfy.brewery.registry.ObjectRegistry;
+import net.satisfy.brewery.util.silo.ConnectivityHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -48,7 +48,8 @@ public class SiloBlock extends FacingBlock implements EntityBlock {
 
     public SiloBlock(Properties settings) {
         super(settings);
-        this.registerDefaultState(this.defaultBlockState().setValue(TOP, true)
+        this.registerDefaultState(this.defaultBlockState()
+                .setValue(TOP, true)
                 .setValue(BOTTOM, true)
                 .setValue(OPEN, false)
                 .setValue(SHAPE, Shape.NONE)
@@ -81,7 +82,7 @@ public class SiloBlock extends FacingBlock implements EntityBlock {
 
     public static boolean isSilo(ItemStack itemStack) {
         Item item = itemStack.getItem();
-        return (item instanceof BlockItem bi) &&
+        return item instanceof BlockItem bi &&
                 (bi.getBlock() == ObjectRegistry.SILO_WOOD.get() ||
                         bi.getBlock() == ObjectRegistry.SILO_COPPER.get());
     }
@@ -96,18 +97,23 @@ public class SiloBlock extends FacingBlock implements EntityBlock {
         if (level.isClientSide)
             return itemStack.isEmpty() || isDryItem(itemStack) ? InteractionResult.SUCCESS : isSilo(itemStack) || player.isDiscrete() ? InteractionResult.PASS : InteractionResult.CONSUME;
         BlockEntity be = level.getBlockEntity(blockPos);
-        if (be instanceof SiloBlockEntity siloBE)
+        if (be instanceof SiloBlockEntity siloBE) {
+            SiloBlockEntity siloController = siloBE.getControllerBE();
+            if (siloController == null)
+                return InteractionResult.PASS;
             if (itemStack.isEmpty()) {
                 if (player.isDiscrete()) {
                     ItemStack returnStack = siloBE.tryRemoveItem();
                     if (!returnStack.isEmpty())
                         player.addItem(itemStack);
                 } else {
-                    //TODO SET OPEN / CLOSE
+                    // Open / Close
+                    siloController.open(!blockState.getValue(OPEN));
                 }
                 return InteractionResult.SUCCESS;
-            } else if (isDryItem(itemStack) && siloBE.tryAddItem(itemStack))
+            } else if (isDryItem(itemStack) && siloController.tryAddItem(itemStack))
                 return InteractionResult.SUCCESS;
+        }
         return isSilo(itemStack) || player.isDiscrete() ? InteractionResult.PASS : InteractionResult.CONSUME;
     }
 
@@ -120,8 +126,8 @@ public class SiloBlock extends FacingBlock implements EntityBlock {
             return;
 
         BlockEntity be = world.getBlockEntity(pos);
-        if (be instanceof SiloBlockEntity container)
-            container.updateConnectivity();
+        if (be instanceof SiloBlockEntity siloBlockEntity)
+            siloBlockEntity.updateConnectivity();
     }
 
     @SuppressWarnings("deprecation")
@@ -132,7 +138,6 @@ public class SiloBlock extends FacingBlock implements EntityBlock {
             if (!(be instanceof SiloBlockEntity siloBE))
                 return;
             Containers.dropContents(level, blockPos, siloBE);
-            //level.updateNeighbourForOutputSignal(blockPos, this);
             level.removeBlockEntity(blockPos);
             ConnectivityHandler.splitMulti(siloBE);
         }
@@ -188,12 +193,10 @@ public class SiloBlock extends FacingBlock implements EntityBlock {
         return new SiloBlockEntity(pos, state);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public @NotNull BlockState mirror(BlockState state, Mirror mirror) { //TODO ?
         if (mirror == Mirror.NONE)
             return state;
-        boolean x = mirror == Mirror.FRONT_BACK;
         return switch (state.getValue(SHAPE)) {
             case NORTH -> state.setValue(SHAPE, Shape.SOUTH);
             case NORTH_EAST -> state.setValue(SHAPE, Shape.SOUTH_WEST);
@@ -207,7 +210,6 @@ public class SiloBlock extends FacingBlock implements EntityBlock {
         };
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public @NotNull BlockState rotate(BlockState state, Rotation rotation) {
         for (int i = 0; i < rotation.ordinal(); i++)

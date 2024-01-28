@@ -1,7 +1,5 @@
 package net.satisfy.brewery.item;
 
-import com.google.common.collect.Lists;
-import com.mojang.datafixers.util.Pair;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -13,8 +11,6 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffectUtil;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
@@ -25,11 +21,15 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Map;
+import java.util.Objects;
 
 public class DrinkBlockItem extends BlockItem {
-    public DrinkBlockItem(Block block, Properties settings) {
+    private final MobEffect effect;
+    private final int baseDuration;
+    public DrinkBlockItem(MobEffect effect, int duration, Block block, Properties settings) {
         super(block, settings);
+        this.effect = effect;
+        this.baseDuration = duration;
     }
 
     @Override
@@ -50,9 +50,39 @@ public class DrinkBlockItem extends BlockItem {
         }
         if (livingEntity instanceof ServerPlayer serverPlayer) {
             AlcoholManager.drinkAlcohol(serverPlayer);
+
+            // Check for beer quality and apply effects accordingly
+            if (itemStack.hasTag() && Objects.requireNonNull(itemStack.getTag()).contains("brewery.beer_quality")) {
+                int quality = itemStack.getTag().getInt("brewery.beer_quality");
+                MobEffectInstance effectInstance = calculateEffectForQuality(quality);
+                serverPlayer.addEffect(effectInstance);
+            } else {
+                MobEffectInstance effectInstance = new MobEffectInstance(effect, baseDuration , 0);
+                serverPlayer.addEffect(effectInstance);
+            }
         }
+
         return returnStack;
     }
+
+    @NotNull
+    private MobEffectInstance calculateEffectForQuality(int quality) {
+        int durationMultiplier = 1;
+        int effectLevel = switch (quality) {
+            case 2 -> {
+                durationMultiplier = 3;
+                yield 2;
+            }
+            case 3 -> {
+                durationMultiplier = 5;
+                yield 3;
+            }
+            default -> 1;
+        };
+
+        return new MobEffectInstance(effect, baseDuration * durationMultiplier, effectLevel - 1);
+    }
+
 
     public static void addQuality(ItemStack itemStack, int quality) {
         CompoundTag nbtData = new CompoundTag();
@@ -66,73 +96,35 @@ public class DrinkBlockItem extends BlockItem {
 
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> tooltip, TooltipFlag context) {
-        List<Pair<MobEffectInstance, Float>> list2 = getFoodProperties() != null ? getFoodProperties().getEffects() : Lists.newArrayList();
-        List<Pair<Attribute, AttributeModifier>> list3 = Lists.newArrayList();
-        if (list2.isEmpty()) {
-            tooltip.add(Component.translatable("effect.none").withStyle(ChatFormatting.GRAY));
+        int beerQuality = stack.hasTag() && Objects.requireNonNull(stack.getTag()).contains("brewery.beer_quality") ? stack.getTag().getInt("brewery.beer_quality") : 1;
+        int durationMultiplier = 1;
+        int effectLevel = switch (beerQuality) {
+            case 2 -> {
+                durationMultiplier = 3;
+                yield 2;
+            }
+            case 3 -> {
+                durationMultiplier = 5;
+                yield 3;
+            }
+            default -> 1;
+        };
+
+        if (this.effect != null) {
+            MutableComponent effectName = Component.translatable(this.effect.getDescriptionId());
+            if (effectLevel > 1) {
+                effectName.append(" ").append(Component.translatable("potion.potency." + (effectLevel - 1))); // Add level next to the effect name.
+            }
+            MutableComponent effectDuration = Component.literal(" (" + MobEffectUtil.formatDuration(new MobEffectInstance(this.effect, this.baseDuration * durationMultiplier), 1.0f) + ")");
+            tooltip.add(effectName.append(effectDuration).withStyle(this.effect.getCategory().getTooltipFormatting()));
         } else {
-            for(Pair<MobEffectInstance, Float> statusEffectInstance : list2) {
-                MutableComponent mutableText = Component.translatable(statusEffectInstance.getFirst().getDescriptionId());
-                MobEffect statusEffect = statusEffectInstance.getFirst().getEffect();
-                Map<Attribute, AttributeModifier> map = statusEffect.getAttributeModifiers();
-                if (!map.isEmpty()) {
-                    for(Map.Entry<Attribute, AttributeModifier> entry : map.entrySet()) {
-                        AttributeModifier entityAttributeModifier = entry.getValue();
-                        AttributeModifier entityAttributeModifier2 = new AttributeModifier(
-                                entityAttributeModifier.getName(),
-                                statusEffect.getAttributeModifierValue(statusEffectInstance.getFirst().getAmplifier(), entityAttributeModifier),
-                                entityAttributeModifier.getOperation()
-                        );
-                        list3.add(new Pair<>(entry.getKey(), entityAttributeModifier2));
-                    }
-                }
-
-                if (statusEffectInstance.getFirst().getDuration() > 20) {
-                    mutableText = Component.translatable(
-                            "potion.withDuration",
-                            mutableText, MobEffectUtil.formatDuration(statusEffectInstance.getFirst(), statusEffectInstance.getSecond()));
-                }
-
-                tooltip.add(mutableText.withStyle(statusEffect.getCategory().getTooltipFormatting()));
-            }
+            tooltip.add(Component.translatable("effect.none").withStyle(ChatFormatting.GRAY));
         }
 
-        if (!list3.isEmpty()) {
-            tooltip.add(Component.empty());
-            tooltip.add(Component.translatable("potion.whenDrank").withStyle(ChatFormatting.DARK_PURPLE));
-
-            for(Pair<Attribute, AttributeModifier> pair : list3) {
-                AttributeModifier entityAttributeModifier3 = pair.getSecond();
-                double d = entityAttributeModifier3.getAmount();
-                double e;
-                if (entityAttributeModifier3.getOperation() != AttributeModifier.Operation.MULTIPLY_BASE && entityAttributeModifier3.getOperation() != AttributeModifier.Operation.MULTIPLY_TOTAL) {
-                    e = entityAttributeModifier3.getAmount();
-                } else {
-                    e = entityAttributeModifier3.getAmount() * 100.0;
-                }
-
-                if (d > 0.0) {
-                    tooltip.add(
-                            Component.translatable(
-                                    "attribute.modifier.plus." + entityAttributeModifier3.getOperation().toValue(),
-                                    ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(e), Component.translatable(pair.getFirst().getDescriptionId()))
-                                    .withStyle(ChatFormatting.BLUE)
-                    );
-                } else if (d < 0.0) {
-                    e *= -1.0;
-                    tooltip.add(
-                            Component.translatable(
-                                    "attribute.modifier.take." + entityAttributeModifier3.getOperation().toValue(),
-                                    ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(e), Component.translatable(pair.getFirst().getDescriptionId()))
-                                    .withStyle(ChatFormatting.RED)
-                    );
-                }
-            }
+        if (beerQuality > 1) {
+            tooltip.add(Component.translatable("tooltip.brewery.beer_quality", beerQuality).withStyle(ChatFormatting.GOLD));
         }
-        if (stack.getTag() != null && stack.getTag().contains("brewery.beer_quality")) {
-            tooltip.add(Component.empty());
-            tooltip.add(Component.translatable("tooltip.brewery.beer_quality", stack.getTag().getInt("brewery.beer_quality")).withStyle(ChatFormatting.GOLD));
-        }
+
         tooltip.add(Component.translatable("tooltip.brewery.canbeplaced").withStyle(ChatFormatting.ITALIC, ChatFormatting.GRAY));
     }
 

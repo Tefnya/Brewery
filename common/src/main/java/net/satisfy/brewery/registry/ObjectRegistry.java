@@ -215,15 +215,12 @@ public class ObjectRegistry {
 
     private static <T extends Block> RegistrySupplier<T> registerWithItemeverage(String name, Supplier<T> block, MobEffect effect, int duration) {
         RegistrySupplier<T> toReturn = registerWithoutItem(name, block);
-        registerItem(name, () -> new DrinkBlockItem(toReturn.get(), getSettings(settings -> settings.food(beverageFoodComponent(effect, duration)))));
+        registerItem(name, () -> new DrinkBlockItem(effect, duration, toReturn.get(), getSettings(settings -> settings.food(beverageFoodComponent()))));
         return toReturn;
     }
 
-    private static FoodProperties beverageFoodComponent(MobEffect effect, int durationInTicks) {
+    private static FoodProperties beverageFoodComponent() {
         FoodProperties.Builder component = new FoodProperties.Builder().nutrition(2).saturationMod(1);
-        if (effect != null) {
-            component.effect(new MobEffectInstance(effect, durationInTicks), 1.0f);
-        }
         return component.build();
     }
 

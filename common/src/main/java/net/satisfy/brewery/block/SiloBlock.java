@@ -161,7 +161,7 @@ public class SiloBlock extends FacingBlock implements EntityBlock {
         return level.getBlockEntity(blockPos, BlockEntityRegistry.SILO.get()).map(AbstractContainerMenu::getRedstoneSignalFromContainer).orElse(0);
     }
 
-    static final VoxelShape CAMPFIRE_SMOKE_CLIP = Block.box(0, 4, 0, 16, 16, 16); // TODO ?
+    static final VoxelShape CAMPFIRE_SMOKE_CLIP = Block.box(0, 4, 0, 16, 16, 16);
 
     @SuppressWarnings("deprecation")
     @Override
@@ -194,7 +194,7 @@ public class SiloBlock extends FacingBlock implements EntityBlock {
     }
 
     @Override
-    public @NotNull BlockState mirror(BlockState state, Mirror mirror) { //TODO ?
+    public @NotNull BlockState mirror(BlockState state, Mirror mirror) {
         if (mirror == Mirror.NONE)
             return state;
         return switch (state.getValue(SHAPE)) {

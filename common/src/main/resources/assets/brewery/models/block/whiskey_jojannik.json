@@ -1,7 +1,8 @@
 {
 	"credit": "Made by Satisfy",
 	"textures": {
-		"0": "brewery:block/whiskey_jojannik"
+		"0": "brewery:block/whiskey_jojannik",
+		"particle": "brewery:block/whiskey_jojannik"
 	},
 	"elements": [
 		{

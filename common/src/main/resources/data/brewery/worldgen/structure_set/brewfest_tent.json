@@ -1,0 +1,16 @@
+{
+  "structures": [
+    {
+      "structure": "brewery:brewfest_tent",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "salt": 86843,
+    "spacing": 22,
+    "separation": 12,
+    "type": "minecraft:random_spread"
+  }
+}
+
+

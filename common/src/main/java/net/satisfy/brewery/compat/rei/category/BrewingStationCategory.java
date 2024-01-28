@@ -65,9 +65,14 @@ public class BrewingStationCategory implements DisplayCategory<BrewingStationDis
             widgets.add(Widgets.createSlot(new Point(startPoint.x + 12, startPoint.y + 20)).entries(display.getInputEntries().get(1)).markInput());
 
         if (display.getInputEntries().size() < 3)
-            widgets.add(Widgets.createSlotBackground(new Point(startPoint.x + 40, startPoint.y + 10)));
+            widgets.add(Widgets.createSlotBackground(new Point(startPoint.x + 32, startPoint.y)));
         else
-            widgets.add(Widgets.createSlot(new Point(startPoint.x + 32, startPoint.y + 10)).entries(display.getInputEntries().get(2)).markInput());
+            widgets.add(Widgets.createSlot(new Point(startPoint.x + 32, startPoint.y)).entries(display.getInputEntries().get(2)).markInput());
+
+        if (display.getInputEntries().size() < 4)
+            widgets.add(Widgets.createSlotBackground(new Point(startPoint.x + 32, startPoint.y + 20)));
+        else
+            widgets.add(Widgets.createSlot(new Point(startPoint.x + 32, startPoint.y + 20)).entries(display.getInputEntries().get(3)).markInput());
 
         return widgets;
     }

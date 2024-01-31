@@ -244,7 +244,7 @@
       "model": "brewery:block/silo_wood/silo_wood_connected_north_east_open_bottom"
     },
     "shape=north_east,facing=east,bottom=true,open=true,top=false": {
-      "model": "brewery:block/silo_wood/silo_wood_connected_north_east_open_bottom_east2"
+      "model": "brewery:block/silo_wood/silo_wood_connected_north_east_open_bottom_east3"
     },
     "shape=north_east,facing=south,bottom=true,open=true,top=false": {
       "model": "brewery:block/silo_wood/silo_wood_connected_north_east_corner"
@@ -256,7 +256,7 @@
       "model": "brewery:block/silo_wood/silo_wood_connected_north_east_closed_bottom"
     },
     "shape=north_east,facing=east,bottom=true,open=false,top=false": {
-      "model": "brewery:block/silo_wood/silo_wood_connected_north_east_closed_bottom_east2"
+      "model": "brewery:block/silo_wood/silo_wood_connected_north_east_closed_bottom_east3"
     },
     "shape=north_east,facing=south,bottom=true,open=false,top=false": {
       "model": "brewery:block/silo_wood/silo_wood_connected_north_east_corner"
@@ -649,7 +649,7 @@
       "model": "brewery:block/silo_wood/silo_wood_connected_mid_east"
     },
     "shape=west,facing=north,bottom=true,open=false,top=false": {
-      "model": "brewery:block/silo_wood/silo_wood_connected_north"
+      "model": "brewery:block/silo_wood/silo_wood_connected_north3"
     },
     "shape=west,facing=east,bottom=true,open=false,top=false": {
       "model": "brewery:block/silo_wood/silo_wood_connected_mid_west"
@@ -661,7 +661,7 @@
       "model": "brewery:block/silo_wood/silo_wood_connected_mid_closed_west"
     },
     "shape=west,facing=north,bottom=true,open=true,top=false": {
-      "model": "brewery:block/silo_wood/silo_wood_connected_north"
+      "model": "brewery:block/silo_wood/silo_wood_connected_north3"
     },
     "shape=west,facing=east,bottom=true,open=true,top=false": {
       "model": "brewery:block/silo_wood/silo_wood_connected_mid_west"

@@ -1,10 +1,10 @@
 package net.satisfy.brewery.block.brewingstation;
 
 import com.mojang.math.Vector3f;
+import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.DustParticleOptions;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
@@ -24,7 +24,6 @@ import net.satisfy.brewery.block.property.BrewMaterial;
 import net.satisfy.brewery.registry.BlockStateRegistry;
 import net.satisfy.brewery.registry.SoundEventRegistry;
 import net.satisfy.brewery.util.BreweryUtil;
-import net.minecraft.Util;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -33,8 +32,8 @@ import java.util.function.Supplier;
 
 public class BrewTimerBlock extends BrewingstationBlock {
     public static final BooleanProperty TIME;
-    public static final BooleanProperty ACTIVATED = BooleanProperty.create("activated");
-    public static final BooleanProperty PRESSED = BooleanProperty.create("pressed");
+    public static final BooleanProperty ACTIVATED;
+    public static final BooleanProperty PRESSED;
     private static final Supplier<VoxelShape> voxelShapeSupplier;
 
     public static final Map<Direction, VoxelShape> SHAPE;
@@ -49,24 +48,15 @@ public class BrewTimerBlock extends BrewingstationBlock {
 
     @Override
     public @NotNull InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
-        if (!blockState.getValue(PRESSED)) {
-            level.setBlock(blockPos, blockState.setValue(PRESSED, true), 3);
-            level.blockEvent(blockPos, this, 1, 60);
+        if (Boolean.TRUE.equals(blockState.getValue(TIME))) {
+            level.setBlock(blockPos, blockState.setValue(TIME, false), 3);
             return InteractionResult.SUCCESS;
         }
         return InteractionResult.CONSUME;
     }
 
-
-
     @Override
-    public void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
-        if (state.getValue(PRESSED)) {
-            world.setBlock(pos, state.setValue(PRESSED, false), 3);
-        }
-    }
-
-    @Override
+    @SuppressWarnings("deprecation")
     public @NotNull VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
         return SHAPE.get(state.getValue(FACING));
     }
@@ -79,7 +69,7 @@ public class BrewTimerBlock extends BrewingstationBlock {
 
     @Override
     public void animateTick(BlockState blockState, Level level, BlockPos blockPos, RandomSource randomSource) {
-        if (blockState.getValue(ACTIVATED)) {
+        if (Boolean.TRUE.equals(blockState.getValue(TIME))) {
             double x = blockPos.getX() + 0.5;
             double y = blockPos.getY() + 1.2;
             double z = blockPos.getZ() + 0.5;
@@ -96,11 +86,17 @@ public class BrewTimerBlock extends BrewingstationBlock {
                 double offsetZ = randomSource.nextDouble() * 0.6D - 0.3D;
                 level.addParticle(redDust, x + offsetX, y, z + offsetZ, 1.0, 0.0, 0.0);
             }
+
+            if (!Boolean.TRUE.equals(blockState.getValue(ACTIVATED))) {
+                level.setBlock(blockPos, blockState.setValue(ACTIVATED, true), 3);
+            }
         }
     }
 
     static {
         TIME = BlockStateRegistry.TIME;
+        PRESSED = BooleanProperty.create("pressed");
+        ACTIVATED = BooleanProperty.create("activated");
         voxelShapeSupplier = () -> {
             VoxelShape shape = Shapes.empty();
             shape = Shapes.or(shape, Shapes.box(0.125, 0.5, 0.9375, 0.5, 0.875, 1));
@@ -119,3 +115,4 @@ public class BrewTimerBlock extends BrewingstationBlock {
         });
     }
 }
+

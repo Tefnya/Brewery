@@ -55,7 +55,6 @@ public class SideBoardBlock extends ChestBlock {
         return SHAPES.get(state.getValue(FACING));
     }
 
-
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {

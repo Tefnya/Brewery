@@ -142,7 +142,7 @@
       "model": "brewery:block/silo_wood/silo_wood_connected_north_west_open_bottom_east_corner"
     },
     "shape=north_west,facing=west,bottom=true,open=false,top=true": {
-      "model": "brewery:block/silo_wood/silo_wood_connected_north_west_closed_west"
+      "model": "brewery:block/silo_wood/silo_wood_connected_north_west_closed_west_"
     },
     "shape=north_east,facing=north,bottom=true,open=true,top=true": {
       "model": "brewery:block/silo_wood/silo_wood_connected_north_east_open"

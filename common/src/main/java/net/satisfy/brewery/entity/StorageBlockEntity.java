@@ -105,7 +105,7 @@ public class StorageBlockEntity extends RandomizableContainerBlockEntity {
 
     @Override
     protected Component getDefaultName() {
-        return Component.empty();
+        return Component.translatable("brewery.container.cabinet");
     }
 
     @Override

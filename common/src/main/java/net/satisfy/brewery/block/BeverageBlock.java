@@ -1,5 +1,6 @@
 package net.satisfy.brewery.block;
 
+import de.cristelknight.doapi.common.block.FacingBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -19,7 +20,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class BeverageBlock extends Block {
+public class BeverageBlock extends FacingBlock {
     private final VoxelShape SHAPE = Shapes.box(0.1875, 0, 0.1875, 0.8125, 0.875, 0.8125);
     public static final IntegerProperty STACK = IntegerProperty.create("stack", 1, 2);
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;

@@ -45,7 +45,10 @@ public interface IBrewfestArmorSet {
     }
 
     private boolean hasCorrectBrewfest(ArmorMaterial material, Player player) {
-        if (material.equals(ArmorMaterialRegistry.BREWFEST_ARMOR)) {
+        if (material.equals(ArmorMaterialRegistry.BREWFEST_ARMOR) ||
+                material.equals(ArmorMaterialRegistry.BREWFEST_DRESS) ||
+                material.equals(ArmorMaterialRegistry.BREWFEST_LEATHER)) {
+
             int slot = 1;
             if (!player.getInventory().getArmor(slot).isEmpty()) {
                 ArmorItem armor = (ArmorItem) player.getInventory().getArmor(slot).getItem();
@@ -55,6 +58,7 @@ public interface IBrewfestArmorSet {
         }
         return false;
     }
+
 
 
     default void addStatusEffectForMaterial(Player player, MobEffectInstance mapStatusEffect) {
@@ -76,8 +80,9 @@ public interface IBrewfestArmorSet {
     }
 
     private static boolean isBrewfestBoots(ArmorItem armorItem) {
-        return armorItem.getMaterial() == ArmorMaterialRegistry.BREWFEST_ARMOR;
+        return armorItem.getMaterial() == ArmorMaterialRegistry.BREWFEST_ARMOR || armorItem.getMaterial() == ArmorMaterialRegistry.BREWFEST_DRESS || armorItem.getMaterial() == ArmorMaterialRegistry.BREWFEST_LEATHER;
     }
+
 
     static boolean hasBrewfestLeggings(Player player) {
         if (player.getInventory().getArmor(1).isEmpty()) return false;
@@ -89,7 +94,7 @@ public interface IBrewfestArmorSet {
     }
 
     private static boolean isBrewfestLeggings(ArmorItem armorItem) {
-        return armorItem.getMaterial() == ArmorMaterialRegistry.BREWFEST_LEATHER;
+        return armorItem.getMaterial() == ArmorMaterialRegistry.BREWFEST_LEATHER || armorItem.getMaterial() == ArmorMaterialRegistry.BREWFEST_DRESS || armorItem.getMaterial() == ArmorMaterialRegistry.BREWFEST_LEATHER;
     }
 
     static boolean hasBrewfestBreastplate(Player player) {
@@ -102,7 +107,7 @@ public interface IBrewfestArmorSet {
     }
 
     private static boolean isBrewfestBreastplate(ArmorItem armorItem) {
-        return armorItem.getMaterial() == ArmorMaterialRegistry.BREWFEST_ARMOR || armorItem.getMaterial() == ArmorMaterialRegistry.BREWFEST_DRESS;
+        return armorItem.getMaterial() == ArmorMaterialRegistry.BREWFEST_ARMOR || armorItem.getMaterial() == ArmorMaterialRegistry.BREWFEST_DRESS || armorItem.getMaterial() == ArmorMaterialRegistry.BREWFEST_LEATHER;
     }
 
     static boolean hasBrewfestHelmet(Player player) {
@@ -116,6 +121,6 @@ public interface IBrewfestArmorSet {
 
 
     private static boolean isBrewfestHelmet(ArmorItem armorItem) {
-        return armorItem.getMaterial() == ArmorMaterialRegistry.BREWFEST_LEATHER;
+        return armorItem.getMaterial() == ArmorMaterialRegistry.BREWFEST_LEATHER || armorItem.getMaterial() == ArmorMaterialRegistry.BREWFEST_DRESS || armorItem.getMaterial() == ArmorMaterialRegistry.BREWFEST_LEATHER;
     }
 }

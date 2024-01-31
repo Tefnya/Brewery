@@ -183,13 +183,14 @@
   "brewery.advancement.eat_everything.title": "Oktoberfest-Buffet",
   "brewery.advancement.eat_everything.desc": "Delight in a mix of distinctive meals",
   "effect.brewery.healingtouch": "Healing Touch",
-  "effect.brewery.renevingtouch": "Reneving Touch",
+  "effect.brewery.renewingtouch": "Renewing Touch",
   "effect.brewery.partystarter": "Partystarter",
   "effect.brewery.toxictouch": "Toxic Touch",
   "effect.brewery.protectivetouch": "Protective Touch",
   "effect.brewery.snowwhite": "Snow White",
   "effect.brewery.pintcharisma": "Pint Charisma",
-
+  "brewery.container.cabinet": "Cabinet",
+  "brewery.container.sideboard": "Sideboard",
   "rei.brewery.brewing_station_category": "Brewingstation",
   "rei.brewery.silo_category": "Silo"
 

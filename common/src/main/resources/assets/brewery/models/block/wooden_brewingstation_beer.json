@@ -43,7 +43,7 @@
 			"to": [14, 10, 15.5],
 			"rotation": {"angle": 0, "axis": "y", "origin": [8, 25, -9.5]},
 			"faces": {
-				"up": {"uv": [1, 2, 15, 14], "rotation": 90, "texture": "#14"}
+				"up": {"uv": [0, 0, 14, 12], "rotation": 90, "texture": "#14"}
 			}
 		},
 		{
@@ -129,6 +129,7 @@
 			"name": "basin_1",
 			"origin": [8, 8, 8],
 			"color": 0,
+			"nbt": "{}",
 			"children": [0, 1, 2, 3, 4, 5, 6]
 		}
 	]

@@ -19,6 +19,5 @@ public class CustomArmorRegistry {
     public static  <T extends LivingEntity> void registerHatModels(Map<Item, EntityModel<T>> models, EntityModelSet modelLoader) {
         models.put(ObjectRegistry.BREWFEST_HAT.get(), new BrewfestHatModel<>(modelLoader.bakeLayer(BrewfestHatModel.LAYER_LOCATION)));
         models.put(ObjectRegistry.BREWFEST_HAT_RED.get(), new BrewfestHatModel<>(modelLoader.bakeLayer(BrewfestHatModel.LAYER_LOCATION)));
-
     }
 }

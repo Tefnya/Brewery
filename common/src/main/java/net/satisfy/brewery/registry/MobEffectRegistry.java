@@ -6,7 +6,6 @@ import dev.architectury.registry.registries.Registrar;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.satisfy.brewery.Brewery;
 import net.satisfy.brewery.effect.*;
-import net.satisfy.brewery.event.RenewingTouchEvent;
 import net.satisfy.brewery.util.BreweryIdentifier;
 import net.minecraft.core.Registry;
 import net.minecraft.world.effect.MobEffect;
@@ -14,6 +13,7 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 
 import java.util.function.Supplier;
+
 
 public class MobEffectRegistry {
 
@@ -51,7 +51,7 @@ public class MobEffectRegistry {
         BLACKOUT = registerEffect("blackout", () -> new BlackoutEffect().setFactorDataFactory(() -> new MobEffectInstance.FactorData(22)));
         SATURATED = registerEffect("saturated", SaturatedEffect::new);
         TOXICTOUCH = registerEffect("toxictouch", () -> new ToxicTouchEffect(MobEffectCategory.BENEFICIAL, 0x90F891));
-        RENEWINGTOUCH = registerEffect("renevingtouch", () -> new RenewingTouchEffect(MobEffectCategory.BENEFICIAL, 0x90F891));
+        RENEWINGTOUCH = registerEffect("renewingtouch", () -> new RenewingTouchEffect(MobEffectCategory.BENEFICIAL, 0x90F891));
         HEALINGTOUCH = registerEffect("healingtouch", () -> new HealingTouchEffect(MobEffectCategory.BENEFICIAL, 0x90F891));
         PROTECTIVETOUCH = registerEffect("protectivetouch", () -> new ProtectiveTouchEffect(MobEffectCategory.BENEFICIAL, 0x90F891));
         PARTYSTARTER = registerEffect("partystarter", () -> new PartystarterEffect(MobEffectCategory.BENEFICIAL, 0x90F891));

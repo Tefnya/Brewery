@@ -29,7 +29,7 @@ public class BrewfestHatRedItem extends CustomHatItem {
 
     @Override
     public Float getOffset() {
-        return -2.0f;
+        return -1.9f;
     }
 
     @Override

@@ -176,6 +176,10 @@ public class BrewstationBlockEntity extends BlockEntity implements ImplementedIn
             BlockPos ovenPos = BrewHelper.getBlock(ObjectRegistry.BREW_OVEN.get(), this.components, level);
             BlockState ovenState = this.level.getBlockState(ovenPos);
             this.level.setBlockAndUpdate(ovenPos, ovenState.setValue(BlockStateRegistry.HEAT, Heat.OFF));
+
+            BlockPos timerPos = BrewHelper.getBlock(ObjectRegistry.BREW_TIMER.get(), this.components, level);
+            BlockState timerState = this.level.getBlockState(timerPos);
+            this.level.setBlockAndUpdate(timerPos, timerState.setValue(BlockStateRegistry.TIME, false));
         }
         for (Ingredient ingredient : recipe.getIngredients()) {
             for (int i = 0; i < 3; i++) {
@@ -191,7 +195,7 @@ public class BrewstationBlockEntity extends BlockEntity implements ImplementedIn
 
     private void spawnElementals() {
         BlockState blockState = this.level.getBlockState(this.getBlockPos());
-        if (this.solved == 0 && this.level != null && this.level.random.nextDouble() >= 0.5D && blockState.getValue(BlockStateRegistry.MATERIAL) == BrewMaterial.WOOD) {
+        if (this.solved == 0 && this.level != null && this.level.random.nextDouble() >= 0.1D && blockState.getValue(BlockStateRegistry.MATERIAL) == BrewMaterial.WOOD) {
             BlockPos spawnPos = BrewHelper.getBlock(ObjectRegistry.BREW_OVEN.get(), this.components, level);
             if (spawnPos != null) {
                 BeerElementalEntity beerElemental = new BeerElementalEntity(EntityRegistry.BEER_ELEMENTAL.get(), this.level);

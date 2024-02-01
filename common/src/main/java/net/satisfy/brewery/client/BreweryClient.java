@@ -37,7 +37,7 @@ public class BreweryClient {
 
         RenderTypeRegistry.register(RenderType.cutout(),
                 ObjectRegistry.WILD_HOPS.get(), ObjectRegistry.BEER_MUG.get(), ObjectRegistry.BEER_WHEAT.get(),
-                ObjectRegistry.BEER_HOPS.get(), ObjectRegistry.BEER_BARLEY.get(), ObjectRegistry.BEER_CHORUS.get(),
+                ObjectRegistry.BEER_HOPS.get(), ObjectRegistry.BEER_BARLEY.get(), ObjectRegistry.BEER_HALEY.get(),
                 ObjectRegistry.BARLEY_CROP.get(), ObjectRegistry.CORN_CROP.get(), ObjectRegistry.HOPS_CROP_BODY.get(),
                 ObjectRegistry.HOPS_CROP.get(), ObjectRegistry.SILO_WOOD.get(), ObjectRegistry.SILO_COPPER.get()
 

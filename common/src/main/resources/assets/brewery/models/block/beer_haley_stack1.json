@@ -2,8 +2,8 @@
 	"credit": "Made by Satisfy",
 	"render_type": "minecraft:cutout",
 	"textures": {
-		"0": "brewery:block/beer_chorus",
-		"particle": "brewery:block/beer_chorus"
+		"0": "brewery:block/beer_haley",
+		"particle": "brewery:block/beer_haley"
 	},
 	"elements": [
 		{

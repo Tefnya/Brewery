@@ -44,6 +44,21 @@
     "bites=2,facing=west": {
       "model": "brewery:block/pork_knuckle_2",
       "y": 270
+    },
+    "bites=3,facing=west": {
+      "model": "minecraft:block/air",
+      "y": 270
+    },
+    "bites=3,facing=north": {
+      "model": "minecraft:block/air"
+    },
+    "bites=3,facing=east": {
+      "model": "minecraft:block/air",
+      "y": 90
+    },
+    "bites=3,facing=south": {
+      "model": "minecraft:block/air",
+      "y": 180
     }
   }
 }

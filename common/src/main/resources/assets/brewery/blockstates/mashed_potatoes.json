@@ -29,6 +29,36 @@
     "bites=1,facing=south": {
       "model": "brewery:block/mashed_potatoes_0",
       "y": 180
+    },
+    "bites=2,facing=west": {
+      "model": "minecraft:block/air",
+      "y": 270
+    },
+    "bites=2,facing=north": {
+      "model": "minecraft:block/air"
+    },
+    "bites=2,facing=east": {
+      "model": "minecraft:block/air",
+      "y": 90
+    },
+    "bites=2,facing=south": {
+      "model": "minecraft:block/air",
+      "y": 180
+    },
+    "bites=3,facing=west": {
+      "model": "minecraft:block/air",
+      "y": 270
+    },
+    "bites=3,facing=north": {
+      "model": "minecraft:block/air"
+    },
+    "bites=3,facing=east": {
+      "model": "minecraft:block/air",
+      "y": 90
+    },
+    "bites=3,facing=south": {
+      "model": "minecraft:block/air",
+      "y": 180
     }
   }
 }

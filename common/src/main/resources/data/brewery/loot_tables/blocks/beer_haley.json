@@ -13,7 +13,7 @@
               "conditions": [
                 {
                   "condition": "minecraft:block_state_property",
-                  "block": "brewery:beer_chorus",
+                  "block": "brewery:beer_haley",
                   "properties": {
                     "stack": "2"
                   }
@@ -27,7 +27,7 @@
               "conditions": [
                 {
                   "condition": "minecraft:block_state_property",
-                  "block": "brewery:beer_chorus",
+                  "block": "brewery:beer_haley",
                   "properties": {
                     "stack": "3"
                   }
@@ -41,7 +41,7 @@
               "conditions": [
                 {
                   "condition": "minecraft:block_state_property",
-                  "block": "brewery:beer_chorus",
+                  "block": "brewery:beer_haley",
                   "properties": {
                     "stack": "4"
                   }
@@ -54,7 +54,7 @@
               "function": "minecraft:explosion_decay"
             }
           ],
-          "name": "brewery:beer_chorus"
+          "name": "brewery:beer_haley"
         }
       ]
     }

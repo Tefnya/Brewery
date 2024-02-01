@@ -90,9 +90,9 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> BEER_WHEAT = registerWithItemeverage("beer_wheat", () -> new BeverageBlock(getMugSettings()), MobEffectRegistry.SNOWWHITE.get(), 30 * 20);
     public static final RegistrySupplier<Block> BEER_HOPS = registerWithItemeverage("beer_hops", () -> new BeverageBlock(getMugSettings()), MobEffectRegistry.PARTYSTARTER.get(), 30 * 20);
     public static final RegistrySupplier<Block> BEER_BARLEY = registerWithItemeverage("beer_barley", () -> new BeverageBlock(getMugSettings()), MobEffectRegistry.PINTCHARISMA.get(), 30 * 20);
-    public static final RegistrySupplier<Block> BEER_CHORUS = registerWithItemeverage("beer_chorus", () -> new BeverageBlock(getMugSettings()), MobEffects.LEVITATION, 20 * 20);
+    public static final RegistrySupplier<Block> BEER_HALEY = registerWithItemeverage("beer_haley", () -> new BeverageBlock(getMugSettings()), MobEffectRegistry.HALEY.get(), 30 * 20);
     public static final RegistrySupplier<Block> WHISKEY_MAGGOALLAN = registerWithItemeverage("whiskey_maggoallan", () -> new BeverageBlock(getBeverageSettings()), MobEffectRegistry.HEALINGTOUCH.get(), 30 * 20);
-    public static final RegistrySupplier<Block> WHISKEY_carrasconlabel = registerWithItemeverage("whiskey_carrasconlabel", () -> new BeverageBlock(getBeverageSettings()), MobEffectRegistry.RENEWINGTOUCH.get(), 30 * 20);
+    public static final RegistrySupplier<Block> WHISKEY_CARRASCONLABEL = registerWithItemeverage("whiskey_carrasconlabel", () -> new BeverageBlock(getBeverageSettings()), MobEffectRegistry.RENEWINGTOUCH.get(), 30 * 20);
     public static final RegistrySupplier<Block> WHISKEY_LILITUSINGLEMALT = registerWithItemeverage("whiskey_lilitusinglemalt", () -> new BeverageBlock(getBeverageSettings()), MobEffectRegistry.PARTYSTARTER.get(), 30 * 20);
     public static final RegistrySupplier<Block> WHISKEY_JOJANNIK = registerWithItemeverage("whiskey_jojannik", () -> new BeverageBlock(getBeverageSettings()), MobEffectRegistry.TOXICTOUCH.get(), 30 * 20);
     public static final RegistrySupplier<Block> WHISKEY_CRISTELWALKER = registerWithItemeverage("whiskey_cristelwalker", () -> new BeverageBlock(getBeverageSettings()), MobEffectRegistry.PROTECTIVETOUCH.get(), 30 * 20);

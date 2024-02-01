@@ -2,13 +2,13 @@
   "parent": "brewery:main/brewing_pioneer",
   "display": {
     "icon": {
-      "item": "brewery:beer_chorus"
+      "item": "brewery:beer_haley"
     },
     "title": {
-      "translate": "brewery.advancement.get_beer_chorus"
+      "translate": "brewery.advancement.get_beer_haley"
     },
     "description": {
-      "translate": "brewery.advancement.get_beer_chorus.desc"
+      "translate": "brewery.advancement.get_beer_haley.desc"
     },
     "frame": "goal",
     "show_toast": true,
@@ -16,13 +16,13 @@
     "hidden": false
   },
   "criteria": {
-    "beer_chorus": {
+    "beer_haley": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "brewery:beer_chorus"
+              "brewery:beer_haley"
             ]
           }
         ]
@@ -31,7 +31,7 @@
   },
   "requirements": [
     [
-      "beer_chorus"
+      "beer_haley"
     ]
   ]
 }

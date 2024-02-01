@@ -1,18 +1,18 @@
 {
   "variants": {
     "facing=east": {
-      "model": "brewery:block/whiskey_hadarilabel",
+      "model": "brewery:block/whiskey_carrasconlabel",
       "y": 90
     },
     "facing=north": {
-      "model": "brewery:block/whiskey_hadarilabel"
+      "model": "brewery:block/whiskey_carrasconlabel"
     },
     "facing=south": {
-      "model": "brewery:block/whiskey_hadarilabel",
+      "model": "brewery:block/whiskey_carrasconlabel",
       "y": 180
     },
     "facing=west": {
-      "model": "brewery:block/whiskey_hadarilabel",
+      "model": "brewery:block/whiskey_carrasconlabel",
       "y": 270
     }
   }

@@ -2,13 +2,13 @@
   "parent": "brewery:main/copper_brewmaster",
   "display": {
     "icon": {
-      "item": "brewery:whiskey_hadarilabel"
+      "item": "brewery:whiskey_carrasconlabel"
     },
     "title": {
-      "translate": "brewery.advancement.get_whiskey_hadarilabel"
+      "translate": "brewery.advancement.get_whiskey_carrasconlabel"
     },
     "description": {
-      "translate": "brewery.advancement.get_whiskey_hadarilabel.desc"
+      "translate": "brewery.advancement.get_whiskey_carrasconlabel.desc"
     },
     "frame": "goal",
     "show_toast": true,
@@ -16,13 +16,13 @@
     "hidden": false
   },
   "criteria": {
-    "whiskey_hadarilabel": {
+    "whiskey_carrasconlabel": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "brewery:whiskey_hadarilabel"
+              "brewery:whiskey_carrasconlabel"
             ]
           }
         ]
@@ -31,7 +31,7 @@
   },
   "requirements": [
     [
-      "whiskey_hadarilabel"
+      "whiskey_carrasconlabel"
     ]
   ]
 }

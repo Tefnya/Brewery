@@ -23,6 +23,7 @@ import net.satisfy.brewery.Brewery;
 import net.satisfy.brewery.block.brew_event.BrewEvent;
 import net.satisfy.brewery.block.brew_event.BrewEvents;
 import net.satisfy.brewery.block.brew_event.BrewHelper;
+import net.satisfy.brewery.block.property.BrewMaterial;
 import net.satisfy.brewery.block.property.Heat;
 import net.satisfy.brewery.block.property.Liquid;
 import net.satisfy.brewery.entity.beer_elemental.BeerElementalEntity;
@@ -158,7 +159,11 @@ public class BrewstationBlockEntity extends BlockEntity implements ImplementedIn
         ItemStack resultSack = recipe.getResultItem();
         if (resultSack.getItem() instanceof DrinkBlockItem drinkItem) {
             DrinkBlockItem.addQuality(resultSack, this.solved);
-            drinkItem.addCount(resultSack, this.solved);
+            if (this.solved == 0) {
+                drinkItem.addCount(resultSack, 1);
+            } else {
+                drinkItem.addCount(resultSack, this.solved);
+            }
         }
         this.beer = resultSack;
         spawnElementals();
@@ -185,7 +190,8 @@ public class BrewstationBlockEntity extends BlockEntity implements ImplementedIn
     }
 
     private void spawnElementals() {
-        if (this.solved == 0 && this.level != null && this.level.random.nextDouble() >= 0.5D) {
+        BlockState blockState = this.level.getBlockState(this.getBlockPos());
+        if (this.solved == 0 && this.level != null && this.level.random.nextDouble() >= 0.5D && blockState.getValue(BlockStateRegistry.MATERIAL) == BrewMaterial.WOOD) {
             BlockPos spawnPos = BrewHelper.getBlock(ObjectRegistry.BREW_OVEN.get(), this.components, level);
             if (spawnPos != null) {
                 BeerElementalEntity beerElemental = new BeerElementalEntity(EntityRegistry.BEER_ELEMENTAL.get(), this.level);

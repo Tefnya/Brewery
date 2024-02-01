@@ -1,6 +1,6 @@
 {
   "variants": {
-    "material=wood,facing=east,activated=false,pressed=false": {
+    "material=wood,facing=east,activated=false,pressed=false,time=false": {
       "model": "brewery:block/wooden_brewingstation_timer",
       "y": 90
     },
@@ -76,7 +76,7 @@
       "y": 270
     },
     "material=netherite,facing=east,activated=true,pressed=false": {
-      "model": "brewery:block/netherite_brewingstation_time_activated",
+      "model": "brewery:block/netherite_brewingstation_timer_activated",
       "y": 90
     },
     "material=netherite,facing=north,activated=true,pressed=false": {

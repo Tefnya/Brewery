@@ -31,6 +31,7 @@ public class MobEffectRegistry {
     public static final RegistrySupplier<MobEffect> PARTYSTARTER;
     public static final RegistrySupplier<MobEffect> SNOWWHITE;
     public static final RegistrySupplier<MobEffect> PINTCHARISMA;
+    public static final RegistrySupplier<MobEffect> HALEY;
 
 
     private static RegistrySupplier<MobEffect> registerEffect(String name, Supplier<MobEffect> effect){
@@ -57,6 +58,7 @@ public class MobEffectRegistry {
         PARTYSTARTER = registerEffect("partystarter", () -> new PartystarterEffect(MobEffectCategory.BENEFICIAL, 0x90F891));
         SNOWWHITE = registerEffect("snowwhite", () -> new SnowWhiteEffect(MobEffectCategory.BENEFICIAL, 0x90F891));
         PINTCHARISMA = registerEffect("pintcharisma", () -> new PintCharismaEffect(MobEffectCategory.BENEFICIAL, 0x90F891));
+        HALEY = registerEffect("haley", () -> new HaleyEffect(MobEffectCategory.BENEFICIAL, 0x90F891));
 
     }
 }

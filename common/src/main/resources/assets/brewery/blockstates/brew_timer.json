@@ -76,7 +76,7 @@
       "y": 270
     },
     "material=netherite,facing=east,activated=true,pressed=false": {
-      "model": "brewery:block/netherite_brewingstation_time_activatedr",
+      "model": "brewery:block/netherite_brewingstation_time_activated",
       "y": 90
     },
     "material=netherite,facing=north,activated=true,pressed=false": {

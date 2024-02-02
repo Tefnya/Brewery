@@ -12,11 +12,18 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeManager;
+import net.satisfy.brewery.compat.jei.category.BrewingStationCategory;
 import net.satisfy.brewery.compat.jei.category.SiloCategory;
+import net.satisfy.brewery.compat.jei.transfer.BrewingStationTransferInfo;
+import net.satisfy.brewery.compat.jei.transfer.SiloTransferInfo;
+import net.satisfy.brewery.recipe.BrewingRecipe;
+import net.satisfy.brewery.recipe.SiloRecipe;
 import net.satisfy.brewery.registry.ObjectRegistry;
+import net.satisfy.brewery.registry.RecipeTypeRegistry;
 import net.satisfy.brewery.util.BreweryIdentifier;
 
 
+import java.util.List;
 import java.util.Objects;
 
 
@@ -31,7 +38,11 @@ public class BreweryJEIClientPlugin implements IModPlugin {
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
         RecipeManager rm = Objects.requireNonNull(Minecraft.getInstance().level).getRecipeManager();
+        List<BrewingRecipe> fermentationBarrelRecipes = rm.getAllRecipesFor(RecipeTypeRegistry.BREWING_RECIPE_TYPE.get());
+        registration.addRecipes(BrewingStationCategory.BREWINGSTATION, fermentationBarrelRecipes);
 
+        List<SiloRecipe> applePressRecipes = rm.getAllRecipesFor(RecipeTypeRegistry.SILO_RECIPE_TYPE.get());
+        registration.addRecipes(SiloCategory.SILO_CATEGORY, applePressRecipes);
     }
 
     @Override
@@ -41,12 +52,12 @@ public class BreweryJEIClientPlugin implements IModPlugin {
 
     @Override
     public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration) {
-
+        registration.addRecipeTransferHandler(new BrewingStationTransferInfo());
+        registration.addRecipeTransferHandler(new SiloTransferInfo());
     }
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-       /*
         registration.addRecipeCatalyst(
                 ObjectRegistry.WOODEN_BREWINGSTATION.get().asItem().getDefaultInstance(),
                 BrewingStationCategory.BREWINGSTATION
@@ -60,7 +71,7 @@ public class BreweryJEIClientPlugin implements IModPlugin {
         registration.addRecipeCatalyst(
                 ObjectRegistry.NETHERITE_BREWINGSTATION.get().asItem().getDefaultInstance(),
                 BrewingStationCategory.BREWINGSTATION
-        );*/
+        );
 
         registration.addRecipeCatalyst(
                 ObjectRegistry.SILO_WOOD.get().asItem().getDefaultInstance(),

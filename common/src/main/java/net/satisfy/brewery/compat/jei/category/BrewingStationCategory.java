@@ -10,15 +10,17 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.satisfy.brewery.Brewery;
 import net.satisfy.brewery.compat.jei.BreweryJEIClientPlugin;
-import net.satisfy.brewery.recipe.SiloRecipe;
+import net.satisfy.brewery.recipe.BrewingRecipe;
 import net.satisfy.brewery.registry.ObjectRegistry;
 
-public class SiloCategory implements IRecipeCategory<SiloRecipe> {
-    public static final RecipeType<SiloRecipe> SILO_CATEGORY = RecipeType.create(Brewery.MOD_ID, "drying", SiloRecipe.class);
+public class BrewingStationCategory implements IRecipeCategory<BrewingRecipe> {
+    public static final RecipeType<BrewingRecipe> BREWINGSTATION = RecipeType.create(Brewery.MOD_ID, "brewing", BrewingRecipe.class);
     private static final int SLOT_SIZE = 22;
     private static final int WIDTH_OF = 26;
     private static final int HEIGHT_OF = 13;
@@ -27,33 +29,37 @@ public class SiloCategory implements IRecipeCategory<SiloRecipe> {
     private final Component localizedName;
     private final IDrawable slotIcon;
 
-    public SiloCategory(IGuiHelper helper) {
+    public BrewingStationCategory(IGuiHelper helper) {
         ResourceLocation backgroundImage = new ResourceLocation(Brewery.MOD_ID, "textures/gui/jei/silo.png");
         background = helper.createDrawable(backgroundImage, 0, 0, 118, 80);
         this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, ObjectRegistry.SILO_WOOD.get().asItem().getDefaultInstance());
-        this.localizedName = Component.translatable("rei.brewery.silo_category");
+        this.localizedName = Component.translatable("rei.brewery.brewing_station_category");
         slotIcon = helper.createDrawable(backgroundImage, 119, 0, SLOT_SIZE, SLOT_SIZE);
     }
 
     @Override
-    public void setRecipe(IRecipeLayoutBuilder builder, SiloRecipe recipe, IFocusGroup focuses) {
-        int inputSlotX = 48 - WIDTH_OF;
-        int inputSlotY = 34 - HEIGHT_OF;
+    public void setRecipe(IRecipeLayoutBuilder builder, BrewingRecipe recipe, IFocusGroup focuses) {
+        NonNullList<Ingredient> ingredients = recipe.getIngredients();
+        int s = ingredients.size();
         int outputSlotX = 116 - WIDTH_OF;
         int outputSlotY = 35 - HEIGHT_OF;
 
-        BreweryJEIClientPlugin.addSlot(builder, inputSlotX, inputSlotY, recipe.input);
+        if(s > 0) BreweryJEIClientPlugin.addSlot(builder, 33 - WIDTH_OF, 26 - HEIGHT_OF, ingredients.get(0));
+        if(s > 1) BreweryJEIClientPlugin.addSlot(builder, 51 - WIDTH_OF, 26 - HEIGHT_OF, ingredients.get(1));
+        if(s > 2) BreweryJEIClientPlugin.addSlot(builder, 33 - WIDTH_OF, 44 - HEIGHT_OF, ingredients.get(2));
+        if(s > 3) BreweryJEIClientPlugin.addSlot(builder, 51 - WIDTH_OF, 44 - HEIGHT_OF, ingredients.get(3));
+
         builder.addSlot(RecipeIngredientRole.OUTPUT, outputSlotX, outputSlotY).addItemStack(recipe.getResultItem());
     }
-
+    
     @Override
-    public void draw(SiloRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack ms, double mouseX, double mouseY) {
+    public void draw(BrewingRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack ms, double mouseX, double mouseY) {
         this.slotIcon.draw(ms, 63, 53);
     }
-
+    
     @Override
-    public RecipeType<SiloRecipe> getRecipeType() {
-        return SILO_CATEGORY;
+    public RecipeType<BrewingRecipe> getRecipeType() {
+        return BREWINGSTATION;
     }
 
     @Override

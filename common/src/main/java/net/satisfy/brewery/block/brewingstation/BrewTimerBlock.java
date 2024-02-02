@@ -51,19 +51,10 @@ public class BrewTimerBlock extends BrewingstationBlock {
     public @NotNull InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
         if (Boolean.TRUE.equals(blockState.getValue(TIME))) {
             level.setBlockAndUpdate(blockPos, blockState.setValue(TIME, false).setValue(PRESSED, true)); // Change 'pressed' to true
-            schedulePressedReset((ServerLevel) level, blockPos); // Schedule the reset of 'pressed' after 3 seconds
             return InteractionResult.SUCCESS;
         }
         return InteractionResult.CONSUME;
     }
-
-    // Helper method to schedule the reset of 'pressed' after 3 seconds
-    private void schedulePressedReset(ServerLevel level, BlockPos blockPos) {
-        level.getBlockTicks().scheduleTick(blockPos, this, 60); // 3 seconds (20 ticks per second)
-    }
-
-
-
 
 
     @Override

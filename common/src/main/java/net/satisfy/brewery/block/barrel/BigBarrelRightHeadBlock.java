@@ -25,7 +25,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
-public class BigBarrelRightHeadBlock extends AbstractBarrelBlock {
+public class BigBarrelRightHeadBlock extends BigBarrelBlock {
     public static final EnumProperty<DoubleBlockHalf> HALF;
 
     public BigBarrelRightHeadBlock(Properties properties) {

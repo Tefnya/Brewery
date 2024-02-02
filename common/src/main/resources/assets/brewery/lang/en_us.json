@@ -18,6 +18,7 @@
   "brewery.sound.beer_elemental_death": "Beer Elemental Dying",
   "brewery.sound.beer_elemental_ambient": "Beer Elemental Ambient",
   "brewery.sound.beer_elemental_hurt": "Beer Elemental Hurt",
+  "brewery.sound.beer_elemental_attack": "Beer Elemental Attack",
   "brewery.sound.drawer_open": "Opening Drawer",
   "brewery.sound.drawer_close": "Closing Drawer",
   "brewery.sound.cabinet_open": "Opening Cabinet",

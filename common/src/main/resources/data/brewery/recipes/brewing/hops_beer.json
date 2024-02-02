@@ -8,7 +8,7 @@
       "item": "brewery:hops"
     }
   ],
-  "material": "COPPER",
+  "material": "WOOD",
   "result": {
     "item": "brewery:beer_hops"
   }

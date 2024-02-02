@@ -1,6 +1,5 @@
-package net.satisfy.brewery.entity.beer_elemental;
+package net.satisfy.brewery.entity;
 
-import net.satisfy.brewery.entity.beer_elemental_barrel.BeerElementalAttackEntity;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
@@ -26,7 +25,7 @@ public class BeerElementalEntity extends Monster {
 
     public BeerElementalEntity(EntityType<? extends Monster> entityType, Level level) {
         super(entityType, level);
-        this.xpReward = 10;
+        this.xpReward = 8;
     }
 
     @Override
@@ -186,8 +185,8 @@ public class BeerElementalEntity extends Monster {
                     }
 
                     if (attackStep > 1) {
-                        if (!elemental.isSilent())
-                            elemental.level.levelEvent(null, 1018, elemental.blockPosition(), 0);
+                        if (!elemental.isSilent()) elemental.playSound(SoundEventRegistry.BEER_ELEMENTAL_ATTACK.get(), 1.0F, 1.0F);
+
 
                         double dX = target.getX() - elemental.getX();
                         double dY = target.getY(0.5D) - elemental.getY(0.5D);
@@ -199,14 +198,12 @@ public class BeerElementalEntity extends Monster {
                             BeerElementalAttackEntity attack = new BeerElementalAttackEntity(elemental.level, elemental, elemental.getRandom().triangle(dX, 2.297D * f), dY, elemental.getRandom().triangle(dZ, 2.297D * f));
                             attack.setPos(attack.getX(), elemental.getY(0.5D) + 0.5D, attack.getZ());
 
-
                             elemental.level.addFreshEntity(attack);
                         }
                     }
                 }
                 elemental.getLookControl().setLookAt(target, 10.0F, 10.0F);
-            }
-            else if (lastSeen < 5)
+            } else if (lastSeen < 5)
                 elemental.getMoveControl().setWantedPosition(target.getX(), target.getY(), target.getZ(), 1.0D);
 
             super.tick();

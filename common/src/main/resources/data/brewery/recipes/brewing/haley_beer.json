@@ -8,7 +8,7 @@
       "item": "minecraft:popped_chorus_fruit"
     }
   ],
-  "material": "COPPER",
+  "material": "WOOD",
   "result": {
     "item": "brewery:beer_haley"
   }

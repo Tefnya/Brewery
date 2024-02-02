@@ -26,7 +26,6 @@ import net.satisfy.brewery.block.brew_event.BrewHelper;
 import net.satisfy.brewery.block.property.BrewMaterial;
 import net.satisfy.brewery.block.property.Heat;
 import net.satisfy.brewery.block.property.Liquid;
-import net.satisfy.brewery.entity.beer_elemental.BeerElementalEntity;
 import net.satisfy.brewery.item.DrinkBlockItem;
 import net.satisfy.brewery.recipe.BrewingRecipe;
 import net.satisfy.brewery.registry.*;

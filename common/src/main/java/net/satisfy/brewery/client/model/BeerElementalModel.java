@@ -1,4 +1,4 @@
-package net.satisfy.brewery.entity.beer_elemental;
+package net.satisfy.brewery.client.model;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;

@@ -38,6 +38,7 @@ import net.satisfy.brewery.block.property.Liquid;
 import net.satisfy.brewery.entity.BrewstationBlockEntity;
 import net.satisfy.brewery.registry.BlockStateRegistry;
 import net.satisfy.brewery.registry.ObjectRegistry;
+import net.satisfy.brewery.registry.SoundEventRegistry;
 import net.satisfy.brewery.util.BreweryUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -139,7 +140,7 @@ public class BrewKettleBlock extends BrewingstationBlock implements EntityBlock 
             double z = blockPos.getZ() + 0.5;
 
             if (randomSource.nextDouble() < 0.3D) {
-                level.playLocalSound(x, y, z, SoundEvents.BUBBLE_COLUMN_UPWARDS_AMBIENT, SoundSource.BLOCKS, 1.0F, 1.0F, false);
+                level.playLocalSound(x, y, z, SoundEventRegistry.BREWSTATION_KETTLE.get(), SoundSource.BLOCKS, 1.0F, 1.0F, false);
             }
 
             double offset = 0.2;

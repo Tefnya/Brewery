@@ -21,6 +21,7 @@ public class SoundEventRegistry {
     public static final RegistrySupplier<SoundEvent> BEER_ELEMENTAL_AMBIENT = create("beer_elemental_ambient");
     public static final RegistrySupplier<SoundEvent> BEER_ELEMENTAL_HURT = create("beer_elemental_hurt");
     public static final RegistrySupplier<SoundEvent> BEER_ELEMENTAL_DEATH = create("beer_elemental_death");
+    public static final RegistrySupplier<SoundEvent> BEER_ELEMENTAL_ATTACK = create("beer_elemental_attack");
     public static final RegistrySupplier<SoundEvent> BREWSTATION_AMBIENT = create("brewstation_ambient");
     public static final RegistrySupplier<SoundEvent> BREWSTATION_KETTLE = create("brewstation_kettle");
     public static final RegistrySupplier<SoundEvent> BREWSTATION_OVEN = create("brewstation_oven");

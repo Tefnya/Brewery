@@ -1,5 +1,3 @@
-/*
-
 package net.satisfy.brewery.compat.jei;
 
 import mezz.jei.api.IModPlugin;
@@ -14,6 +12,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeManager;
+import net.satisfy.brewery.compat.jei.category.SiloCategory;
 import net.satisfy.brewery.registry.ObjectRegistry;
 import net.satisfy.brewery.util.BreweryIdentifier;
 
@@ -47,12 +46,36 @@ public class BreweryJEIClientPlugin implements IModPlugin {
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-        registration.addRecipeCatalyst(ObjectRegistry.WOODEN_BREWINGSTATION.get().asItem().getDefaultInstance(), ObjectRegistry.COPPER_BREWINGSTATION.get().asItem().getDefaultInstance(), ObjectRegistry.NETHERITE_BREWINGSTATION.get().asItem().getDefaultInstance(), BrewingStationCategory.BREWINGSTATION);
-        registration.addRecipeCatalyst(ObjectRegistry.SILO_WOOD.get().asItem().getDefaultInstance(), ObjectRegistry.SILO_COPPER.get().asItem().getDefaultInstance(), SiloCategory.SILO_CATEGORY);
+       /*
+        registration.addRecipeCatalyst(
+                ObjectRegistry.WOODEN_BREWINGSTATION.get().asItem().getDefaultInstance(),
+                BrewingStationCategory.BREWINGSTATION
+        );
+
+        registration.addRecipeCatalyst(
+                ObjectRegistry.COPPER_BREWINGSTATION.get().asItem().getDefaultInstance(),
+                BrewingStationCategory.BREWINGSTATION
+        );
+
+        registration.addRecipeCatalyst(
+                ObjectRegistry.NETHERITE_BREWINGSTATION.get().asItem().getDefaultInstance(),
+                BrewingStationCategory.BREWINGSTATION
+        );*/
+
+        registration.addRecipeCatalyst(
+                ObjectRegistry.SILO_WOOD.get().asItem().getDefaultInstance(),
+                SiloCategory.SILO_CATEGORY
+        );
+
+        registration.addRecipeCatalyst(
+                ObjectRegistry.SILO_COPPER.get().asItem().getDefaultInstance(),
+                SiloCategory.SILO_CATEGORY
+        );
     }
+
+
 
     public static void addSlot(IRecipeLayoutBuilder builder, int x, int y, Ingredient ingredient){
         builder.addSlot(RecipeIngredientRole.INPUT, x, y).addIngredients(ingredient);
     }
 }
-*/

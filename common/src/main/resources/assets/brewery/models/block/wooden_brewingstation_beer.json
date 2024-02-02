@@ -39,9 +39,9 @@
 		},
 		{
 			"name": "Bottom",
-			"from": [2, 10, 1.5],
-			"to": [14, 10, 15.5],
-			"rotation": {"angle": 0, "axis": "y", "origin": [8, 25, -9.5]},
+			"from": [2, 10, 2],
+			"to": [14, 10, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 25, -10]},
 			"faces": {
 				"up": {"uv": [0, 0, 14, 12], "rotation": 90, "texture": "#14"}
 			}

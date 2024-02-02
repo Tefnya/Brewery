@@ -1,4 +1,4 @@
-package net.satisfy.brewery.entity.beer_elemental_barrel;
+package net.satisfy.brewery.client.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -14,6 +14,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.phys.Vec2;
+import net.satisfy.brewery.entity.BeerElementalAttackEntity;
 
 public class BeerElementalAttackRenderer extends EntityRenderer<BeerElementalAttackEntity> {
 

@@ -1,5 +1,6 @@
-package net.satisfy.brewery.entity.beer_elemental_barrel;
+package net.satisfy.brewery.entity;
 
+import net.minecraft.sounds.SoundEvent;
 import net.satisfy.brewery.registry.EntityRegistry;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
@@ -11,19 +12,30 @@ import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
+import net.satisfy.brewery.registry.SoundEventRegistry;
 
 public class BeerElementalAttackEntity extends AbstractHurtingProjectile {
 
 	public BeerElementalAttackEntity(EntityType<? extends BeerElementalAttackEntity> entityType, Level level) {
 		super(entityType, level);
+		playCreationSound();
 	}
 
 	public BeerElementalAttackEntity(Level level, LivingEntity livingEntity, double d, double e, double f) {
 		super(EntityRegistry.BEER_ELEMENTAL_ATTACK.get(), livingEntity, d, e, f, level);
 
-		double velocityModifier = 0.3;
+		double velocityModifier = 0.4;
 		this.setDeltaMovement(this.getDeltaMovement().multiply(velocityModifier, velocityModifier, velocityModifier));
 
+	}
+
+	private void playCreationSound() {
+		double x = this.getX();
+		double y = this.getY();
+		double z = this.getZ();
+		SoundEvent soundEvent = SoundEventRegistry.BEER_ELEMENTAL_ATTACK.get();
+
+		level.playSound(null, x, y, z, soundEvent, this.getSoundSource(), 1.0F, 1.0F);
 	}
 
 	@Override

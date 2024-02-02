@@ -29,6 +29,15 @@
       "brewery:beer_elemental_death3"
     ]
   },
+  "beer_elemental_attack": {
+    "subtitle": "brewery.sound.beer_elemental_attack",
+    "sounds": [
+      "brewery:beer_elemental_attack1",
+      "brewery:beer_elemental_attack2",
+      "brewery:beer_elemental_attack3",
+      "brewery:beer_elemental_attack4"
+    ]
+  },
   "drawer_open": {
     "subtitle": "brewery.sound.drawer_open",
     "sounds": [

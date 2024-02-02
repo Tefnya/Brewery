@@ -1,8 +1,10 @@
-package net.satisfy.brewery.entity.beer_elemental;
+package net.satisfy.brewery.client.render;
 
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
+import net.satisfy.brewery.client.model.BeerElementalModel;
+import net.satisfy.brewery.entity.BeerElementalEntity;
 
 import static net.satisfy.brewery.Brewery.MOD_ID;
 

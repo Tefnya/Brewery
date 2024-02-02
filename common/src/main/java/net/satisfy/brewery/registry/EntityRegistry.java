@@ -4,8 +4,8 @@ import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.Registrar;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.satisfy.brewery.Brewery;
-import net.satisfy.brewery.entity.beer_elemental.BeerElementalEntity;
-import net.satisfy.brewery.entity.beer_elemental_barrel.BeerElementalAttackEntity;
+import net.satisfy.brewery.entity.BeerElementalEntity;
+import net.satisfy.brewery.entity.BeerElementalAttackEntity;
 import net.satisfy.brewery.entity.rope.HangingRopeEntity;
 import net.satisfy.brewery.entity.rope.RopeCollisionEntity;
 import net.satisfy.brewery.entity.rope.RopeKnotEntity;
@@ -28,7 +28,8 @@ public class EntityRegistry {
                     .build(new BreweryIdentifier("rope_knot").toString())
     );
 
-    public static final RegistrySupplier<EntityType<RopeCollisionEntity>> ROPE_COLLISION = create("rope_collision", () -> EntityType.Builder.of(RopeCollisionEntity::new, MobCategory.MISC)
+    public static final RegistrySupplier<EntityType<RopeCollisionEntity>> ROPE_COLLISION = create("rope_collision", ()
+            -> EntityType.Builder.of(RopeCollisionEntity::new, MobCategory.MISC)
                     .sized(4 / 16f, 4 / 16f)
                     .clientTrackingRange(10)
                     .noSave()

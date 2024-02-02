@@ -36,9 +36,9 @@
 				"north": {"uv": [0, 0, 5, 5], "texture": "#16"},
 				"east": {"uv": [4, 0, 3, 2], "texture": "#16"},
 				"south": {"uv": [0, 0, 2, 2], "texture": "#16"},
-				"west": {"uv": [1, 0, 0, 5], "texture": "#16"},
+				"west": {"uv": [1, 0, 0, 2], "texture": "#16"},
 				"up": {"uv": [5, 0, 3, 1], "rotation": 180, "texture": "#16"},
-				"down": {"uv": [0, 1, 5, 0], "texture": "#16"}
+				"down": {"uv": [3, 1, 5, 0], "texture": "#16"}
 			}
 		},
 		{
@@ -50,7 +50,7 @@
 				"north": {"uv": [0, 0, 5, 5], "texture": "#16"},
 				"east": {"uv": [4, 0, 3, 2], "texture": "#16"},
 				"south": {"uv": [0, 0, 2, 2], "texture": "#16"},
-				"west": {"uv": [1, 0, 0, 5], "texture": "#16"},
+				"west": {"uv": [1, 0, 0, 2], "texture": "#16"},
 				"up": {"uv": [5, 0, 3, 1], "rotation": 180, "texture": "#16"},
 				"down": {"uv": [4, 1, 5, 0], "texture": "#16"}
 			}
@@ -136,6 +136,7 @@
 			"name": "basin_2_tachometer",
 			"origin": [8, 8, 8],
 			"color": 0,
+			"nbt": "{}",
 			"children": [0, 1, 2, 3, 4, 5, 6]
 		}
 	]

@@ -5,6 +5,7 @@ import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
@@ -49,11 +50,21 @@ public class BrewTimerBlock extends BrewingstationBlock {
     @Override
     public @NotNull InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
         if (Boolean.TRUE.equals(blockState.getValue(TIME))) {
-            level.setBlock(blockPos, blockState.setValue(TIME, false), 3);
+            level.setBlockAndUpdate(blockPos, blockState.setValue(TIME, false).setValue(PRESSED, true)); // Change 'pressed' to true
+            schedulePressedReset((ServerLevel) level, blockPos); // Schedule the reset of 'pressed' after 3 seconds
             return InteractionResult.SUCCESS;
         }
         return InteractionResult.CONSUME;
     }
+
+    // Helper method to schedule the reset of 'pressed' after 3 seconds
+    private void schedulePressedReset(ServerLevel level, BlockPos blockPos) {
+        level.getBlockTicks().scheduleTick(blockPos, this, 60); // 3 seconds (20 ticks per second)
+    }
+
+
+
+
 
     @Override
     @SuppressWarnings("deprecation")

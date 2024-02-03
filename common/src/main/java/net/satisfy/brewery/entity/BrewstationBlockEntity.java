@@ -46,7 +46,6 @@ public class BrewstationBlockEntity extends BlockEntity implements ImplementedIn
     private static final int MAX_BREW_TIME = 60 * 20;
     private static final int MIN_TIME_FOR_EVENT = 5 * 20;
     private static final int MAX_TIME_FOR_EVENT = 15 * 20;
-
     private static final int SOUND_DURATION = 3 * 20;
     private int soundTime;
     private int brewTime;

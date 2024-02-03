@@ -5,7 +5,6 @@ import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.DustParticleOptions;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
@@ -35,6 +34,9 @@ public class BrewTimerBlock extends BrewingstationBlock {
     public static final BooleanProperty TIME;
     public static final BooleanProperty ACTIVATED;
     public static final BooleanProperty PRESSED;
+    private static final int PRESS_DURATION = 3 * 20;
+    private static int pressedTime;
+    private static boolean canBePressed = false;
     private static final Supplier<VoxelShape> voxelShapeSupplier;
 
     public static final Map<Direction, VoxelShape> SHAPE;
@@ -50,7 +52,7 @@ public class BrewTimerBlock extends BrewingstationBlock {
     @Override
     public @NotNull InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
         if (Boolean.TRUE.equals(blockState.getValue(TIME))) {
-            level.setBlockAndUpdate(blockPos, blockState.setValue(TIME, false).setValue(PRESSED, true)); // Change 'pressed' to true
+            level.setBlockAndUpdate(blockPos, blockState.setValue(TIME, false).setValue(ACTIVATED, false));
             return InteractionResult.SUCCESS;
         }
         return InteractionResult.CONSUME;

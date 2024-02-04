@@ -1,5 +1,6 @@
 package net.satisfy.brewery.block.crops;
 
+import net.minecraft.world.level.LevelReader;
 import net.satisfy.brewery.registry.ObjectRegistry;
 import net.minecraft.BlockUtil;
 import net.minecraft.core.BlockPos;
@@ -60,10 +61,10 @@ public class HopsCropBodyBlock extends HopsCropBlock implements BonemealableBloc
     }
 
     @Override
-    public boolean isValidBonemealTarget(BlockGetter blockGetter, BlockPos blockPos, BlockState blockState, boolean bl) {
+    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState, boolean bl) {
         return true;
     }
-
+    
     @Override
     public boolean isBonemealSuccess(Level level, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
         return true;

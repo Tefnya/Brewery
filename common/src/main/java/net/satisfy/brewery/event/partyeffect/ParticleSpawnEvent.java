@@ -1,6 +1,5 @@
 package net.satisfy.brewery.event.partyeffect;
 
-import com.mojang.math.Vector3f;
 import dev.architectury.event.EventResult;
 import dev.architectury.event.events.common.PlayerEvent;
 import net.minecraft.core.particles.DustParticleOptions;
@@ -14,6 +13,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Vector3f;
 
 import java.util.Random;
 

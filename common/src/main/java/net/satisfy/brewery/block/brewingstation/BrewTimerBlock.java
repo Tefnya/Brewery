@@ -1,6 +1,5 @@
 package net.satisfy.brewery.block.brewingstation;
 
-import com.mojang.math.Vector3f;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -17,6 +16,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -25,6 +25,7 @@ import net.satisfy.brewery.registry.BlockStateRegistry;
 import net.satisfy.brewery.registry.SoundEventRegistry;
 import net.satisfy.brewery.util.BreweryUtil;
 import org.jetbrains.annotations.NotNull;
+import org.joml.Vector3f;
 
 import java.util.HashMap;
 import java.util.Map;

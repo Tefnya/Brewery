@@ -4,6 +4,7 @@ import dev.architectury.platform.Platform;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.Registrar;
 import dev.architectury.registry.registries.RegistrySupplier;
+import net.minecraft.core.registries.Registries;
 import net.satisfy.brewery.Brewery;
 import net.satisfy.brewery.effect.*;
 import net.satisfy.brewery.util.BreweryIdentifier;
@@ -17,7 +18,7 @@ import java.util.function.Supplier;
 
 public class MobEffectRegistry {
 
-    private static final DeferredRegister<MobEffect> MOB_EFFECTS = DeferredRegister.create(Brewery.MOD_ID, Registry.MOB_EFFECT_REGISTRY);
+    private static final DeferredRegister<MobEffect> MOB_EFFECTS = DeferredRegister.create(Brewery.MOD_ID, Registries.MOB_EFFECT);
     private static final Registrar<MobEffect> MOB_EFFECTS_REGISTRAR = MOB_EFFECTS.getRegistrar();
 
     public static final RegistrySupplier<MobEffect> DRUNK;

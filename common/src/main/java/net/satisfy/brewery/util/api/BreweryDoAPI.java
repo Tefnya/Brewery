@@ -30,6 +30,4 @@ public class BreweryDoAPI implements DoApiAPI {
     public <T extends LivingEntity> void registerArmor(Map<FullCustomArmor, Pair<HumanoidModel<T>, HumanoidModel<T>>> models, EntityModelSet modelLoader) {
 
     }
-
-
 }

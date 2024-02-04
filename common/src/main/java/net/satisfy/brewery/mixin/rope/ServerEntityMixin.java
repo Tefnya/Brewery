@@ -2,6 +2,8 @@ package net.satisfy.brewery.mixin.rope;
 
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntList;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.server.level.ServerPlayer;
 import net.satisfy.brewery.entity.rope.RopeKnotEntity;
 import net.satisfy.brewery.networking.BreweryNetworking;
 import net.satisfy.brewery.util.rope.RopeConnection;
@@ -27,7 +29,7 @@ public class ServerEntityMixin {
     private Entity entity;
 
     @Inject(method = "sendPairingData", at = @At("TAIL"))
-    private void sendPackages(Consumer<Packet<?>> consumer, CallbackInfo ci) {
+    private void sendPackages(ServerPlayer serverPlayer, Consumer<Packet<ClientGamePacketListener>> consumer, CallbackInfo ci) {
         if (this.entity instanceof RopeKnotEntity knot) {
             FriendlyByteBuf buf = BreweryNetworking.createPacketBuf();
             Set<RopeConnection> connections = knot.getConnections();

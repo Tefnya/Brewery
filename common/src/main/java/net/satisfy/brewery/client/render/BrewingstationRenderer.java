@@ -13,6 +13,7 @@ import net.minecraft.world.phys.Vec3;
 import net.satisfy.brewery.block.brewingstation.BrewingstationBlock;
 import net.satisfy.brewery.entity.BrewstationBlockEntity;
 import net.satisfy.brewery.util.BreweryUtil;
+import org.joml.Vector3f;
 
 import java.util.List;
 import java.util.Random;

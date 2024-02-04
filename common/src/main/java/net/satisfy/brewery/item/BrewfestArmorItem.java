@@ -16,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class BrewfestArmorItem extends ArmorItem implements IBrewfestArmorSet {
-    public BrewfestArmorItem(ArmorMaterial material, EquipmentSlot slot, Properties settings) {
+    public BrewfestArmorItem(ArmorMaterial material, Type slot, Properties settings) {
         super(material, slot, settings);
     }
 

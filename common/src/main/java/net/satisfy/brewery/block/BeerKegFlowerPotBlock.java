@@ -106,11 +106,6 @@ public class BeerKegFlowerPotBlock extends FacingBlock implements EntityBlock {
         return false;
     }
 
-    @Override
-    public PushReaction getPistonPushReaction(BlockState state) {
-        return PushReaction.IGNORE;
-    }
-
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {

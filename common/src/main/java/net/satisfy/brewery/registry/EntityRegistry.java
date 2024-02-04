@@ -3,6 +3,7 @@ package net.satisfy.brewery.registry;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.Registrar;
 import dev.architectury.registry.registries.RegistrySupplier;
+import net.minecraft.core.registries.Registries;
 import net.satisfy.brewery.Brewery;
 import net.satisfy.brewery.entity.BeerElementalEntity;
 import net.satisfy.brewery.entity.BeerElementalAttackEntity;
@@ -17,7 +18,7 @@ import net.minecraft.world.entity.MobCategory;
 import java.util.function.Supplier;
 
 public class EntityRegistry {
-    private static final Registrar<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(Brewery.MOD_ID, Registry.ENTITY_TYPE_REGISTRY).getRegistrar();
+    private static final Registrar<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(Brewery.MOD_ID, Registries.ENTITY_TYPE).getRegistrar();
 
     public static final RegistrySupplier<EntityType<RopeKnotEntity>> ROPE_KNOT = create("rope_knot",
             () -> EntityType.Builder.of(RopeKnotEntity::new, MobCategory.MISC)

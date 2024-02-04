@@ -40,7 +40,6 @@ public class BigBarrelBlock extends HorizontalDirectionalBlock {
         HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
     }
 
-    // TODO: fix drop issue, item is not dropped when not-main-block is broken
     @Override
     public @NotNull ItemStack getCloneItemStack(BlockGetter getter, BlockPos pos, BlockState state) {
         if (!(this instanceof BigBarrelMainBlock)) {

@@ -55,6 +55,6 @@ public class BrewingStationCategory implements IRecipeCategory<BrewingRecipe> {
         builder.addSlot(RecipeIngredientRole.INPUT, 50, 35).addIngredients(recipe.getIngredients().get(1));
         builder.addSlot(RecipeIngredientRole.INPUT, 50, 53).addIngredients(recipe.getIngredients().get(2));
 
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 110, 35).addItemStack(recipe.getResultItem());
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 110, 35).addItemStack(recipe.getResultItem(null));
     }
 }

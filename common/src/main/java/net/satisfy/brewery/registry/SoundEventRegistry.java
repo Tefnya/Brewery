@@ -4,6 +4,7 @@ import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.Registrar;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.satisfy.brewery.Brewery;
@@ -11,7 +12,7 @@ import net.satisfy.brewery.util.BreweryIdentifier;
 
 public class SoundEventRegistry {
 
-    private static final Registrar<SoundEvent> SOUND_EVENTS = DeferredRegister.create(Brewery.MOD_ID, Registry.SOUND_EVENT_REGISTRY).getRegistrar();
+    private static final Registrar<SoundEvent> SOUND_EVENTS = DeferredRegister.create(Brewery.MOD_ID, Registries.SOUND_EVENT).getRegistrar();
 
     public static final RegistrySupplier<SoundEvent> DRAWER_OPEN = create("drawer_open");
     public static final RegistrySupplier<SoundEvent> DRAWER_CLOSE = create("drawer_close");
@@ -32,8 +33,9 @@ public class SoundEventRegistry {
 
     private static RegistrySupplier<SoundEvent> create(String name) {
         final ResourceLocation id = new BreweryIdentifier(name);
-        return SOUND_EVENTS.register(id, () -> new SoundEvent(id));
+        return SOUND_EVENTS.register(id, () -> SoundEvent.createVariableRangeEvent(id));
     }
+
 
     public static void init() {
         Brewery.LOGGER.debug("Registering Sounds for " + Brewery.MOD_ID);

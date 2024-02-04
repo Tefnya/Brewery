@@ -27,9 +27,6 @@ public class ConnectivityHandler {
         Direction.Axis mainAxis = frontier.get(0)
                 .getMainConnectionAxis();
 
-        // essentially, if it's a vertical multi then the search won't be restricted by
-        // Y
-        // alternately, a horizontal multi search shouldn't be restricted by X or Z
         int minX = (mainAxis == Direction.Axis.Y ? Integer.MAX_VALUE : Integer.MIN_VALUE);
         int minY = (mainAxis != Direction.Axis.Y ? Integer.MAX_VALUE : Integer.MIN_VALUE);
         int minZ = (mainAxis == Direction.Axis.Y ? Integer.MAX_VALUE : Integer.MIN_VALUE);
@@ -214,7 +211,6 @@ public class ConnectivityHandler {
                     extraData = be.modifyExtraData(extraData);
 
                     splitMultiAndInvalidate(part, cache);
-                    // Modify Part
                     part.setController(origin);
                     part.preventConnectivityUpdate();
                     cache.put(pos, be);

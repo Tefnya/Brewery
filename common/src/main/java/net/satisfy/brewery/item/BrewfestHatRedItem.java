@@ -19,7 +19,7 @@ public class BrewfestHatRedItem extends CustomHatItem {
 
 
     public BrewfestHatRedItem(Properties settings) {
-        super(ArmorMaterialRegistry.BREWFEST_LEATHER, EquipmentSlot.HEAD, settings);
+        super(ArmorMaterialRegistry.BREWFEST_LEATHER, Type.HELMET, settings);
     }
 
     @Override

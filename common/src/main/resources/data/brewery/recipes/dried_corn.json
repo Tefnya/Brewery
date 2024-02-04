@@ -1,8 +1,10 @@
 {
   "type": "brewery:drying",
-  "input": {
-    "item": "brewery:corn"
-  },
+  "ingredients": [
+    {
+      "item": "brewery:corn"
+    }
+  ],
   "output": {
     "item": "brewery:dried_corn"
   }

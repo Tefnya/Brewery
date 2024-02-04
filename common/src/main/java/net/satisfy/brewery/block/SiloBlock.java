@@ -107,7 +107,6 @@ public class SiloBlock extends FacingBlock implements EntityBlock {
                     if (!returnStack.isEmpty())
                         player.addItem(itemStack);
                 } else {
-                    // Open / Close
                     siloController.open(!blockState.getValue(OPEN));
                 }
                 return InteractionResult.SUCCESS;

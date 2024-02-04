@@ -26,6 +26,9 @@
     ],
     "rei_client": [
       "net.satisfy.brewery.fabric.rei.BreweryREIClientPluginFabric"
+    ],
+    "jei_mod_plugin": [
+      "net.satisfy.brewery.compat.jei.BreweryJEIClientPlugin"
     ]
   },
   "mixins": [

@@ -2,91 +2,43 @@ package net.satisfy.brewery.compat.jei;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
-import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
-import mezz.jei.api.recipe.RecipeIngredientRole;
-import mezz.jei.api.registration.IRecipeCatalystRegistration;
+import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
-import mezz.jei.api.registration.IRecipeTransferRegistration;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeManager;
+import net.satisfy.brewery.Brewery;
 import net.satisfy.brewery.compat.jei.category.BrewingStationCategory;
 import net.satisfy.brewery.compat.jei.category.SiloCategory;
-import net.satisfy.brewery.compat.jei.transfer.BrewingStationTransferInfo;
-import net.satisfy.brewery.compat.jei.transfer.SiloTransferInfo;
 import net.satisfy.brewery.recipe.BrewingRecipe;
 import net.satisfy.brewery.recipe.SiloRecipe;
-import net.satisfy.brewery.registry.ObjectRegistry;
 import net.satisfy.brewery.registry.RecipeTypeRegistry;
-import net.satisfy.brewery.util.BreweryIdentifier;
-
 
 import java.util.List;
 import java.util.Objects;
 
-
 @JeiPlugin
 public class BreweryJEIClientPlugin implements IModPlugin {
+    public static RecipeType<BrewingRecipe> BREWING_TYPE = new RecipeType<>(BrewingStationCategory.UID, BrewingRecipe.class);
+    public static RecipeType<SiloRecipe> DRYING_TYPE = new RecipeType<>(SiloCategory.UID, SiloRecipe.class);
+
+    @Override
+    public ResourceLocation getPluginUid() {
+        return new ResourceLocation(Brewery.MOD_ID, "jei_plugin");
+    }
 
     @Override
     public void registerCategories(IRecipeCategoryRegistration registration) {
-       }
+        registration.addRecipeCategories(new BrewingStationCategory(registration.getJeiHelpers().getGuiHelper()));
+        registration.addRecipeCategories(new SiloCategory(registration.getJeiHelpers().getGuiHelper()));
 
+    }
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
         RecipeManager rm = Objects.requireNonNull(Minecraft.getInstance().level).getRecipeManager();
-        List<BrewingRecipe> fermentationBarrelRecipes = rm.getAllRecipesFor(RecipeTypeRegistry.BREWING_RECIPE_TYPE.get());
-        registration.addRecipes(BrewingStationCategory.BREWINGSTATION, fermentationBarrelRecipes);
-
-        List<SiloRecipe> applePressRecipes = rm.getAllRecipesFor(RecipeTypeRegistry.SILO_RECIPE_TYPE.get());
-        registration.addRecipes(SiloCategory.SILO_CATEGORY, applePressRecipes);
-    }
-
-    @Override
-    public ResourceLocation getPluginUid() {
-        return new BreweryIdentifier("jei_plugin");
-    }
-
-    @Override
-    public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration) {
-        registration.addRecipeTransferHandler(new BrewingStationTransferInfo());
-        registration.addRecipeTransferHandler(new SiloTransferInfo());
-    }
-
-    @Override
-    public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-        registration.addRecipeCatalyst(
-                ObjectRegistry.WOODEN_BREWINGSTATION.get().asItem().getDefaultInstance(),
-                BrewingStationCategory.BREWINGSTATION
-        );
-
-        registration.addRecipeCatalyst(
-                ObjectRegistry.COPPER_BREWINGSTATION.get().asItem().getDefaultInstance(),
-                BrewingStationCategory.BREWINGSTATION
-        );
-
-        registration.addRecipeCatalyst(
-                ObjectRegistry.NETHERITE_BREWINGSTATION.get().asItem().getDefaultInstance(),
-                BrewingStationCategory.BREWINGSTATION
-        );
-
-        registration.addRecipeCatalyst(
-                ObjectRegistry.SILO_WOOD.get().asItem().getDefaultInstance(),
-                SiloCategory.SILO_CATEGORY
-        );
-
-        registration.addRecipeCatalyst(
-                ObjectRegistry.SILO_COPPER.get().asItem().getDefaultInstance(),
-                SiloCategory.SILO_CATEGORY
-        );
-    }
-
-
-
-    public static void addSlot(IRecipeLayoutBuilder builder, int x, int y, Ingredient ingredient){
-        builder.addSlot(RecipeIngredientRole.INPUT, x, y).addIngredients(ingredient);
+        List<BrewingRecipe> recipesbrewing = rm.getAllRecipesFor(RecipeTypeRegistry.BREWING_RECIPE_TYPE.get());registration.addRecipes(BREWING_TYPE, recipesbrewing);
+        List<SiloRecipe> recipesDrying = rm.getAllRecipesFor(RecipeTypeRegistry.SILO_RECIPE_TYPE.get());registration.addRecipes(DRYING_TYPE, recipesDrying);
     }
 }

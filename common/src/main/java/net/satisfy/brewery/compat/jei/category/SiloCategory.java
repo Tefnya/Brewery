@@ -1,10 +1,8 @@
 package net.satisfy.brewery.compat.jei.category;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
-import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
@@ -12,53 +10,33 @@ import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import net.satisfy.brewery.Brewery;
 import net.satisfy.brewery.compat.jei.BreweryJEIClientPlugin;
 import net.satisfy.brewery.recipe.SiloRecipe;
 import net.satisfy.brewery.registry.ObjectRegistry;
 
 public class SiloCategory implements IRecipeCategory<SiloRecipe> {
-    public static final RecipeType<SiloRecipe> SILO_CATEGORY = RecipeType.create(Brewery.MOD_ID, "drying", SiloRecipe.class);
-    private static final int SLOT_SIZE = 22;
-    private static final int WIDTH_OF = 26;
-    private static final int HEIGHT_OF = 13;
-    private final IDrawable icon;
+    public final static ResourceLocation UID = new ResourceLocation(Brewery.MOD_ID, "drying");
+    public final static ResourceLocation TEXTURE =
+            new ResourceLocation(Brewery.MOD_ID, "textures/gui/silo.png");
+
     private final IDrawable background;
-    private final Component localizedName;
-    private final IDrawable slotIcon;
+    private final IDrawable icon;
 
     public SiloCategory(IGuiHelper helper) {
-        ResourceLocation backgroundImage = new ResourceLocation(Brewery.MOD_ID, "textures/gui/jei/silo.png");
-        background = helper.createDrawable(backgroundImage, 0, 0, 118, 80);
-        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, ObjectRegistry.SILO_WOOD.get().asItem().getDefaultInstance());
-        this.localizedName = Component.translatable("rei.brewery.silo_category");
-        slotIcon = helper.createDrawable(backgroundImage, 119, 0, SLOT_SIZE, SLOT_SIZE);
-    }
-
-    @Override
-    public void setRecipe(IRecipeLayoutBuilder builder, SiloRecipe recipe, IFocusGroup focuses) {
-        int inputSlotX = 48 - WIDTH_OF;
-        int inputSlotY = 34 - HEIGHT_OF;
-        int outputSlotX = 116 - WIDTH_OF;
-        int outputSlotY = 35 - HEIGHT_OF;
-
-        BreweryJEIClientPlugin.addSlot(builder, inputSlotX, inputSlotY, recipe.input);
-        builder.addSlot(RecipeIngredientRole.OUTPUT, outputSlotX, outputSlotY).addItemStack(recipe.getResultItem());
-    }
-
-    @Override
-    public void draw(SiloRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack ms, double mouseX, double mouseY) {
-        this.slotIcon.draw(ms, 63, 53);
+        this.background = helper.createDrawable(TEXTURE, 0, 0, 176, 85);
+        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ObjectRegistry.SILO_WOOD.get()));
     }
 
     @Override
     public RecipeType<SiloRecipe> getRecipeType() {
-        return SILO_CATEGORY;
+        return BreweryJEIClientPlugin.DRYING_TYPE;
     }
 
     @Override
     public Component getTitle() {
-        return this.localizedName;
+        return Component.translatable("rei.brewery.silo_category");
     }
 
     @Override
@@ -69,5 +47,12 @@ public class SiloCategory implements IRecipeCategory<SiloRecipe> {
     @Override
     public IDrawable getIcon() {
         return this.icon;
+    }
+
+    @Override
+    public void setRecipe(IRecipeLayoutBuilder builder, SiloRecipe recipe, IFocusGroup focuses) {
+        builder.addSlot(RecipeIngredientRole.INPUT, 50, 35).addIngredients(recipe.getIngredients().get(0));
+
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 110, 35).addItemStack(recipe.getResultItem());
     }
 }

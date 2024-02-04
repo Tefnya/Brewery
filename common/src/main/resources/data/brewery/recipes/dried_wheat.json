@@ -1,8 +1,10 @@
 {
   "type": "brewery:drying",
-  "input": {
-    "item": "minecraft:wheat"
-  },
+  "ingredients": [
+    {
+      "item": "minecraft:wheat"
+    }
+  ],
   "output": {
     "item": "brewery:dried_wheat"
   }

@@ -60,7 +60,6 @@ public class TableBlock extends LineConnectingBlock implements SimpleWaterlogged
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-
         Level world = context.getLevel();
         BlockPos clickedPos = context.getClickedPos();
         return super.getStateForPlacement(context).setValue(WATERLOGGED, world.getFluidState(clickedPos).getType() == Fluids.WATER);

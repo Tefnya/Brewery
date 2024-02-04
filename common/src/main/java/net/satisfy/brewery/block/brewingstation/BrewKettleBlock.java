@@ -12,9 +12,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -150,23 +148,6 @@ public class BrewKettleBlock extends BrewingstationBlock implements EntityBlock 
 
             level.addParticle(ParticleTypes.BUBBLE, x + offsetX, y + offsetY, z + offsetZ, 0.0, 0.0, 0.0);
             level.addParticle(ParticleTypes.BUBBLE_POP, x + offsetX, y + offsetY, z + offsetZ, 0.0, 0.0, 0.0);
-        }
-    }
-
-
-    @Override
-    public void stepOn(Level level, BlockPos blockPos, BlockState blockState, Entity entity) {
-        super.stepOn(level, blockPos, blockState, entity);
-        if (entity instanceof ItemEntity item) {
-            ItemStack itemStack = item.getItem();
-            BlockEntity blockEntity = level.getBlockEntity(blockPos);
-            if (blockEntity instanceof BrewstationBlockEntity brewKettleEntity) {
-                brewKettleEntity.addIngredient(itemStack);
-                brewKettleEntity.updateInClientWorld();
-                if (itemStack.isEmpty()) {
-                    entity.discard();
-                }
-            }
         }
     }
 

@@ -46,6 +46,8 @@ public class BrewstationBlockEntity extends BlockEntity implements ImplementedIn
     private static final int MAX_BREW_TIME = 60 * 20;
     private static final int MIN_TIME_FOR_EVENT = 5 * 20;
     private static final int MAX_TIME_FOR_EVENT = 15 * 20;
+    private static final int SOUND_DURATION = 3 * 20;
+    private int soundTime;
     private int brewTime;
     private int timeToNextEvent = Integer.MIN_VALUE;
     private final Set<BrewEvent> runningEvents = new HashSet<>();
@@ -118,6 +120,13 @@ public class BrewstationBlockEntity extends BlockEntity implements ImplementedIn
             endBrewing();
             return;
         }
+
+        if (soundTime >= SOUND_DURATION) {
+            assert this.level != null;
+            level.playSound(null, blockPos, SoundEventRegistry.BREWSTATION_AMBIENT.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
+            soundTime = 0;
+        }
+        soundTime++;
         if(timeToNextEvent == Integer.MIN_VALUE) setTimeToEvent();
 
         BrewHelper.checkRunningEvents(this);
@@ -128,6 +137,8 @@ public class BrewstationBlockEntity extends BlockEntity implements ImplementedIn
             this.brew(recipe);
             return;
         } else if (timeLeft >= MIN_TIME_FOR_EVENT && timeToNextEvent <= 0 && runningEvents.size() < BrewEvents.BREW_EVENTS.size()) {
+
+
             BrewEvent event = BrewHelper.getRdmEvent(this);
             Brewery.LOGGER.warn("Starting event!" + BrewEvents.getId(event).getPath());
             event.start(this.components, level);
@@ -154,6 +165,7 @@ public class BrewstationBlockEntity extends BlockEntity implements ImplementedIn
 
     private void brew(Recipe<?> recipe) {
         Brewery.LOGGER.info("Brewing!!!");
+
 
         ItemStack resultSack = recipe.getResultItem();
         if (resultSack.getItem() instanceof DrinkBlockItem drinkItem) {
@@ -212,6 +224,7 @@ public class BrewstationBlockEntity extends BlockEntity implements ImplementedIn
         this.solved = 0;
         this.brewTime = 0;
         this.totalEvents = 0;
+        this.soundTime = 3 * 20;
         this.timeToNextEvent = Integer.MIN_VALUE;
     }
 

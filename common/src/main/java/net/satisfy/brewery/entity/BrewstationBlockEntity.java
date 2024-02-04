@@ -2,6 +2,7 @@ package net.satisfy.brewery.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
@@ -134,7 +135,8 @@ public class BrewstationBlockEntity extends BlockEntity implements ImplementedIn
         int timeLeft = MAX_BREW_TIME - brewTime;
 
         if (brewTime >= MAX_BREW_TIME) {
-            this.brew(recipe);
+            RegistryAccess access = level.registryAccess();
+            this.brew(recipe, access);
             return;
         } else if (timeLeft >= MIN_TIME_FOR_EVENT && timeToNextEvent <= 0 && runningEvents.size() < BrewEvents.BREW_EVENTS.size()) {
 
@@ -163,11 +165,11 @@ public class BrewstationBlockEntity extends BlockEntity implements ImplementedIn
                 this.level.getBlockState(BrewHelper.getBlock(ObjectRegistry.BREW_OVEN.get(), this.components, this.level)).getValue(BlockStateRegistry.HEAT) != Heat.OFF;
     }
 
-    private void brew(Recipe<?> recipe) {
+    private void brew(Recipe<?> recipe, RegistryAccess access) {
         Brewery.LOGGER.info("Brewing!!!");
 
 
-        ItemStack resultSack = recipe.getResultItem();
+        ItemStack resultSack = recipe.getResultItem(access);
         if (resultSack.getItem() instanceof DrinkBlockItem drinkItem) {
             DrinkBlockItem.addQuality(resultSack, this.solved);
             if (this.solved == 0) {

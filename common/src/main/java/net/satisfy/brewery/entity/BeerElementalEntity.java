@@ -2,6 +2,7 @@ package net.satisfy.brewery.entity;
 
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -10,8 +11,10 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.monster.Blaze;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.SmallFireball;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.satisfy.brewery.registry.SoundEventRegistry;
@@ -19,7 +22,6 @@ import net.satisfy.brewery.registry.SoundEventRegistry;
 import java.util.EnumSet;
 
 public class BeerElementalEntity extends Monster {
-
     private float allowedHeightOffset = 0.5f;
     private int nextHeightOffsetChangeTick;
 
@@ -41,12 +43,12 @@ public class BeerElementalEntity extends Monster {
 
     @Override
     public void aiStep() {
-        if (!onGround && getDeltaMovement().y < 0.0D)
+        if (!this.onGround() && this.getDeltaMovement().y < 0.0) {
             setDeltaMovement(getDeltaMovement().multiply(1.0D, 0.6D, 1.0D));
 
-        if (level.isClientSide) {
+            if (this.level().isClientSide) {
             if (random.nextInt(24) == 0 && !isSilent())
-                level.playLocalSound(getX(), getY(), getZ(), SoundEventRegistry.BEER_ELEMENTAL_AMBIENT.get(), getSoundSource(), 1.0F + random.nextFloat(), 0.3F + random.nextFloat() * 0.7F, false);
+                this.level().playLocalSound(getX(), getY(), getZ(), SoundEventRegistry.BEER_ELEMENTAL_AMBIENT.get(), getSoundSource(), 1.0F + random.nextFloat(), 0.3F + random.nextFloat() * 0.7F, false);
 
             for(int i = 0; i < 2; i++) {
                 double velocityX = (random.nextDouble() - 0.5) * 0.1;
@@ -57,13 +59,13 @@ public class BeerElementalEntity extends Monster {
                 double slowerVelocityY = velocityY * 0.001;
                 double slowerVelocityZ = velocityZ * 0.001;
 
-                level.addParticle(ParticleTypes.UNDERWATER, getRandomX(0.3D), getY() + random.nextDouble() * 1.4D, getRandomZ(0.4D), slowerVelocityX, slowerVelocityY, slowerVelocityZ);
+                this.level().addParticle(ParticleTypes.UNDERWATER, getRandomX(0.3D), getY() + random.nextDouble() * 1.4D, getRandomZ(0.4D), slowerVelocityX, slowerVelocityY, slowerVelocityZ);
             }
         }
 
         super.aiStep();
     }
-
+    }
 
     @Override
     protected void customServerAiStep() {
@@ -195,10 +197,11 @@ public class BeerElementalEntity extends Monster {
                         double f = Math.sqrt(Math.sqrt(dist)) * 0.5D;
 
                         for (int i = 0; i < 1; ++i) {
-                            BeerElementalAttackEntity attack = new BeerElementalAttackEntity(elemental.level, elemental, elemental.getRandom().triangle(dX, 2.297D * f), dY, elemental.getRandom().triangle(dZ, 2.297D * f));
+                            BeerElementalAttackEntity attack = new BeerElementalAttackEntity(this.elemental.level(), elemental, elemental.getRandom().triangle(dX, 2.297D * f), dY, elemental.getRandom().triangle(dZ, 2.297D * f));
                             attack.setPos(attack.getX(), elemental.getY(0.5D) + 0.5D, attack.getZ());
 
-                            elemental.level.addFreshEntity(attack);
+                            this.elemental.level().addFreshEntity(attack);
+
                         }
                     }
                 }

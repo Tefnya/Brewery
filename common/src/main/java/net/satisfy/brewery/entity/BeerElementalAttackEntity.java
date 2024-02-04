@@ -35,26 +35,20 @@ public class BeerElementalAttackEntity extends AbstractHurtingProjectile {
 		double z = this.getZ();
 		SoundEvent soundEvent = SoundEventRegistry.BEER_ELEMENTAL_ATTACK.get();
 
-		level.playSound(null, x, y, z, soundEvent, this.getSoundSource(), 1.0F, 1.0F);
+		this.getCommandSenderWorld().playSound(null, x, y, z, soundEvent, this.getSoundSource(), 1.0F, 1.0F);
 	}
 
 	@Override
 	protected void onHitEntity(EntityHitResult entityHitResult) {
-		if(!level.isClientSide) {
-			Entity target = entityHitResult.getEntity();
-			Entity owner = this.getOwner();
-
-			if(!target.hurt(DamageSource.sonicBoom(owner), 8.0F)) {
-				if(owner instanceof LivingEntity livingEntity)
-					doEnchantDamageEffects(livingEntity, target);
-			}
-		}
+		super.onHitEntity(entityHitResult);
+		Entity entity = entityHitResult.getEntity();
+		entity.hurt(entity.damageSources().thrown(this, null), 6);
 	}
 
 	@Override
 	protected void onHit(HitResult hitResult) {
 		super.onHit(hitResult);
-		if (!this.level.isClientSide)
+		if (!this.getCommandSenderWorld().isClientSide)
 			this.discard();
 	}
 

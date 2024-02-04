@@ -2,7 +2,6 @@ package net.satisfy.brewery.client.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Quaternion;
 import net.satisfy.brewery.client.model.RopeModel;
 import net.satisfy.brewery.util.rope.RopeHelper;
 import net.satisfy.brewery.util.rope.UVCord;

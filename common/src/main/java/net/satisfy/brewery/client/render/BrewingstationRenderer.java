@@ -1,7 +1,7 @@
 package net.satisfy.brewery.client.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
@@ -50,8 +50,8 @@ public class BrewingstationRenderer implements BlockEntityRenderer<BrewstationBl
                 Vec3 itemPosition = rotate(baseVector, anglePartition * itemCount, Direction.Axis.Y);
                 poseStack.translate(itemPosition.x, itemPosition.y, itemPosition.z);
 
-                poseStack.mulPose(Vector3f.YP.rotationDegrees(anglePartition * itemCount + 35));
-                poseStack.mulPose(Vector3f.XP.rotationDegrees(65));
+                poseStack.mulPose(Axis.YP.rotationDegrees(anglePartition * itemCount + 35));
+                poseStack.mulPose(Axis.XP.rotationDegrees(65));
 
                 for (int k = 0; k <= stack.getCount() / 8; k++) {
                     poseStack.pushPose();

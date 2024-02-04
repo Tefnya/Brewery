@@ -2,12 +2,13 @@ package net.satisfy.brewery.registry;
 
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
-import me.shedaniel.rei.plugin.common.displays.brewing.BrewingRecipe;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.satisfy.brewery.Brewery;
+import net.satisfy.brewery.recipe.BrewingRecipe;
+import net.satisfy.brewery.recipe.SiloRecipe;
 
 
 import java.util.function.Supplier;

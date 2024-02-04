@@ -51,7 +51,6 @@ public class DrinkBlockItem extends BlockItem {
         if (livingEntity instanceof ServerPlayer serverPlayer) {
             AlcoholManager.drinkAlcohol(serverPlayer);
 
-            // Check for beer quality and apply effects accordingly
             if (itemStack.hasTag() && Objects.requireNonNull(itemStack.getTag()).contains("brewery.beer_quality")) {
                 int quality = itemStack.getTag().getInt("brewery.beer_quality");
                 MobEffectInstance effectInstance = calculateEffectForQuality(quality);

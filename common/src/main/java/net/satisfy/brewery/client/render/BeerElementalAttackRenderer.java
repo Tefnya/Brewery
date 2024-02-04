@@ -2,9 +2,6 @@ package net.satisfy.brewery.client.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Matrix4f;
-import com.mojang.math.Vector3f;
-import com.mojang.math.Vector4f;
 import net.satisfy.brewery.Brewery;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -15,6 +12,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.phys.Vec2;
 import net.satisfy.brewery.entity.BeerElementalAttackEntity;
+import org.joml.Matrix4f;
+import org.joml.Vector3f;
+import org.joml.Vector4f;
 
 public class BeerElementalAttackRenderer extends EntityRenderer<BeerElementalAttackEntity> {
 
@@ -62,7 +62,7 @@ public class BeerElementalAttackRenderer extends EntityRenderer<BeerElementalAtt
 			Vec2 quadUvs = UVS[i];
 
 			Vector4f pos = new Vector4f(localPos.x(), localPos.y() + 0.5F, localPos.z(), 1.0F);
-			pos.transform(poseMatrix);
+			pos.mul(poseMatrix);
 
 			vertexBuilder.vertex(pos.x(), pos.y(), pos.z(),
 					1.0F, 1.0F, 1.0F, 1.0F,

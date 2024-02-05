@@ -7,7 +7,6 @@
     "DisclaimerMixin",
     "FogRendererMixin",
     "GameRendererMixin",
-    "OrderedTextToolTipAccessor",
     "SkipExperimentMixin",
     "WindowMixin",
     "rope.PickMixin"

@@ -1,31 +1,37 @@
 {
   "parent": "brewery:main/drying_expertise",
+  "criteria": {
+    "silo": {
+      "conditions": {
+        "location": [
+          {
+            "block": "brewery:silo_copper",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    }
+  },
   "display": {
-    "icon": {
-      "item": "brewery:silo_copper"
-    },
-    "title": {
-      "translate": "brewery.advancement.place_silo_copper"
-    },
+    "announce_to_chat": true,
     "description": {
       "translate": "brewery.advancement.place_silo_copper.desc"
     },
-    "frame": "challenge",
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "brewery:silo_copper"
+    },
     "show_toast": true,
-    "announce_to_chat": true,
-    "hidden": false
-  },
-  "criteria": {
-    "silo_copper": {
-      "trigger": "minecraft:placed_block",
-      "conditions": {
-        "block": "brewery:silo_copper"
-      }
+    "title": {
+      "translate": "brewery.advancement.place_silo_copper"
     }
   },
   "requirements": [
     [
-      "silo_copper"
+      "silo"
     ]
-  ]
+  ],
+  "sends_telemetry_event": true
 }

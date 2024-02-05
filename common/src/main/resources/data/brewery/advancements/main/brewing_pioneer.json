@@ -1,31 +1,37 @@
 {
   "parent": "brewery:main/root",
+  "criteria": {
+    "brewing_station": {
+      "conditions": {
+        "location": [
+          {
+            "block": "brewery:wooden_brewingstation",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    }
+  },
   "display": {
-    "icon": {
-      "item": "brewery:wooden_brewingstation"
-    },
-    "title": {
-      "translate": "brewery.advancement.place_brewingstation"
-    },
+    "announce_to_chat": true,
     "description": {
       "translate": "brewery.advancement.place_brewingstation.desc"
     },
     "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "brewery:wooden_brewingstation"
+    },
     "show_toast": true,
-    "announce_to_chat": true,
-    "hidden": false
-  },
-  "criteria": {
-    "brewing_station": {
-      "trigger": "minecraft:placed_block",
-      "conditions": {
-        "block": "brewery:wooden_brewingstation"
-      }
+    "title": {
+      "translate": "brewery.advancement.place_brewingstation"
     }
   },
   "requirements": [
     [
       "brewing_station"
     ]
-  ]
+  ],
+  "sends_telemetry_event": true
 }

@@ -49,18 +49,21 @@ public class RopeRender {
         float length = (float) ropeVec.length();
         Vec3 ropeNormal = ropeVec.normalize();
 
-        // Create a quaternion representing the rotation around the ropeNormal vector by 'degrees' degrees
         Quaternionf quaternion = new Quaternionf().rotationAxis(degrees * (float)Math.PI / 180, (float) ropeNormal.x, (float) ropeNormal.y, (float) ropeNormal.z);
 
-        Vector3f crossVec = ropeNormal.equals(POSITIVE_Y) || ropeNormal.equals(NEGATIVE_Y) ? new Vector3f(1, 0, 0) : new Vector3f((Vector3fc) ropeNormal.cross(POSITIVE_Y).normalize()); // plane vector
-        crossVec.rotate(quaternion); // rotate plane by 'degrees'
-        crossVec.mul(((uv.x1() - uv.x0()) / 16.0F) * SCALE); // width
-        crossVec.mul(0.5F); // to each side
+        Vector3f crossVec;
+        if (ropeNormal.equals(POSITIVE_Y) || ropeNormal.equals(NEGATIVE_Y)) {
+            crossVec = new Vector3f(1, 0, 0);
+        } else {
+            Vec3 tempVec = ropeNormal.cross(POSITIVE_Y).normalize();
+            crossVec = new Vector3f((float) tempVec.x, (float) tempVec.y, (float) tempVec.z);
+        }
 
         float uvStart, uvEnd = 0;
         double segmentLength = Math.min(length, 1.0F / QUALITY), actuallySegmentLength;
         Vector3f currentPos = new Vector3f(), lastPos = new Vector3f();
-        Vector3f segmentVector = new Vector3f((Vector3fc) ropeNormal.multiply(segmentLength, segmentLength, segmentLength)), segmentPos = new Vector3f();
+        Vec3 tempVec = ropeNormal.multiply(segmentLength, segmentLength, segmentLength);
+        Vector3f segmentVector = new Vector3f((float) tempVec.x, (float) tempVec.y, (float) tempVec.z), segmentPos = new Vector3f();
 
         boolean lastIter = false, straight = (ropeVec.x == 0 && ropeVec.z == 0) || RopeHelper.HANGING_AMOUNT == 0;
         for (int segment = 0; segment < MAX_SEGMENTS; segment++) {

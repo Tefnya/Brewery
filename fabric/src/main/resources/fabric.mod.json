@@ -32,7 +32,6 @@
     ]
   },
   "mixins": [
-    "brewery.mixins.json",
     "brewery-common.mixins.json"
   ],
   "depends": {

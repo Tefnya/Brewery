@@ -27,6 +27,7 @@ public class Brewery {
         ObjectRegistry.init();
         BlockEntityRegistry.init();
         MobEffectRegistry.init();
+        TabRegistry.init();
         CommonEvents.init();
         BreweryNetworking.registerC2SPackets();
         SiloBlock.registerDryers();

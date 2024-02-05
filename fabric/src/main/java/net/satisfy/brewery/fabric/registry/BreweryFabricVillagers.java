@@ -1,5 +1,7 @@
 package net.satisfy.brewery.fabric.registry;
 
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.satisfy.brewery.registry.ObjectRegistry;
 import net.satisfy.brewery.util.BreweryIdentifier;
 import net.satisfy.brewery.util.BreweryVillagerUtil;
@@ -17,7 +19,7 @@ public class BreweryFabricVillagers {
     private static final BreweryIdentifier BREWER_POI_IDENTIFIER = new BreweryIdentifier("brewer_poi");
     public static final PoiType BREWER_POI = PointOfInterestHelper.register(BREWER_POI_IDENTIFIER, 1, 12, ObjectRegistry.BAR_COUNTER.get());
     @SuppressWarnings("deprecation")
-    public static final VillagerProfession BREWER = Registry.register(Registry.VILLAGER_PROFESSION, new ResourceLocation("brewery", "brewer"), VillagerProfessionBuilder.create().id(new ResourceLocation("brewery", "brewer")).workstation(ResourceKey.create(Registry.POINT_OF_INTEREST_TYPE_REGISTRY, BREWER_POI_IDENTIFIER)).build());
+    public static final VillagerProfession BREWER = Registry.register(BuiltInRegistries.VILLAGER_PROFESSION, new ResourceLocation("brewery", "brewer"), VillagerProfessionBuilder.create().id(new ResourceLocation("brewery", "brewer")).workstation(ResourceKey.create(Registries.POINT_OF_INTEREST_TYPE, BREWER_POI_IDENTIFIER)).build());
 
     public static void init() {
         TradeOfferHelper.registerVillagerOffers(BREWER, 1, factories -> {

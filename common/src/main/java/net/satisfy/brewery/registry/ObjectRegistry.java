@@ -1,7 +1,6 @@
 package net.satisfy.brewery.registry;
 
 import de.cristelknight.doapi.Util;
-import de.cristelknight.doapi.common.item.StandardItem;
 import dev.architectury.core.item.ArchitecturySpawnEggItem;
 import dev.architectury.registry.fuel.FuelRegistry;
 import dev.architectury.registry.registries.DeferredRegister;
@@ -33,7 +32,6 @@ import net.satisfy.brewery.block.property.BrewMaterial;
 import net.satisfy.brewery.item.*;
 import net.satisfy.brewery.util.BreweryFoodProperties;
 import net.satisfy.brewery.util.BreweryIdentifier;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -118,21 +116,15 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> GINGERBREAD = registerWithItem("gingerbread", () -> new GingerBreadBlock(BlockBehaviour.Properties.copy(Blocks.FLOWER_POT)));
     public static final RegistrySupplier<Item> BEER_ELEMENTAL_SPAWN_EGG = registerItem("beer_elemental_spawn_egg", () -> new ArchitecturySpawnEggItem(EntityRegistry.BEER_ELEMENTAL, -1, -1, getSettings()));
     public static final RegistrySupplier<Item> BREWFEST_HAT = registerItem("brewfest_hat", () -> new BrewfestHatItem(getSettings().rarity(Rarity.EPIC)));
-    public static final RegistrySupplier<Item> BREWFEST_REGALIA = registerItem("brewfest_regalia", () -> new BrewfestArmorItem(ArmorMaterialRegistry.BREWFEST_ARMOR, ArmorItem.Type.CHESTPLATE, getSettings().rarity(Rarity.COMMON)));
-    public static final RegistrySupplier<Item> BREWFEST_TROUSERS = registerItem("brewfest_trousers", () -> new BrewfestArmorItem(ArmorMaterialRegistry.BREWFEST_LEATHER, ArmorItem.Type.LEGGINGS, getSettings().rarity(Rarity.RARE)));
-    public static final RegistrySupplier<Item> BREWFEST_BOOTS = registerItem("brewfest_boots", () -> new BrewfestArmorItem(ArmorMaterialRegistry.BREWFEST_ARMOR, ArmorItem.Type.BOOTS, getSettings().rarity(Rarity.UNCOMMON)));
+    public static final RegistrySupplier<Item> BREWFEST_REGALIA = registerItem("brewfest_regalia", () -> new BrewfestChest(ArmorMaterialRegistry.BREWFEST_ARMOR, getSettings().rarity(Rarity.COMMON)));
+    public static final RegistrySupplier<Item> BREWFEST_TROUSERS = registerItem("brewfest_trousers", () -> new BrewfestLegs(ArmorMaterialRegistry.BREWFEST_ARMOR, getSettings().rarity(Rarity.RARE)));
+    public static final RegistrySupplier<Item> BREWFEST_BOOTS = registerItem("brewfest_boots", () -> new BrewfestBoots(ArmorMaterialRegistry.BREWFEST_ARMOR, getSettings().rarity(Rarity.RARE)));
     public static final RegistrySupplier<Item> BREWFEST_HAT_RED = registerItem("brewfest_hat_red", () -> new BrewfestHatRedItem(getSettings().rarity(Rarity.EPIC)));
-    public static final RegistrySupplier<Item> BREWFEST_DRESS = registerItem("brewfest_dress", () -> new BrewfestArmorItem(ArmorMaterialRegistry.BREWFEST_DRESS, ArmorItem.Type.LEGGINGS, getSettings().rarity(Rarity.RARE)));
-    public static final RegistrySupplier<Item> BREWFEST_BLOUSE = registerItem("brewfest_blouse", () -> new BrewfestArmorItem(ArmorMaterialRegistry.BREWFEST_DRESS, ArmorItem.Type.CHESTPLATE, getSettings().rarity(Rarity.COMMON)));
-    public static final RegistrySupplier<Item> BREWFEST_SHOES = registerItem("brewfest_shoes", () -> new BrewfestArmorItem(ArmorMaterialRegistry.BREWFEST_DRESS, ArmorItem.Type.BOOTS, getSettings().rarity(Rarity.UNCOMMON)));
+    public static final RegistrySupplier<Item> BREWFEST_DRESS = registerItem("brewfest_dress", () -> new BrewfestLegs(ArmorMaterialRegistry.BREWFEST_DRESS, getSettings().rarity(Rarity.RARE)));
+    public static final RegistrySupplier<Item> BREWFEST_BLOUSE = registerItem("brewfest_blouse", () -> new BrewfestChest(ArmorMaterialRegistry.BREWFEST_DRESS, getSettings().rarity(Rarity.COMMON)));
+    public static final RegistrySupplier<Item> BREWFEST_SHOES = registerItem("brewfest_shoes", () -> new BrewfestBoots(ArmorMaterialRegistry.BREWFEST_DRESS, getSettings().rarity(Rarity.UNCOMMON)));
     public static final RegistrySupplier<Item> BEER_STANDARD = registerItem("beer_standard", () -> new StandardItem(new Item.Properties().stacksTo(16).rarity(Rarity.UNCOMMON)));
-
-
-    //TODO                      **** 1.20.1 ****
-    //TODO * conditional recipes -> candlelight, Potato Salad / Dumplings
-    //TODO * conditional recipes -> bakery, Pretzel / Gingerbread
-    //TODO * Armor Renderer -> Custom 3D Armor für brewfest garb
-
+    
     public static void init() {
         Brewery.LOGGER.debug("register Mod Block and Items for " + Brewery.MOD_ID);
         ITEMS.register();

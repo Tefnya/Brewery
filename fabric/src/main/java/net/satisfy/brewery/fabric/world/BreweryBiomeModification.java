@@ -1,5 +1,6 @@
 package net.satisfy.brewery.fabric.world;
 
+import net.minecraft.core.registries.Registries;
 import net.satisfy.brewery.util.BreweryIdentifier;
 import net.satisfy.brewery.world.PlacedFeatures;
 import net.fabricmc.fabric.api.biome.v1.*;
@@ -21,7 +22,7 @@ public class BreweryBiomeModification {
     }
 
     private static Predicate<BiomeSelectionContext> getBrewerySelector(String path) {
-        return BiomeSelectors.tag(TagKey.create(Registry.BIOME_REGISTRY, new BreweryIdentifier(path)));
+        return BiomeSelectors.tag(TagKey.create(Registries.BIOME, new BreweryIdentifier(path)));
     }
 
 

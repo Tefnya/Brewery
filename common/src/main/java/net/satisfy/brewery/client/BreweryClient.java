@@ -84,6 +84,6 @@ public class BreweryClient {
     }
 
     public static void registerEntityModelLayers(){
-        CustomArmorRegistry.registerCustomArmorLayers();
+        ArmorRegistry.registerArmorModelLayers();
     }
 }

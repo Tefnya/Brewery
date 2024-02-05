@@ -1,5 +1,5 @@
 {
-  "parent": "brewery:main/copper_brewmaster",
+  "parent": "brewery:main/netherite_brewmaster",
   "display": {
     "icon": {
       "item": "brewery:whiskey_lilitusinglemalt"

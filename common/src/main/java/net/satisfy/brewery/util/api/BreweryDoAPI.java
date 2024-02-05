@@ -4,7 +4,7 @@ import com.mojang.datafixers.util.Pair;
 import de.cristelknight.doapi.api.DoApiAPI;
 import de.cristelknight.doapi.api.DoApiPlugin;
 import de.cristelknight.doapi.client.render.feature.FullCustomArmor;
-import net.satisfy.brewery.registry.CustomArmorRegistry;
+import net.satisfy.brewery.registry.ArmorRegistry;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.EntityModelSet;
@@ -23,11 +23,12 @@ public class BreweryDoAPI implements DoApiAPI {
 
     @Override
     public <T extends LivingEntity> void registerHat(Map<Item, EntityModel<T>> models, EntityModelSet modelLoader) {
-        CustomArmorRegistry.registerHatModels(models, modelLoader);
+        ArmorRegistry.registerHatModels(models, modelLoader);
     }
 
     @Override
     public <T extends LivingEntity> void registerArmor(Map<FullCustomArmor, Pair<HumanoidModel<T>, HumanoidModel<T>>> models, EntityModelSet modelLoader) {
+        ArmorRegistry.registerArmorModels(models, modelLoader);
 
     }
 }

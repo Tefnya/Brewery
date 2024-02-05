@@ -13,7 +13,7 @@
     "show_toast": false,
     "announce_to_chat": false,
     "hidden": false,
-    "background": "brewery:textures/block/brewery_planks.png"
+    "background": "brewery:textures/block/patterned_wool.png"
   },
   "criteria": {
     "seeds": {

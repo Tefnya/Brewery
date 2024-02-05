@@ -2,6 +2,7 @@ package net.satisfy.brewery.item;
 
 import de.cristelknight.doapi.common.item.CustomHatItem;
 import net.satisfy.brewery.registry.ArmorMaterialRegistry;
+import net.satisfy.brewery.registry.ArmorRegistry;
 import net.satisfy.brewery.util.BreweryClientUtil;
 import net.satisfy.brewery.util.BreweryIdentifier;
 import net.minecraft.network.chat.Component;
@@ -35,7 +36,7 @@ public class BrewfestHatItem extends CustomHatItem {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level world, @NotNull List<Component> tooltip, TooltipFlag context) {
         if (world != null && world.isClientSide()) {
-            BreweryClientUtil.appendTooltip(tooltip);
+            ArmorRegistry.appendTooltip(tooltip);
         }
     }
 }

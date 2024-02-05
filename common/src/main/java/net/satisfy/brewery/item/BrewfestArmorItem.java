@@ -1,5 +1,6 @@
 package net.satisfy.brewery.item;
 
+import net.satisfy.brewery.registry.ArmorRegistry;
 import net.satisfy.brewery.util.BreweryClientUtil;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
@@ -34,7 +35,7 @@ public class BrewfestArmorItem extends ArmorItem implements IBrewfestArmorSet {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level world, @NotNull List<Component> tooltip, TooltipFlag context) {
         if (world != null && world.isClientSide()) {
-            BreweryClientUtil.appendTooltip(tooltip);
+            ArmorRegistry.appendTooltip(tooltip);
         }
     }
 }

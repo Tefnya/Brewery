@@ -112,9 +112,9 @@ public class DrinkBlockItem extends BlockItem {
         if (this.effect != null) {
             MutableComponent effectName = Component.translatable(this.effect.getDescriptionId());
             if (effectLevel > 1) {
-                effectName.append(" ").append(Component.translatable("potion.potency." + (effectLevel - 1))); // Add level next to the effect name.
+                effectName.append(" ").append(Component.translatable("potion.potency." + (effectLevel - 1)));
             }
-            MutableComponent effectDuration = Component.literal(" (" + MobEffectUtil.formatDuration(new MobEffectInstance(this.effect, this.baseDuration * durationMultiplier), 1.0f) + ")");
+            MutableComponent effectDuration = Component.translatable(" (" + MobEffectUtil.formatDuration(new MobEffectInstance(this.effect, this.baseDuration * durationMultiplier), 1.0f) + ")");
             tooltip.add(effectName.append(effectDuration).withStyle(this.effect.getCategory().getTooltipFormatting()));
         } else {
             tooltip.add(Component.translatable("effect.none").withStyle(ChatFormatting.GRAY));

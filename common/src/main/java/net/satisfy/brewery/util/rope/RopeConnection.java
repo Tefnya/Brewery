@@ -117,11 +117,7 @@ public class RopeConnection {
         }
     }
 
-    private Vec3 getLeashOffset(Entity entity) {
-        double eyeHeight = entity.getEyeHeight();
-        double width = entity.getBbWidth() * 0.4F;
-        return new Vec3(0.0, eyeHeight, width);
-    }
+
 
     private void createCollision() {
         if (!collisions.isEmpty()) return;
@@ -131,8 +127,8 @@ public class RopeConnection {
         float step = (EntityRegistry.ROPE_COLLISION.get().getWidth() * 2.5F) / distance;
         float centerHoldout = EntityRegistry.ROPE_COLLISION.get().getWidth() / distance;
 
-        Vec3 startPos = from.position().add(getLeashOffset(from));
-        Vec3 endPos = to.position().add(getLeashOffset(to));
+        Vec3 startPos = from.position().add(from.getLeashOffset());
+        Vec3 endPos = to.position().add(to.getLeashOffset(to.getEyeHeight()));
 
         for (double v = step; v < 0.5F - centerHoldout; v += step) {
             Entity fromCollider = spawnCollision(startPos, endPos, v);
@@ -168,7 +164,7 @@ public class RopeConnection {
         if (from.level().isClientSide()) return;
 
         Vec3 startPos = from.position().add(from.getLeashOffset());
-        Vec3 endPos = to.position().add(getLeashOffset(to));
+        Vec3 endPos = to.position().add(to.getLeashOffset(to.getEyeHeight()));
         Vec3 ropeVec = endPos.subtract(startPos);
 
         int i = 0;

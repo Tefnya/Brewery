@@ -53,7 +53,7 @@ public class RopeConnection {
     }
 
     public Level getLevel() {
-        return from.getLevel();
+        return from.level();
     }
 
     public double getSquaredDistance() {
@@ -100,7 +100,7 @@ public class RopeConnection {
             connection.createCollision();
             connection.createHangingRopes();
         }
-        if (fromKnot.getLevel() instanceof ServerLevel serverLevel) {
+        if (fromKnot.level() instanceof ServerLevel serverLevel) {
             connection.sendAttachRopePacket(serverLevel);
         }
         return connection;
@@ -117,16 +117,22 @@ public class RopeConnection {
         }
     }
 
+    private Vec3 getLeashOffset(Entity entity) {
+        double eyeHeight = entity.getEyeHeight();
+        double width = entity.getBbWidth() * 0.4F;
+        return new Vec3(0.0, eyeHeight, width);
+    }
+
     private void createCollision() {
         if (!collisions.isEmpty()) return;
-        if (from.getLevel().isClientSide()) return;
+        if (from.level().isClientSide()) return;
 
         float distance = from.distanceTo(to);
         float step = (EntityRegistry.ROPE_COLLISION.get().getWidth() * 2.5F) / distance;
         float centerHoldout = EntityRegistry.ROPE_COLLISION.get().getWidth() / distance;
 
-        Vec3 startPos = from.position().add(from.getLeashOffset());
-        Vec3 endPos = to.position().add(to.getLeashOffset());
+        Vec3 startPos = from.position().add(getLeashOffset(from));
+        Vec3 endPos = to.position().add(getLeashOffset(to));
 
         for (double v = step; v < 0.5F - centerHoldout; v += step) {
             Entity fromCollider = spawnCollision(startPos, endPos, v);
@@ -141,7 +147,7 @@ public class RopeConnection {
 
     @Nullable
     private Entity spawnCollision(Vec3 startPos, Vec3 endPos, double v) {
-        assert from.getLevel() instanceof ServerLevel;
+        assert from.level() instanceof ServerLevel;
         Vec3 ropeVec = endPos.subtract(startPos);
         Vec3 currentVec = ropeVec.scale(v);
         Vec3 currentPos = startPos.add(currentVec);
@@ -149,8 +155,8 @@ public class RopeConnection {
         double y = RopeHelper.getYHanging(currentVec.length(), endPos.subtract(startPos));
         y -= EntityRegistry.ROPE_COLLISION.get().getHeight() / 2;
 
-        RopeCollisionEntity collisionEntity = RopeCollisionEntity.create(from.getLevel(), currentPos.x(), currentPos.y() + y, currentPos.z(), this);
-        if (from.getLevel().addFreshEntity(collisionEntity)) {
+        RopeCollisionEntity collisionEntity = RopeCollisionEntity.create(from.level(), currentPos.x(), currentPos.y() + y, currentPos.z(), this);
+        if (from.level().addFreshEntity(collisionEntity)) {
             return collisionEntity;
         } else {
             Brewery.LOGGER.warn("FAILED to summon collision entity for a rope.");
@@ -159,10 +165,10 @@ public class RopeConnection {
     }
 
     private void createHangingRopes() {
-        if (from.getLevel().isClientSide()) return;
+        if (from.level().isClientSide()) return;
 
         Vec3 startPos = from.position().add(from.getLeashOffset());
-        Vec3 endPos = to.position().add(to.getLeashOffset());
+        Vec3 endPos = to.position().add(getLeashOffset(to));
         Vec3 ropeVec = endPos.subtract(startPos);
 
         int i = 0;
@@ -174,9 +180,9 @@ public class RopeConnection {
             y -= EntityRegistry.HANGING_ROPE.get().getHeight();
 
             boolean active = (this.activeRopes & (1 << i)) == 0;
-            HangingRopeEntity hangingRopeEntity = HangingRopeEntity.create(from.getLevel(), blockPos.getX(), startPos.add(currentVec).y + y, blockPos.getZ(), this, active);
+            HangingRopeEntity hangingRopeEntity = HangingRopeEntity.create(from.level(), blockPos.getX(), startPos.add(currentVec).y + y, blockPos.getZ(), this, active);
             hangingRopeEntity.setTicksFrozen((byte) 0);
-            boolean added = from.getLevel().addFreshEntity(hangingRopeEntity);
+            boolean added = from.level().addFreshEntity(hangingRopeEntity);
             if (added) {
                 this.hangingRopes.add(hangingRopeEntity.getId());
             } else {
@@ -194,7 +200,7 @@ public class RopeConnection {
         if (!alive) return;
         this.alive = false;
 
-        Level level = from.getLevel();
+        Level level = from.level();
         if (level.isClientSide()) return;
 
         boolean drop = mayDrop;
@@ -215,7 +221,7 @@ public class RopeConnection {
 
         destroyCollision();
         destroyHangingRopes();
-        if (from.getLevel() instanceof ServerLevel serverLevel && !from.isRemoved() && !to.isRemoved()) {
+        if (from.level() instanceof ServerLevel serverLevel && !from.isRemoved() && !to.isRemoved()) {
             sendDetachChainPacket(serverLevel);
         }
     }
@@ -233,7 +239,7 @@ public class RopeConnection {
 
     private void destroyCollision() {
         for (Integer entityId : this.collisions) {
-            Entity e = from.getLevel().getEntity(entityId);
+            Entity e = from.level().getEntity(entityId);
             if (e instanceof RopeCollisionEntity) {
                 e.discard();
             } else {
@@ -245,14 +251,14 @@ public class RopeConnection {
 
     private void destroyHangingRopes() {
         for (Integer entityId : this.hangingRopes) {
-            Entity entity = from.getLevel().getEntity(entityId);
+            Entity entity = from.level().getEntity(entityId);
             if (entity instanceof HangingRopeEntity) {
                 entity.discard();
             } else {
                 Brewery.LOGGER.warn("Hanging storage contained reference to {} (#{}) which is not a hanging rope entity.", entity, entityId);
             }
         }
-        if (from.getLevel() instanceof ServerLevel serverLevel) {
+        if (from.level() instanceof ServerLevel serverLevel) {
             Set<BlockPos> blockPositions = BreweryMath.lineIntersection(this);
             for (BlockPos blockPos : blockPositions) {
                 HangingRopeEntity.notifyBlock(blockPos, serverLevel, HopsCropHeadBlock.getHeadBlock());

@@ -13,7 +13,7 @@ public class HaleyEffect extends MobEffect {
 
     @Override
     public void applyEffectTick(LivingEntity livingEntity, int amplifier) {
-        if (livingEntity instanceof Player player && !player.isOnGround() && !player.isFallFlying() && !player.isInWater()) {
+        if (livingEntity instanceof Player player && !player.onGround() && !player.isFallFlying() && !player.isInWater()) {
             player.startFallFlying();
         }
     }

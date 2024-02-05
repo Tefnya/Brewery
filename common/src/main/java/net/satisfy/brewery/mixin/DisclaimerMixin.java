@@ -3,6 +3,7 @@ package net.satisfy.brewery.mixin;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.PlainTextButton;
 import net.minecraft.client.gui.screens.LevelLoadingScreen;
 import net.minecraft.client.gui.screens.Screen;
@@ -32,7 +33,7 @@ public abstract class DisclaimerMixin extends Screen {
     }
 
     @Inject(method = "render", at = @At(value = "TAIL"))
-    public void renderDisclaimer(PoseStack poseStack, int i, int j, float f, CallbackInfo ci) {
+    public void renderDisclaimer(GuiGraphics guiGraphics, int i, int j, float f, CallbackInfo ci) {
         String[] disclaimers = this.disclaimer.getString().split("\n");
         if (!this.added) {
             this.added = true;
@@ -53,12 +54,13 @@ public abstract class DisclaimerMixin extends Screen {
             int width = this.font.width(info);
             int x = (this.width - width) / 2;
 
-            poseStack.pushPose();
-            poseStack.translate(0.0, 0.0, 2);
-            this.font.draw(poseStack, Component.literal(info).withStyle(ChatFormatting.WHITE), x, this.height - this.font.lineHeight * y - 4, 0xFFFF55);
-            poseStack.popPose();
+            guiGraphics.pose().pushPose();
+            guiGraphics.pose().translate(0.0, 0.0, 2);
+            guiGraphics.drawString(this.font, Component.literal(info).withStyle(ChatFormatting.WHITE), x, this.height - this.font.lineHeight * y - 4, 0xFFFF55);
+            guiGraphics.pose().popPose();
+
         }
-        super.render(poseStack, i, j, f);
+        super.render(guiGraphics, i, j, f);
     }
 
 

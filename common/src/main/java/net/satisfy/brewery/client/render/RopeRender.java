@@ -6,7 +6,9 @@ import net.satisfy.brewery.client.model.RopeModel;
 import net.satisfy.brewery.util.rope.RopeHelper;
 import net.satisfy.brewery.util.rope.UVCord;
 import net.minecraft.world.phys.Vec3;
+import org.joml.Quaternionf;
 import org.joml.Vector3f;
+import org.joml.Vector3fc;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -46,20 +48,23 @@ public class RopeRender {
     private void createModel(final RopeModel.Builder builder, final Vec3 ropeVec, final int degrees, final UVCord uv) {
         float length = (float) ropeVec.length();
         Vec3 ropeNormal = ropeVec.normalize();
-        Quaternion quaternion = new Vector3f(ropeNormal).rotationDegrees(degrees);
-        Vector3f crossVec = ropeNormal.equals(POSITIVE_Y) || ropeNormal.equals(NEGATIVE_Y) ? Vector3f.XP.copy() : new Vector3f(ropeNormal.cross(POSITIVE_Y).normalize()); //plane vector
-        crossVec.transform(quaternion); //rotate plane ? degrees
-        crossVec.mul(((uv.x1() - uv.x0()) / 16.0F) * SCALE); //width
-        crossVec.mul(0.5F); //to each side
+
+        // Create a quaternion representing the rotation around the ropeNormal vector by 'degrees' degrees
+        Quaternionf quaternion = new Quaternionf().rotationAxis(degrees * (float)Math.PI / 180, (float) ropeNormal.x, (float) ropeNormal.y, (float) ropeNormal.z);
+
+        Vector3f crossVec = ropeNormal.equals(POSITIVE_Y) || ropeNormal.equals(NEGATIVE_Y) ? new Vector3f(1, 0, 0) : new Vector3f((Vector3fc) ropeNormal.cross(POSITIVE_Y).normalize()); // plane vector
+        crossVec.rotate(quaternion); // rotate plane by 'degrees'
+        crossVec.mul(((uv.x1() - uv.x0()) / 16.0F) * SCALE); // width
+        crossVec.mul(0.5F); // to each side
 
         float uvStart, uvEnd = 0;
         double segmentLength = Math.min(length, 1.0F / QUALITY), actuallySegmentLength;
-        Vector3f currentPos = Vector3f.ZERO.copy(), lastPos = new Vector3f();
-        Vector3f segmentVector = new Vector3f(ropeNormal.multiply(segmentLength, segmentLength, segmentLength)), segmentPos = Vector3f.ZERO.copy();
+        Vector3f currentPos = new Vector3f(), lastPos = new Vector3f();
+        Vector3f segmentVector = new Vector3f((Vector3fc) ropeNormal.multiply(segmentLength, segmentLength, segmentLength)), segmentPos = new Vector3f();
 
         boolean lastIter = false, straight = (ropeVec.x == 0 && ropeVec.z == 0) || RopeHelper.HANGING_AMOUNT == 0;
         for (int segment = 0; segment < MAX_SEGMENTS; segment++) {
-            lastPos.load(currentPos); //current to last
+            lastPos = new Vector3f(currentPos); // current to last
             segmentPos.add(segmentVector); // add step on top
 
             if (straight || new Vec3(segmentPos).length() > length) {
@@ -67,9 +72,9 @@ public class RopeRender {
                 segmentPos.set((float) ropeVec.x, (float) ropeVec.y, (float) ropeVec.z);
             }
 
-            currentPos.load(segmentPos); // set currentPos to top
+            currentPos = new Vector3f(segmentPos); // set currentPos to top
             if (!straight)
-                currentPos.add(0.0F, (float) RopeHelper.getYHanging(new Vec3(segmentPos).length(), ropeVec), 0.0F); //add hanging
+                currentPos.add(0.0F, (float) RopeHelper.getYHanging(new Vec3(segmentPos).length(), ropeVec), 0.0F); // add hanging
 
             actuallySegmentLength = new Vec3(currentPos).distanceTo(new Vec3(lastPos));
 

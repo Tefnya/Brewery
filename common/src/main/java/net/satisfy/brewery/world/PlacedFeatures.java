@@ -1,5 +1,6 @@
 package net.satisfy.brewery.world;
 
+import net.minecraft.core.registries.Registries;
 import net.satisfy.brewery.util.BreweryIdentifier;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
@@ -10,6 +11,6 @@ public class PlacedFeatures {
 
 
     public static ResourceKey<PlacedFeature> registerKey(String name) {
-        return ResourceKey.create(Registry.PLACED_FEATURE_REGISTRY, new BreweryIdentifier(name));
+        return ResourceKey.create(Registries.PLACED_FEATURE, new BreweryIdentifier(name));
     }
 }

@@ -204,7 +204,7 @@ public class RopeKnotEntity extends HangingEntity implements IRopeEntity {
             this.connections.removeIf(RopeConnection::dead);
             return;
         }
-        checkOutOfWorld();
+        checkBelowWorld();
 
         boolean anyConverted = convertIncompleteConnections();
         updateConnections();

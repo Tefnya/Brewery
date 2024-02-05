@@ -12,7 +12,7 @@ public class ChangeHangingRopeS2CPacket implements NetworkManager.NetworkReceive
         int id = buf.readInt();
         boolean active = buf.readBoolean();
         context.queue(() -> {
-            Entity entity = context.getPlayer().getLevel().getEntity(id);
+            Entity entity = context.getPlayer().level().getEntity(id);
             if (entity instanceof HangingRopeEntity hangingRope) {
                 hangingRope.setActive(active);
             } else {

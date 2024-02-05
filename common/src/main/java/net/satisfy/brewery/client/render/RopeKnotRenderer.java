@@ -75,10 +75,10 @@ public class RopeKnotRenderer extends EntityRenderer<RopeKnotEntity> {
 
         BlockPos blockPosOfStart = BreweryMath.ofFloored(fromKnot.getEyePosition(tickDelta));
         BlockPos blockPosOfEnd = BreweryMath.ofFloored(toEntity.getEyePosition(tickDelta));
-        int blockLightLevelOfStart = fromKnot.getLevel().getBrightness(LightLayer.BLOCK, blockPosOfStart);
-        int blockLightLevelOfEnd = toEntity.getLevel().getBrightness(LightLayer.BLOCK, blockPosOfEnd);
-        int skylightLevelOfStart = fromKnot.getLevel().getBrightness(LightLayer.SKY, blockPosOfStart);
-        int skylightLevelOfEnd = toEntity.getLevel().getBrightness(LightLayer.SKY, blockPosOfEnd);
+        int blockLightLevelOfStart = fromKnot.level().getBrightness(LightLayer.BLOCK, blockPosOfStart);
+        int blockLightLevelOfEnd = toEntity.level().getBrightness(LightLayer.BLOCK, blockPosOfEnd);
+        int skylightLevelOfStart = fromKnot.level().getBrightness(LightLayer.SKY, blockPosOfStart);
+        int skylightLevelOfEnd = toEntity.level().getBrightness(LightLayer.SKY, blockPosOfEnd);
 
         poseStack.pushPose();
         Vec3 leashOffset = fromKnot.getLeashOffset();

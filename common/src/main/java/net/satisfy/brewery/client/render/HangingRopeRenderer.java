@@ -51,7 +51,7 @@ public class HangingRopeRenderer extends EntityRenderer<HangingRopeEntity> {
         if (ropeVec.length() < 1) return;
         BlockPos blockPosOfStart = BreweryMath.ofFloored(entity.position());
         BlockPos blockPosOfEnd = BreweryMath.ofFloored(entity.position().add(ropeVec).add(new Vec3(0, 1, 0)));
-        Level level = entity.getLevel();
+        Level level = entity.level();
         int blockLightLevelOfStart = level.getBrightness(LightLayer.BLOCK, blockPosOfStart);
         int blockLightLevelOfEnd = level.getBrightness(LightLayer.BLOCK, blockPosOfEnd);
         int skylightLevelOfStart = level.getBrightness(LightLayer.SKY, blockPosOfStart);

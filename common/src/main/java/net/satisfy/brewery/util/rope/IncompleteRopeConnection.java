@@ -20,7 +20,7 @@ public class IncompleteRopeConnection {
 
     public boolean tryCompleteOrRemove() {
         if (isDead()) return true;
-        Entity secondary = from.getLevel().getEntity(toId);
+        Entity secondary = from.level().getEntity(toId);
         if (secondary == null) return false;
         RopeConnection.create(from, secondary);
         return true;

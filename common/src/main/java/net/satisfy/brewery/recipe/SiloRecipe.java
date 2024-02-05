@@ -116,7 +116,7 @@ public class SiloRecipe implements Recipe<SimpleContainer> {
             for (Ingredient ing : recipe.getIngredients()) {
                 ing.toNetwork(buf);
             }
-            buf.writeItem(recipe.getResultItem());
+            buf.writeItem(recipe.getResultItem(null));
         }
     }
 }

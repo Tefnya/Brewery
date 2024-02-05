@@ -20,7 +20,7 @@ public class BlockClickEvent implements InteractionEvent.RightClickBlock {
     @Override
     public EventResult click(Player player, InteractionHand hand, BlockPos pos, Direction face) {
         if (player == null || player.isCrouching()) return EventResult.pass();
-        Level level = player.getLevel();
+        Level level = player.level();
 
         BlockState blockState = level.getBlockState(pos);
         ItemStack itemStack = player.getItemInHand(hand);

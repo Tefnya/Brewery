@@ -1,9 +1,9 @@
 package net.satisfy.brewery.event;
 
 import dev.architectury.event.events.common.LootEvent;
-import net.satisfy.brewery.util.BreweryLoottableInjector;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.storage.loot.LootTables;
+import net.minecraft.world.level.storage.loot.LootDataManager;
+import net.satisfy.brewery.util.BreweryLoottableInjector;
 
 public class CommonEvents {
 
@@ -11,7 +11,7 @@ public class CommonEvents {
         LootEvent.MODIFY_LOOT_TABLE.register(CommonEvents::onModifyLootTable);
     }
 
-    public static void onModifyLootTable(LootTables tables, ResourceLocation id, LootEvent.LootTableModificationContext context, boolean builtin) {
+    public static void onModifyLootTable(LootDataManager tables, ResourceLocation id, LootEvent.LootTableModificationContext context, boolean builtin) {
         BreweryLoottableInjector.InjectLoot(id, context);
     }
 }

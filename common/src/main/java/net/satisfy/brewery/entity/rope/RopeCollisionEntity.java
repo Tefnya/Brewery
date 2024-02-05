@@ -1,5 +1,6 @@
 package net.satisfy.brewery.entity.rope;
 
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.satisfy.brewery.registry.EntityRegistry;
 import net.satisfy.brewery.util.rope.RopeConnection;
 import net.fabricmc.api.EnvType;
@@ -40,7 +41,7 @@ public class RopeCollisionEntity extends Entity implements IRopeEntity {
 
     @Override
     public void tick() {
-        if (getLevel().isClientSide()) return;
+        if (level().isClientSide()) return;
         if (connection != null && connection.needsBeDestroyed()) connection.destroy(true);
 
         if (connection == null || connection.dead()) {
@@ -51,7 +52,7 @@ public class RopeCollisionEntity extends Entity implements IRopeEntity {
     @Override
     public boolean skipAttackInteraction(Entity entity) {
         if (entity instanceof Player player) {
-            hurt(DamageSource.playerAttack(player), 0.0F);
+            hurt(this.damageSources().playerAttack(player), 0.0F);
         } else {
             playSound(SoundEvents.WOOL_HIT, 0.5F, 1.0F);
         }
@@ -118,7 +119,7 @@ public class RopeCollisionEntity extends Entity implements IRopeEntity {
     }
 
     @Override
-    public @NotNull Packet<?> getAddEntityPacket() {
+    public Packet<ClientGamePacketListener> getAddEntityPacket() {
         return new ClientboundAddEntityPacket(this); //BreweryUtil.createEntitySpawnPacket(BreweryNetworking.SPAWN_COLLISION_S2C_ID, this);
     }
 }

@@ -90,7 +90,7 @@ public class RopeKnotEntity extends HangingEntity implements IRopeEntity {
     @Override
     public @NotNull InteractionResult interact(Player player, InteractionHand interactionHand) {
         ItemStack handStack = player.getItemInHand(interactionHand);
-        if (this.getLevel().isClientSide()) {
+        if (this.level().isClientSide()) {
             if (handStack.is(ObjectRegistry.ROPE.get())) {
                 return InteractionResult.SUCCESS;
             }
@@ -152,7 +152,7 @@ public class RopeKnotEntity extends HangingEntity implements IRopeEntity {
 
     public static List<RopeConnection> getHeldRopesInRange(Player player, Vec3 target) {
         AABB searchBox = AABB.ofSize(target, MAX_RANGE * 2, MAX_RANGE * 2, MAX_RANGE * 2);
-        List<RopeKnotEntity> otherKnots = player.getLevel().getEntitiesOfClass(RopeKnotEntity.class, searchBox);
+        List<RopeKnotEntity> otherKnots = player.level().getEntitiesOfClass(RopeKnotEntity.class, searchBox);
 
         List<RopeConnection> attachableRopes = new ArrayList<>();
 
@@ -170,7 +170,7 @@ public class RopeKnotEntity extends HangingEntity implements IRopeEntity {
         List<RopeKnotEntity> results = level.getEntitiesOfClass(RopeKnotEntity.class, AABB.ofSize(Vec3.atLowerCornerOf(pos), 2, 2, 2));
 
         for (RopeKnotEntity current : results) {
-            if (new BlockPos(current.position()).equals(pos)) {
+            if (new BlockPos((int) current.position().x, (int) current.position().y, (int) current.position().z).equals(pos)) {
                 return current;
             }
         }
@@ -180,7 +180,7 @@ public class RopeKnotEntity extends HangingEntity implements IRopeEntity {
     @Override
     public boolean skipAttackInteraction(Entity entity) {
         if (entity instanceof Player player) {
-            hurt(DamageSource.playerAttack(player), 0.0F);
+            hurt(this.damageSources().playerAttack(player), 0.0F);
         } else {
             playSound(SoundEvents.WOOL_HIT, 0.5F, 1.0F);
         }
@@ -200,7 +200,7 @@ public class RopeKnotEntity extends HangingEntity implements IRopeEntity {
 
     @Override
     public void tick() {
-        if (getLevel().isClientSide()) {
+        if (level().isClientSide()) {
             this.connections.removeIf(RopeConnection::dead);
             return;
         }
@@ -246,7 +246,7 @@ public class RopeKnotEntity extends HangingEntity implements IRopeEntity {
 
     @Override
     public boolean survives() {
-        BlockState blockState = getLevel().getBlockState(getPos());
+        BlockState blockState = level().getBlockState(getPos());
         return canAttachTo(blockState);
     }
 
@@ -322,14 +322,14 @@ public class RopeKnotEntity extends HangingEntity implements IRopeEntity {
     }
 
     private boolean deserializeChainTag(Tag element) {
-        if (element == null || getLevel().isClientSide()) {
+        if (element == null || level().isClientSide()) {
             return true;
         }
 
         if (element instanceof CompoundTag tag) {
             if (tag.contains("UUID")) {
                 UUID uuid = tag.getUUID("UUID");
-                Entity toEntity = ((ServerLevel) getLevel()).getEntity(uuid);
+                Entity toEntity = ((ServerLevel) level()).getEntity(uuid);
                 if (toEntity != null) {
                     RopeConnection.create(this, toEntity);
                     return true;
@@ -338,7 +338,7 @@ public class RopeKnotEntity extends HangingEntity implements IRopeEntity {
                 BlockPos blockPos = new BlockPos(tag.getInt("RelX"), tag.getInt("RelY"), tag.getInt("RelZ"));
                 // Adjust position to be relative to our facing direction
                 blockPos = getBlockPosAsFacingRelative(blockPos, Direction.fromYRot(this.getYRot()));
-                RopeKnotEntity entity = RopeKnotEntity.getHopRopeKnotEntity(getLevel(), blockPos.offset(this.getPos()));
+                RopeKnotEntity entity = RopeKnotEntity.getHopRopeKnotEntity(level(), blockPos.offset(this.getPos()));
                 if (entity != null) {
                     int activeRopes = tag.contains("Active") ? tag.getInt("Active") : 0;
                     RopeConnection.create(this, entity, activeRopes);
@@ -358,11 +358,11 @@ public class RopeKnotEntity extends HangingEntity implements IRopeEntity {
     }
 
     public boolean shouldRenderKnot() {
-        return !getLevel().getBlockState(pos).isAir();
+        return !level().getBlockState(pos).isAir();
     }
 
     private double getYOffset(double x, double y, double z) {
-        BlockState blockState = this.getLevel().getBlockState(new BlockPos(x, y, z));
+        BlockState blockState = this.level().getBlockState(new BlockPos((int) x, (int) y, (int) z));
         return blockState.is(Blocks.TRIPWIRE_HOOK) ? 6 / 16.0F : 10 / 16.0F;
     }
 

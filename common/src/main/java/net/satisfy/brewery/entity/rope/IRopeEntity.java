@@ -1,6 +1,7 @@
 package net.satisfy.brewery.entity.rope;
 
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -14,12 +15,12 @@ public interface IRopeEntity {
         if (self.isInvulnerableTo(source)) {
             return InteractionResult.FAIL;
         }
-        if (self.getLevel().isClientSide) {
+        if (self.level().isClientSide) {
             return InteractionResult.PASS;
         }
 
-
-        if (source.isExplosion()) {
+// If source is an explosion, return SUCCESS
+        if (source.is(DamageTypeTags.IS_EXPLOSION)) {
             return InteractionResult.SUCCESS;
         }
         if (source.getEntity() instanceof Player player) {
@@ -28,7 +29,7 @@ public interface IRopeEntity {
             }
         }
 
-        if (!source.isProjectile()) {
+        if (!source.is(DamageTypeTags.IS_PROJECTILE)) {
             self.playSound(SoundEvents.WOOL_HIT, 0.5F, 1.0F);
         }
         return InteractionResult.FAIL;

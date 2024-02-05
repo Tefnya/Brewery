@@ -2,6 +2,7 @@ package net.satisfy.brewery.entity.rope;
 
 import dev.architectury.extensions.network.EntitySpawnExtension;
 import dev.architectury.networking.NetworkManager;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.satisfy.brewery.block.crops.HopsCropBlock;
 import net.satisfy.brewery.networking.BreweryNetworking;
 import net.satisfy.brewery.registry.EntityRegistry;
@@ -77,7 +78,7 @@ public class HangingRopeEntity extends Entity implements IRopeEntity, EntitySpaw
 
     @Override
     public void tick() {
-        if (getLevel().isClientSide()) {
+        if (level().isClientSide()) {
             if (checkTimer++ >= 50) {
                 checkTimer = 0;
                 checkLength();
@@ -95,7 +96,7 @@ public class HangingRopeEntity extends Entity implements IRopeEntity, EntitySpaw
     private void checkLength() {
         BlockPos blockPos = this.blockPosition();
         int length = 0;
-        while (!this.level.getBlockState(blockPos.below(length + 1)).getMaterial().isSolid() && length < MAX_LENGTH) {
+        while (!this.level().getBlockState(blockPos.below(length + 1)).isSolid() && length < MAX_LENGTH) {
             length++;
         }
         this.length = length;
@@ -107,8 +108,8 @@ public class HangingRopeEntity extends Entity implements IRopeEntity, EntitySpaw
         boolean changed = (!this.active && itemStack.is(ObjectRegistry.ROPE.get())) || (this.active && IRopeEntity.canDestroyWith(itemStack));
         if (changed) {
             this.active = !this.active;
-            if (connection != null && !player.getLevel().isClientSide) connection.setActive(this.active, this.getId());
-            if (player.getLevel() instanceof ServerLevel serverLevel) {
+            if (connection != null && !player.level().isClientSide) connection.setActive(this.active, this.getId());
+            if (player.level() instanceof ServerLevel serverLevel) {
                 sendChangePacket(serverLevel);
                 if (!this.active) {
                     notifyBlock(this.blockPosition(), serverLevel, HopsCropBlock.getHeadBlock());
@@ -144,7 +145,7 @@ public class HangingRopeEntity extends Entity implements IRopeEntity, EntitySpaw
     @Override
     public boolean skipAttackInteraction(Entity entity) {
         if (entity instanceof Player player) {
-            hurt(DamageSource.playerAttack(player), 0.0F);
+            hurt(this.damageSources().playerAttack(player), 0.0F);
         } else {
             playSound(SoundEvents.WOOL_HIT, 0.5F, 1.0F);
         }
@@ -221,7 +222,7 @@ public class HangingRopeEntity extends Entity implements IRopeEntity, EntitySpaw
     }
 
     @Override
-    public @NotNull Packet<?> getAddEntityPacket() {
+    public Packet<ClientGamePacketListener> getAddEntityPacket() {
         return NetworkManager.createAddEntityPacket(this);
     }
 

@@ -4,8 +4,10 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
@@ -31,6 +33,13 @@ public class BeerElementalEntity extends Monster {
     }
 
     @Override
+    public EntityDimensions getDimensions(Pose pose) {
+        return EntityDimensions.scalable(10.0F, 24.0F);
+    }
+
+
+
+    @Override
     protected void registerGoals() {
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setAlertOthers());
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
@@ -41,30 +50,22 @@ public class BeerElementalEntity extends Monster {
         this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
     }
 
-    @Override
     public void aiStep() {
         if (!this.onGround() && this.getDeltaMovement().y < 0.0) {
-            setDeltaMovement(getDeltaMovement().multiply(1.0D, 0.6D, 1.0D));
+            this.setDeltaMovement(this.getDeltaMovement().multiply(1.0, 0.6, 1.0));
+        }
 
-            if (this.level().isClientSide) {
-            if (random.nextInt(24) == 0 && !isSilent())
-                this.level().playLocalSound(getX(), getY(), getZ(), SoundEventRegistry.BEER_ELEMENTAL_AMBIENT.get(), getSoundSource(), 1.0F + random.nextFloat(), 0.3F + random.nextFloat() * 0.7F, false);
+        if (this.level().isClientSide) {
+            if (this.random.nextInt(24) == 0 && !this.isSilent()) {
+                this.level().playLocalSound(this.getX() + 0.5, this.getY() + 0.5, this.getZ() + 0.5, SoundEvents.BLAZE_BURN, this.getSoundSource(), 1.0F + this.random.nextFloat(), this.random.nextFloat() * 0.7F + 0.3F, false);
+            }
 
-            for(int i = 0; i < 2; i++) {
-                double velocityX = (random.nextDouble() - 0.5) * 0.1;
-                double velocityY = random.nextDouble() * 0.2;
-                double velocityZ = (random.nextDouble() - 0.5) * 0.1;
-
-                double slowerVelocityX = velocityX * 0.001;
-                double slowerVelocityY = velocityY * 0.001;
-                double slowerVelocityZ = velocityZ * 0.001;
-
-                this.level().addParticle(ParticleTypes.UNDERWATER, getRandomX(0.3D), getY() + random.nextDouble() * 1.4D, getRandomZ(0.4D), slowerVelocityX, slowerVelocityY, slowerVelocityZ);
+            for(int i = 0; i < 2; ++i) {
+                this.level().addParticle(ParticleTypes.UNDERWATER, this.getRandomX(0.5), this.getRandomY(), this.getRandomZ(0.5), 0.0, 0.0, 0.0);
             }
         }
 
         super.aiStep();
-    }
     }
 
     @Override
@@ -97,7 +98,7 @@ public class BeerElementalEntity extends Monster {
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundEventRegistry.BEER_ELEMENTAL_AMBIENT.get();
+        return SoundEvents.AXOLOTL_IDLE_AIR;
     }
 
     @Override

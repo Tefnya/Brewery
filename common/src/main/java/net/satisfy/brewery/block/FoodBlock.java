@@ -88,7 +88,7 @@ public class FoodBlock extends FacingBlock {
             return InteractionResult.PASS;
         } else {
             player.getFoodData().eat(foodComponent.getNutrition(), foodComponent.getSaturationModifier());
-            world.playSound(null, pos, SoundEvents.FOX_EAT, SoundSource.PLAYERS, 0.5f, world.getRandom().nextFloat() * 0.1f + 0.9f);
+            world.playSound(null, pos, SoundEvents.GENERIC_EAT, SoundSource.PLAYERS, 0.5f, world.getRandom().nextFloat() * 0.1f + 0.9f);
             world.gameEvent(player, GameEvent.EAT, pos);
 
             int bites = state.getValue(BITES);

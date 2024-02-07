@@ -84,35 +84,29 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Item> ROPE = registerItem("rope", () -> new RopeItem(getSettings()));
     public static final RegistrySupplier<Block> HANGING_ROPE = registerWithoutItem("hanging_rope", () -> new HangingRope(BlockBehaviour.Properties.copy(Blocks.CYAN_WOOL)));
     public static final RegistrySupplier<Block> BEER_MUG = registerWithItem("beer_mug", () -> new BeerKegFlowerPotBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD)));
-    public static final RegistrySupplier<Block> BEER_WHEAT = registerWithItemeverage("beer_wheat", () -> new BeverageBlock(getMugSettings()), MobEffectRegistry.SNOWWHITE.get(), 30 * 20);
-    public static final RegistrySupplier<Block> BEER_HOPS = registerWithItemeverage("beer_hops", () -> new BeverageBlock(getMugSettings()), MobEffectRegistry.PARTYSTARTER.get(), 30 * 20);
-    public static final RegistrySupplier<Block> BEER_BARLEY = registerWithItemeverage("beer_barley", () -> new BeverageBlock(getMugSettings()), MobEffectRegistry.PINTCHARISMA.get(), 30 * 20);
-    public static final RegistrySupplier<Block> BEER_HALEY = registerWithItemeverage("beer_haley", () -> new BeverageBlock(getMugSettings()), MobEffectRegistry.HALEY.get(), 30 * 20);
-    public static final RegistrySupplier<Block> WHISKEY_MAGGOALLAN = registerWithItemeverage("whiskey_maggoallan", () -> new BeverageBlock(getBeverageSettings()), MobEffectRegistry.HEALINGTOUCH.get(), 30 * 20);
-    public static final RegistrySupplier<Block> WHISKEY_CARRASCONLABEL = registerWithItemeverage("whiskey_carrasconlabel", () -> new BeverageBlock(getBeverageSettings()), MobEffectRegistry.RENEWINGTOUCH.get(), 30 * 20);
-    public static final RegistrySupplier<Block> WHISKEY_LILITUSINGLEMALT = registerWithItemeverage("whiskey_lilitusinglemalt", () -> new BeverageBlock(getBeverageSettings()), MobEffectRegistry.PARTYSTARTER.get(), 30 * 20);
-    public static final RegistrySupplier<Block> WHISKEY_JOJANNIK = registerWithItemeverage("whiskey_jojannik", () -> new BeverageBlock(getBeverageSettings()), MobEffectRegistry.TOXICTOUCH.get(), 30 * 20);
-    public static final RegistrySupplier<Block> WHISKEY_CRISTELWALKER = registerWithItemeverage("whiskey_cristelwalker", () -> new BeverageBlock(getBeverageSettings()), MobEffectRegistry.PROTECTIVETOUCH.get(), 30 * 20);
+    public static final RegistrySupplier<Block> BEER_WHEAT = registerWithItemeverage("beer_wheat", () -> new BeverageBlock(getMugSettings()), MobEffectRegistry.SNOWWHITE, 30 * 20);
+    public static final RegistrySupplier<Block> BEER_HOPS = registerWithItemeverage("beer_hops", () -> new BeverageBlock(getMugSettings()), MobEffectRegistry.PARTYSTARTER, 30 * 20);
+    public static final RegistrySupplier<Block> BEER_BARLEY = registerWithItemeverage("beer_barley", () -> new BeverageBlock(getMugSettings()), MobEffectRegistry.PINTCHARISMA, 30 * 20);
+    public static final RegistrySupplier<Block> BEER_HALEY = registerWithItemeverage("beer_haley", () -> new BeverageBlock(getMugSettings()), MobEffectRegistry.HALEY, 30 * 20);
+    public static final RegistrySupplier<Block> WHISKEY_MAGGOALLAN = registerWithItemeverage("whiskey_maggoallan", () -> new BeverageBlock(getBeverageSettings()), MobEffectRegistry.HEALINGTOUCH, 30 * 20);
+    public static final RegistrySupplier<Block> WHISKEY_CARRASCONLABEL = registerWithItemeverage("whiskey_carrasconlabel", () -> new BeverageBlock(getBeverageSettings()), MobEffectRegistry.RENEWINGTOUCH, 30 * 20);
+    public static final RegistrySupplier<Block> WHISKEY_LILITUSINGLEMALT = registerWithItemeverage("whiskey_lilitusinglemalt", () -> new BeverageBlock(getBeverageSettings()), MobEffectRegistry.PARTYSTARTER, 30 * 20);
+    public static final RegistrySupplier<Block> WHISKEY_JOJANNIK = registerWithItemeverage("whiskey_jojannik", () -> new BeverageBlock(getBeverageSettings()), MobEffectRegistry.TOXICTOUCH, 30 * 20);
+    public static final RegistrySupplier<Block> WHISKEY_CRISTELWALKER = registerWithItemeverage("whiskey_cristelwalker", () -> new BeverageBlock(getBeverageSettings()), MobEffectRegistry.PROTECTIVETOUCH, 30 * 20);
     public static final RegistrySupplier<Block> PORK_KNUCKLE_BLOCK = registerWithoutItem("pork_knuckle", () -> new FoodBlock(BlockBehaviour.Properties.copy(Blocks.CAKE), 2, BreweryFoodProperties.PORK_KNUCKLE));
-    public static final RegistrySupplier<Item> PORK_KNUCKLE = registerItem("pork_knuckle", () -> new SaturatedBlockItem(PORK_KNUCKLE_BLOCK.get(), getFoodItemSettings(12, 1.2f, MobEffectRegistry.SATURATED.get(), 4000)));
     public static final RegistrySupplier<Block> FRIED_CHICKEN_BLOCK = registerWithoutItem("fried_chicken", () -> new FoodBlock(BlockBehaviour.Properties.copy(Blocks.CAKE), 1, BreweryFoodProperties.FRIED_CHICKEN));
-    public static final RegistrySupplier<Item> FRIED_CHICKEN = registerItem("fried_chicken", () -> new SaturatedBlockItem(FRIED_CHICKEN_BLOCK.get(), getFoodItemSettings(12, 1.2f, MobEffectRegistry.SATURATED.get(), 4000)));
-
-
     public static final RegistrySupplier<Block> HALF_CHICKEN_BLOCK = registerWithoutItem("half_chicken", () -> new FoodBlock(BlockBehaviour.Properties.copy(Blocks.CAKE), 3, BreweryFoodProperties.HALF_CHICKEN));
-    public static final RegistrySupplier<Item> HALF_CHICKEN = registerItem("half_chicken", () -> new SaturatedBlockItem(HALF_CHICKEN_BLOCK.get(), getFoodItemSettings(12, 1.2f, MobEffectRegistry.SATURATED.get(), 4000)));
-    public static final RegistrySupplier<Item> SAUSAGE = registerItem("sausage", () -> new SaturatedItem(getFoodItemSettings(12, 1.2f, MobEffectRegistry.SATURATED.get(), 6000)));
     public static final RegistrySupplier<Block> MASHED_POTATOES_BLOCK = registerWithoutItem("mashed_potatoes", () -> new FoodBlock(BlockBehaviour.Properties.copy(Blocks.CAKE), 1, BreweryFoodProperties.MASHED_POTATOES));
-    public static final RegistrySupplier<Item> MASHED_POTATOES = registerItem("mashed_potatoes", () -> new SaturatedBlockItem(MASHED_POTATOES_BLOCK.get(), getFoodItemSettings(12, 1.2f, MobEffectRegistry.SATURATED.get(), 4000)));
     public static final RegistrySupplier<Block> POTATO_SALAD_BLOCK = registerWithoutItem("potato_salad", () -> new FoodBlock(BlockBehaviour.Properties.copy(Blocks.CAKE), 1, BreweryFoodProperties.POTATO_SALAD));
-    public static final RegistrySupplier<Item> POTATO_SALAD = registerItem("potato_salad", () -> new SaturatedBlockItem(POTATO_SALAD_BLOCK.get(), getFoodItemSettings(10, 1.2f, MobEffectRegistry.SATURATED.get(), 6000)));
-
     public static final RegistrySupplier<Block> DUMPLINGS_BLOCK = registerWithoutItem("dumplings", () -> new FoodBlock(BlockBehaviour.Properties.copy(Blocks.CAKE), 2, BreweryFoodProperties.POTATO_SALAD));
-    public static final RegistrySupplier<Item> DUMPLINGS = registerItem("dumplings", () -> new SaturatedBlockItem(DUMPLINGS_BLOCK.get(), getFoodItemSettings(10, 1.2f, MobEffectRegistry.SATURATED.get(), 6000)));
-
-
-
-    public static final RegistrySupplier<Item> PRETZEL = registerItem("pretzel", () -> new SaturatedItem(getFoodItemSettings(6, 0.7f, MobEffectRegistry.SATURATED.get(), 2000)));
+    public static final RegistrySupplier<Item> PORK_KNUCKLE = registerItem("pork_knuckle", () -> new SaturatedBlockItem(PORK_KNUCKLE_BLOCK.get(), getFoodItemSettings(8, 0.8f, MobEffectRegistry.SATURATED.get(), 4000)));
+    public static final RegistrySupplier<Item> FRIED_CHICKEN = registerItem("fried_chicken", () -> new SaturatedBlockItem(FRIED_CHICKEN_BLOCK.get(), getFoodItemSettings(8, 0.8f, MobEffectRegistry.SATURATED.get(), 4000)));
+    public static final RegistrySupplier<Item> HALF_CHICKEN = registerItem("half_chicken", () -> new SaturatedBlockItem(HALF_CHICKEN_BLOCK.get(), getFoodItemSettings(8, 0.8f, MobEffectRegistry.SATURATED.get(), 4000)));
+    public static final RegistrySupplier<Item> SAUSAGE = registerItem("sausage", () -> new SaturatedItem(getFoodItemSettings(8, 0.8f, MobEffectRegistry.SATURATED.get(), 6000)));
+    public static final RegistrySupplier<Item> MASHED_POTATOES = registerItem("mashed_potatoes", () -> new SaturatedBlockItem(MASHED_POTATOES_BLOCK.get(), getFoodItemSettings(8, 0.8f, MobEffectRegistry.SATURATED.get(), 4000)));
+    public static final RegistrySupplier<Item> POTATO_SALAD = registerItem("potato_salad", () -> new SaturatedBlockItem(POTATO_SALAD_BLOCK.get(), getFoodItemSettings(7, 0.8f, MobEffectRegistry.SATURATED.get(), 6000)));
+    public static final RegistrySupplier<Item> DUMPLINGS = registerItem("dumplings", () -> new SaturatedBlockItem(DUMPLINGS_BLOCK.get(), getFoodItemSettings(7, 0.8f, MobEffectRegistry.SATURATED.get(), 6000)));
+    public static final RegistrySupplier<Item> PRETZEL = registerItem("pretzel", () -> new SaturatedItem(getFoodItemSettings(4, 0.47f, MobEffectRegistry.SATURATED.get(), 2000)));
     public static final RegistrySupplier<Block> GINGERBREAD = registerWithItem("gingerbread", () -> new GingerBreadBlock(BlockBehaviour.Properties.copy(Blocks.FLOWER_POT)));
     public static final RegistrySupplier<Item> BEER_ELEMENTAL_SPAWN_EGG = registerItem("beer_elemental_spawn_egg", () -> new ArchitecturySpawnEggItem(EntityRegistry.BEER_ELEMENTAL, -1, -1, getSettings()));
     public static final RegistrySupplier<Item> BREWFEST_HAT = registerItem("brewfest_hat", () -> new BrewfestHatItem(getSettings().rarity(Rarity.EPIC)));
@@ -124,7 +118,7 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Item> BREWFEST_BLOUSE = registerItem("brewfest_blouse", () -> new BrewfestChest(ArmorMaterialRegistry.BREWFEST_DRESS, getSettings().rarity(Rarity.COMMON)));
     public static final RegistrySupplier<Item> BREWFEST_SHOES = registerItem("brewfest_shoes", () -> new BrewfestBoots(ArmorMaterialRegistry.BREWFEST_DRESS, getSettings().rarity(Rarity.UNCOMMON)));
     public static final RegistrySupplier<Item> BEER_STANDARD = registerItem("beer_standard", () -> new StandardItem(new Item.Properties().stacksTo(16).rarity(Rarity.UNCOMMON)));
-    
+
     public static void init() {
         Brewery.LOGGER.debug("register Mod Block and Items for " + Brewery.MOD_ID);
         ITEMS.register();
@@ -203,9 +197,9 @@ public class ObjectRegistry {
     }
 
 
-    private static <T extends Block> RegistrySupplier<T> registerWithItemeverage(String name, Supplier<T> block, MobEffect effect, int duration) {
+    private static <T extends Block> RegistrySupplier<T> registerWithItemeverage(String name, Supplier<T> block, RegistrySupplier<MobEffect> effect, int duration) {
         RegistrySupplier<T> toReturn = registerWithoutItem(name, block);
-        registerItem(name, () -> new DrinkBlockItem(effect, duration, toReturn.get(), getSettings(settings -> settings.food(beverageFoodComponent()))));
+        registerItem(name, () -> new DrinkBlockItem(effect.get(), duration, toReturn.get(), getSettings(settings -> settings.food(beverageFoodComponent()))));
         return toReturn;
     }
 

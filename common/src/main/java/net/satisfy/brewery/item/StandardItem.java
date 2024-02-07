@@ -14,7 +14,7 @@ import java.util.List;
 
 public class StandardItem extends de.cristelknight.doapi.common.item.StandardItem {
     public StandardItem(Properties properties) {
-        super(properties, new BreweryIdentifier("textures/standard/beer_standard.png"), () -> new MobEffectInstance(MobEffects.REGENERATION, 200, 1, true, false, true));
+        super(properties, new BreweryIdentifier("textures/standard/beer_standard.png"), () -> new MobEffectInstance(MobEffects.DIG_SPEED, 200, 1, true, false, true));
     }
 
     @Override

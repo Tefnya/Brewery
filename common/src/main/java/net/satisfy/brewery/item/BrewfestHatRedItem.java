@@ -25,7 +25,7 @@ public class BrewfestHatRedItem extends CustomHatItem {
 
     @Override
     public ResourceLocation getTexture() {
-        return new BreweryIdentifier("textures/entity/brewfest_hat_red.png");
+        return new BreweryIdentifier("textures/models/armor/brewfest_hat_red.png");
     }
 
     @Override

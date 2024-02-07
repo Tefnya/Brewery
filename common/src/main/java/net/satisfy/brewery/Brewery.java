@@ -23,18 +23,18 @@ public class Brewery {
 
     public static void init() {
         LOGGER.debug("Initiate " + MOD_ID);
-        BrewEvents.loadClass();
-        ObjectRegistry.init();
-        BlockEntityRegistry.init();
         MobEffectRegistry.init();
+        ObjectRegistry.init();
+        BrewEvents.loadClass();
+        BlockEntityRegistry.init();
         TabRegistry.init();
         CommonEvents.init();
         BreweryNetworking.registerC2SPackets();
-        SiloBlock.registerDryers();
         EntityRegistry.init();
         SoundEventRegistry.init();
         RecipeTypeRegistry.init();
         registerEvents();
+        SiloBlock.registerDryers();
 
 
         HealingTouchEvent healingTouchEvent = new HealingTouchEvent();
@@ -57,10 +57,5 @@ public class Brewery {
         PlayerEvent.PLAYER_RESPAWN.register(new PlayerRespawnEvent());
         PlayerEvent.PLAYER_CLONE.register(new PlayerCloneEvent());
         InteractionEvent.RIGHT_CLICK_BLOCK.register(new BlockClickEvent());
-    }
-
-    public static ResourceLocation MOD_ID(String path)
-    {
-        return new ResourceLocation(Brewery.MOD_ID, path);
     }
 }

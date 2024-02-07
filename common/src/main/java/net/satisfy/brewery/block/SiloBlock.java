@@ -69,12 +69,6 @@ public class SiloBlock extends FacingBlock implements EntityBlock {
             DRYERS.put(itemLike.asItem(), resultItem.asItem());
     }
 
-    public static void registerDryers() {
-        addDry(Items.WHEAT, ObjectRegistry.DRIED_WHEAT.get());
-        addDry(ObjectRegistry.CORN.get(), ObjectRegistry.DRIED_CORN.get());
-        addDry(ObjectRegistry.BARLEY.get(), ObjectRegistry.DRIED_BARLEY.get());
-
-    }
 
     public static boolean isDryItem(ItemStack itemStack) {
         return DRYERS.containsKey(itemStack.getItem());
@@ -238,5 +232,11 @@ public class SiloBlock extends FacingBlock implements EntityBlock {
         public @NotNull String getSerializedName() {
             return this.name().toLowerCase();
         }
+    }
+
+    public static void registerDryers() {
+        addDry(ObjectRegistry.CORN.get(), ObjectRegistry.DRIED_CORN.get());
+        addDry(ObjectRegistry.BARLEY.get(), ObjectRegistry.DRIED_BARLEY.get());
+        addDry(Items.WHEAT, ObjectRegistry.DRIED_WHEAT.get());
     }
 }

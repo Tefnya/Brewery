@@ -22,11 +22,10 @@ public class BrewfestHatModel<T extends Entity> extends EntityModel<T> {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
-		PartDefinition bone = partdefinition.addOrReplaceChild("brewfest_hat", CubeListBuilder.create().texOffs(0, 0).addBox(-12.0F, -4.0F, 4.0F, 8.0F, 4.0F, 8.0F, new CubeDeformation(0.0F))
-				.texOffs(-1, 5).addBox(-12.1F, -1.0F, 3.9F, 8.2F, 1.0F, 8.2F, new CubeDeformation(0.0F))
-				.texOffs(-14, 15).addBox(-15.0F, 0.0F, 1.0F, 14.0F, 0.0F, 14.0F, new CubeDeformation(0.0F)), PartPose.offset(8.0F, 24.0F, -8.0F));
-
-		PartDefinition feather_r1 = bone.addOrReplaceChild("feather_r1", CubeListBuilder.create().texOffs(18, 21).addBox(-0.1F, -4.0F, -3.5F, 0.0F, 4.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-3.9F, -1.0F, 8.5F, 0.0F, 0.0F, 0.3927F));
+		PartDefinition brewfest_hat = partdefinition.addOrReplaceChild("brewfest_hat", CubeListBuilder.create().texOffs(-14, 15).addBox(-7.0F, 0.0F, -7.0F, 14.0F, 0.0F, 14.0F, new CubeDeformation(0.0F))
+				.texOffs(0, 0).addBox(-4.0F, -4.2F, -4.0F, 8.0F, 4.0F, 8.0F, new CubeDeformation(0.2F))
+				.texOffs(-1, 4).addBox(-4.05F, -2.21F, -4.05F, 8.1F, 2.0F, 8.1F, new CubeDeformation(0.2F))
+				.texOffs(22, 22).addBox(4.21F, -7.4F, -1.0F, 0.0F, 5.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
 
 		return LayerDefinition.create(meshdefinition, 32, 32);
 	}

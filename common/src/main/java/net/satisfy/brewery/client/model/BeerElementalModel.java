@@ -10,13 +10,13 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.monster.Monster;
+import net.satisfy.brewery.Brewery;
 
 import java.util.Arrays;
 
-import static net.satisfy.brewery.Brewery.MOD_ID;
 
 public class BeerElementalModel<T extends Monster> extends EntityModel<T> {
-    public static final ModelLayerLocation BEER_ELEMENTAL_MODEL_LAYER = new ModelLayerLocation(new ResourceLocation(MOD_ID, "beer_elemental"), "main");
+    public static final ModelLayerLocation BEER_ELEMENTAL_MODEL_LAYER = new ModelLayerLocation(new ResourceLocation(Brewery.MOD_ID, "beer_elemental"), "main");
     private final ModelPart[] upperBodyParts;
 
     private final ModelPart upperBodyParts0;

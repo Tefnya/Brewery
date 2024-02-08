@@ -11,6 +11,13 @@ loom {
     accessWidenerPath = project(":common").loom.accessWidenerPath
 }
 
+
+def jarFileName = 'letsdo-brewery-fabric'
+
+archivesBaseName = jarFileName
+
+
+
 repositories {
     maven {
         name "terraform wood api, trinkets"

@@ -19,6 +19,11 @@ loom {
     }
 }
 
+def jarFileName = 'letsdo-brewery-forge'
+
+archivesBaseName = jarFileName
+
+
 configurations {
     common
     shadowCommon // Don't use shadow from the shadow plugin since it *excludes* files.

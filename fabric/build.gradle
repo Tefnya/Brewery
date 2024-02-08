@@ -18,6 +18,10 @@ repositories {
     }
 }
 
+def jarFileName = 'letsdo-brewery-fabric'
+
+archivesBaseName = jarFileName
+
 configurations {
     common
     shadowCommon

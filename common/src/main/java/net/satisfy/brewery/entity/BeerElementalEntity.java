@@ -2,6 +2,7 @@ package net.satisfy.brewery.entity;
 
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -95,7 +96,8 @@ public class BeerElementalEntity extends Monster {
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundEventRegistry.BEER_ELEMENTAL_AMBIENT.get();
+        return SoundEvents.AXOLOTL_IDLE_AIR;
+
     }
 
     @Override

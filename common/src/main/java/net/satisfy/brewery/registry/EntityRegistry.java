@@ -50,7 +50,7 @@ public class EntityRegistry {
 
     public static final RegistrySupplier<EntityType<BeerElementalEntity>> BEER_ELEMENTAL = create("beer_elemental",
             () -> EntityType.Builder.of(BeerElementalEntity::new, MobCategory.MONSTER)
-                    .sized(1F, 1F)
+                    .sized(1.0F, 1.6F)
                     .clientTrackingRange(80)
                     .updateInterval(3)
                     .build(new BreweryIdentifier("beer_elemental").toString())

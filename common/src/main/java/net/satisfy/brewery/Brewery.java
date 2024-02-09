@@ -34,7 +34,6 @@ public class Brewery {
         SoundEventRegistry.init();
         RecipeTypeRegistry.init();
         registerEvents();
-        SiloBlock.registerDryers();
 
 
         HealingTouchEvent healingTouchEvent = new HealingTouchEvent();

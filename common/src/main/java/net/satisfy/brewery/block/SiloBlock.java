@@ -37,10 +37,13 @@ import net.satisfy.brewery.util.silo.ConnectivityHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 
 public class SiloBlock extends FacingBlock implements EntityBlock {
     public static final HashMap<Item, Item> DRYERS = new HashMap<>();
+    private static boolean isDryersInitialized = false;
     public static final BooleanProperty TOP = BooleanProperty.create("top");
     public static final BooleanProperty BOTTOM = BooleanProperty.create("bottom");
     public static final BooleanProperty OPEN = BooleanProperty.create("open");
@@ -70,9 +73,6 @@ public class SiloBlock extends FacingBlock implements EntityBlock {
     }
 
 
-    public static boolean isDryItem(ItemStack itemStack) {
-        return DRYERS.containsKey(itemStack.getItem());
-    }
 
     public static boolean isSilo(ItemStack itemStack) {
         Item item = itemStack.getItem();
@@ -234,9 +234,21 @@ public class SiloBlock extends FacingBlock implements EntityBlock {
         }
     }
 
-    public static void registerDryers() {
-        addDry(ObjectRegistry.CORN.get(), ObjectRegistry.DRIED_CORN.get());
-        addDry(ObjectRegistry.BARLEY.get(), ObjectRegistry.DRIED_BARLEY.get());
-        addDry(Items.WHEAT, ObjectRegistry.DRIED_WHEAT.get());
+    public static Map<Item, Item> getDryers() {
+        return Collections.unmodifiableMap(DRYERS);
+    }
+
+    public static synchronized void initializeDryersIfNeeded() {
+        if (!isDryersInitialized) {
+            addDry(ObjectRegistry.CORN.get(), ObjectRegistry.DRIED_CORN.get());
+            addDry(ObjectRegistry.BARLEY.get(), ObjectRegistry.DRIED_BARLEY.get());
+            addDry(Items.WHEAT, ObjectRegistry.DRIED_WHEAT.get());
+            isDryersInitialized = true;
+        }
+    }
+
+    public static boolean isDryItem(ItemStack itemStack) {
+        initializeDryersIfNeeded();
+        return DRYERS.containsKey(itemStack.getItem());
     }
 }

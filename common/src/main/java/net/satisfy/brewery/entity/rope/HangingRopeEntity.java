@@ -42,7 +42,9 @@ public class HangingRopeEntity extends Entity implements IRopeEntity, EntitySpaw
     private RopeConnection connection;
     private boolean active;
     @Environment(EnvType.CLIENT)
-    private int length, checkTimer = 50;
+    private int length;
+
+    private int checkTimer = 50;
 
     public HangingRopeEntity(EntityType<? extends HangingRopeEntity> entityType, Level level) {
         super(entityType, level);

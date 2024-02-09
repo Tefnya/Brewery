@@ -31,7 +31,6 @@ public class Brewery {
         MobEffectRegistry.init();
         CommonEvents.init();
         BreweryNetworking.registerC2SPackets();
-        SiloBlock.registerDryers();
         EntityRegistry.init();
         SoundEventRegistry.init();
         RecipeTypeRegistry.init();

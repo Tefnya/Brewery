@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "[45,)"
+loaderVersion = "[43,)"
 #issueTrackerURL = ""
 license = "ARR"
 
@@ -7,7 +7,7 @@ license = "ARR"
 modId = "brewery"
 version = "${version}"
 displayName = "Brewery"
-authors = "BaumeisterJO, satisfy"
+authors = "BaumeisterJO, satisfy, ECarrascon"
 description = '''
 O'zapft is! Welcome to Brewery. Establish your own brewery and craft beer and whiskey.
 '''
@@ -16,20 +16,20 @@ O'zapft is! Welcome to Brewery. Establish your own brewery and craft beer and wh
 [[dependencies.brewery]]
 modId = "forge"
 mandatory = true
-versionRange = "[45,)"
+versionRange = "[43,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.brewery]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.19.4,)"
+versionRange = "[1.19.2,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.brewery]]
 modId = "architectury"
 mandatory = true
-versionRange = "[8.1.79,)"
+versionRange = "[6.5.82,)"
 ordering = "AFTER"
 side = "BOTH"

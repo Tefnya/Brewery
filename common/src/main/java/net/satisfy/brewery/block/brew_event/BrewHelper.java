@@ -77,6 +77,9 @@ public class BrewHelper {
 
     public static BrewEvent getRdmEvent(BrewstationBlockEntity entity) {
         List<ResourceLocation> possibleEvents = possibleEvents(entity);
+        if (possibleEvents.isEmpty()) {
+            return null;
+        }
         ResourceLocation eventLocation = possibleEvents.get(entity.getLevel().getRandom().nextInt(possibleEvents.size()));
 
         Supplier<BrewEvent> type = BrewEvents.byId(eventLocation);

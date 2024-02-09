@@ -36,6 +36,9 @@ public class BrewEvents {
 
     @Nullable
     public static ResourceLocation getId(BrewEvent event) {
+        if (event == null) {
+            return null;
+        }
         for (ResourceLocation location : BREW_EVENTS.keySet()) {
             BrewEvent brewEvent = BREW_EVENTS.get(location).get();
             if (event.getClass() == brewEvent.getClass()) {

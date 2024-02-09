@@ -1,7 +1,6 @@
 modLoader = "javafml"
 loaderVersion = "[43,)"
-#issueTrackerURL = ""
-license = "ARR"
+license = "Custom"
 
 [[mods]]
 modId = "brewery"
@@ -11,7 +10,7 @@ authors = "BaumeisterJO, satisfy, ECarrascon"
 description = '''
 O'zapft is! Welcome to Brewery. Establish your own brewery and craft beer and whiskey.
 '''
-#logoFile = ""
+logoFile = "pack.png"
 
 [[dependencies.brewery]]
 modId = "forge"

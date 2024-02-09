@@ -7,6 +7,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
@@ -116,6 +117,7 @@ public class BrewstationBlockEntity extends BlockEntity implements ImplementedIn
     public void tick(Level level, BlockPos blockPos, BlockState blockState, BrewstationBlockEntity blockEntity) {
         if (level.isClientSide) return;
         if (!this.beer.isEmpty()) return;
+
         Recipe<?> recipe = level.getRecipeManager().getRecipeFor(RecipeTypeRegistry.BREWING_RECIPE_TYPE.get(), this, level).orElse(null);
         if (!canBrew(recipe)) {
             endBrewing();
@@ -137,24 +139,33 @@ public class BrewstationBlockEntity extends BlockEntity implements ImplementedIn
         if (brewTime >= MAX_BREW_TIME) {
             RegistryAccess access = level.registryAccess();
             this.brew(recipe, access);
-            return;
         } else if (timeLeft >= MIN_TIME_FOR_EVENT && timeToNextEvent <= 0 && runningEvents.size() < BrewEvents.BREW_EVENTS.size()) {
-
-
             BrewEvent event = BrewHelper.getRdmEvent(this);
-            Brewery.LOGGER.warn("Starting event!" + BrewEvents.getId(event).getPath());
-            event.start(this.components, level);
-            runningEvents.add(event);
-            totalEvents++;
+            if (event != null) {
+                ResourceLocation eventId = BrewEvents.getId(event);
+                if (eventId != null) {
+                    Brewery.LOGGER.warn("Starting event! " + eventId.getPath());
+                    event.start(this.components, level);
+                    runningEvents.add(event);
+                    totalEvents++;
+                } else {
+                    Brewery.LOGGER.warn("Event ID is null, cannot start event.");
+                }
+            } else {
+                Brewery.LOGGER.warn("No event to start, skipping event triggering.");
+            }
             setTimeToEvent();
         }
         brewTime++;
         timeToNextEvent--;
     }
 
-    private void setTimeToEvent(){
-        timeToNextEvent = BreweryMath.getRandomHighNumber(this.getLevel().getRandom(), MIN_TIME_FOR_EVENT, MAX_TIME_FOR_EVENT);
+    private void setTimeToEvent() {
+        if (this.level != null) {
+            timeToNextEvent = BreweryMath.getRandomHighNumber(this.level.getRandom(), MIN_TIME_FOR_EVENT, MAX_TIME_FOR_EVENT);
+        }
     }
+
 
     private boolean canBrew(Recipe<?> recipe) {
         if (recipe == null || this.level == null)

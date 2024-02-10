@@ -6,6 +6,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;
 import net.satisfy.brewery.Brewery;
 import net.satisfy.brewery.client.render.*;
+import net.satisfy.brewery.forge.client.BreweryClientForge;
 import net.satisfy.brewery.forge.registry.BreweryForgeVillagers;
 import net.satisfy.brewery.registry.CompostablesRegistry;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -22,6 +23,7 @@ public class BreweryForge {
         Brewery.init();
         modEventBus.addListener(this::commonSetup);
         BreweryForgeVillagers.register(modEventBus);
+        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> BreweryClientForge::entityRendererSetup);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {

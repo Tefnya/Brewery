@@ -94,7 +94,7 @@ public interface IBrewfestArmorSet {
     }
 
     private static boolean isBrewfestLeggings(ArmorItem armorItem) {
-        return armorItem.getMaterial() == ArmorMaterialRegistry.BREWFEST_LEATHER || armorItem.getMaterial() == ArmorMaterialRegistry.BREWFEST_DRESS || armorItem.getMaterial() == ArmorMaterialRegistry.BREWFEST_LEATHER;
+        return armorItem.getMaterial() == ArmorMaterialRegistry.BREWFEST_LEATHER || armorItem.getMaterial() == ArmorMaterialRegistry.BREWFEST_DRESS || armorItem.getMaterial() == ArmorMaterialRegistry.BREWFEST_ARMOR;
     }
 
     static boolean hasBrewfestBreastplate(Player player) {

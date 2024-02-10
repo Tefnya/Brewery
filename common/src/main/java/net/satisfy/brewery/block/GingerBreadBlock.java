@@ -73,7 +73,7 @@ public class GingerBreadBlock extends FacingBlock {
 
     @Override
     public void appendHoverText(ItemStack itemStack, BlockGetter world, List<Component> tooltip, TooltipFlag tooltipContext) {
-        tooltip.add(Component.translatable("tooltip.brewery.canbeplaced").withStyle(ChatFormatting.ITALIC, ChatFormatting.GRAY));
+        tooltip.add(Component.translatable("tooltip.brewery.canbeplacedwalls").withStyle(ChatFormatting.ITALIC, ChatFormatting.GRAY));
 
     }
 }

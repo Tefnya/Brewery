@@ -3,7 +3,7 @@
   "cookingtime": 200,
   "experience": 0.35,
   "ingredient": {
-    "item": "minecraft:beef"
+    "item": "minecraft:cooked_beef"
   },
   "result": "brewery:sausage"
 }

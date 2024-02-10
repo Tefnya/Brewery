@@ -139,7 +139,7 @@
   "brewery.advancement.get_whiskey_maggoallan": "Gewidmet an: Satisfy",
   "brewery.advancement.get_whiskey_jojannik": "Gewidmet an: BaumeisterJo",
   "brewery.advancement.get_whiskey_cristelwalker": "Gewidmet an: Cristelknight",
-  "brewery.advancement.get_whiskey_carrasconlabel": "Gewidmet an: HadariYao",
+  "brewery.advancement.get_whiskey_carrasconlabel": "Gewidmet an: EC",
   "brewery.advancement.get_whiskey_lilitusinglemalt.desc": "Braue einen Lilitu-Single-MaltWhiskey",
   "brewery.advancement.get_whiskey_maggoallan.desc": "Braue einen Maggoallan-Whiskey",
   "brewery.advancement.get_whiskey_jojannik.desc": "Braue einen JoJannik-Whiskey",
@@ -170,5 +170,14 @@
   "effect.brewery.cuddlywarm": "Cuddlywarm",
   "effect.brewery.survivalist": "Survivalist",
   "effect.brewery.sliding": "Sliding",
-  "block.brewery.beer_standard": "Beer Standard"
+  "block.brewery.beer_standard": "Beer Standard",
+  "block.brewery.barrel_main_head": "Grosses Fass",
+  "block.brewery.barrel_right": "BGrosses Fass",
+  "block.brewery.barrel_head_right": "Grosses Fass",
+  "block.brewery.brew_whistle": "Braustation",
+  "block.brewery.brew_oven": "Braustation",
+  "block.brewery.brew_timer": "Braustation",
+  "entity.brewery.rope_knot": "Knoten",
+  "entity.brewery.rope_collision": "Seil",
+  "entity.brewery.hanging_rope": "Hängendes Seil"
 }

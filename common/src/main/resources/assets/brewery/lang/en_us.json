@@ -158,7 +158,7 @@
   "brewery.advancement.get_whiskey_maggoallan": "Dedicated to: Satisfy",
   "brewery.advancement.get_whiskey_jojannik": "Dedicated to: BaumeisterJo",
   "brewery.advancement.get_whiskey_cristelwalker": "Dedicated to: Cristelknight",
-  "brewery.advancement.get_whiskey_carrasconlabel": "Dedicated to: HadariYao",
+  "brewery.advancement.get_whiskey_carrasconlabel": "Dedicated to: EC",
   "brewery.advancement.get_whiskey_lilitusinglemalt.desc": "Brew a Lilitu Single Malt Whiskey",
   "brewery.advancement.get_whiskey_maggoallan.desc": "Brew a Maggoallan Whiskey",
   "brewery.advancement.get_whiskey_jojannik.desc": "Brew a JoJannik Whiskey",
@@ -182,5 +182,13 @@
   "brewery.container.cabinet": "Cabinet",
   "brewery.container.sideboard": "Sideboard",
   "rei.brewery.brewing_station_category": "Brewingstation",
-  "rei.brewery.silo_category": "Silo"
-}
+  "rei.brewery.silo_category": "Silo",
+  "block.brewery.barrel_main_head": "Big Barrel",
+  "block.brewery.barrel_right": "Big Barrel",
+  "block.brewery.barrel_head_right": "Big Barrel",
+  "block.brewery.brew_whistle": "Brewingstation",
+  "block.brewery.brew_oven": "Brewingstation",
+  "block.brewery.brew_timer": "Brewingstation",
+  "entity.brewery.rope_knot": "Rope Knot",
+  "entity.brewery.rope_collision": "Rope",
+  "entity.brewery.hanging_rope": "Hanging Rope"}

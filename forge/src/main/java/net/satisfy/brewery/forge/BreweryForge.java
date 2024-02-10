@@ -21,21 +21,12 @@ public class BreweryForge {
         EventBuses.registerModEventBus(Brewery.MOD_ID, FMLJavaModLoadingContext.get().getModEventBus());
         Brewery.init();
         modEventBus.addListener(this::commonSetup);
-        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> this::clientSetup);
         BreweryForgeVillagers.register(modEventBus);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         event.enqueueWork(CompostablesRegistry::init);
         Brewery.commonSetup();
-    }
-
-    private void clientSetup() {
-        EntityRendererRegistry.register(EntityRegistry.BEER_ELEMENTAL, BeerElementalRenderer::new);
-        EntityRendererRegistry.register(EntityRegistry.BEER_ELEMENTAL_ATTACK, BeerElementalAttackRenderer::new);
-        EntityRendererRegistry.register(EntityRegistry.HANGING_ROPE, HangingRopeRenderer::new);
-        EntityRendererRegistry.register(EntityRegistry.ROPE_COLLISION, RopeCollisionEntityRenderer::new);
-        EntityRendererRegistry.register(EntityRegistry.ROPE_KNOT, RopeKnotRenderer::new);
     }
 
 }

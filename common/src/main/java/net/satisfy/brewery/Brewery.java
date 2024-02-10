@@ -49,10 +49,6 @@ public class Brewery {
         PlayerEvent.ATTACK_ENTITY.register(protectiveTouchEvent);
     }
 
-    public static void commonSetup(){
-        EntityAttributeRegistry.register(EntityRegistry.BEER_ELEMENTAL, BeerElementalEntity::createAttributes);
-    }
-
     private static void registerEvents() {
         PlayerEvent.PLAYER_RESPAWN.register(new PlayerRespawnEvent());
         PlayerEvent.PLAYER_CLONE.register(new PlayerCloneEvent());

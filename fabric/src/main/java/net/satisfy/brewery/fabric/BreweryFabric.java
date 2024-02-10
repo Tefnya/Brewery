@@ -9,7 +9,6 @@ public class BreweryFabric implements ModInitializer {
     @Override
     public void onInitialize() {
         Brewery.init();
-        Brewery.commonSetup();
         BreweryFabricVillagers.init();
         BreweryBiomeModification.init();
     }

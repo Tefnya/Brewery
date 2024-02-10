@@ -41,8 +41,12 @@ public class BrewOvenBlock extends BrewingstationBlock {
 
 
     public BrewOvenBlock(Properties properties) {
-        super(properties);
+        super(properties.lightLevel(state -> hasHeat(state) ? 13 : 0));
         this.registerDefaultState(this.defaultBlockState().setValue(MATERIAL, BrewMaterial.WOOD).setValue(HEAT, Heat.OFF));
+    }
+
+    private static boolean hasHeat(BlockState state) {
+        return state.getValue(HEAT) != Heat.OFF;
     }
 
     @SuppressWarnings("deprecation")

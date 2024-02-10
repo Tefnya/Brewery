@@ -1,5 +1,6 @@
 package net.satisfy.brewery.registry;
 
+import dev.architectury.registry.level.entity.EntityAttributeRegistry;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.Registrar;
 import dev.architectury.registry.registries.RegistrySupplier;
@@ -68,7 +69,12 @@ public class EntityRegistry {
         return ENTITY_TYPES.register(new BreweryIdentifier(path), type);
     }
 
-    public static void init() {
+    public static void registerBeerElemental() {
+        EntityAttributeRegistry.register(BEER_ELEMENTAL, BeerElementalEntity::createAttributes);
+    }
 
+    public static void init() {
+        registerBeerElemental();
     }
 }
+

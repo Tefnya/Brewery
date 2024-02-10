@@ -1,19 +1,19 @@
 package net.satisfy.brewery.registry;
 
+import dev.architectury.registry.level.entity.EntityAttributeRegistry;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.Registrar;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
 import net.satisfy.brewery.Brewery;
-import net.satisfy.brewery.entity.BeerElementalEntity;
 import net.satisfy.brewery.entity.BeerElementalAttackEntity;
+import net.satisfy.brewery.entity.BeerElementalEntity;
 import net.satisfy.brewery.entity.rope.HangingRopeEntity;
 import net.satisfy.brewery.entity.rope.RopeCollisionEntity;
 import net.satisfy.brewery.entity.rope.RopeKnotEntity;
 import net.satisfy.brewery.util.BreweryIdentifier;
-import net.minecraft.core.Registry;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobCategory;
 
 import java.util.function.Supplier;
 
@@ -69,7 +69,12 @@ public class EntityRegistry {
         return ENTITY_TYPES.register(new BreweryIdentifier(path), type);
     }
 
-    public static void init() {
+    public static void registerBeerElemental() {
+        EntityAttributeRegistry.register(BEER_ELEMENTAL, BeerElementalEntity::createAttributes);
+    }
 
+    public static void init() {
+        registerBeerElemental();
     }
 }
+

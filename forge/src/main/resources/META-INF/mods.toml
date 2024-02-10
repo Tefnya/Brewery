@@ -6,7 +6,7 @@ license = "Custom"
 modId = "brewery"
 version = "${version}"
 displayName = "Brewery"
-authors = "BaumeisterJO, satisfy"
+authors = "BaumeisterJO, satisfy, EC"
 description = '''
 O'zapft is! Welcome to Brewery. Establish your own brewery and craft beer and whiskey.
 '''

@@ -1,6 +1,5 @@
 package net.satisfy.brewery.block.crops;
 
-import net.satisfy.brewery.registry.ObjectRegistry;
 import net.minecraft.BlockUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -16,6 +15,7 @@ import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.satisfy.brewery.registry.ObjectRegistry;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
@@ -39,7 +39,7 @@ public class HopsCropBodyBlock extends HopsCropBlock implements BonemealableBloc
     @SuppressWarnings("deprecation")
     @Override
     public boolean canBeReplaced(BlockState blockState, BlockPlaceContext blockPlaceContext) {
-        boolean bl = blockState.canBeReplaced(blockPlaceContext);
+        boolean bl = super.canBeReplaced(blockState, blockPlaceContext);
         return (!bl || !blockPlaceContext.getItemInHand().is(getHeadBlock().asItem())) && bl;
     }
 

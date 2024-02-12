@@ -110,7 +110,7 @@ public class BrewKettleBlock extends BrewingstationBlock implements EntityBlock 
                     level.setBlockAndUpdate(blockPos, blockState.setValue(LIQUID, liquid == Liquid.OVERFLOWING ? Liquid.FILLED : Liquid.EMPTY));
                     level.playSound(null, blockPos, SoundEvents.BUCKET_FILL, SoundSource.PLAYERS, 1.0F, 1.0F);
                     if (!player.isCreative()) {
-                        player.setItemInHand(interactionHand, new ItemStack(Items.WATER_BUCKET));
+                        player.addItem(new ItemStack(Items.WATER_BUCKET));
                     }
                     return InteractionResult.SUCCESS;
                 }

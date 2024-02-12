@@ -16,6 +16,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ChestMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.entity.ContainerOpenersCounter;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -29,7 +30,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class BigBarrelBlockEntity extends RandomizableContainerBlockEntity {
+public class BigBarrelBlockEntity extends ChestBlockEntity {
     private NonNullList<ItemStack> items = NonNullList.withSize(54, ItemStack.EMPTY);
     private Set<BlockPos> components = new HashSet<>(4);
 

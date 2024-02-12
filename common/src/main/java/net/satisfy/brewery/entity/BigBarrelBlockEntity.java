@@ -50,12 +50,14 @@ public class BigBarrelBlockEntity extends ChestBlockEntity {
 
         @Override
         protected void openerCountChanged(Level level, BlockPos blockPos, BlockState blockState, int i, int j) {
+            BigBarrelBlockEntity.this.signalOpenCount(level, blockPos, blockState, i, j);
         }
+
 
         @Override
         protected boolean isOwnContainer(Player player) {
-            if (player.containerMenu instanceof ChestMenu) {
-                Container container = ((ChestMenu)player.containerMenu).getContainer();
+            if (player.containerMenu instanceof ChestMenu chestMenu) {
+                Container container = (chestMenu).getContainer();
                 return container == BigBarrelBlockEntity.this;
             }
             return false;
@@ -107,7 +109,7 @@ public class BigBarrelBlockEntity extends ChestBlockEntity {
     }
 
     @Override
-    protected NonNullList<ItemStack> getItems() {
+    protected @NotNull NonNullList<ItemStack> getItems() {
         return this.items;
     }
 
@@ -140,6 +142,7 @@ public class BigBarrelBlockEntity extends ChestBlockEntity {
         }
     }
 
+    @Override
     public void recheckOpen() {
         if (!this.remove) {
             this.openersCounter.recheckOpeners(this.getLevel(), this.getBlockPos(), this.getBlockState());
@@ -152,9 +155,10 @@ public class BigBarrelBlockEntity extends ChestBlockEntity {
 
     void playSound(BlockState blockState, SoundEvent soundEvent) {
         Vec3i vec3i = blockState.getValue(BigBarrelMainBlock.FACING).getNormal();
-        double d = (double)this.worldPosition.getX() + 0.5 + (double)vec3i.getX() / 2.0;
-        double e = (double)this.worldPosition.getY() + 0.5 + (double)vec3i.getY() / 2.0;
-        double f = (double)this.worldPosition.getZ() + 0.5 + (double)vec3i.getZ() / 2.0;
+        double d = this.worldPosition.getX() + 0.5 + vec3i.getX() / 2.0;
+        double e = this.worldPosition.getY() + 0.5 + vec3i.getY() / 2.0;
+        double f = this.worldPosition.getZ() + 0.5 + vec3i.getZ() / 2.0;
+        assert this.level != null;
         this.level.playSound(null, d, e, f, soundEvent, SoundSource.BLOCKS, 0.5f, this.level.random.nextFloat() * 0.1f + 0.9f);
     }
 }

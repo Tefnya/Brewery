@@ -8,13 +8,10 @@ import dev.architectury.registry.client.rendering.BlockEntityRendererRegistry;
 import dev.architectury.registry.client.rendering.ColorHandlerRegistry;
 import dev.architectury.registry.client.rendering.RenderTypeRegistry;
 import net.satisfy.brewery.client.model.RopeKnotEntityModel;
-import net.satisfy.brewery.client.model.RopeModel;
 import net.satisfy.brewery.client.render.*;
 import net.satisfy.brewery.client.model.BeerElementalModel;
 import net.satisfy.brewery.client.render.BeerElementalRenderer;
 import net.satisfy.brewery.client.render.BeerElementalAttackRenderer;
-import net.satisfy.brewery.entity.BeerElementalAttackEntity;
-import net.satisfy.brewery.event.KeyInputHandler;
 import net.satisfy.brewery.event.PlayerJoinEvent;
 import net.satisfy.brewery.item.ItemPredicate;
 import net.satisfy.brewery.networking.BreweryNetworking;
@@ -31,7 +28,6 @@ import net.minecraft.client.renderer.RenderType;
 public class BreweryClient {
 
     public static void onInitializeClient() {
-        KeyInputHandler.register();
         BreweryNetworking.registerS2CPackets();
         ItemPredicate.register();
         registerRenderer();

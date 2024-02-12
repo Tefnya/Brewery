@@ -2,7 +2,8 @@
 	"credit": "Made by Satisfy",
 	"texture_size": [64, 64],
 	"textures": {
-		"6": "brewery:block/silo/silo_connected_wood"
+		"6": "brewery:block/silo/silo_connected_wood",
+		"particle": "brewery:block/silo/silo_connected_wood"
 	},
 	"elements": [
 		{

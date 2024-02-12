@@ -75,7 +75,6 @@ public class BrewKettleBlock extends BrewingstationBlock implements EntityBlock 
                 if (returnStack != null) {
                     player.addItem(returnStack);
                     level.playSound(null, blockPos, SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS, 1.0F, 1.0F);
-                    //brewKettleEntity.updateInClientWorld();
                     level.sendBlockUpdated(blockPos, blockState, blockState, Block.UPDATE_CLIENTS);
                     return InteractionResult.SUCCESS;
                 }
@@ -87,6 +86,14 @@ public class BrewKettleBlock extends BrewingstationBlock implements EntityBlock 
                     ItemStack beerStack = brewKettleEntity.getBeer();
                     if (beerStack != null) {
                         player.addItem(beerStack);
+                        if (!player.isCreative()) {
+                            itemStack.shrink(1);
+                            if (itemStack.isEmpty()) {
+                                player.getInventory().removeItem(itemStack);
+                            }
+                            level.playSound(null, blockPos, SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS, 1.0F, 1.0F);
+                            level.sendBlockUpdated(blockPos, blockState, blockState, Block.UPDATE_CLIENTS);
+                        }
                         return InteractionResult.SUCCESS;
                     }
                     return InteractionResult.CONSUME;
@@ -179,7 +186,7 @@ public class BrewKettleBlock extends BrewingstationBlock implements EntityBlock 
         boolean placeable = canPlace(level, backPos, sidePos, diagonalPos, topPos);
         Player player = blockPlaceContext.getPlayer();
         if (!placeable && player != null) {
-            player.displayClientMessage(Component.literal("Cant place Brewingstation here. Needs a 2x2x2 space.").withStyle(ChatFormatting.RED), true);
+            player.displayClientMessage(Component.translatable("tooltip.brewery.cantbeplacedhere").withStyle(ChatFormatting.RED), true);
         }
         return placeable ? blockState : null;
     }

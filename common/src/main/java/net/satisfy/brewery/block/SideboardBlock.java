@@ -117,6 +117,7 @@ public class SideboardBlock extends BaseEntityBlock {
 		}
 	}
 
+
 	@Override
 	public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean moved) {
 		if (!state.is(newState.getBlock())) {

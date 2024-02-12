@@ -54,7 +54,7 @@ public class BigBarrelMainBlock extends BigBarrelBlock implements EntityBlock {
     });
     private static final Supplier<VoxelShape> topVoxelShapeSupplier = () -> {
         VoxelShape shape = Shapes.empty();
-        shape = Shapes.or(shape, Shapes.box(0, 0, 0, 0.875, 0.875, 1));
+        shape = Shapes.or(shape, Shapes.box(0, 0, 0, 0.875, 1, 1));
         return shape;
     };
     public static final Map<Direction, VoxelShape> TOP_SHAPE = Util.make(new HashMap<>(), map -> {
@@ -127,7 +127,8 @@ public class BigBarrelMainBlock extends BigBarrelBlock implements EntityBlock {
         boolean placeable = canPlace(level, backPos, sidePos, diagonalPos, topPos);
         Player player = blockPlaceContext.getPlayer();
         if (!placeable && player != null) {
-            player.displayClientMessage(Component.literal("Not enough space").withStyle(ChatFormatting.RED), true);
+
+            player.displayClientMessage(Component.translatable("tooltip.brewery.cantbeplacedhere").withStyle(ChatFormatting.RED), true);
             player.playSound(SoundEvents.WOOL_HIT);
         }
         return placeable ? blockState : null;

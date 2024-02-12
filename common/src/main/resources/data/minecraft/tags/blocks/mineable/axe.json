@@ -14,6 +14,9 @@
     "brewery:sideboard",
     "brewery:wall_cabinet",
     "brewery:cabinet",
-    "brewery:drawer"
+    "brewery:drawer",
+    "brewery:brew_whistle",
+    "brewery:brew_oven",
+    "brewery:brew_timer"
   ]
 }

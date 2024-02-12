@@ -57,21 +57,26 @@ public class BeerKegFlowerPotBlock extends FacingBlock implements EntityBlock {
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (hand == InteractionHand.OFF_HAND) return InteractionResult.PASS;
         BeerKegFlowerPotBlockEntity be = (BeerKegFlowerPotBlockEntity)world.getBlockEntity(pos);
-        if (be == null || player.isShiftKeyDown()) return InteractionResult.PASS;
+        if (be == null) return InteractionResult.PASS;
 
         ItemStack handStack = player.getItemInHand(hand);
         Item flower = be.getFlower();
 
-        if (handStack.isEmpty()) {
-            if (flower != null) {
-                if(!world.isClientSide){
-                    player.addItem(flower.getDefaultInstance());
-                    be.setFlower(null);
-                }
-                return InteractionResult.sidedSuccess(world.isClientSide);
+        if (player.isShiftKeyDown() && flower != null) {
+            if (!world.isClientSide) {
+                player.addItem(new ItemStack(flower));
+                be.setFlower(null);
+                world.sendBlockUpdated(pos, state, state, 3);
             }
-        } else if (fitInPot(handStack) && flower == null) {
-            if(!world.isClientSide){
+            return InteractionResult.sidedSuccess(world.isClientSide);
+        } else if (!player.isShiftKeyDown() && handStack.isEmpty() && flower != null) {
+            if (!world.isClientSide) {
+                player.addItem(flower.getDefaultInstance());
+                be.setFlower(null);
+            }
+            return InteractionResult.sidedSuccess(world.isClientSide);
+        } else if (!player.isShiftKeyDown() && fitInPot(handStack) && flower == null) {
+            if (!world.isClientSide) {
                 be.setFlower(handStack.getItem());
                 if (!player.isCreative()) {
                     handStack.shrink(1);
@@ -81,6 +86,7 @@ public class BeerKegFlowerPotBlock extends FacingBlock implements EntityBlock {
         }
         return super.use(state, world, pos, player, hand, hit);
     }
+
 
     public boolean fitInPot(ItemStack item) {
         return item.is(ItemTags.SMALL_FLOWERS);

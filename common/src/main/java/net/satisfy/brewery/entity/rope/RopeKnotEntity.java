@@ -206,14 +206,17 @@ public class RopeKnotEntity extends HangingEntity implements IRopeEntity {
         }
         checkBelowWorld();
 
-        boolean anyConverted = convertIncompleteConnections();
-        updateConnections();
-        removeDeadConnections();
+        if (level().isLoaded(getPos())) {
+            boolean anyConverted = convertIncompleteConnections();
+            updateConnections();
+            removeDeadConnections();
 
-        if (graceTicks < 0 || (anyConverted && incompleteConnections.isEmpty())) {
-            graceTicks = 0;
-        } else if (graceTicks > 0) {
-            graceTicks--;
+
+            if (graceTicks < 0 || (anyConverted && incompleteConnections.isEmpty())) {
+                graceTicks = 0;
+            } else if (graceTicks > 0) {
+                graceTicks--;
+            }
         }
     }
 

@@ -40,7 +40,7 @@ public class HopsCropBodyBlock extends HopsCropBlock implements BonemealableBloc
     @SuppressWarnings("deprecation")
     @Override
     public boolean canBeReplaced(BlockState blockState, BlockPlaceContext blockPlaceContext) {
-        boolean bl = blockState.canBeReplaced(blockPlaceContext);
+        boolean bl = super.canBeReplaced(blockState, blockPlaceContext);
         return (!bl || !blockPlaceContext.getItemInHand().is(getHeadBlock().asItem())) && bl;
     }
 

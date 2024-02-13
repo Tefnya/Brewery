@@ -82,7 +82,7 @@ public class BrewstationBlockEntity extends BlockEntity implements ImplementedIn
         for (int i = 0; i < 3; i++) {
             ItemStack stack = this.ingredients.get(i);
             if (stack.isEmpty()) {
-                this.setItem(i, itemStack.getItem().getDefaultInstance());
+                this.setItem(i, itemStack.split(1));
                 return InteractionResult.SUCCESS;
             }
         }

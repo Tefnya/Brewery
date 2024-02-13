@@ -105,7 +105,7 @@ public class BrewKettleBlock extends BrewingstationBlock implements EntityBlock 
                     level.setBlockAndUpdate(blockPos, blockState.setValue(LIQUID, Liquid.FILLED));
                     level.playSound(null, blockPos, SoundEvents.BUCKET_EMPTY, SoundSource.PLAYERS, 1.0F, 1.0F);
                     if (!player.isCreative()) {
-                        player.setItemInHand(interactionHand, new ItemStack(Items.BUCKET));
+                        player.addItem(new ItemStack(Items.WATER_BUCKET));
                     }
                     return InteractionResult.SUCCESS;
                 }
@@ -168,6 +168,21 @@ public class BrewKettleBlock extends BrewingstationBlock implements EntityBlock 
                 world.updateNeighbourForOutputSignal(pos, this);
             }
             super.onRemove(state, world, pos, newState, moved);
+        }
+    }
+
+    @Override
+    public @NotNull ItemStack getCloneItemStack(BlockGetter getter, BlockPos pos, BlockState state) {
+        BrewMaterial material = state.getValue(MATERIAL);
+        switch (material) {
+            case COPPER:
+                return new ItemStack(ObjectRegistry.COPPER_BREWINGSTATION.get());
+            case WOOD:
+                return new ItemStack(ObjectRegistry.WOODEN_BREWINGSTATION.get());
+            case NETHERITE:
+                return new ItemStack(ObjectRegistry.NETHERITE_BREWINGSTATION.get());
+            default:
+                return super.getCloneItemStack(getter, pos, state);
         }
     }
 

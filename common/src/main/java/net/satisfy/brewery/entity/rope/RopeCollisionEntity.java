@@ -42,10 +42,12 @@ public class RopeCollisionEntity extends Entity implements IRopeEntity {
     @Override
     public void tick() {
         if (level().isClientSide()) return;
-        if (connection != null && connection.needsBeDestroyed()) connection.destroy(true);
+        if (level().isLoaded(this.getOnPos())) {
+            if (connection != null && connection.needsBeDestroyed()) connection.destroy(true);
 
-        if (connection == null || connection.dead()) {
-            remove(Entity.RemovalReason.DISCARDED);
+            if (connection == null || connection.dead()) {
+                remove(Entity.RemovalReason.DISCARDED);
+            }
         }
     }
 

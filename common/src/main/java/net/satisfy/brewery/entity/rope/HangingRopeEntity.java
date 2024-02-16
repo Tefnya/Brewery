@@ -87,10 +87,12 @@ public class HangingRopeEntity extends Entity implements IRopeEntity, EntitySpaw
             }
             return;
         }
-        if (connection != null && connection.needsBeDestroyed()) connection.destroy(true);
+        if (level().isLoaded(getOnPos())) {
+            if (connection != null && connection.needsBeDestroyed()) connection.destroy(true);
 
-        if (connection == null || connection.dead()) {
-            remove(RemovalReason.DISCARDED);
+            if (connection == null || connection.dead()) {
+                remove(RemovalReason.DISCARDED);
+            }
         }
     }
 

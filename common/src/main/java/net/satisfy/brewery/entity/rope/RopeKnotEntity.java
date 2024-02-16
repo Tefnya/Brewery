@@ -200,13 +200,14 @@ public class RopeKnotEntity extends HangingEntity implements IRopeEntity {
 
     @Override
     public void tick() {
-        if (level().isClientSide()) {
-            this.connections.removeIf(RopeConnection::dead);
-            return;
-        }
-        checkBelowWorld();
-
         if (level().isLoaded(getPos())) {
+            if (level().isClientSide()) {
+                this.connections.removeIf(RopeConnection::dead);
+                return;
+            }
+            checkBelowWorld();
+
+
             boolean anyConverted = convertIncompleteConnections();
             updateConnections();
             removeDeadConnections();
@@ -218,6 +219,7 @@ public class RopeKnotEntity extends HangingEntity implements IRopeEntity {
                 graceTicks--;
             }
         }
+
     }
 
     private boolean convertIncompleteConnections() {

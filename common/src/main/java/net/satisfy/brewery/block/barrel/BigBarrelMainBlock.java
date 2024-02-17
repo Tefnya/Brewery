@@ -89,7 +89,6 @@ public class BigBarrelMainBlock extends BigBarrelBlock implements EntityBlock {
                     .filter(componentPos -> !componentPos.equals(pos))
                     .forEach(componentPos -> world.removeBlock(componentPos, false));
             if (state.getBlock() != newState.getBlock()) {
-                Containers.dropContents(world, pos, brewstationEntity);
                 world.updateNeighbourForOutputSignal(pos, this);
 
                 super.onRemove(state, world, pos, newState, moved);

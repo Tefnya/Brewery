@@ -13,7 +13,7 @@
           "type": "minecraft:item",
           "conditions": [
             {
-              "block": "brewery:barrel_main",
+              "block": "brewery:barrel_head_right",
               "condition": "minecraft:block_state_property",
               "properties": {
                 "half": "lower"

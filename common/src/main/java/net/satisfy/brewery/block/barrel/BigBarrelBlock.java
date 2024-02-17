@@ -52,20 +52,6 @@ public class BigBarrelBlock extends HorizontalDirectionalBlock {
         return super.getCloneItemStack(getter, pos, state);
     }
 
-    @Override
-    public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
-        if (level.isClientSide) {
-            return InteractionResult.SUCCESS;
-        }
-        if (blockState.getValue(HALF) == DoubleBlockHalf.UPPER) {
-            blockPos = blockPos.below();
-        }
-        BigBarrelBlockEntity blockEntity = getController(blockPos, level);
-        if (blockEntity instanceof BigBarrelBlockEntity) {
-            player.openMenu(blockEntity);
-        }
-        return InteractionResult.CONSUME;
-    }
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {

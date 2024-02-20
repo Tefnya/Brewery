@@ -32,6 +32,7 @@ import net.satisfy.brewery.block.property.BrewMaterial;
 import net.satisfy.brewery.item.*;
 import net.satisfy.brewery.util.BreweryFoodProperties;
 import net.satisfy.brewery.util.BreweryIdentifier;
+import net.satisfy.brewery.Brewery;
 
 import java.util.HashMap;
 import java.util.Map;

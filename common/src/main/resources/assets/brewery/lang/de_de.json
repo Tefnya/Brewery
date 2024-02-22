@@ -147,7 +147,7 @@
   "brewery.advancement.get_whiskey_cristelwalker.desc": "Braue einen Cristelwalker-Whiskey",
   "brewery.advancement.get_whiskey_carrasconlabel.desc": "Braue einen Ecarrasconlabel-Whiskey",
   "brewery.advancement.completionist": "Komplettist",
-  "brewery.advancement.completionist.desc": "Schließe alle Brauerei-Fortschritte ab. Danke, dass Sie Brauerei spielen!",
+  "brewery.advancement.completionist.desc": "Schließe alle Brauerei-Fortschritte ab. Danke, dass du Brewery spielst!",
   "brewery.advancement.get_saturated": "Mhmmm, lecker",
   "brewery.advancement.get_saturated.desc": "Frag nicht woher es kommt - iss!",
   "brewery.advancement.eat_everything.title": "Brewery-Buffet",
@@ -162,7 +162,6 @@
   "effect.brewery.haley": "Liebliches Gleiten",
   "effect.brewery.saturated": "Gesättigt",
   "brewery.container.cabinet": "Schrank",
-  "brewery.container.sideboard": "Kommode",
   "rei.brewery.brewing_station_category": "Braustation",
   "rei.brewery.silo_category": "Silo",
   "block.brewery.barrel_main_head": "Grosses Fass",
@@ -173,5 +172,11 @@
   "block.brewery.brew_timer": "Braustation",
   "entity.brewery.rope_knot": "Knoten",
   "entity.brewery.rope_collision": "Seil",
-  "entity.brewery.hanging_rope": "Hängendes Seil"
+  "entity.brewery.hanging_rope": "Hängendes Seil",
+  "tooltip.brewery.cantbeplacedhere": "This Block cannot be placed here. It requires a 2x2x2 space",
+  "brewery.sound.brewstation_ambient": "Brewstation hums",
+  "brewery.sound.brewstation_oven": "Oven crackles",
+  "brewery.sound.brewstation_timer": "Timer ticking",
+  "brewery.sound.brewstation_kettle": "Bubbles pop",
+  "brewery.sound.brewstation_whistle": "Whistle whistles"
 }

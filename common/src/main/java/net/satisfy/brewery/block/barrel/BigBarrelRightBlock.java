@@ -47,6 +47,23 @@ public class BigBarrelRightBlock extends BigBarrelBlock {
         }
     }
 
+    @Override
+    public void onRemove(BlockState blockState, Level level, BlockPos blockPos, BlockState blockState2, boolean bl) {
+        Direction facing = blockState.getValue(FACING);
+        BlockPos backPos = blockPos.relative(facing.getOpposite());
+        BlockPos sidePos = blockPos.relative(facing.getClockWise());
+        BlockPos diagonalPos = sidePos.relative(facing.getOpposite());
+
+        level.removeBlock(backPos, false);
+        level.removeBlock(sidePos, false);
+        level.removeBlock(diagonalPos, false);
+        level.removeBlock(blockPos, false);
+
+
+        super.onRemove(blockState, level, blockPos, blockState2, bl);
+    }
+
+
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {

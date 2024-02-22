@@ -61,6 +61,22 @@ public class BigBarrelRightHeadBlock extends BigBarrelBlock {
         HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
     }
 
+    @Override
+    public void onRemove(BlockState blockState, Level level, BlockPos blockPos, BlockState blockState2, boolean bl) {
+        Direction facing = blockState.getValue(FACING);
+        BlockPos front = blockPos.relative(facing);
+        BlockPos sidePos = blockPos.relative(facing.getClockWise());
+        BlockPos diagonalPos = sidePos.relative(facing);
+
+        level.removeBlock(front, false);
+        level.removeBlock(sidePos, false);
+        level.removeBlock(diagonalPos, false);
+        level.removeBlock(blockPos, false);
+
+
+        super.onRemove(blockState, level, blockPos, blockState2, bl);
+    }
+
     private static final Supplier<VoxelShape> bottomVoxelShapeSupplier = () -> {
         VoxelShape shape = Shapes.empty();
         shape = Shapes.or(shape, Shapes.box(0.125, 0, 0.5625, 1, 0.25, 0.8125));

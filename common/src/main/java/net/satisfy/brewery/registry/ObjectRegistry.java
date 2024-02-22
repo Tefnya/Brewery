@@ -15,6 +15,7 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.PushReaction;
+import net.satisfy.brewery.Brewery;
 import net.satisfy.brewery.block.*;
 import net.satisfy.brewery.block.barrel.BigBarrelMainBlock;
 import net.satisfy.brewery.block.barrel.BigBarrelMainHeadBlock;
@@ -32,7 +33,6 @@ import net.satisfy.brewery.block.property.BrewMaterial;
 import net.satisfy.brewery.item.*;
 import net.satisfy.brewery.util.BreweryFoodProperties;
 import net.satisfy.brewery.util.BreweryIdentifier;
-import net.satisfy.brewery.Brewery;
 
 import java.util.HashMap;
 import java.util.Map;

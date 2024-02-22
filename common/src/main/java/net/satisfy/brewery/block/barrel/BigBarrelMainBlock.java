@@ -6,9 +6,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.Containers;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -18,18 +15,14 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.EntityBlock;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.satisfy.brewery.entity.BigBarrelBlockEntity;
 import net.satisfy.brewery.registry.ObjectRegistry;
 import net.satisfy.brewery.util.BreweryUtil;
 import org.jetbrains.annotations.NotNull;
@@ -39,7 +32,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
-public class BigBarrelMainBlock extends BigBarrelBlock implements EntityBlock {
+public class BigBarrelMainBlock extends BigBarrelBlock{
     public static final EnumProperty<DoubleBlockHalf> HALF;
     private static final Supplier<VoxelShape> bottomVoxelShapeSupplier = () -> {
         VoxelShape shape = Shapes.empty();
@@ -81,20 +74,7 @@ public class BigBarrelMainBlock extends BigBarrelBlock implements EntityBlock {
         }
     }
 
-    @Override
-    public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean moved) {
-        BlockEntity blockEntity = world.getBlockEntity(pos);
-        if (blockEntity instanceof BigBarrelBlockEntity brewstationEntity) {
-            brewstationEntity.getComponents().stream()
-                    .filter(componentPos -> !componentPos.equals(pos))
-                    .forEach(componentPos -> world.removeBlock(componentPos, false));
-            if (state.getBlock() != newState.getBlock()) {
-                world.updateNeighbourForOutputSignal(pos, this);
 
-                super.onRemove(state, world, pos, newState, moved);
-            }
-        }
-    }
 
     public @NotNull BlockState updateShape(BlockState blockState, Direction direction, BlockState blockState2, LevelAccessor levelAccessor, BlockPos blockPos, BlockPos blockPos2) {
         DoubleBlockHalf doubleBlockHalf = blockState.getValue(HALF);
@@ -109,6 +89,21 @@ public class BigBarrelMainBlock extends BigBarrelBlock implements EntityBlock {
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
         builder.add(HALF);
+    }
+
+    @Override
+    public void onRemove(BlockState blockState, Level level, BlockPos blockPos, BlockState blockState2, boolean bl) {
+        Direction facing = blockState.getValue(FACING);
+        BlockPos backPos = blockPos.relative(facing.getOpposite());
+        BlockPos sidePos = blockPos.relative(facing.getCounterClockWise());
+        BlockPos diagonalPos = sidePos.relative(facing.getOpposite());
+
+        level.removeBlock(backPos, false);
+        level.removeBlock(sidePos, false);
+        level.removeBlock(diagonalPos, false);
+        level.removeBlock(blockPos, false);
+
+        super.onRemove(blockState, level, blockPos, blockState2, bl);
     }
 
     @Nullable
@@ -147,10 +142,6 @@ public class BigBarrelMainBlock extends BigBarrelBlock implements EntityBlock {
         level.setBlock(sidePos, ObjectRegistry.BARREL_RIGHT.get().defaultBlockState().setValue(FACING, facing), 3);
         level.setBlock(diagonalPos, ObjectRegistry.BARREL_HEAD_RIGHT.get().defaultBlockState().setValue(FACING, facing), 3);
 
-        BlockEntity blockEntity = level.getBlockEntity(blockPos);
-        if (blockEntity instanceof BigBarrelBlockEntity brewKettleEntity) {
-            brewKettleEntity.setComponents(blockPos, backPos, sidePos, diagonalPos);
-        }
     }
 
     private boolean canPlace(Level level, BlockPos... blockPoses) {
@@ -174,9 +165,4 @@ public class BigBarrelMainBlock extends BigBarrelBlock implements EntityBlock {
         }
     }
 
-    @Nullable
-    @Override
-    public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
-        return new BigBarrelBlockEntity(blockPos, blockState);
-    }
 }

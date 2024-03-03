@@ -49,7 +49,7 @@ public class RopeRender {
         Vec3 ropeNormal = ropeVec.normalize();
         // TODO: Everything is working, but the next line (Quaternion quaternion = new Vector3f(ropeNormal).rotationDegrees(degrees); in 1.19.2) I am
         //  not sure if it is the right port, but again, it works.
-        Quaternionf quaternion = new Quaternionf().rotateAxis((float) degrees, (float) ropeNormal.x(), (float) ropeNormal.y(), (float) ropeNormal.z());
+        Quaternionf quaternion = new Quaternionf().rotateAxis(degrees, (float) ropeNormal.x(), (float) ropeNormal.y(), (float) ropeNormal.z());
         Vector3f crossVec = ropeNormal.equals(POSITIVE_Y) || ropeNormal.equals(NEGATIVE_Y) ? new Vector3f(1.0f, 0.0f, 0.0f) : new Vector3f(
                 (float) ropeNormal.cross(POSITIVE_Y).normalize().x,
                 (float) ropeNormal.cross(POSITIVE_Y).normalize().y,

@@ -2,18 +2,13 @@ package net.satisfy.brewery.entity.rope;
 
 import dev.architectury.extensions.network.EntitySpawnExtension;
 import dev.architectury.networking.NetworkManager;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
-import net.satisfy.brewery.block.crops.HopsCropBlock;
-import net.satisfy.brewery.networking.BreweryNetworking;
-import net.satisfy.brewery.registry.EntityRegistry;
-import net.satisfy.brewery.registry.ObjectRegistry;
-import net.satisfy.brewery.util.rope.RopeConnection;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -31,6 +26,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.satisfy.brewery.block.crops.HopsCropBlock;
+import net.satisfy.brewery.networking.BreweryNetworking;
+import net.satisfy.brewery.registry.EntityRegistry;
+import net.satisfy.brewery.registry.ObjectRegistry;
+import net.satisfy.brewery.util.rope.RopeConnection;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -87,12 +87,10 @@ public class HangingRopeEntity extends Entity implements IRopeEntity, EntitySpaw
             }
             return;
         }
-        if (level().isLoaded(getOnPos())) {
-            if (connection != null && connection.needsBeDestroyed()) connection.destroy(true);
+        if (connection != null && connection.needsBeDestroyed()) connection.destroy(true);
 
-            if (connection == null || connection.dead()) {
-                remove(RemovalReason.DISCARDED);
-            }
+        if (connection == null || connection.dead()) {
+            remove(RemovalReason.DISCARDED);
         }
     }
 

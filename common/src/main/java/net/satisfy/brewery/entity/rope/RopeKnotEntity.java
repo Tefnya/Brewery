@@ -2,10 +2,6 @@ package net.satisfy.brewery.entity.rope;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectList;
-import net.satisfy.brewery.Brewery;
-import net.satisfy.brewery.registry.EntityRegistry;
-import net.satisfy.brewery.registry.ObjectRegistry;
-import net.satisfy.brewery.util.rope.RopeConnection;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.core.BlockPos;
@@ -38,6 +34,10 @@ import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.satisfy.brewery.Brewery;
+import net.satisfy.brewery.registry.EntityRegistry;
+import net.satisfy.brewery.registry.ObjectRegistry;
+import net.satisfy.brewery.util.rope.RopeConnection;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -170,7 +170,7 @@ public class RopeKnotEntity extends HangingEntity implements IRopeEntity {
         List<RopeKnotEntity> results = level.getEntitiesOfClass(RopeKnotEntity.class, AABB.ofSize(Vec3.atLowerCornerOf(pos), 2, 2, 2));
 
         for (RopeKnotEntity current : results) {
-            if (new BlockPos((int) current.position().x, (int) current.position().y, (int) current.position().z).equals(pos)) {
+            if (new BlockPos(current.pos).equals(pos)) {
                 return current;
             }
         }
@@ -200,26 +200,23 @@ public class RopeKnotEntity extends HangingEntity implements IRopeEntity {
 
     @Override
     public void tick() {
-        if (level().isLoaded(getPos())) {
-            if (level().isClientSide()) {
-                this.connections.removeIf(RopeConnection::dead);
-                return;
-            }
-            checkBelowWorld();
+        if (level().isClientSide()) {
 
-
-            boolean anyConverted = convertIncompleteConnections();
-            updateConnections();
-            removeDeadConnections();
-
-
-            if (graceTicks < 0 || (anyConverted && incompleteConnections.isEmpty())) {
-                graceTicks = 0;
-            } else if (graceTicks > 0) {
-                graceTicks--;
-            }
+            this.connections.removeIf(RopeConnection::dead);
+            return;
         }
 
+        checkBelowWorld();
+
+        boolean anyConverted = convertIncompleteConnections();
+        updateConnections();
+        removeDeadConnections();
+
+        if (graceTicks < 0 || (anyConverted && incompleteConnections.isEmpty())) {
+            graceTicks = 0;
+        } else if (graceTicks > 0) {
+            graceTicks--;
+        }
     }
 
     private boolean convertIncompleteConnections() {
@@ -367,14 +364,14 @@ public class RopeKnotEntity extends HangingEntity implements IRopeEntity {
     }
 
     private double getYOffset(double x, double y, double z) {
-        BlockState blockState = this.level().getBlockState(new BlockPos((int) x, (int) y, (int) z));
+        BlockState blockState = this.level().getBlockState(BlockPos.containing(x, y, z));
         return blockState.is(Blocks.TRIPWIRE_HOOK) ? 6 / 16.0F : 10 / 16.0F;
     }
 
     //OVERRIDE SHIT
     @Override
     public void setPos(double x, double y, double z) {
-        super.setPos((double) Mth.floor(x) + 0.5D, (double) Mth.floor(y) + getYOffset(x, y, z), (double) Mth.floor(z) + 0.5D);
+        super.setPos(Mth.floor(x) + 0.5D, Mth.floor(y) + getYOffset(x, y, z), Mth.floor(z) + 0.5D);
     }
 
     @Override

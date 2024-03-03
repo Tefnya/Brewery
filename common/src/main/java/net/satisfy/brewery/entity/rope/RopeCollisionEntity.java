@@ -1,14 +1,12 @@
 package net.satisfy.brewery.entity.rope;
 
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
-import net.satisfy.brewery.registry.EntityRegistry;
-import net.satisfy.brewery.util.rope.RopeConnection;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionResult;
@@ -18,6 +16,8 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.satisfy.brewery.registry.EntityRegistry;
+import net.satisfy.brewery.util.rope.RopeConnection;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -42,13 +42,12 @@ public class RopeCollisionEntity extends Entity implements IRopeEntity {
     @Override
     public void tick() {
         if (level().isClientSide()) return;
-        if (level().isLoaded(this.getOnPos())) {
-            if (connection != null && connection.needsBeDestroyed()) connection.destroy(true);
+        if (connection != null && connection.needsBeDestroyed()) connection.destroy(true);
 
-            if (connection == null || connection.dead()) {
-                remove(Entity.RemovalReason.DISCARDED);
-            }
+        if (connection == null || connection.dead()) {
+            remove(Entity.RemovalReason.DISCARDED);
         }
+
     }
 
     @Override

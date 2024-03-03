@@ -1,19 +1,10 @@
 {
   "variants": {
-    "facing=east": {
-      "model": "brewery:block/whiskey_maggoallan",
-      "y": 90
-    },
-    "facing=north": {
+    "fake_model=false": {
       "model": "brewery:block/whiskey_maggoallan"
     },
-    "facing=south": {
-      "model": "brewery:block/whiskey_maggoallan",
-      "y": 180
-    },
-    "facing=west": {
-      "model": "brewery:block/whiskey_maggoallan",
-      "y": 270
+    "fake_model=true": {
+      "model": "brewery:block/transparent"
     }
   }
 }

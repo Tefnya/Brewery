@@ -17,6 +17,7 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.shapes.BooleanOp;
@@ -124,5 +125,9 @@ public class BreweryUtil {
         for (T t : c)
             lastElement = t;
         return lastElement;
+    }
+
+    public static boolean isSolid(LevelReader levelReader, BlockPos blockPos){
+        return levelReader.getBlockState(blockPos.below()).isSolid();
     }
 }

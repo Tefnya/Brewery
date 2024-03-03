@@ -11,6 +11,7 @@ import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.satisfy.brewery.registry.StorageTypeRegistry;
 
 import java.util.Map;
 import java.util.Set;
@@ -18,7 +19,8 @@ import java.util.Set;
 @DoApiPlugin
 public class BreweryDoAPI implements DoApiAPI {
     @Override
-    public void registerBlocks(Set<Block> set) {
+    public void registerBlocks(Set<Block> blocks) {
+        StorageTypeRegistry.registerBlocks(blocks);
     }
 
     @Override

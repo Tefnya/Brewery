@@ -37,7 +37,11 @@ public class BreweryClient {
                 ObjectRegistry.WILD_HOPS.get(), ObjectRegistry.BEER_MUG.get(), ObjectRegistry.BEER_WHEAT.get(),
                 ObjectRegistry.BEER_HOPS.get(), ObjectRegistry.BEER_BARLEY.get(), ObjectRegistry.BEER_HALEY.get(),
                 ObjectRegistry.BARLEY_CROP.get(), ObjectRegistry.CORN_CROP.get(), ObjectRegistry.HOPS_CROP_BODY.get(),
-                ObjectRegistry.HOPS_CROP.get(), ObjectRegistry.SILO_WOOD.get(), ObjectRegistry.SILO_COPPER.get()
+                ObjectRegistry.HOPS_CROP.get(), ObjectRegistry.SILO_WOOD.get(), ObjectRegistry.SILO_COPPER.get(),
+                ObjectRegistry.WHISKEY_CARRASCONLABEL.get(), ObjectRegistry.WHISKEY_LILITUSINGLEMALT.get(),
+                ObjectRegistry.WHISKEY_JOJANNIK.get(), ObjectRegistry.WHISKEY_MAGGOALLAN.get(),
+                ObjectRegistry.WHISKEY_CRISTELWALKER.get()
+
 
         );
 
@@ -48,6 +52,7 @@ public class BreweryClient {
                     return BiomeColors.getAverageWaterColor(world, pos);
         }, ObjectRegistry.WOODEN_BREWINGSTATION, ObjectRegistry.COPPER_BREWINGSTATION, ObjectRegistry.NETHERITE_BREWINGSTATION);
 
+        ClientStorageTypes.init();
 
         ClientPlayerEvent.CLIENT_PLAYER_JOIN.register(new PlayerJoinEvent());
         ClientTickEvent.CLIENT_LEVEL_PRE.register((clientLevel) -> RopeHelper.tick());

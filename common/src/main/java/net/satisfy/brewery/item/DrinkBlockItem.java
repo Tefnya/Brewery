@@ -1,6 +1,8 @@
 package net.satisfy.brewery.item;
 
+import de.cristelknight.doapi.common.block.entity.StorageBlockEntity;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -13,8 +15,10 @@ import net.minecraft.world.effect.MobEffectUtil;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import net.satisfy.brewery.effect.alcohol.AlcoholManager;
 import net.satisfy.brewery.registry.ObjectRegistry;
 import org.jetbrains.annotations.NotNull;
@@ -36,6 +40,25 @@ public class DrinkBlockItem extends BlockItem {
     public @NotNull UseAnim getUseAnimation(ItemStack stack) {
         return UseAnim.DRINK;
     }
+
+    @Override
+    protected BlockState getPlacementState(BlockPlaceContext context) {
+        if (!Objects.requireNonNull(context.getPlayer()).isCrouching()) {
+            return null;
+        }
+
+        BlockState blockState = this.getBlock().getStateForPlacement(context);
+        return blockState != null && this.canPlace(context, blockState) ? blockState : null;
+    }
+
+    @Override
+    protected boolean updateCustomBlockEntityTag(BlockPos blockPos, Level level, @Nullable Player player, ItemStack itemStack, BlockState blockState) {
+        if(level.getBlockEntity(blockPos) instanceof StorageBlockEntity wineEntity){
+            wineEntity.setStack(0, itemStack.copyWithCount(1));
+        }
+        return super.updateCustomBlockEntityTag(blockPos, level, player, itemStack, blockState);
+    }
+
 
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand interactionHand) {

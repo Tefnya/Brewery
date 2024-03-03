@@ -49,13 +49,7 @@ public class EntityRegistry {
                     .build(new BreweryIdentifier("hanging_rope").toString())
     );
 
-    public static final RegistrySupplier<EntityType<BeerElementalEntity>> BEER_ELEMENTAL = create("beer_elemental",
-            () -> EntityType.Builder.of(BeerElementalEntity::new, MobCategory.MONSTER)
-                    .sized(1.0F, 1.6F)
-                    .clientTrackingRange(80)
-                    .updateInterval(3)
-                    .build(new BreweryIdentifier("beer_elemental").toString())
-    );
+    public static final RegistrySupplier<EntityType<BeerElementalEntity>> BEER_ELEMENTAL = create("beer_elemental", () -> EntityType.Builder.of(BeerElementalEntity::new, MobCategory.MONSTER).sized(1.0F, 1.6F).clientTrackingRange(80).updateInterval(3).build(new BreweryIdentifier("beer_elemental").toString()));
 
     public static final RegistrySupplier<EntityType<BeerElementalAttackEntity>> BEER_ELEMENTAL_ATTACK = create("beer_elemental_attack",
             () -> EntityType.Builder.<BeerElementalAttackEntity>of(BeerElementalAttackEntity::new, MobCategory.MISC)

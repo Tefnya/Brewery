@@ -21,10 +21,11 @@ import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.satisfy.brewery.registry.BlockEntityRegistry;
+import org.jetbrains.annotations.NotNull;
 
 public class StorageBlockEntity extends RandomizableContainerBlockEntity {
     private NonNullList<ItemStack> inventory;
-    private ContainerOpenersCounter stateManager;
+    private final ContainerOpenersCounter stateManager;
 
     public StorageBlockEntity(BlockPos pos, BlockState state) {
         this(pos, state, SoundEvents.CHEST_OPEN, SoundEvents.CHEST_CLOSE);
@@ -37,12 +38,14 @@ public class StorageBlockEntity extends RandomizableContainerBlockEntity {
             @Override
             protected void onOpen(Level world, BlockPos pos, BlockState state) {
                 world.setBlock(pos, state.setValue(BlockStateProperties.OPEN, true), 3);
+                assert StorageBlockEntity.this.level != null;
                 playSound(StorageBlockEntity.this.level, pos, openSound);
             }
 
             @Override
             protected void onClose(Level world, BlockPos pos, BlockState state) {
                 world.setBlock(pos, state.setValue(BlockStateProperties.OPEN, false), 3);
+                assert StorageBlockEntity.this.level != null;
                 playSound(StorageBlockEntity.this.level, pos, closeSound);
             }
 
@@ -94,7 +97,7 @@ public class StorageBlockEntity extends RandomizableContainerBlockEntity {
     }
 
     @Override
-    protected NonNullList<ItemStack> getItems() {
+    protected @NotNull NonNullList<ItemStack> getItems() {
         return this.inventory;
     }
 
@@ -104,12 +107,12 @@ public class StorageBlockEntity extends RandomizableContainerBlockEntity {
     }
 
     @Override
-    protected Component getDefaultName() {
-        return Component.translatable("brewery.container.cabinet");
+    protected @NotNull Component getDefaultName() {
+        return Component.translatable(this.getBlockState().getBlock().getDescriptionId());
     }
 
     @Override
-    protected AbstractContainerMenu createMenu(int syncId, Inventory playerInventory) {
+    protected @NotNull AbstractContainerMenu createMenu(int syncId, Inventory playerInventory) {
         return new ChestMenu(MenuType.GENERIC_9x2, syncId, playerInventory, this, 2);
     }
 
@@ -134,6 +137,7 @@ public class StorageBlockEntity extends RandomizableContainerBlockEntity {
     }
 
     public void setOpen(BlockState state, boolean open) {
+        assert this.level != null;
         this.level.setBlock(this.getBlockPos(), state.setValue(BlockStateProperties.OPEN, open), 3);
     }
 

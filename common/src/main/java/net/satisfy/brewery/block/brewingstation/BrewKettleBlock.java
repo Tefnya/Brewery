@@ -199,10 +199,6 @@ public class BrewKettleBlock extends BrewingstationBlock implements EntityBlock 
         BlockPos diagonalPos = sidePos.relative(facing.getOpposite());
         BlockPos topPos = diagonalPos.above();
         boolean placeable = canPlace(level, backPos, sidePos, diagonalPos, topPos);
-        Player player = blockPlaceContext.getPlayer();
-        if (!placeable && player != null) {
-            player.displayClientMessage(Component.translatable("tooltip.brewery.cantbeplacedhere").withStyle(ChatFormatting.RED), true);
-        }
         return placeable ? blockState : null;
     }
 

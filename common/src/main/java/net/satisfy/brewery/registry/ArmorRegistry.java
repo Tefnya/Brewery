@@ -1,6 +1,8 @@
 package net.satisfy.brewery.registry;
 
 import com.mojang.datafixers.util.Pair;
+import de.cristelknight.doapi.client.render.feature.CustomArmorManager;
+import de.cristelknight.doapi.client.render.feature.CustomArmorSet;
 import de.cristelknight.doapi.client.render.feature.FullCustomArmor;
 import dev.architectury.registry.client.level.entity.EntityModelLayerRegistry;
 import net.minecraft.ChatFormatting;
@@ -29,9 +31,15 @@ public class ArmorRegistry {
 
     }
 
-    public static  <T extends LivingEntity> void registerArmorModels(Map<FullCustomArmor, Pair<HumanoidModel<T>, HumanoidModel<T>>> models, EntityModelSet modelLoader) {
-        models.put(new FullCustomArmor(ObjectRegistry.BREWFEST_BOOTS.get(), ObjectRegistry.BREWFEST_REGALIA.get(), ObjectRegistry.BREWFEST_TROUSERS.get(), new BreweryIdentifier("textures/models/armor/lederhosen.png")), new Pair<>(new LederhosenOuter<>(modelLoader.bakeLayer(LederhosenOuter.LAYER_LOCATION)), new LederhosenInner<>(modelLoader.bakeLayer(LederhosenInner.LAYER_LOCATION))));
-        models.put(new FullCustomArmor(ObjectRegistry.BREWFEST_SHOES.get(), ObjectRegistry.BREWFEST_BLOUSE.get(), ObjectRegistry.BREWFEST_DRESS.get(), new BreweryIdentifier("textures/models/armor/dirndl.png")), new Pair<>(new DirndlOuter<>(modelLoader.bakeLayer(LederhosenOuter.LAYER_LOCATION)), new DirndlInner<>(modelLoader.bakeLayer(LederhosenInner.LAYER_LOCATION))));
+    public static <T extends LivingEntity> void registerArmorModels(CustomArmorManager<T> armors, EntityModelSet modelLoader) {
+        armors.addArmor(new CustomArmorSet<T>(ObjectRegistry.BREWFEST_HAT.get(), ObjectRegistry.BREWFEST_REGALIA.get(), ObjectRegistry.BREWFEST_BOOTS.get(), ObjectRegistry.BREWFEST_TROUSERS.get())
+                .setTexture(new BreweryIdentifier("lederhosen"))
+                .setOuterModel(new LederhosenOuter<>(modelLoader.bakeLayer(LederhosenOuter.LAYER_LOCATION)))
+                .setInnerModel(new LederhosenInner<>(modelLoader.bakeLayer(LederhosenInner.LAYER_LOCATION))));
+        armors.addArmor(new CustomArmorSet<T>(ObjectRegistry.BREWFEST_HAT_RED.get(), ObjectRegistry.BREWFEST_BLOUSE.get(), ObjectRegistry.BREWFEST_DRESS.get(), ObjectRegistry.BREWFEST_SHOES.get())
+                .setTexture(new BreweryIdentifier("dirndl"))
+                .setOuterModel(new LederhosenOuter<>(modelLoader.bakeLayer(LederhosenOuter.LAYER_LOCATION)))
+                .setInnerModel(new LederhosenInner<>(modelLoader.bakeLayer(LederhosenInner.LAYER_LOCATION))));
     }
 
     public static  <T extends LivingEntity> void registerHatModels(Map<Item, EntityModel<T>> models, EntityModelSet modelLoader) {

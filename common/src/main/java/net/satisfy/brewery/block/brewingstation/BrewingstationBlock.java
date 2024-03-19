@@ -12,7 +12,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.satisfy.brewery.Brewery;
 import net.satisfy.brewery.block.property.BrewMaterial;
 import net.satisfy.brewery.entity.BrewstationBlockEntity;
 import net.satisfy.brewery.registry.BlockStateRegistry;
@@ -34,15 +33,20 @@ public class BrewingstationBlock extends HorizontalDirectionalBlock {
 
     @Override
     public @NotNull ItemStack getCloneItemStack(BlockGetter getter, BlockPos pos, BlockState state) {
-        if (this.getClass() != BrewKettleBlock.class) {
-            BrewstationBlockEntity blockEntity = getController(pos, getter);
-            if (blockEntity != null) {
-                Brewery.LOGGER.error("Is null (blockEntity)");
-                return blockEntity.getBlockState().getBlock().getCloneItemStack(getter, pos, state);
-            }
+        ItemStack stack = super.getCloneItemStack(getter, pos, state);
+        BrewstationBlockEntity blockEntity = getController(pos, getter);
+        if (blockEntity != null) {
+            return blockEntity.getBlockState().getBlock().getCloneItemStack(getter, pos, state);
         }
-        return super.getCloneItemStack(getter, pos, state);
+        return stack;
     }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        super.createBlockStateDefinition(builder);
+        builder.add(MATERIAL, FACING);
+    }
+
 
     @Override
     public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
@@ -75,11 +79,5 @@ public class BrewingstationBlock extends HorizontalDirectionalBlock {
             }
         }
         return null;
-    }
-
-    @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        super.createBlockStateDefinition(builder);
-        builder.add(FACING, MATERIAL);
     }
 }

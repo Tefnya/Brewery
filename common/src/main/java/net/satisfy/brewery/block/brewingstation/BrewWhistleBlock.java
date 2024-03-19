@@ -73,7 +73,7 @@ public class BrewWhistleBlock extends BrewingstationBlock {
     }
 
     @Override
-    public ItemStack getCloneItemStack(BlockGetter blockGetter, BlockPos blockPos, BlockState blockState) {
+    public @NotNull ItemStack getCloneItemStack(BlockGetter blockGetter, BlockPos blockPos, BlockState blockState) {
         if(blockState.getValue(HALF).equals(DoubleBlockHalf.UPPER)) {
             blockPos = blockPos.below();
         }

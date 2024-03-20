@@ -16,11 +16,12 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+@SuppressWarnings("deprecation")
 public class BrewfestHatRedItem extends CustomHatItem {
 
 
     public BrewfestHatRedItem(Properties settings) {
-        super(ArmorMaterialRegistry.BREWFEST_LEATHER, Type.HELMET, settings);
+        super(ArmorMaterialRegistry.BREWFEST_ARMOR, Type.HELMET, settings);
     }
 
     @Override

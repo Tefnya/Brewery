@@ -18,7 +18,6 @@ import net.satisfy.brewery.registry.RecipeTypeRegistry;
 import org.jetbrains.annotations.NotNull;
 
 public class BrewingRecipe implements Recipe<Container> {
-
     private final ResourceLocation identifier;
     private final NonNullList<Ingredient> ingredients;
     private final ItemStack output;
@@ -51,7 +50,7 @@ public class BrewingRecipe implements Recipe<Container> {
     }
 
     @Override
-    public ItemStack assemble(Container container, RegistryAccess registryAccess) {
+    public @NotNull ItemStack assemble(Container container, RegistryAccess registryAccess) {
         return ItemStack.EMPTY;
     }
 
@@ -67,7 +66,7 @@ public class BrewingRecipe implements Recipe<Container> {
     }
 
     @Override
-    public ItemStack getResultItem(RegistryAccess registryAccess) {
+    public @NotNull ItemStack getResultItem(RegistryAccess registryAccess) {
         return this.output.copy();
     }
 

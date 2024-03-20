@@ -2,136 +2,68 @@ package net.satisfy.brewery.registry;
 
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ArmorMaterials;
 import net.minecraft.world.item.crafting.Ingredient;
+import org.jetbrains.annotations.NotNull;
 
 public class ArmorMaterialRegistry {
     private static final Ingredient WOOL_REPAIR_INGREDIENT = Ingredient.of(ItemTags.WOOL);
-    public static final ArmorMaterial BREWFEST_ARMOR = new ArmorMaterial() {
 
-        @Override
+    public static final ArmorMaterial BREWFEST_ARMOR = new BrewfestArmorMaterial("brewfest", ArmorMaterials.LEATHER, WOOL_REPAIR_INGREDIENT);
+    public static final ArmorMaterial BREWFEST_LEATHER = BREWFEST_ARMOR;
+    public static final ArmorMaterial BREWFEST_DRESS = new BrewfestArmorMaterial("dirndl", ArmorMaterials.LEATHER, WOOL_REPAIR_INGREDIENT, ArmorMaterials.IRON.getEnchantmentValue(), ArmorMaterials.TURTLE.getEquipSound());
+
+    private static class BrewfestArmorMaterial implements ArmorMaterial {
+        private final String name;
+        private final ArmorMaterial delegate;
+        private final Ingredient repairIngredient;
+        private final int enchantmentValue;
+        private final SoundEvent equipSound;
+
+        BrewfestArmorMaterial(String name, ArmorMaterial delegate, Ingredient repairIngredient) {
+            this(name, delegate, repairIngredient, delegate.getEnchantmentValue(), delegate.getEquipSound());
+        }
+
+        BrewfestArmorMaterial(String name, ArmorMaterial delegate, Ingredient repairIngredient, int enchantmentValue, SoundEvent equipSound) {
+            this.name = name;
+            this.delegate = delegate;
+            this.repairIngredient = repairIngredient;
+            this.enchantmentValue = enchantmentValue;
+            this.equipSound = equipSound;
+        }
+
         public int getDurabilityForType(ArmorItem.Type type) {
-            return ArmorMaterials.LEATHER.getDurabilityForType(type);
+            return delegate.getDurabilityForType(type);
         }
 
-        @Override
         public int getDefenseForType(ArmorItem.Type type) {
-            return ArmorMaterials.LEATHER.getDefenseForType(type);
+            return delegate.getDefenseForType(type);
         }
 
-        @Override
         public int getEnchantmentValue() {
-            return ArmorMaterials.LEATHER.getEnchantmentValue();
+            return enchantmentValue;
         }
 
-        @Override
-        public SoundEvent getEquipSound() {
-            return ArmorMaterials.LEATHER.getEquipSound();
+        public @NotNull SoundEvent getEquipSound() {
+            return equipSound;
         }
 
-        public Ingredient getRepairIngredient() {
-            return WOOL_REPAIR_INGREDIENT;
+        public @NotNull Ingredient getRepairIngredient() {
+            return repairIngredient;
         }
 
-        @Override
-        public String getName() {
-            return "brewfest";
+        public @NotNull String getName() {
+            return name;
         }
 
-        @Override
         public float getToughness() {
-            return ArmorMaterials.LEATHER.getToughness();
+            return delegate.getToughness();
         }
 
-        @Override
         public float getKnockbackResistance() {
-            return ArmorMaterials.LEATHER.getKnockbackResistance();
+            return delegate.getKnockbackResistance();
         }
-    };
-
-    public static final ArmorMaterial BREWFEST_LEATHER = new ArmorMaterial() {
-
-        @Override
-        public int getDurabilityForType(ArmorItem.Type type) {
-            return ArmorMaterials.LEATHER.getDurabilityForType(type);
-        }
-
-        @Override
-        public int getDefenseForType(ArmorItem.Type type) {
-            return ArmorMaterials.LEATHER.getDefenseForType(type);
-        }
-
-        @Override
-        public int getEnchantmentValue() {
-            return ArmorMaterials.LEATHER.getEnchantmentValue();
-        }
-
-        @Override
-        public SoundEvent getEquipSound() {
-            return ArmorMaterials.LEATHER.getEquipSound();
-        }
-
-        public Ingredient getRepairIngredient() {
-            return ArmorMaterials.LEATHER.getRepairIngredient();
-        }
-
-        @Override
-        public String getName() {
-            return "brewfest";
-        }
-
-        @Override
-        public float getToughness() {
-            return ArmorMaterials.LEATHER.getToughness();
-        }
-
-        @Override
-        public float getKnockbackResistance() {
-            return ArmorMaterials.LEATHER.getKnockbackResistance();
-        }
-    };
-
-    public static final ArmorMaterial BREWFEST_DRESS = new ArmorMaterial() {
-        @Override
-        public int getDurabilityForType(ArmorItem.Type type) {
-            return ArmorMaterials.LEATHER.getDurabilityForType(type);
-        }
-
-        @Override
-        public int getDefenseForType(ArmorItem.Type type) {
-            return ArmorMaterials.LEATHER.getDefenseForType(type);
-        }
-
-        @Override
-        public int getEnchantmentValue() {
-            return ArmorMaterials.IRON.getEnchantmentValue();
-        }
-
-        @Override
-        public SoundEvent getEquipSound() {
-            return ArmorMaterials.TURTLE.getEquipSound();
-        }
-
-        public Ingredient getRepairIngredient() {
-            return WOOL_REPAIR_INGREDIENT;
-        }
-
-        @Override
-        public String getName() {
-            return "dirndl";
-        }
-
-        @Override
-        public float getToughness() {
-            return ArmorMaterials.LEATHER.getToughness();
-        }
-
-        @Override
-        public float getKnockbackResistance() {
-            return ArmorMaterials.LEATHER.getKnockbackResistance();
-        }
-    };
+    }
 }

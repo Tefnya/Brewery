@@ -14,8 +14,8 @@ import net.minecraft.world.level.Level;
 import net.satisfy.brewery.Brewery;
 import net.satisfy.brewery.registry.RecipeTypeRegistry;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
+@SuppressWarnings("unused")
 public class SiloRecipe implements Recipe<SimpleContainer> {
     private final ResourceLocation id;
     private final ItemStack output;
@@ -38,12 +38,12 @@ public class SiloRecipe implements Recipe<SimpleContainer> {
     }
 
     @Override
-    public NonNullList<Ingredient> getIngredients() {
+    public @NotNull NonNullList<Ingredient> getIngredients() {
         return recipeItems;
     }
 
     @Override
-    public ItemStack assemble(SimpleContainer container, RegistryAccess registryAccess) {
+    public @NotNull ItemStack assemble(SimpleContainer container, RegistryAccess registryAccess) {
         return output;
     }
 
@@ -53,12 +53,12 @@ public class SiloRecipe implements Recipe<SimpleContainer> {
     }
 
     @Override
-    public ItemStack getResultItem(RegistryAccess registryAccess) {
+    public @NotNull ItemStack getResultItem(RegistryAccess registryAccess) {
         return output.copy();
     }
 
     @Override
-    public ResourceLocation getId() {
+    public @NotNull ResourceLocation getId() {
         return id;
     }
 
@@ -84,7 +84,7 @@ public class SiloRecipe implements Recipe<SimpleContainer> {
         public static final ResourceLocation ID = new ResourceLocation(Brewery.MOD_ID, "drying");
 
         @Override
-        public SiloRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
+        public @NotNull SiloRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
             ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, "output"));
 
             JsonArray ingredients = GsonHelper.getAsJsonArray(pSerializedRecipe, "ingredients");
@@ -98,12 +98,10 @@ public class SiloRecipe implements Recipe<SimpleContainer> {
         }
 
         @Override
-        public @Nullable SiloRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
+        public @NotNull SiloRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
             NonNullList<Ingredient> inputs = NonNullList.withSize(buf.readInt(), Ingredient.EMPTY);
 
-            for (int i = 0; i < inputs.size(); i++) {
-                inputs.set(i, Ingredient.fromNetwork(buf));
-            }
+            inputs.replaceAll(ignored -> Ingredient.fromNetwork(buf));
 
             ItemStack output = buf.readItem();
             return new SiloRecipe(id, output, inputs);

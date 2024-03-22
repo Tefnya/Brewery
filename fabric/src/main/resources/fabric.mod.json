@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "brewery",
   "version": "${version}",
-  "name": "Brewery",
+  "name": "[Let's Do] Brewery",
   "description": "Ozapft is! Brau Bier, beiss in a Bretzn – willkomme zum Braufescht!",
   "authors": [
     "BaumeisterJO, satisfy, EC"

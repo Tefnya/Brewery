@@ -5,7 +5,7 @@ license = "Custom"
 [[mods]]
 modId = "brewery"
 version = "${version}"
-displayName = "Brewery"
+displayName = "[Let's Do] Brewery"
 authors = "BaumeisterJO, satisfy, EC"
 description = '''
 Ozapft is! Brau Bier, beiss in a Bretzn – willkomme zum Braufescht!'''

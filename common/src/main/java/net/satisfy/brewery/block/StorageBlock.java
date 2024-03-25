@@ -23,23 +23,27 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.satisfy.brewery.entity.StorageBlockEntity;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.function.Supplier;
+
+@SuppressWarnings("deprecation")
 public class StorageBlock extends BaseEntityBlock {
 	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 	public static final BooleanProperty OPEN = BlockStateProperties.OPEN;
-	private final SoundEvent openSound;
-	private final SoundEvent closeSound;
+	private final Supplier<SoundEvent> openSound;
+	private final Supplier<SoundEvent> closeSound;
 
-	public StorageBlock(Properties settings, SoundEvent openSound, SoundEvent closeSound) {
+	public StorageBlock(Properties settings, Supplier<SoundEvent> openSound, Supplier<SoundEvent> closeSound) {
 		super(settings);
 		this.openSound = openSound;
 		this.closeSound = closeSound;
-		this.registerDefaultState(((this.stateDefinition.any()).setValue(FACING, Direction.NORTH)).setValue(OPEN, false));
+		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(OPEN, false));
 	}
 
 	@Override
-	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+	public @NotNull InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 		if (world.isClientSide) {
 			return InteractionResult.SUCCESS;
 		} else {
@@ -56,8 +60,8 @@ public class StorageBlock extends BaseEntityBlock {
 	public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean moved) {
 		if (!state.is(newState.getBlock())) {
 			BlockEntity blockEntity = world.getBlockEntity(pos);
-			if (blockEntity instanceof Container) {
-				Containers.dropContents(world, pos, (Container)blockEntity);
+			if (blockEntity instanceof Container container) {
+				Containers.dropContents(world, pos, container);
 				world.updateNeighbourForOutputSignal(pos, this);
 			}
 
@@ -68,11 +72,11 @@ public class StorageBlock extends BaseEntityBlock {
 	@Nullable
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return new StorageBlockEntity(pos, state, this.openSound, this.closeSound);
+		return new StorageBlockEntity(pos, state);
 	}
 
 	@Override
-	public RenderShape getRenderShape(BlockState state) {
+	public @NotNull RenderShape getRenderShape(BlockState state) {
 		return RenderShape.MODEL;
 	}
 
@@ -97,12 +101,12 @@ public class StorageBlock extends BaseEntityBlock {
 	}
 
 	@Override
-	public BlockState rotate(BlockState state, Rotation rotation) {
+	public @NotNull BlockState rotate(BlockState state, Rotation rotation) {
 		return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
 	}
 
 	@Override
-	public BlockState mirror(BlockState state, Mirror mirror) {
+	public @NotNull BlockState mirror(BlockState state, Mirror mirror) {
 		return state.rotate(mirror.getRotation(state.getValue(FACING)));
 	}
 
@@ -116,7 +120,7 @@ public class StorageBlock extends BaseEntityBlock {
 		return this.defaultBlockState().setValue(FACING, ctx.getHorizontalDirection().getOpposite());
 	}
 
-	public void playSound(Level world, BlockPos pos, boolean open) {
-		world.playSound(null, pos, open ? this.openSound : this.closeSound, SoundSource.BLOCKS, 1.0f, 1.0f);
+	public void playSound(Level world, BlockPos pos, boolean isOpen) {
+		world.playSound(null, pos, isOpen ? openSound.get() : closeSound.get(), SoundSource.BLOCKS, 1.0f, 1.1f);
 	}
 }

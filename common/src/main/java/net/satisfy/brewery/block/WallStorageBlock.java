@@ -12,9 +12,10 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Supplier;
 
 public class WallStorageBlock extends StorageBlock {
-    public WallStorageBlock(Properties settings, SoundEvent openSound, SoundEvent closeSound) {
+    public WallStorageBlock(Properties settings, Supplier<SoundEvent> openSound, Supplier<SoundEvent> closeSound) {
         super(settings, openSound, closeSound);
     }
 

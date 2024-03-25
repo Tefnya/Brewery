@@ -1,5 +1,6 @@
 package net.satisfy.brewery.item;
 
+import de.cristelknight.doapi.common.item.StandardItem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -12,8 +13,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class StandardItem extends de.cristelknight.doapi.common.item.StandardItem {
-    public StandardItem(Properties properties) {
+public class BeerStandardItem extends StandardItem {
+    public BeerStandardItem(Properties properties) {
         super(properties, new BreweryIdentifier("textures/standard/beer_standard.png"), () -> new MobEffectInstance(MobEffects.DIG_SPEED, 200, 1, true, false, true));
     }
 

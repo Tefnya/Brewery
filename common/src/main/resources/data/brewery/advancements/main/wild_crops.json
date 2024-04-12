@@ -67,9 +67,15 @@
   },
   "requirements": [
     [
-      "barley_seeds",
-      "hops_seeds",
-      "hops",
+      "barley_seeds"
+    ],
+    [
+      "hops_seeds"
+    ],
+    [
+      "hops"
+    ],
+    [
       "barley"
     ]
   ]

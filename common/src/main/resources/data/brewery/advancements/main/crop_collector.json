@@ -19,18 +19,38 @@
     "experience": 75
   },
   "criteria": {
-    "get_crops": {
+    "brewery:barley": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "items": ["brewery:barley"]
-          },
+            "items": [
+              "brewery:barley"
+            ]
+          }
+        ]
+      }
+    },
+    "brewery:corn": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
           {
-            "items": ["brewery:corn"]
-          },
+            "items": [
+              "brewery:corn"
+            ]
+          }
+        ]
+      }
+    },
+    "brewery:hops": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
           {
-            "items": ["brewery:hops"]
+            "items": [
+              "brewery:hops"
+            ]
           }
         ]
       }
@@ -38,7 +58,13 @@
   },
   "requirements": [
     [
-      "get_crops"
+      "brewery:barley"
+    ],
+    [
+      "brewery:corn"
+    ],
+    [
+      "brewery:hops"
     ]
   ]
 }

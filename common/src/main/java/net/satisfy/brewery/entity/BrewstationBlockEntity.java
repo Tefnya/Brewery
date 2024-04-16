@@ -21,7 +21,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.state.BlockState;
-import net.satisfy.brewery.Brewery;
 import net.satisfy.brewery.block.brew_event.BrewEvent;
 import net.satisfy.brewery.block.brew_event.BrewEvents;
 import net.satisfy.brewery.block.brew_event.BrewHelper;
@@ -71,7 +70,6 @@ public class BrewstationBlockEntity extends BlockEntity implements ImplementedIn
 
     public void setComponents(BlockPos... components) {
         if (components.length != 4) {
-            Brewery.LOGGER.debug("Cant add components to BrewingStation. Should have 4 but only have {} parts.", components.length);
             return;
         }
         this.components.addAll(Arrays.asList(components));
@@ -144,15 +142,10 @@ public class BrewstationBlockEntity extends BlockEntity implements ImplementedIn
             if (event != null) {
                 ResourceLocation eventId = BrewEvents.getId(event);
                 if (eventId != null) {
-                    Brewery.LOGGER.warn("Starting event! " + eventId.getPath());
                     event.start(this.components, level);
                     runningEvents.add(event);
                     totalEvents++;
-                } else {
-                    Brewery.LOGGER.warn("Event ID is null, cannot start event.");
                 }
-            } else {
-                Brewery.LOGGER.warn("No event to start, skipping event triggering.");
             }
             setTimeToEvent();
         }
@@ -177,19 +170,14 @@ public class BrewstationBlockEntity extends BlockEntity implements ImplementedIn
     }
 
     private void brew(Recipe<?> recipe, RegistryAccess access) {
-        Brewery.LOGGER.info("Brewing!!!");
-
-
-        ItemStack resultSack = recipe.getResultItem(access);
-        if (resultSack.getItem() instanceof DrinkBlockItem drinkItem) {
-            DrinkBlockItem.addQuality(resultSack, this.solved);
-            if (this.solved == 0) {
-                drinkItem.addCount(resultSack, 1);
-            } else {
-                drinkItem.addCount(resultSack, this.solved);
-            }
+        ItemStack resultStack = recipe.getResultItem(access);
+        if (resultStack.getItem() instanceof DrinkBlockItem drinkItem) {
+            assert this.level != null;
+            int quality = this.level.getBlockState(this.getBlockPos()).getValue(BlockStateRegistry.MATERIAL) == BrewMaterial.NETHERITE ? 3 : this.solved;
+            DrinkBlockItem.addQuality(resultStack, quality);
+            drinkItem.addCount(resultStack, this.solved == 0 ? 1 : this.solved);
         }
-        this.beer = resultSack;
+        this.beer = resultStack;
         spawnElementals();
         endBrewing();
 
@@ -214,10 +202,11 @@ public class BrewstationBlockEntity extends BlockEntity implements ImplementedIn
                 }
             }
         }
-
     }
 
+
     private void spawnElementals() {
+        assert this.level != null;
         BlockState blockState = this.level.getBlockState(this.getBlockPos());
         if (this.solved == 0 && this.level != null && this.level.random.nextDouble() >= 0.1D && blockState.getValue(BlockStateRegistry.MATERIAL) == BrewMaterial.WOOD) {
             BlockPos spawnPos = BrewHelper.getBlock(ObjectRegistry.BREW_OVEN.get(), this.components, level);

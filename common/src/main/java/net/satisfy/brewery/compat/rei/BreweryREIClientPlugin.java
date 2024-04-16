@@ -35,8 +35,7 @@ public class BreweryREIClientPlugin {
     public static void registerDisplays(DisplayRegistry registry) {
         registry.registerFiller(BrewingRecipe.class, BrewingStationDisplay::new);
 
-        for (Map.Entry<Item, Item> recipe : SiloBlock.getDryers().entrySet()) {
-            registry.add(new SiloDisplay(EntryIngredients.ofIngredients(Collections.singletonList(Ingredient.of(recipe.getKey()))), EntryIngredients.ofIngredients(Collections.singletonList(Ingredient.of(recipe.getValue())))));
+        for (Map.Entry<Item, Item> recipe : SiloBlock.getDryers().entrySet()) {registry.add(new SiloDisplay(EntryIngredients.ofIngredients(Collections.singletonList(Ingredient.of(recipe.getKey()))), EntryIngredients.ofIngredients(Collections.singletonList(Ingredient.of(recipe.getValue())))));
         }
     }
 }

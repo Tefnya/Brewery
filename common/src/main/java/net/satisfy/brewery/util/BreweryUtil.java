@@ -75,8 +75,6 @@ public class BreweryUtil {
                 OverlayTexture.NO_OVERLAY, matrices, vertexConsumers, level, 1);
     }
 
-    public static <T> void registerObject(Registry<T> registry, ResourceLocation id, T object) {}
-
     public static void putBlockPos(CompoundTag compoundTag, BlockPos blockPos) {
         if (blockPos == null)
             return;
@@ -117,14 +115,6 @@ public class BreweryUtil {
         for (int pos = 0; pos < positions.length / 3; pos++)
             blockSet.add(new BlockPos(positions[pos * 3], positions[pos * 3 + 1], positions[pos * 3 + 2]));
         return blockSet;
-    }
-
-    @Nullable
-    public static <T> T getLastElement(final Collection<T> c) {
-        T lastElement = null;
-        for (T t : c)
-            lastElement = t;
-        return lastElement;
     }
 
     public static boolean isSolid(LevelReader levelReader, BlockPos blockPos){

@@ -5,10 +5,10 @@
       "item": "brewery:beer_hops"
     },
     "title": {
-      "translate": "brewery.advancement.get_beer_hops"
+      "translate": "advancement.brewery.get_beer_hops"
     },
     "description": {
-      "translate": "brewery.advancement.get_beer_hops.desc"
+      "translate": "advancement.brewery.get_beer_hops.desc"
     },
     "frame": "goal",
     "show_toast": true,

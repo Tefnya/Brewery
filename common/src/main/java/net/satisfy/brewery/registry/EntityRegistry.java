@@ -10,6 +10,7 @@ import net.minecraft.world.entity.MobCategory;
 import net.satisfy.brewery.Brewery;
 import net.satisfy.brewery.entity.BeerElementalAttackEntity;
 import net.satisfy.brewery.entity.BeerElementalEntity;
+import net.satisfy.brewery.entity.DarkBrewEntity;
 import net.satisfy.brewery.entity.rope.HangingRopeEntity;
 import net.satisfy.brewery.entity.rope.RopeCollisionEntity;
 import net.satisfy.brewery.entity.rope.RopeKnotEntity;
@@ -17,8 +18,15 @@ import net.satisfy.brewery.util.BreweryIdentifier;
 
 import java.util.function.Supplier;
 
+@SuppressWarnings("unused")
 public class EntityRegistry {
     private static final Registrar<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(Brewery.MOD_ID, Registries.ENTITY_TYPE).getRegistrar();
+
+    public static final RegistrySupplier<EntityType<DarkBrewEntity>> DARK_BREW = create("dark_brew",
+            () -> EntityType.Builder.<DarkBrewEntity>of(DarkBrewEntity::new, MobCategory.MISC)
+                    .sized(0.25f, 0.25f)
+                    .build(new BreweryIdentifier("dark_brew").toString())
+    );
 
     public static final RegistrySupplier<EntityType<RopeKnotEntity>> ROPE_KNOT = create("rope_knot",
             () -> EntityType.Builder.of(RopeKnotEntity::new, MobCategory.MISC)
@@ -49,7 +57,13 @@ public class EntityRegistry {
                     .build(new BreweryIdentifier("hanging_rope").toString())
     );
 
-    public static final RegistrySupplier<EntityType<BeerElementalEntity>> BEER_ELEMENTAL = create("beer_elemental", () -> EntityType.Builder.of(BeerElementalEntity::new, MobCategory.MONSTER).sized(1.0F, 1.6F).clientTrackingRange(80).updateInterval(3).build(new BreweryIdentifier("beer_elemental").toString()));
+    public static final RegistrySupplier<EntityType<BeerElementalEntity>> BEER_ELEMENTAL = create("beer_elemental",
+            () -> EntityType.Builder.of(BeerElementalEntity::new, MobCategory.MONSTER)
+                    .sized(1.0F, 1.6F)
+                    .clientTrackingRange(80)
+                    .updateInterval(3)
+                    .build(new BreweryIdentifier("beer_elemental").toString())
+    );
 
     public static final RegistrySupplier<EntityType<BeerElementalAttackEntity>> BEER_ELEMENTAL_ATTACK = create("beer_elemental_attack",
             () -> EntityType.Builder.<BeerElementalAttackEntity>of(BeerElementalAttackEntity::new, MobCategory.MISC)

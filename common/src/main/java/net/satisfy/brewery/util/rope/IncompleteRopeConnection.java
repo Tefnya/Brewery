@@ -33,6 +33,5 @@ public class IncompleteRopeConnection {
     public void destroy() {
         if (!alive) return;
         this.alive = false;
-        // Can't drop items on the client I guess
     }
 }

@@ -26,6 +26,9 @@ import net.satisfy.brewery.registry.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
+
+@SuppressWarnings("deprecation")
 public class HangingRope extends Block implements SimpleWaterloggedBlock {
     public static final BooleanProperty WATERLOGGED;
     public static final BooleanProperty TOP;
@@ -40,7 +43,7 @@ public class HangingRope extends Block implements SimpleWaterloggedBlock {
     public BlockState getStateForPlacement(BlockPlaceContext blockPlaceContext) {
         FluidState fluidState = blockPlaceContext.getLevel().getFluidState(blockPlaceContext.getClickedPos());
         boolean bl = fluidState.getType() == Fluids.WATER;
-        return super.getStateForPlacement(blockPlaceContext).setValue(WATERLOGGED, bl);
+        return Objects.requireNonNull(super.getStateForPlacement(blockPlaceContext)).setValue(WATERLOGGED, bl);
     }
 
     @Override

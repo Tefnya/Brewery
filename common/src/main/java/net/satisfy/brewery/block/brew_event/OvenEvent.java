@@ -11,7 +11,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import java.util.Set;
 
 public class OvenEvent extends BrewEvent {
-
     @Override
     public CompoundTag save(CompoundTag compoundTag) {
         return compoundTag;

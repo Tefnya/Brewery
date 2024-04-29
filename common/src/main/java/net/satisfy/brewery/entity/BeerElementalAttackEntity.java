@@ -1,7 +1,7 @@
 package net.satisfy.brewery.entity;
 
+import de.cristelknight.doapi.common.registry.DoApiSoundEventRegistry;
 import net.minecraft.sounds.SoundEvent;
-import net.satisfy.brewery.registry.EntityRegistry;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.damagesource.DamageSource;
@@ -12,7 +12,8 @@ import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
-import net.satisfy.brewery.registry.SoundEventRegistry;
+import net.satisfy.brewery.registry.EntityRegistry;
+import org.jetbrains.annotations.NotNull;
 
 public class BeerElementalAttackEntity extends AbstractHurtingProjectile {
 
@@ -33,7 +34,7 @@ public class BeerElementalAttackEntity extends AbstractHurtingProjectile {
 		double x = this.getX();
 		double y = this.getY();
 		double z = this.getZ();
-		SoundEvent soundEvent = SoundEventRegistry.BEER_ELEMENTAL_ATTACK.get();
+		SoundEvent soundEvent = DoApiSoundEventRegistry.BEER_ELEMENTAL_ATTACK.get();
 
 		this.getCommandSenderWorld().playSound(null, x, y, z, soundEvent, this.getSoundSource(), 1.0F, 1.0F);
 	}
@@ -68,7 +69,7 @@ public class BeerElementalAttackEntity extends AbstractHurtingProjectile {
 	}
 
 	@Override
-	protected ParticleOptions getTrailParticle() {
+	protected @NotNull ParticleOptions getTrailParticle() {
 		return ParticleTypes.FALLING_HONEY;
 	}
 }

@@ -7,6 +7,7 @@ import dev.architectury.registry.client.level.entity.EntityRendererRegistry;
 import dev.architectury.registry.client.rendering.BlockEntityRendererRegistry;
 import dev.architectury.registry.client.rendering.ColorHandlerRegistry;
 import dev.architectury.registry.client.rendering.RenderTypeRegistry;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.satisfy.brewery.client.model.RopeKnotEntityModel;
 import net.satisfy.brewery.client.render.*;
 import net.satisfy.brewery.client.model.BeerElementalModel;
@@ -24,33 +25,33 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.RenderType;
 
+import static net.satisfy.brewery.registry.ObjectRegistry.*;
+
 @Environment(EnvType.CLIENT)
 public class BreweryClient {
 
     public static void onInitializeClient() {
         BreweryNetworking.registerS2CPackets();
         ItemPredicate.register();
-        registerRenderer();
         registerModelLayers();
+        registerRenderer();
 
         RenderTypeRegistry.register(RenderType.cutout(),
-                ObjectRegistry.WILD_HOPS.get(), ObjectRegistry.BEER_MUG.get(), ObjectRegistry.BEER_WHEAT.get(),
-                ObjectRegistry.BEER_HOPS.get(), ObjectRegistry.BEER_BARLEY.get(), ObjectRegistry.BEER_HALEY.get(),
-                ObjectRegistry.BARLEY_CROP.get(), ObjectRegistry.CORN_CROP.get(), ObjectRegistry.HOPS_CROP_BODY.get(),
-                ObjectRegistry.HOPS_CROP.get(), ObjectRegistry.SILO_WOOD.get(), ObjectRegistry.SILO_COPPER.get(),
-                ObjectRegistry.WHISKEY_CARRASCONLABEL.get(), ObjectRegistry.WHISKEY_LILITUSINGLEMALT.get(),
-                ObjectRegistry.WHISKEY_JOJANNIK.get(), ObjectRegistry.WHISKEY_MAGGOALLAN.get(),
-                ObjectRegistry.WHISKEY_CRISTELWALKER.get()
-
-
+                WILD_HOPS.get(), BEER_MUG.get(), BEER_WHEAT.get(), BEER_HOPS.get(),
+                BEER_BARLEY.get(), BEER_HALEY.get(), BEER_OAT.get(), BEER_NETTLE.get(),
+                HOPS_CROP_BODY.get(), HOPS_CROP.get(), WHISKEY_MAGGOALLAN.get(),
+                WHISKEY_CARRASCONLABEL.get(), WHISKEY_LILITUSINGLEMALT.get(),
+                WHISKEY_JOJANNIK.get(), WHISKEY_MAGGOALLAN.get(),
+                WHISKEY_CRISTELWALKER.get()
         );
+
 
         ColorHandlerRegistry.registerBlockColors((state, world, pos, tintIndex) -> {
                     if (world == null || pos == null) {
                         return -1;
                     }
                     return BiomeColors.getAverageWaterColor(world, pos);
-        }, ObjectRegistry.WOODEN_BREWINGSTATION, ObjectRegistry.COPPER_BREWINGSTATION, ObjectRegistry.NETHERITE_BREWINGSTATION);
+        }, WOODEN_BREWINGSTATION, COPPER_BREWINGSTATION, NETHERITE_BREWINGSTATION);
 
         ClientStorageTypes.init();
 
@@ -62,20 +63,17 @@ public class BreweryClient {
         registerEntityModelLayers();
     }
 
-
-
     private static void registerRenderer() {
+        BlockEntityRendererRegistry.register(BlockEntityRegistry.BEER_MUG_BLOCK_ENTITY.get(), BeerMugBlockEntityRenderer::new);
+        BlockEntityRendererRegistry.register(BlockEntityRegistry.BREWINGSTATION_BLOCK_ENTITY.get(), BrewingstationRenderer::new);
         EntityModelLayerRegistry.register(ModelRegistry.ROPE_KNOT, RopeKnotEntityModel::createBodyLayer);
         EntityRendererRegistry.register(EntityRegistry.ROPE_KNOT, RopeKnotRenderer::new);
         EntityRendererRegistry.register(EntityRegistry.HANGING_ROPE, HangingRopeRenderer::new);
         EntityRendererRegistry.register(EntityRegistry.ROPE_COLLISION, RopeCollisionEntityRenderer::new);
         EntityRendererRegistry.register(EntityRegistry.BEER_ELEMENTAL, BeerElementalRenderer::new);
         EntityRendererRegistry.register(EntityRegistry.BEER_ELEMENTAL_ATTACK, BeerElementalAttackRenderer::new);
-
-        BlockEntityRendererRegistry.register(BlockEntityRegistry.BREWINGSTATION_BLOCK_ENTITY.get(), BrewingstationRenderer::new);
-        BlockEntityRendererRegistry.register(BlockEntityRegistry.BEER_MUG_FLOWER_POT_BLOCK_ENTITY.get(), BeerKegBlockEntityRenderer::new);
-    }
-
+        EntityRendererRegistry.register(EntityRegistry.DARK_BREW, ThrownItemRenderer::new);
+           }
 
     public static void registerModelLayers() {
         EntityModelLayerRegistry.register(BeerElementalModel.BEER_ELEMENTAL_MODEL_LAYER, BeerElementalModel::createBodyLayer);

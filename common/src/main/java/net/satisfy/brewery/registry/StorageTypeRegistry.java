@@ -7,15 +7,17 @@ import net.satisfy.brewery.util.BreweryIdentifier;
 import java.util.List;
 import java.util.Set;
 
+import static net.satisfy.brewery.registry.ObjectRegistry.*;
+
 public class StorageTypeRegistry {
-    public static final ResourceLocation WINE_BOTTLE = new BreweryIdentifier("wine_bottle");
+    public static final ResourceLocation BEVERAGE = new BreweryIdentifier("beverage");
 
     public static void registerBlocks(Set<Block> blocks) {
         blocks.addAll(List.of(
-                ObjectRegistry.BEER_BARLEY.get(), ObjectRegistry.BEER_HALEY.get(), ObjectRegistry.BEER_HOPS.get(),
-                ObjectRegistry.WHISKEY_CARRASCONLABEL.get(), ObjectRegistry.WHISKEY_CRISTELWALKER.get(),
-                ObjectRegistry.WHISKEY_JOJANNIK.get(), ObjectRegistry.WHISKEY_MAGGOALLAN.get(),
-                ObjectRegistry.WHISKEY_LILITUSINGLEMALT.get(), ObjectRegistry.BEER_WHEAT.get()
+                BEER_BARLEY.get(), BEER_HALEY.get(), BEER_HOPS.get(), BEER_NETTLE.get(),
+                WHISKEY_CARRASCONLABEL.get(), WHISKEY_CRISTELWALKER.get(),
+                WHISKEY_JOJANNIK.get(), WHISKEY_MAGGOALLAN.get(), BEER_WHEAT.get(),
+                WHISKEY_LILITUSINGLEMALT.get(), BEER_OAT.get()
         ));
     }
 }

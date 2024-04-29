@@ -5,10 +5,10 @@
       "item": "brewery:beer_haley"
     },
     "title": {
-      "translate": "brewery.advancement.get_beer_haley"
+      "translate": "advancement.brewery.get_beer_haley"
     },
     "description": {
-      "translate": "brewery.advancement.get_beer_haley.desc"
+      "translate": "advancement.brewery.get_beer_haley.desc"
     },
     "frame": "goal",
     "show_toast": true,

@@ -8,11 +8,7 @@ import net.minecraft.world.level.block.ComposterBlock;
 public class CompostablesRegistry {
     
     public static void init(){
-        registerCompostableItem(ObjectRegistry.CORN, 0.4F);
-        registerCompostableItem(ObjectRegistry.CORN_SEEDS, 0.2F);
         registerCompostableItem(ObjectRegistry.DRIED_CORN, 0.6F);
-        registerCompostableItem(ObjectRegistry.BARLEY, 0.4F);
-        registerCompostableItem(ObjectRegistry.BARLEY_SEEDS, 0.2F);
         registerCompostableItem(ObjectRegistry.DRIED_BARLEY, 0.6F);
         registerCompostableItem(ObjectRegistry.HOPS, 0.4F);
         registerCompostableItem(ObjectRegistry.HOPS_SEEDS, 0.2F);

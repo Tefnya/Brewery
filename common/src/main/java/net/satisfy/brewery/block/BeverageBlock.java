@@ -3,6 +3,7 @@ package net.satisfy.brewery.block;
 import com.mojang.datafixers.util.Pair;
 import de.cristelknight.doapi.common.block.StorageBlock;
 import de.cristelknight.doapi.common.block.entity.StorageBlockEntity;
+import de.cristelknight.doapi.common.util.GeneralUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -29,9 +30,9 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.satisfy.brewery.item.DrinkBlockItem;
 import net.satisfy.brewery.registry.StorageTypeRegistry;
-import net.satisfy.brewery.util.BreweryUtil;
 import org.jetbrains.annotations.NotNull;
 
+@SuppressWarnings("deprecation")
 public class BeverageBlock extends StorageBlock {
     private static final VoxelShape SHAPE = Shapes.box(0.125, 0, 0.125, 0.875, 0.875, 0.875);
 
@@ -46,7 +47,7 @@ public class BeverageBlock extends StorageBlock {
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+    public @NotNull InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         final ItemStack stack = player.getItemInHand(hand);
         BlockEntity blockEntity = world.getBlockEntity(pos);
 
@@ -118,7 +119,7 @@ public class BeverageBlock extends StorageBlock {
 
     @Override
     public boolean canSurvive(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
-        return BreweryUtil.isSolid(levelReader, blockPos);
+        return GeneralUtil.isSolid(levelReader, blockPos);
     }
 
     @Override
@@ -134,7 +135,7 @@ public class BeverageBlock extends StorageBlock {
     }
     @Override
     public ResourceLocation type() {
-        return StorageTypeRegistry.WINE_BOTTLE;
+        return StorageTypeRegistry.BEVERAGE;
     }
     @Override
     public boolean canInsertStack(ItemStack itemStack) {
@@ -173,7 +174,7 @@ public class BeverageBlock extends StorageBlock {
     }
 
     @Override
-    public RenderShape getRenderShape(BlockState blockState) {
+    public @NotNull RenderShape getRenderShape(BlockState blockState) {
         return RenderShape.MODEL;
     }
 

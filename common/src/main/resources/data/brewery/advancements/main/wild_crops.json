@@ -5,10 +5,10 @@
       "item": "brewery:hops"
     },
     "title": {
-      "translate": "brewery.advancement.wild_crops"
+      "translate": "advancement.brewery.wild_crops"
     },
     "description": {
-      "translate": "brewery.advancement.wild_crops.desc"
+      "translate": "advancement.brewery.wild_crops.desc"
     },
     "frame": "task",
     "show_toast": true,

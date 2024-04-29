@@ -13,7 +13,7 @@
   "display": {
     "announce_to_chat": false,
     "description": {
-      "translate": "brewery.advancement.get_saturated.desc"
+      "translate": "advancement.brewery.get_saturated.desc"
     },
     "frame": "task",
     "hidden": false,
@@ -22,7 +22,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "brewery.advancement.get_saturated"
+      "translate": "advancement.brewery.get_saturated"
     }
   },
   "requirements": [

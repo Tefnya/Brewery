@@ -5,6 +5,7 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.satisfy.brewery.client.model.BeerElementalModel;
 import net.satisfy.brewery.entity.BeerElementalEntity;
+import org.jetbrains.annotations.NotNull;
 
 import static net.satisfy.brewery.Brewery.MOD_ID;
 
@@ -19,7 +20,7 @@ BeerElementalRenderer extends MobRenderer<BeerElementalEntity, BeerElementalMode
     }
 
     @Override
-    public ResourceLocation getTextureLocation(BeerElementalEntity entity) {
+    public @NotNull ResourceLocation getTextureLocation(BeerElementalEntity entity) {
         return TEXTURE;
     }
 }

@@ -5,10 +5,10 @@
       "item": "brewery:barley"
     },
     "title": {
-      "translate": "brewery.advancement.crop_collector"
+      "translate": "advancement.brewery.crop_collector"
     },
     "description": {
-      "translate": "brewery.advancement.crop_collector.desc"
+      "translate": "advancement.brewery.crop_collector.desc"
     },
     "frame": "challenge",
     "show_toast": true,

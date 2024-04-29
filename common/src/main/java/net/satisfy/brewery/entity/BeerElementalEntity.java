@@ -1,5 +1,6 @@
 package net.satisfy.brewery.entity;
 
+import de.cristelknight.doapi.common.registry.DoApiSoundEventRegistry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -14,7 +15,7 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import net.satisfy.brewery.registry.SoundEventRegistry;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.EnumSet;
 
@@ -28,11 +29,9 @@ public class BeerElementalEntity extends Monster {
     }
 
     @Override
-    public EntityDimensions getDimensions(Pose pose) {
+    public @NotNull EntityDimensions getDimensions(Pose pose) {
         return EntityDimensions.scalable(1F, 2F);
     }
-
-
 
     @Override
     protected void registerGoals() {
@@ -63,6 +62,13 @@ public class BeerElementalEntity extends Monster {
         super.aiStep();
     }
 
+    public static AttributeSupplier.Builder createAttributes() {
+        return Mob.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 80.0D)
+                .add(Attributes.MOVEMENT_SPEED, 0.4D)
+                .add(Attributes.ATTACK_DAMAGE, 8.0D);
+    }
+
     @Override
     protected void customServerAiStep() {
         nextHeightOffsetChangeTick--;
@@ -84,32 +90,19 @@ public class BeerElementalEntity extends Monster {
         }
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 80.0D)
-                .add(Attributes.MOVEMENT_SPEED, 0.4D)
-                .add(Attributes.ATTACK_DAMAGE, 8.0D);
-    }
-
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.AXOLOTL_IDLE_AIR;
+        return DoApiSoundEventRegistry.BEER_ELEMENTAL_AMBIENT.get();
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSource) {
-        return SoundEventRegistry.BEER_ELEMENTAL_HURT.get();
+        return DoApiSoundEventRegistry.BEER_ELEMENTAL_HURT.get();
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEventRegistry.BEER_ELEMENTAL_DEATH.get();
-    }
-
-
-    @Override
-    public float getLightLevelDependentMagicValue() {
-        return 1.0F;
+        return DoApiSoundEventRegistry.BEER_ELEMENTAL_DEATH.get();
     }
 
     @Override
@@ -183,7 +176,7 @@ public class BeerElementalEntity extends Monster {
                     }
 
                     if (attackStep > 1) {
-                        if (!elemental.isSilent()) elemental.playSound(SoundEventRegistry.BEER_ELEMENTAL_ATTACK.get(), 1.0F, 1.0F);
+                        if (!elemental.isSilent()) elemental.playSound(DoApiSoundEventRegistry.BEER_ELEMENTAL_ATTACK.get(), 1.0F, 1.0F);
 
 
                         double dX = target.getX() - elemental.getX();

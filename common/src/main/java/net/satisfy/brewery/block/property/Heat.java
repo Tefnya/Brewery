@@ -1,6 +1,7 @@
 package net.satisfy.brewery.block.property;
 
 import net.minecraft.util.StringRepresentable;
+import org.jetbrains.annotations.NotNull;
 
 public enum Heat implements StringRepresentable {
     OFF("off"),
@@ -14,7 +15,7 @@ public enum Heat implements StringRepresentable {
     }
 
     @Override
-    public String getSerializedName() {
+    public @NotNull String getSerializedName() {
         return name;
     }
 }

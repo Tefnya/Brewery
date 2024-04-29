@@ -71,8 +71,6 @@ public class RopeCollisionEntity extends Entity implements IRopeEntity {
         return false;
     }
 
-    //Override Stuff
-
     @Environment(EnvType.CLIENT)
     @Override
     public boolean shouldRenderAtSqrDistance(double d) {
@@ -120,7 +118,7 @@ public class RopeCollisionEntity extends Entity implements IRopeEntity {
     }
 
     @Override
-    public Packet<ClientGamePacketListener> getAddEntityPacket() {
-        return new ClientboundAddEntityPacket(this); //BreweryUtil.createEntitySpawnPacket(BreweryNetworking.SPAWN_COLLISION_S2C_ID, this);
+    public @NotNull Packet<ClientGamePacketListener> getAddEntityPacket() {
+        return new ClientboundAddEntityPacket(this);
     }
 }

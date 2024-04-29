@@ -5,7 +5,7 @@
       "conditions": {
         "location": [
           {
-            "block": "brewery:silo_wood",
+            "block": "farm_and_charm:silo_wood",
             "condition": "minecraft:block_state_property"
           }
         ]
@@ -16,16 +16,16 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "brewery.advancement.place_silo_wood.desc"
+      "translate": "advancement.brewery.place_silo_wood.desc"
     },
     "frame": "goal",
     "hidden": false,
     "icon": {
-      "item": "brewery:silo_wood"
+      "item": "farm_and_charm:silo_wood"
     },
     "show_toast": true,
     "title": {
-      "translate": "brewery.advancement.place_silo_wood"
+      "translate": "advancement.brewery.place_silo_wood"
     }
   },
   "requirements": [

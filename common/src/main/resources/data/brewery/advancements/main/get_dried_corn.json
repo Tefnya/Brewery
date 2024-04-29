@@ -5,10 +5,10 @@
       "item": "brewery:dried_corn"
     },
     "title": {
-      "translate": "brewery.advancement.get_dried_corn"
+      "translate": "advancement.brewery.get_dried_corn"
     },
     "description": {
-      "translate": "brewery.advancement.get_dried_corn.desc"
+      "translate": "advancement.brewery.get_dried_corn.desc"
     },
     "frame": "goal",
     "show_toast": true,

@@ -1,6 +1,0 @@
-{
-	"parent": "brewery:block/tall_crop",
-	"textures": {
-		"crop": "brewery:block/barley_stage4-2"
-	}
-}

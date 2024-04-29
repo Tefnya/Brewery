@@ -6,6 +6,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
 
 @Environment(EnvType.CLIENT)
 public class RopeCollisionEntityRenderer extends EntityRenderer<RopeCollisionEntity> {

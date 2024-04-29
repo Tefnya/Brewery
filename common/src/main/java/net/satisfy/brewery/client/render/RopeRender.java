@@ -47,16 +47,14 @@ public class RopeRender {
     private void createModel(final RopeModel.Builder builder, final Vec3 ropeVec, final int degrees, final UVCord uv) {
         float length = (float) ropeVec.length();
         Vec3 ropeNormal = ropeVec.normalize();
-        // TODO: Everything is working, but the next line (Quaternion quaternion = new Vector3f(ropeNormal).rotationDegrees(degrees); in 1.19.2) I am
-        //  not sure if it is the right port, but again, it works.
         Quaternionf quaternion = new Quaternionf().rotateAxis(degrees, (float) ropeNormal.x(), (float) ropeNormal.y(), (float) ropeNormal.z());
         Vector3f crossVec = ropeNormal.equals(POSITIVE_Y) || ropeNormal.equals(NEGATIVE_Y) ? new Vector3f(1.0f, 0.0f, 0.0f) : new Vector3f(
                 (float) ropeNormal.cross(POSITIVE_Y).normalize().x,
                 (float) ropeNormal.cross(POSITIVE_Y).normalize().y,
                 (float) ropeNormal.cross(POSITIVE_Y).normalize().z);
-        crossVec.rotate(quaternion); //rotate plane ? degrees
-        crossVec.mul(((uv.x1() - uv.x0()) / 16.0F) * SCALE); //width
-        crossVec.mul(0.5F); //to each side
+        crossVec.rotate(quaternion);
+        crossVec.mul(((uv.x1() - uv.x0()) / 16.0F) * SCALE);
+        crossVec.mul(0.5F);
 
         float uvStart, uvEnd = 0;
         double segmentLength = Math.min(length, 1.0F / QUALITY), actuallySegmentLength;
@@ -67,15 +65,15 @@ public class RopeRender {
 
         boolean lastIter = false, straight = (ropeVec.x == 0 && ropeVec.z == 0) || RopeHelper.HANGING_AMOUNT == 0;
         for (int segment = 0; segment < MAX_SEGMENTS; segment++) {
-            lastPos.set(currentPos); //current to last
-            segmentPos.add(segmentVector); // add step on top
+            lastPos.set(currentPos);
+            segmentPos.add(segmentVector);
 
             if (straight || new Vec3(segmentPos).length() > length) {
                 lastIter = true;
                 segmentPos.set((float) ropeVec.x, (float) ropeVec.y, (float) ropeVec.z);
             }
 
-            currentPos.set(segmentPos); // set currentPos to top
+            currentPos.set(segmentPos);
             if (!straight)
                 currentPos.add(0.0F, (float) RopeHelper.getYHanging(new Vec3(segmentPos).length(), ropeVec), 0.0F); //add hanging
 

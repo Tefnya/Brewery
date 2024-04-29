@@ -5,10 +5,10 @@
       "item": "brewery:whiskey_maggoallan"
     },
     "title": {
-      "translate": "brewery.advancement.get_whiskey_maggoallan"
+      "translate": "advancement.brewery.get_whiskey_maggoallan"
     },
     "description": {
-      "translate": "brewery.advancement.get_whiskey_maggoallan.desc"
+      "translate": "advancement.brewery.get_whiskey_maggoallan.desc"
     },
     "frame": "goal",
     "show_toast": true,

@@ -5,10 +5,10 @@
       "item": "brewery:whiskey_cristelwalker"
     },
     "title": {
-      "translate": "brewery.advancement.get_whiskey_cristelwalker"
+      "translate": "advancement.brewery.get_whiskey_cristelwalker"
     },
     "description": {
-      "translate": "brewery.advancement.get_whiskey_cristelwalker.desc"
+      "translate": "advancement.brewery.get_whiskey_cristelwalker.desc"
     },
     "frame": "goal",
     "show_toast": true,

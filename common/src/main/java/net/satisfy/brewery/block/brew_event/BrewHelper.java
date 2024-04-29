@@ -15,10 +15,7 @@ import net.satisfy.brewery.entity.BrewstationBlockEntity;
 import net.satisfy.brewery.registry.BlockStateRegistry;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Supplier;
 
 public class BrewHelper {
@@ -49,16 +46,13 @@ public class BrewHelper {
 
         for (ResourceLocation event : BrewEvents.BREW_EVENTS.keySet()) {
             boolean canAdd = true;
-
-            // Check if the event is already running
             if (runningEvents.contains(event)) {
                 canAdd = false;
             } else {
-                // Check for conflicts with currently running events
                 for (ResourceLocation runningEvent : runningEvents) {
-                    if (conflictsWith(event, runningEvent)) { // Adjust this condition based on your event conflict logic
+                    if (conflictsWith(event, runningEvent)) {
                         canAdd = false;
-                        break; // No need to check further running events if there's a conflict
+                        break;
                     }
                 }
             }
@@ -80,14 +74,14 @@ public class BrewHelper {
         if (possibleEvents.isEmpty()) {
             return null;
         }
-        ResourceLocation eventLocation = possibleEvents.get(entity.getLevel().getRandom().nextInt(possibleEvents.size()));
+        ResourceLocation eventLocation = possibleEvents.get(Objects.requireNonNull(entity.getLevel()).getRandom().nextInt(possibleEvents.size()));
 
         Supplier<BrewEvent> type = BrewEvents.byId(eventLocation);
+        assert type != null;
         BrewEvent event = type.get();
         event.setTimeForEvent(entity.getLevel().getRandom().nextInt(8 * 20,20 * 20));
         return event;
     }
-
 
     public static void finishEvents(BrewstationBlockEntity entity){
         Set<BrewEvent> eventSet = entity.getRunningEvents();
@@ -132,7 +126,7 @@ public class BrewHelper {
         ListTag list = new ListTag();
         for(BrewEvent event : events){
             CompoundTag tag = event.save(new CompoundTag());
-            tag.putString("id", BrewEvents.getId(event).toString());
+            tag.putString("id", Objects.requireNonNull(BrewEvents.getId(event)).toString());
             tag.putInt("timeLeft", event.getTimeLeft());
             list.add(tag);
         }

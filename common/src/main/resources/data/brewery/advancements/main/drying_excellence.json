@@ -5,7 +5,7 @@
       "conditions": {
         "location": [
           {
-            "block": "brewery:silo_copper",
+            "block": "farm_and_charm:silo_copper",
             "condition": "minecraft:block_state_property"
           }
         ]
@@ -16,16 +16,16 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "brewery.advancement.place_silo_copper.desc"
+      "translate": "advancement.brewery.place_silo_copper.desc"
     },
     "frame": "goal",
     "hidden": false,
     "icon": {
-      "item": "brewery:silo_copper"
+      "item": "farm_and_charm:silo_copper"
     },
     "show_toast": true,
     "title": {
-      "translate": "brewery.advancement.place_silo_copper"
+      "translate": "advancement.brewery.place_silo_copper"
     }
   },
   "requirements": [

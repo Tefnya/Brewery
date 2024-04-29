@@ -8,13 +8,11 @@ import net.minecraft.core.registries.Registries;
 import net.satisfy.brewery.Brewery;
 import net.satisfy.brewery.effect.*;
 import net.satisfy.brewery.util.BreweryIdentifier;
-import net.minecraft.core.Registry;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 
 import java.util.function.Supplier;
-
 
 public class MobEffectRegistry {
 
@@ -23,16 +21,16 @@ public class MobEffectRegistry {
 
     public static final RegistrySupplier<MobEffect> DRUNK;
     public static final RegistrySupplier<MobEffect> BLACKOUT;
-    public static final RegistrySupplier<MobEffect> SATURATED;
     public static final RegistrySupplier<MobEffect> RENEWINGTOUCH;
     public static final RegistrySupplier<MobEffect> TOXICTOUCH;
     public static final RegistrySupplier<MobEffect> HEALINGTOUCH;
     public static final RegistrySupplier<MobEffect> PROTECTIVETOUCH;
-    public static final RegistrySupplier<MobEffect> HARDDRINKING;
     public static final RegistrySupplier<MobEffect> PARTYSTARTER;
     public static final RegistrySupplier<MobEffect> SNOWWHITE;
     public static final RegistrySupplier<MobEffect> PINTCHARISMA;
     public static final RegistrySupplier<MobEffect> HALEY;
+    public static final RegistrySupplier<MobEffect> MINING;
+    public static final RegistrySupplier<MobEffect> PACIFY;
 
 
     private static RegistrySupplier<MobEffect> registerEffect(String name, Supplier<MobEffect> effect){
@@ -49,17 +47,16 @@ public class MobEffectRegistry {
 
     static {
         DRUNK = registerEffect("drunk", DrunkEffect::new);
-        HARDDRINKING = registerEffect("harddrinking", HarddrinkingEffect::new);
         BLACKOUT = registerEffect("blackout", () -> new BlackoutEffect().setFactorDataFactory(() -> new MobEffectInstance.FactorData(22)));
-        SATURATED = registerEffect("saturated", SaturatedEffect::new);
-        TOXICTOUCH = registerEffect("toxictouch", () -> new ToxicTouchEffect(MobEffectCategory.BENEFICIAL, 0x90F891));
-        RENEWINGTOUCH = registerEffect("renewingtouch", () -> new RenewingTouchEffect(MobEffectCategory.BENEFICIAL, 0x90F891));
-        HEALINGTOUCH = registerEffect("healingtouch", () -> new HealingTouchEffect(MobEffectCategory.BENEFICIAL, 0x90F891));
-        PROTECTIVETOUCH = registerEffect("protectivetouch", () -> new ProtectiveTouchEffect(MobEffectCategory.BENEFICIAL, 0x90F891));
-        PARTYSTARTER = registerEffect("partystarter", () -> new PartystarterEffect(MobEffectCategory.BENEFICIAL, 0x90F891));
-        SNOWWHITE = registerEffect("snowwhite", () -> new SnowWhiteEffect(MobEffectCategory.BENEFICIAL, 0x90F891));
-        PINTCHARISMA = registerEffect("pintcharisma", () -> new PintCharismaEffect(MobEffectCategory.BENEFICIAL, 0x90F891));
-        HALEY = registerEffect("haley", () -> new HaleyEffect(MobEffectCategory.BENEFICIAL, 0x90F891));
-
+        MINING = registerEffect("mining", () -> new MiningEffect(MobEffectCategory.BENEFICIAL, 0));
+        PACIFY = registerEffect("pacify", () -> new PacifyEffect(MobEffectCategory.BENEFICIAL, 0));
+        TOXICTOUCH = registerEffect("toxictouch", () -> new ToxicTouchEffect(MobEffectCategory.BENEFICIAL, 0));
+        RENEWINGTOUCH = registerEffect("renewingtouch", () -> new RenewingTouchEffect(MobEffectCategory.BENEFICIAL, 0));
+        HEALINGTOUCH = registerEffect("healingtouch", () -> new HealingTouchEffect(MobEffectCategory.BENEFICIAL, 0));
+        PROTECTIVETOUCH = registerEffect("protectivetouch", () -> new ProtectiveTouchEffect(MobEffectCategory.BENEFICIAL, 0));
+        PARTYSTARTER = registerEffect("partystarter", () -> new PartystarterEffect(MobEffectCategory.BENEFICIAL, 0));
+        SNOWWHITE = registerEffect("snowwhite", () -> new SnowWhiteEffect(MobEffectCategory.BENEFICIAL, 0));
+        PINTCHARISMA = registerEffect("pintcharisma", () -> new PintCharismaEffect(MobEffectCategory.BENEFICIAL, 0));
+        HALEY = registerEffect("haley", () -> new HaleyEffect(MobEffectCategory.BENEFICIAL, 0));
     }
 }

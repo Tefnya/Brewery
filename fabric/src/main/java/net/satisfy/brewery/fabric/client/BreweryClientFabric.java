@@ -6,7 +6,7 @@ import net.fabricmc.api.ClientModInitializer;
 public class BreweryClientFabric implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-        BreweryClient.onInitializeClient();
         BreweryClient.preInitClient();
+        BreweryClient.onInitializeClient();
     }
 }

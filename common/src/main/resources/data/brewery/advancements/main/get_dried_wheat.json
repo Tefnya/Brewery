@@ -5,10 +5,10 @@
       "item": "brewery:dried_wheat"
     },
     "title": {
-      "translate": "brewery.advancement.get_dried_wheat"
+      "translate": "advancement.brewery.get_dried_wheat"
     },
     "description": {
-      "translate": "brewery.advancement.get_dried_wheat.desc"
+      "translate": "advancement.brewery.get_dried_wheat.desc"
     },
     "frame": "goal",
     "show_toast": true,

@@ -14,8 +14,7 @@ public class HaleyEffect extends MobEffect {
 
     @Override
     public void applyEffectTick(LivingEntity entity, int amplifier) {
-        if (entity instanceof Player) {
-            Player player = (Player) entity;
+        if (entity instanceof Player player) {
             if (!player.getCommandSenderWorld().isClientSide) {
                 player.getAbilities().mayfly = true;
                 player.getAbilities().flying = true;
@@ -26,8 +25,7 @@ public class HaleyEffect extends MobEffect {
 
     @Override
     public void removeAttributeModifiers(LivingEntity entity, AttributeMap attributeMap, int amplifier) {
-        if (entity instanceof Player) {
-            Player player = (Player) entity;
+        if (entity instanceof Player player) {
             if (!player.getCommandSenderWorld().isClientSide) {
                 player.getAbilities().mayfly = player.isCreative();
                 player.getAbilities().flying = player.isCreative();

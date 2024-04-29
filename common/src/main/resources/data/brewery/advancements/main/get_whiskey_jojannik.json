@@ -5,10 +5,10 @@
       "item": "brewery:whiskey_jojannik"
     },
     "title": {
-      "translate": "brewery.advancement.get_whiskey_jojannik"
+      "translate": "advancement.brewery.get_whiskey_jojannik"
     },
     "description": {
-      "translate": "brewery.advancement.get_whiskey_jojannik.desc"
+      "translate": "advancement.brewery.get_whiskey_jojannik.desc"
     },
     "frame": "goal",
     "show_toast": true,

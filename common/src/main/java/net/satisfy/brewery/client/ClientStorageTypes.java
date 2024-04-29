@@ -13,7 +13,7 @@ public class ClientStorageTypes {
     }
 
     public static void init(){
-        registerStorageType(StorageTypeRegistry.WINE_BOTTLE, new BeverageRenderer());
+        registerStorageType(StorageTypeRegistry.BEVERAGE, new BeverageRenderer());
     }
 
 }

@@ -5,7 +5,6 @@ import java.util.Objects;
 public class AlcoholLevel {
     private int drunkenness;
     private int immunity;
-    private final int MAX_IMMUNITY = 10;
 
     public AlcoholLevel() {
         this(0, 3);
@@ -57,6 +56,7 @@ public class AlcoholLevel {
     }
 
     public void gainImmunity() {
+        int MAX_IMMUNITY = 10;
         this.immunity = Math.min(this.immunity + 1, MAX_IMMUNITY);
     }
 

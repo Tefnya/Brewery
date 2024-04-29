@@ -12,6 +12,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.phys.Vec2;
 import net.satisfy.brewery.entity.BeerElementalAttackEntity;
+import org.jetbrains.annotations.NotNull;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
@@ -51,7 +52,7 @@ public class BeerElementalAttackRenderer extends EntityRenderer<BeerElementalAtt
 	}
 
 	@Override
-	public ResourceLocation getTextureLocation(BeerElementalAttackEntity entity) {
+	public @NotNull ResourceLocation getTextureLocation(BeerElementalAttackEntity entity) {
 		return TEXTURE_LOCATION;
 	}
 

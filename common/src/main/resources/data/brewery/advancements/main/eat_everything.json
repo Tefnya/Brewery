@@ -75,7 +75,7 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "brewery.advancement.eat_everything.desc"
+      "translate": "advancement.brewery.eat_everything.desc"
     },
     "frame": "challenge",
     "hidden": false,
@@ -84,7 +84,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "brewery.advancement.eat_everything.title"
+      "translate": "advancement.brewery.eat_everything.title"
     }
   },
   "requirements": [

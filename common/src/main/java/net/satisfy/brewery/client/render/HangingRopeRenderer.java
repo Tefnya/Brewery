@@ -19,7 +19,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import org.jetbrains.annotations.NotNull;
 
 @Environment(EnvType.CLIENT)
 public class HangingRopeRenderer extends EntityRenderer<HangingRopeEntity> {
@@ -65,7 +64,8 @@ public class HangingRopeRenderer extends EntityRenderer<HangingRopeEntity> {
     }
 
     @Override
-    public @NotNull ResourceLocation getTextureLocation(HangingRopeEntity entity) {
-        return new ResourceLocation("");
+    @SuppressWarnings("all")
+    public  ResourceLocation getTextureLocation(HangingRopeEntity entity) {
+        return null;
     }
 }

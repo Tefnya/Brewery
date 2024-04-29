@@ -15,6 +15,7 @@ import net.satisfy.brewery.Brewery;
 import net.satisfy.brewery.compat.jei.BreweryJEIClientPlugin;
 import net.satisfy.brewery.recipe.BrewingRecipe;
 import net.satisfy.brewery.registry.ObjectRegistry;
+import org.jetbrains.annotations.NotNull;
 
 public class BrewingStationCategory implements IRecipeCategory<BrewingRecipe> {
     public final static ResourceLocation UID = new ResourceLocation(Brewery.MOD_ID, "brewing");
@@ -30,22 +31,22 @@ public class BrewingStationCategory implements IRecipeCategory<BrewingRecipe> {
     }
 
     @Override
-    public RecipeType<BrewingRecipe> getRecipeType() {
+    public @NotNull RecipeType<BrewingRecipe> getRecipeType() {
         return BreweryJEIClientPlugin.BREWING_TYPE;
     }
 
     @Override
-    public Component getTitle() {
+    public @NotNull Component getTitle() {
         return Component.translatable("rei.brewery.brewing_station_category");
     }
 
     @Override
-    public IDrawable getBackground() {
+    public @NotNull IDrawable getBackground() {
         return this.background;
     }
 
     @Override
-    public IDrawable getIcon() {
+    public @NotNull IDrawable getIcon() {
         return this.icon;
     }
 

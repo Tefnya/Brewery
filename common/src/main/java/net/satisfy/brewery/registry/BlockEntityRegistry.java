@@ -3,7 +3,9 @@ package net.satisfy.brewery.registry;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.world.entity.animal.Bee;
 import net.satisfy.brewery.Brewery;
+import net.satisfy.brewery.block.BeerMugFlowerPotBlock;
 import net.satisfy.brewery.entity.*;
 import net.minecraft.core.Registry;
 import net.minecraft.world.level.block.Block;
@@ -15,9 +17,7 @@ public class BlockEntityRegistry {
     private static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(Brewery.MOD_ID, Registries.BLOCK_ENTITY_TYPE);
 
     public static final RegistrySupplier<BlockEntityType<BrewstationBlockEntity>> BREWINGSTATION_BLOCK_ENTITY = create("brewingstation", () -> BlockEntityType.Builder.of(BrewstationBlockEntity::new, ObjectRegistry.WOODEN_BREWINGSTATION.get(),  ObjectRegistry.COPPER_BREWINGSTATION.get(),  ObjectRegistry.NETHERITE_BREWINGSTATION.get()).build(null));
-    public static final RegistrySupplier<BlockEntityType<BeerKegFlowerPotBlockEntity>> BEER_MUG_FLOWER_POT_BLOCK_ENTITY = create("beer_mug", () -> BlockEntityType.Builder.of(BeerKegFlowerPotBlockEntity::new, ObjectRegistry.BEER_MUG.get()).build(null));
-    public static final RegistrySupplier<BlockEntityType<SiloBlockEntity>> SILO = create("silo", () -> BlockEntityType.Builder.of(SiloBlockEntity::new, ObjectRegistry.SILO_WOOD.get(), ObjectRegistry.SILO_COPPER.get()).build(null));
-    public static final RegistrySupplier<BlockEntityType<StorageBlockEntity>> STORAGE_BLOCK_ENTITY = create("storage_block", () -> BlockEntityType.Builder.of(StorageBlockEntity::new, ObjectRegistry.CABINET.get(), ObjectRegistry.DRAWER.get()).build(null));
+    public static final RegistrySupplier<BlockEntityType<BeerMugBlockEntity>> BEER_MUG_BLOCK_ENTITY = create("beer_mug", () -> BlockEntityType.Builder.of(BeerMugBlockEntity::new, ObjectRegistry.BEER_MUG.get()).build(null));
 
     private static <T extends BlockEntityType<?>> RegistrySupplier<T> create(final String path, final Supplier<T> type) {
         return BLOCK_ENTITY_TYPES.register(path, type);

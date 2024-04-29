@@ -1,21 +1,20 @@
 package net.satisfy.brewery.client.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import de.cristelknight.doapi.client.ClientUtil;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.Vec3;
 import net.satisfy.brewery.block.brewingstation.BrewingstationBlock;
 import net.satisfy.brewery.entity.BrewstationBlockEntity;
-import net.satisfy.brewery.util.BreweryUtil;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
 import java.util.List;
 import java.util.Random;
 
+@SuppressWarnings("unused")
 public class BrewingstationRenderer implements BlockEntityRenderer<BrewstationBlockEntity> {
 
     public BrewingstationRenderer(BlockEntityRendererProvider.Context ctx) {
@@ -28,7 +27,7 @@ public class BrewingstationRenderer implements BlockEntityRenderer<BrewstationBl
         List<ItemStack> ingredients = entity.getIngredient();
         if (ingredients.isEmpty()) return;
 
-        matrixStack.pushPose(); // Ensure this is the first thing done after conditions check
+        matrixStack.pushPose();
         setupInitialTransform(matrixStack, entity);
 
         Random random = new Random(entity.getBlockPos().hashCode());
@@ -40,10 +39,10 @@ public class BrewingstationRenderer implements BlockEntityRenderer<BrewstationBl
             Vector3f position = calculateItemPosition(index, angleOffset, ingredients.size());
             applyItemTransform(matrixStack, position, angleOffset * index);
             renderItems(matrixStack, bufferSource, entity, stack, random);
-            matrixStack.popPose(); // Match every push with a pop
+            matrixStack.popPose();
         }
 
-        matrixStack.popPose(); // Make sure to pop the initial push
+        matrixStack.popPose();
     }
 
     private void setupInitialTransform(PoseStack matrixStack, BrewstationBlockEntity entity) {
@@ -66,14 +65,14 @@ public class BrewingstationRenderer implements BlockEntityRenderer<BrewstationBl
     private void renderItems(PoseStack matrixStack, MultiBufferSource bufferSource, BrewstationBlockEntity entity, ItemStack stack, Random random) {
         for (int i = 0; i <= stack.getCount() / 8; i++) {
             matrixStack.pushPose();
-            Vector3f offset = offsetRandomly(random, 1 / 16f);
+            Vector3f offset = offsetRandomly(random);
             matrixStack.translate(offset.x, offset.y, offset.z);
-            BreweryUtil.renderItem(stack, matrixStack, bufferSource, entity);
+            ClientUtil.renderItem(stack, matrixStack, bufferSource, entity);
             matrixStack.popPose();
         }
     }
 
-    private Vector3f offsetRandomly(Random random, float radius) {
-        return new Vector3f((random.nextFloat() - 0.5f) * 2 * radius, (random.nextFloat() - 0.5f) * 2 * radius, (random.nextFloat() - 0.5f) * 2 * radius);
+    private Vector3f offsetRandomly(Random random) {
+        return new Vector3f((random.nextFloat() - 0.5f) * 2 * (float) 0.0625, (random.nextFloat() - 0.5f) * 2 * (float) 0.0625, (random.nextFloat() - 0.5f) * 2 * (float) 0.0625);
     }
 }

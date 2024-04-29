@@ -1,8 +1,7 @@
 package net.satisfy.brewery.forge;
-
+/*
 import net.satisfy.brewery.Brewery;
 import net.satisfy.brewery.forge.registry.BreweryForgeVillagers;
-import net.satisfy.brewery.util.BreweryVillagerUtil;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -24,7 +23,7 @@ public class BreweryEvents {
 
                 List<VillagerTrades.ItemListing> level1 = trades.computeIfAbsent(1, k -> new ArrayList<>());
                 level1.add(new BreweryVillagerUtil.SellItemFactory(ObjectRegistry.HOPS_SEEDS.get(), 2, 3, 5));
-                level1.add(new BreweryVillagerUtil.SellItemFactory(ObjectRegistry.CORN_SEEDS.get(), 2, 3, 5));
+                level1.add(new VillgerUtil.SellItemFactory(ObjectRegistry.CORN_SEEDS.get(), 2, 3, 5));
                 level1.add(new BreweryVillagerUtil.SellItemFactory(ObjectRegistry.BARLEY_SEEDS.get(), 2, 3, 5));
 
                 List<VillagerTrades.ItemListing> level2 = trades.computeIfAbsent(2, k -> new ArrayList<>());
@@ -56,3 +55,4 @@ public class BreweryEvents {
         }
     }
 }
+*/

@@ -19,7 +19,7 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "brewery.advancement.beer_elemental.desc"
+      "translate": "advancement.brewery.beer_elemental.desc"
     },
     "frame": "challenge",
     "hidden": false,
@@ -28,7 +28,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "brewery.advancement.beer_elemental.title"
+      "translate": "advancement.brewery.beer_elemental.title"
     }
   },
   "requirements": [

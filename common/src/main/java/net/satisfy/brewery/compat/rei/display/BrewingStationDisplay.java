@@ -13,6 +13,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+@SuppressWarnings("all")
 public class BrewingStationDisplay extends BasicDisplay {
 
     public BrewingStationDisplay(BrewingRecipe recipe) {

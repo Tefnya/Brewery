@@ -13,7 +13,6 @@
     "AlcoholPlayerMixin",
     "MobFollowPlayerMixin",
     "PlayerMixin",
-    "StoneCutterMixin",
     "VillagerDiscountMixin",
     "rope.ServerEntityMixin"
   ],

@@ -5,10 +5,10 @@
       "item": "brewery:whiskey_carrasconlabel"
     },
     "title": {
-      "translate": "brewery.advancement.get_whiskey_carrasconlabel"
+      "translate": "advancement.brewery.get_whiskey_carrasconlabel"
     },
     "description": {
-      "translate": "brewery.advancement.get_whiskey_carrasconlabel.desc"
+      "translate": "advancement.brewery.get_whiskey_carrasconlabel.desc"
     },
     "frame": "goal",
     "show_toast": true,

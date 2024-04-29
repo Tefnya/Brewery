@@ -19,7 +19,6 @@ import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import java.util.Set;
 
 public class WhistleEvent extends BrewEvent {
-
     @Override
     public CompoundTag save(CompoundTag compoundTag) {
         return compoundTag;
@@ -33,6 +32,7 @@ public class WhistleEvent extends BrewEvent {
     @Override
     public void onTick(BrewstationBlockEntity entity) {
         Level level = entity.getLevel();
+        assert level != null;
         if(!level.isClientSide()) return;
         RandomSource randomSource = level.getRandom();
         if(!(getTimeLeft() % 3 == 0 && randomSource.nextFloat() < 0.05F)) return;
@@ -41,6 +41,7 @@ public class WhistleEvent extends BrewEvent {
         BlockState blockState = level.getBlockState(blockPos);
 
         if (blockState.getValue(BrewWhistleBlock.WHISTLE) && blockState.getValue(BrewWhistleBlock.HALF) == DoubleBlockHalf.UPPER) {
+            assert blockPos != null;
             double x = blockPos.getX() + 0.5D;
             double y = blockPos.getY();
             double z = blockPos.getZ() + 0.5D;

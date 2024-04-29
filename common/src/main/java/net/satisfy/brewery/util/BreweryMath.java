@@ -67,14 +67,12 @@ public class BreweryMath {
         int dy = endY - startY;
         int dz = endZ - startZ;
 
-        // Calculate the greatest common divisor (GCD) of the direction components
         int gcd = gcd(gcd(dx, dy), dz);
 
         if (gcd == 0) {
             return blockPositions;
         }
 
-        // Iterate over t values within the range
         for (int t = 1; t < gcd; t++) {
             int x = switchX ? endX - (dx * t) / gcd : startX + (dx * t) / gcd;
             int y = switchY ? endY - (dy * t) / gcd : startY + (dy * t) / gcd;

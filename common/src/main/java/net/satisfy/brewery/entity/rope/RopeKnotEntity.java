@@ -35,6 +35,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.satisfy.brewery.Brewery;
+import net.satisfy.brewery.registry.BlockEntityRegistry;
 import net.satisfy.brewery.registry.EntityRegistry;
 import net.satisfy.brewery.registry.ObjectRegistry;
 import net.satisfy.brewery.util.rope.RopeConnection;

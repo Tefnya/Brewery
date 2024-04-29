@@ -5,10 +5,10 @@
       "item": "brewery:whiskey_lilitusinglemalt"
     },
     "title": {
-      "translate": "brewery.advancement.get_whiskey_lilitusinglemalt"
+      "translate": "advancement.brewery.get_whiskey_lilitusinglemalt"
     },
     "description": {
-      "translate": "brewery.advancement.get_whiskey_lilitusinglemalt.desc"
+      "translate": "advancement.brewery.get_whiskey_lilitusinglemalt.desc"
     },
     "frame": "goal",
     "show_toast": true,

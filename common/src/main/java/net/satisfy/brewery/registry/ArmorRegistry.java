@@ -1,13 +1,10 @@
 package net.satisfy.brewery.registry;
 
-import com.mojang.datafixers.util.Pair;
 import de.cristelknight.doapi.client.render.feature.CustomArmorManager;
 import de.cristelknight.doapi.client.render.feature.CustomArmorSet;
-import de.cristelknight.doapi.client.render.feature.FullCustomArmor;
 import dev.architectury.registry.client.level.entity.EntityModelLayerRegistry;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.satisfy.brewery.client.model.*;
@@ -15,7 +12,7 @@ import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
-import net.satisfy.brewery.item.IBrewfestArmorSet;
+import net.satisfy.brewery.item.armor.IBrewfestArmorSet;
 import net.satisfy.brewery.util.BreweryIdentifier;
 
 import java.util.List;
@@ -55,16 +52,11 @@ public class ArmorRegistry {
         boolean breastplate = IBrewfestArmorSet.hasBrewfestBreastplate(player);
         boolean leggings = IBrewfestArmorSet.hasBrewfestLeggings(player);
         boolean boots = IBrewfestArmorSet.hasBrewfestBoots(player);
-        tooltip.add(Component.empty());
-        tooltip.add(Component.translatable("tooltip.brewfest.brewfestdrop").withStyle(ChatFormatting.GOLD));
-        tooltip.add(Component.empty());
-        tooltip.add(Component.translatable("tooltip.brewfest.brewfest_set").withStyle(ChatFormatting.DARK_GREEN, ChatFormatting.BOLD));
+        tooltip.add(Component.nullToEmpty(""));
+        tooltip.add(Component.translatable("tooltip.brewfest.brewfest_set").withStyle(ChatFormatting.DARK_GREEN));
         tooltip.add(helmet ? Component.translatable("tooltip.brewfest.brewfesthelmet").withStyle(ChatFormatting.GREEN) : Component.translatable("tooltip.brewfest.brewfesthelmet").withStyle(ChatFormatting.GRAY));
         tooltip.add(breastplate ? Component.translatable("tooltip.brewfest.brewfestbreastplate").withStyle(ChatFormatting.GREEN) : Component.translatable("tooltip.brewfest.brewfestbreastplate").withStyle(ChatFormatting.GRAY));
         tooltip.add(leggings ? Component.translatable("tooltip.brewfest.brewfestleggings").withStyle(ChatFormatting.GREEN) : Component.translatable("tooltip.brewfest.brewfestleggings").withStyle(ChatFormatting.GRAY));
         tooltip.add(boots ? Component.translatable("tooltip.brewfest.brewfestboots").withStyle(ChatFormatting.GREEN) : Component.translatable("tooltip.brewfest.brewfestboots").withStyle(ChatFormatting.GRAY));
-        tooltip.add(Component.empty());
-        tooltip.add(Component.translatable("tooltip.brewfest.brewfest_seteffect").withStyle(ChatFormatting.GRAY));
-        tooltip.add(helmet && breastplate && leggings && boots ? Component.translatable("tooltip.brewfest.brewfest_effect").withStyle(ChatFormatting.DARK_GREEN) : Component.translatable("tooltip.brewfest.brewfest_effect").withStyle(ChatFormatting.GRAY));
     }
 }

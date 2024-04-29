@@ -26,7 +26,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.satisfy.brewery.block.crops.HopsCropBlock;
+import net.satisfy.brewery.block.HopsCropBlock;
 import net.satisfy.brewery.networking.BreweryNetworking;
 import net.satisfy.brewery.registry.EntityRegistry;
 import net.satisfy.brewery.registry.ObjectRegistry;
@@ -36,6 +36,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+@SuppressWarnings("deprecation")
 public class HangingRopeEntity extends Entity implements IRopeEntity, EntitySpawnExtension {
     public static final int MAX_LENGTH = 8;
     @Nullable
@@ -224,7 +225,7 @@ public class HangingRopeEntity extends Entity implements IRopeEntity, EntitySpaw
     }
 
     @Override
-    public Packet<ClientGamePacketListener> getAddEntityPacket() {
+    public @NotNull Packet<ClientGamePacketListener> getAddEntityPacket() {
         return NetworkManager.createAddEntityPacket(this);
     }
 

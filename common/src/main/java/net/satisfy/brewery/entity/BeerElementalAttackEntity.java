@@ -1,9 +1,9 @@
 package net.satisfy.brewery.entity;
 
 import de.cristelknight.doapi.common.registry.DoApiSoundEventRegistry;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;

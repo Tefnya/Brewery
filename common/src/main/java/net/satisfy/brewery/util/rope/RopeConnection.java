@@ -1,15 +1,6 @@
 package net.satisfy.brewery.util.rope;
 
 import dev.architectury.networking.NetworkManager;
-import net.satisfy.brewery.Brewery;
-import net.satisfy.brewery.block.HopsCropHeadBlock;
-import net.satisfy.brewery.entity.rope.HangingRopeEntity;
-import net.satisfy.brewery.entity.rope.RopeCollisionEntity;
-import net.satisfy.brewery.entity.rope.RopeKnotEntity;
-import net.satisfy.brewery.networking.BreweryNetworking;
-import net.satisfy.brewery.registry.EntityRegistry;
-import net.satisfy.brewery.registry.ObjectRegistry;
-import net.satisfy.brewery.util.BreweryMath;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerLevel;
@@ -21,6 +12,15 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import net.satisfy.brewery.Brewery;
+import net.satisfy.brewery.block.HopsCropHeadBlock;
+import net.satisfy.brewery.entity.rope.HangingRopeEntity;
+import net.satisfy.brewery.entity.rope.RopeCollisionEntity;
+import net.satisfy.brewery.entity.rope.RopeKnotEntity;
+import net.satisfy.brewery.networking.BreweryNetworking;
+import net.satisfy.brewery.registry.EntityRegistry;
+import net.satisfy.brewery.registry.ObjectRegistry;
+import net.satisfy.brewery.util.BreweryMath;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

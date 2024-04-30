@@ -1,11 +1,5 @@
 package net.satisfy.brewery.block.brew_event;
 
-import net.satisfy.brewery.block.brewingstation.BrewKettleBlock;
-import net.satisfy.brewery.block.brewingstation.BrewWhistleBlock;
-import net.satisfy.brewery.entity.BrewstationBlockEntity;
-import net.satisfy.brewery.block.property.Liquid;
-import net.satisfy.brewery.registry.BlockStateRegistry;
-import net.satisfy.brewery.registry.ObjectRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -15,6 +9,12 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.satisfy.brewery.block.brewingstation.BrewKettleBlock;
+import net.satisfy.brewery.block.brewingstation.BrewWhistleBlock;
+import net.satisfy.brewery.block.property.Liquid;
+import net.satisfy.brewery.entity.BrewstationBlockEntity;
+import net.satisfy.brewery.registry.BlockStateRegistry;
+import net.satisfy.brewery.registry.ObjectRegistry;
 
 import java.util.Set;
 

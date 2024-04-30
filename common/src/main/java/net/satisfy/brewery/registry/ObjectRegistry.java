@@ -20,8 +20,8 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.PushReaction;
 import net.satisfy.brewery.Brewery;
-import net.satisfy.brewery.block.*;
 import net.satisfy.brewery.block.TableBlock;
+import net.satisfy.brewery.block.*;
 import net.satisfy.brewery.block.barrel.BigBarrelMainBlock;
 import net.satisfy.brewery.block.barrel.BigBarrelMainHeadBlock;
 import net.satisfy.brewery.block.barrel.BigBarrelRightBlock;
@@ -30,8 +30,6 @@ import net.satisfy.brewery.block.brewingstation.BrewKettleBlock;
 import net.satisfy.brewery.block.brewingstation.BrewOvenBlock;
 import net.satisfy.brewery.block.brewingstation.BrewTimerBlock;
 import net.satisfy.brewery.block.brewingstation.BrewWhistleBlock;
-import net.satisfy.brewery.block.HopsCropBodyBlock;
-import net.satisfy.brewery.block.HopsCropHeadBlock;
 import net.satisfy.brewery.block.property.BrewMaterial;
 import net.satisfy.brewery.item.*;
 import net.satisfy.brewery.item.armor.*;
@@ -43,8 +41,8 @@ import satisfy.farm_and_charm.item.food.EffectItem;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-import static satisfy.farm_and_charm.registry.MobEffectRegistry.SUSTENANCE;
 import static satisfy.farm_and_charm.registry.MobEffectRegistry.SATIATION;
+import static satisfy.farm_and_charm.registry.MobEffectRegistry.SUSTENANCE;
 
 @SuppressWarnings("all")
 public class ObjectRegistry {

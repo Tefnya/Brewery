@@ -2,8 +2,8 @@ package net.satisfy.brewery.event;
 
 import dev.architectury.event.events.client.ClientPlayerEvent;
 import dev.architectury.networking.NetworkManager;
-import net.satisfy.brewery.networking.BreweryNetworking;
 import net.minecraft.client.player.LocalPlayer;
+import net.satisfy.brewery.networking.BreweryNetworking;
 
 public class PlayerJoinEvent implements ClientPlayerEvent.ClientPlayerJoin {
     @Override

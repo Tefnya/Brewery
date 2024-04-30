@@ -1,9 +1,9 @@
 package net.satisfy.brewery.event;
 
 import dev.architectury.event.events.common.PlayerEvent;
+import net.minecraft.server.level.ServerPlayer;
 import net.satisfy.brewery.effect.alcohol.AlcoholManager;
 import net.satisfy.brewery.effect.alcohol.AlcoholPlayer;
-import net.minecraft.server.level.ServerPlayer;
 
 public class PlayerRespawnEvent implements PlayerEvent.PlayerRespawn {
 

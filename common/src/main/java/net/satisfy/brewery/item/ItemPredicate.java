@@ -1,7 +1,7 @@
 package net.satisfy.brewery.item;
 
 import dev.architectury.registry.item.ItemPropertiesRegistry;
-import net.satisfy.brewery.registry.*;
+import net.satisfy.brewery.registry.ObjectRegistry;
 import net.satisfy.brewery.util.BreweryIdentifier;
 
 public class ItemPredicate {

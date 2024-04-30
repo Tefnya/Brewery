@@ -2,9 +2,9 @@ package net.satisfy.brewery.networking.packet;
 
 
 import dev.architectury.networking.NetworkManager;
-import net.satisfy.brewery.effect.alcohol.MotionBlur;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
+import net.satisfy.brewery.effect.alcohol.MotionBlur;
 
 public class DrunkEffectS2CPacket implements NetworkManager.NetworkReceiver {
     @Override

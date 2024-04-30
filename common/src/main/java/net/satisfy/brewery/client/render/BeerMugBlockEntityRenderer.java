@@ -2,14 +2,14 @@ package net.satisfy.brewery.client.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import de.cristelknight.doapi.client.ClientUtil;
-import net.satisfy.brewery.block.BeerMugFlowerPotBlock;
-import net.satisfy.brewery.entity.BeerMugBlockEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.state.BlockState;
+import net.satisfy.brewery.block.BeerMugFlowerPotBlock;
+import net.satisfy.brewery.entity.BeerMugBlockEntity;
 
 @SuppressWarnings("unused")
 public class BeerMugBlockEntityRenderer implements BlockEntityRenderer<BeerMugBlockEntity> {

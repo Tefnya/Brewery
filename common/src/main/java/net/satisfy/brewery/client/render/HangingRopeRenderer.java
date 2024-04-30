@@ -2,10 +2,6 @@ package net.satisfy.brewery.client.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.satisfy.brewery.entity.rope.HangingRopeEntity;
-import net.satisfy.brewery.registry.EntityRegistry;
-import net.satisfy.brewery.util.BreweryIdentifier;
-import net.satisfy.brewery.util.BreweryMath;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -19,6 +15,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.satisfy.brewery.entity.rope.HangingRopeEntity;
+import net.satisfy.brewery.registry.EntityRegistry;
+import net.satisfy.brewery.util.BreweryIdentifier;
+import net.satisfy.brewery.util.BreweryMath;
 
 @Environment(EnvType.CLIENT)
 public class HangingRopeRenderer extends EntityRenderer<HangingRopeEntity> {

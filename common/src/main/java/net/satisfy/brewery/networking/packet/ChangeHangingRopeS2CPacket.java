@@ -1,10 +1,10 @@
 package net.satisfy.brewery.networking.packet;
 
 import dev.architectury.networking.NetworkManager;
-import net.satisfy.brewery.Brewery;
-import net.satisfy.brewery.entity.rope.HangingRopeEntity;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.Entity;
+import net.satisfy.brewery.Brewery;
+import net.satisfy.brewery.entity.rope.HangingRopeEntity;
 
 public class ChangeHangingRopeS2CPacket implements NetworkManager.NetworkReceiver {
     @Override

@@ -1,11 +1,11 @@
 package net.satisfy.brewery.util;
 
 import dev.architectury.event.events.common.LootEvent;
-import net.satisfy.brewery.Brewery;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.minecraft.world.level.storage.loot.entries.LootTableReference;
+import net.satisfy.brewery.Brewery;
 
 public class BreweryLoottableInjector {
     public static void InjectLoot(ResourceLocation id, LootEvent.LootTableModificationContext context) {

@@ -2,13 +2,13 @@ package net.satisfy.brewery.forge.client;
 
 import dev.architectury.registry.client.level.entity.EntityModelLayerRegistry;
 import dev.architectury.registry.client.level.entity.EntityRendererRegistry;
-import net.satisfy.brewery.Brewery;
-import net.satisfy.brewery.client.BreweryClient;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.registries.RegisterEvent;
+import net.satisfy.brewery.Brewery;
+import net.satisfy.brewery.client.BreweryClient;
 import net.satisfy.brewery.client.model.BeerElementalModel;
 import net.satisfy.brewery.client.model.RopeKnotEntityModel;
 import net.satisfy.brewery.client.render.*;

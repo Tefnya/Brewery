@@ -1,10 +1,10 @@
 package net.satisfy.brewery.registry;
 
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.satisfy.brewery.block.property.BrewMaterial;
 import net.satisfy.brewery.block.property.Heat;
 import net.satisfy.brewery.block.property.Liquid;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
 
 public class BlockStateRegistry {
     public static final EnumProperty<BrewMaterial> MATERIAL = EnumProperty.create("material", BrewMaterial.class);

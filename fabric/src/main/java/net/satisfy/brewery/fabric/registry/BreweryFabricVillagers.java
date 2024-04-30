@@ -1,18 +1,18 @@
 package net.satisfy.brewery.fabric.registry;
 
 import de.cristelknight.doapi.common.util.VillagerUtil;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
-import net.satisfy.brewery.registry.ObjectRegistry;
-import net.satisfy.brewery.util.BreweryIdentifier;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.fabric.api.object.builder.v1.villager.VillagerProfessionBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.world.poi.PointOfInterestHelper;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.entity.npc.VillagerProfession;
+import net.satisfy.brewery.registry.ObjectRegistry;
+import net.satisfy.brewery.util.BreweryIdentifier;
 
 @SuppressWarnings("unused, deprecation")
 public class BreweryFabricVillagers {

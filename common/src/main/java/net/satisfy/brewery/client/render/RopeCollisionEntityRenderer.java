@@ -1,12 +1,11 @@
 package net.satisfy.brewery.client.render;
 
-import net.satisfy.brewery.entity.rope.RopeCollisionEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
-import org.jetbrains.annotations.NotNull;
+import net.satisfy.brewery.entity.rope.RopeCollisionEntity;
 
 @Environment(EnvType.CLIENT)
 public class RopeCollisionEntityRenderer extends EntityRenderer<RopeCollisionEntity> {

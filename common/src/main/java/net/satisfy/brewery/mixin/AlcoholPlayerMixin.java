@@ -1,12 +1,12 @@
 package net.satisfy.brewery.mixin;
 
-import net.satisfy.brewery.effect.alcohol.AlcoholLevel;
-import net.satisfy.brewery.effect.alcohol.AlcoholManager;
-import net.satisfy.brewery.effect.alcohol.AlcoholPlayer;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.Vec3;
+import net.satisfy.brewery.effect.alcohol.AlcoholLevel;
+import net.satisfy.brewery.effect.alcohol.AlcoholManager;
+import net.satisfy.brewery.effect.alcohol.AlcoholPlayer;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;

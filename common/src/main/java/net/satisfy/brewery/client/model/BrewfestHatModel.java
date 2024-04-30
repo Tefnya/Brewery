@@ -2,13 +2,13 @@ package net.satisfy.brewery.client.model;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.satisfy.brewery.util.BreweryIdentifier;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.world.entity.Entity;
+import net.satisfy.brewery.util.BreweryIdentifier;
 
 @SuppressWarnings("unused")
 public class BrewfestHatModel<T extends Entity> extends EntityModel<T> {

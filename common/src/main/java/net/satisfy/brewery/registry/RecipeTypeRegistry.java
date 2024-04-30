@@ -9,7 +9,6 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.satisfy.brewery.Brewery;
 import net.satisfy.brewery.recipe.BrewingRecipe;
 
-
 import java.util.function.Supplier;
 
 public class RecipeTypeRegistry {

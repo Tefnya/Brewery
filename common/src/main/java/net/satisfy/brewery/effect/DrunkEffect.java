@@ -2,11 +2,6 @@ package net.satisfy.brewery.effect;
 
 
 import dev.architectury.networking.NetworkManager;
-import net.satisfy.brewery.effect.alcohol.AlcoholLevel;
-import net.satisfy.brewery.effect.alcohol.AlcoholManager;
-import net.satisfy.brewery.effect.alcohol.AlcoholPlayer;
-import net.satisfy.brewery.networking.BreweryNetworking;
-import net.satisfy.brewery.registry.MobEffectRegistry;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffect;
@@ -14,6 +9,11 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
+import net.satisfy.brewery.effect.alcohol.AlcoholLevel;
+import net.satisfy.brewery.effect.alcohol.AlcoholManager;
+import net.satisfy.brewery.effect.alcohol.AlcoholPlayer;
+import net.satisfy.brewery.networking.BreweryNetworking;
+import net.satisfy.brewery.registry.MobEffectRegistry;
 
 public class DrunkEffect extends MobEffect {
     public DrunkEffect() {

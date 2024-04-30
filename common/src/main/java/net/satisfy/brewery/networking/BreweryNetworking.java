@@ -2,10 +2,10 @@ package net.satisfy.brewery.networking;
 
 import dev.architectury.networking.NetworkManager;
 import io.netty.buffer.Unpooled;
-import net.satisfy.brewery.networking.packet.*;
-import net.satisfy.brewery.util.BreweryIdentifier;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
+import net.satisfy.brewery.networking.packet.*;
+import net.satisfy.brewery.util.BreweryIdentifier;
 
 public class BreweryNetworking {
     public static final ResourceLocation DRINK_ALCOHOL_C2S_ID = new BreweryIdentifier("drink_alcohol");

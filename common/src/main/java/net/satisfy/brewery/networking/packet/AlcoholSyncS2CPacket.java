@@ -1,11 +1,11 @@
 package net.satisfy.brewery.networking.packet;
 
 import dev.architectury.networking.NetworkManager;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.network.FriendlyByteBuf;
 import net.satisfy.brewery.effect.alcohol.AlcoholLevel;
 import net.satisfy.brewery.effect.alcohol.AlcoholPlayer;
 import net.satisfy.brewery.effect.alcohol.MotionBlur;
-import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.network.FriendlyByteBuf;
 
 public class AlcoholSyncS2CPacket implements NetworkManager.NetworkReceiver {
     @Override

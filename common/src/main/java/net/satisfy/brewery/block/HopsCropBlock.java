@@ -1,7 +1,5 @@
 package net.satisfy.brewery.block;
 
-import net.satisfy.brewery.entity.rope.HangingRopeEntity;
-import net.satisfy.brewery.registry.ObjectRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -29,6 +27,8 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.satisfy.brewery.entity.rope.HangingRopeEntity;
+import net.satisfy.brewery.registry.ObjectRegistry;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;

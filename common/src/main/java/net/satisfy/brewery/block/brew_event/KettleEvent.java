@@ -1,12 +1,12 @@
 package net.satisfy.brewery.block.brew_event;
 
-import net.satisfy.brewery.block.brewingstation.BrewKettleBlock;
-import net.satisfy.brewery.block.property.Liquid;
-import net.satisfy.brewery.registry.BlockStateRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.satisfy.brewery.block.brewingstation.BrewKettleBlock;
+import net.satisfy.brewery.block.property.Liquid;
+import net.satisfy.brewery.registry.BlockStateRegistry;
 
 import java.util.Set;
 

@@ -1,8 +1,8 @@
 package net.satisfy.brewery.mixin;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.satisfy.brewery.effect.alcohol.MotionBlur;
 import net.minecraft.client.renderer.GameRenderer;
+import net.satisfy.brewery.effect.alcohol.MotionBlur;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

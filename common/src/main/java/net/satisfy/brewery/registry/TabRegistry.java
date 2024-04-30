@@ -16,15 +16,15 @@ public class TabRegistry {
             .icon(() -> new ItemStack(ObjectRegistry.BEER_WHEAT.get()))
             .title(Component.translatable("itemGroup.brewery.creative_tab"))
             .displayItems((parameters, out) -> {
-                out.accept(ObjectRegistry.BENCH.get());
-                out.accept(ObjectRegistry.TABLE.get());
-                out.accept(ObjectRegistry.PATTERNED_WOOL.get());
-                out.accept(ObjectRegistry.PATTERNED_CARPET.get());
                 out.accept(ObjectRegistry.CABINET.get());
                 out.accept(ObjectRegistry.DRAWER.get());
                 out.accept(ObjectRegistry.BAR_COUNTER.get());
                 out.accept(ObjectRegistry.SIDEBOARD.get());
                 out.accept(ObjectRegistry.WALL_CABINET.get());
+                out.accept(ObjectRegistry.TABLE.get());
+                out.accept(ObjectRegistry.BENCH.get());
+                out.accept(ObjectRegistry.PATTERNED_WOOL.get());
+                out.accept(ObjectRegistry.PATTERNED_CARPET.get());
                 out.accept(ObjectRegistry.HOPS_SEEDS.get());
                 out.accept(ObjectRegistry.HOPS.get());
                 out.accept(ObjectRegistry.DRIED_WHEAT.get());

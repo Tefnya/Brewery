@@ -2,10 +2,10 @@ package net.satisfy.brewery.util.rope;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectList;
-import net.satisfy.brewery.entity.rope.RopeKnotEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.Vec3;
+import net.satisfy.brewery.entity.rope.RopeKnotEntity;
 
 public class RopeHelper {
     public static final int HANGING_AMOUNT = 1;

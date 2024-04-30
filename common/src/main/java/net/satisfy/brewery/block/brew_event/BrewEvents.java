@@ -1,10 +1,13 @@
 package net.satisfy.brewery.block.brew_event;
 
-import net.satisfy.brewery.util.BreweryIdentifier;
 import net.minecraft.resources.ResourceLocation;
+import net.satisfy.brewery.util.BreweryIdentifier;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 

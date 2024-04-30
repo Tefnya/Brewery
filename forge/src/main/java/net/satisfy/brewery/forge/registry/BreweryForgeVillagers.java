@@ -1,7 +1,6 @@
 package net.satisfy.brewery.forge.registry;
 
 import com.google.common.collect.ImmutableSet;
-import net.satisfy.brewery.Brewery;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.entity.npc.VillagerProfession;
@@ -10,7 +9,8 @@ import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import net.satisfy.brewery.registry.*;
+import net.satisfy.brewery.Brewery;
+import net.satisfy.brewery.registry.ObjectRegistry;
 
 import java.lang.reflect.InvocationTargetException;
 

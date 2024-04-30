@@ -3,13 +3,10 @@ package net.satisfy.brewery.registry;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.world.entity.animal.Bee;
-import net.satisfy.brewery.Brewery;
-import net.satisfy.brewery.block.BeerMugFlowerPotBlock;
-import net.satisfy.brewery.entity.*;
-import net.minecraft.core.Registry;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.satisfy.brewery.Brewery;
+import net.satisfy.brewery.entity.BeerMugBlockEntity;
+import net.satisfy.brewery.entity.BrewstationBlockEntity;
 
 import java.util.function.Supplier;
 

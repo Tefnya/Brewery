@@ -1,11 +1,11 @@
 package net.satisfy.brewery.mixin;
 
-import net.satisfy.brewery.effect.alcohol.AlcoholLevel;
-import net.satisfy.brewery.effect.alcohol.AlcoholPlayer;
-import net.satisfy.brewery.effect.DrunkEffect;
 import net.minecraft.client.gui.screens.inventory.EffectRenderingInventoryScreen;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.satisfy.brewery.effect.DrunkEffect;
+import net.satisfy.brewery.effect.alcohol.AlcoholLevel;
+import net.satisfy.brewery.effect.alcohol.AlcoholPlayer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;

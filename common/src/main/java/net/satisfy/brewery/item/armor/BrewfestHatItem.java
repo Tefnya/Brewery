@@ -1,14 +1,14 @@
 package net.satisfy.brewery.item.armor;
 
 import de.cristelknight.doapi.common.item.CustomHatItem;
-import net.satisfy.brewery.registry.ArmorMaterialRegistry;
-import net.satisfy.brewery.registry.ArmorRegistry;
-import net.satisfy.brewery.util.BreweryIdentifier;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import net.satisfy.brewery.registry.ArmorMaterialRegistry;
+import net.satisfy.brewery.registry.ArmorRegistry;
+import net.satisfy.brewery.util.BreweryIdentifier;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

@@ -2,12 +2,6 @@ package net.satisfy.brewery.client.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.satisfy.brewery.client.model.RopeKnotEntityModel;
-import net.satisfy.brewery.entity.rope.RopeKnotEntity;
-import net.satisfy.brewery.registry.ModelRegistry;
-import net.satisfy.brewery.util.BreweryIdentifier;
-import net.satisfy.brewery.util.BreweryMath;
-import net.satisfy.brewery.util.rope.RopeConnection;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.culling.Frustum;
@@ -20,6 +14,12 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.phys.Vec3;
+import net.satisfy.brewery.client.model.RopeKnotEntityModel;
+import net.satisfy.brewery.entity.rope.RopeKnotEntity;
+import net.satisfy.brewery.registry.ModelRegistry;
+import net.satisfy.brewery.util.BreweryIdentifier;
+import net.satisfy.brewery.util.BreweryMath;
+import net.satisfy.brewery.util.rope.RopeConnection;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;

@@ -5,12 +5,12 @@ import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.Registrar;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.registries.Registries;
-import net.satisfy.brewery.Brewery;
-import net.satisfy.brewery.effect.*;
-import net.satisfy.brewery.util.BreweryIdentifier;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.satisfy.brewery.Brewery;
+import net.satisfy.brewery.effect.*;
+import net.satisfy.brewery.util.BreweryIdentifier;
 
 import java.util.function.Supplier;
 

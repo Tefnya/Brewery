@@ -1,7 +1,7 @@
 package net.satisfy.brewery.registry;
 
-import net.satisfy.brewery.util.BreweryIdentifier;
 import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.satisfy.brewery.util.BreweryIdentifier;
 
 @SuppressWarnings("unused")
 public class ModelRegistry {

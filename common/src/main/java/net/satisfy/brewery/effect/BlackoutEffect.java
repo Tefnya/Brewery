@@ -1,9 +1,6 @@
 package net.satisfy.brewery.effect;
 
 
-import net.satisfy.brewery.effect.alcohol.AlcoholManager;
-import net.satisfy.brewery.effect.alcohol.AlcoholPlayer;
-import net.satisfy.brewery.registry.MobEffectRegistry;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
@@ -14,6 +11,9 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.satisfy.brewery.effect.alcohol.AlcoholManager;
+import net.satisfy.brewery.effect.alcohol.AlcoholPlayer;
+import net.satisfy.brewery.registry.MobEffectRegistry;
 
 public class BlackoutEffect extends MobEffect {
     public BlackoutEffect() {

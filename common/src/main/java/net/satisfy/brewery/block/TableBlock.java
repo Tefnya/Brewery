@@ -2,12 +2,12 @@ package net.satisfy.brewery.block;
 
 import de.cristelknight.doapi.common.block.LineConnectingBlock;
 import de.cristelknight.doapi.common.util.GeneralUtil;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -20,23 +20,40 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.satisfy.brewery.registry.ObjectRegistry;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
 import java.util.Objects;
 
 @SuppressWarnings("deprecation")
 public class TableBlock extends LineConnectingBlock implements SimpleWaterloggedBlock {
     public static final BooleanProperty WATERLOGGED;
+    public static final BooleanProperty HAS_TABLECLOTH = BooleanProperty.create("has_tablecloth");
     public static final VoxelShape TOP_SHAPE;
     public static final VoxelShape[] LEG_SHAPES;
 
     public TableBlock(BlockBehaviour.Properties settings) {
         super(settings);
-        this.registerDefaultState((this.stateDefinition.any().setValue(WATERLOGGED, false)));
+        this.registerDefaultState(this.stateDefinition.any().setValue(WATERLOGGED, false).setValue(HAS_TABLECLOTH, false));
+    }
+
+    @Override
+    public @NotNull InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        ItemStack itemStack = player.getItemInHand(hand);
+        if (itemStack.getItem().equals(ObjectRegistry.PATTERNED_CARPET.get())) {
+            if (!state.getValue(HAS_TABLECLOTH)) {
+                world.setBlock(pos, state.setValue(HAS_TABLECLOTH, true), 3);
+                if (!player.isCreative()) {
+                    itemStack.shrink(1);
+                }
+                return InteractionResult.sidedSuccess(world.isClientSide);
+            }
+        }
+        return InteractionResult.PASS;
     }
 
     @Override
@@ -70,7 +87,7 @@ public class TableBlock extends LineConnectingBlock implements SimpleWaterlogged
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        builder.add(WATERLOGGED);
+        builder.add(WATERLOGGED, HAS_TABLECLOTH);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package net.satisfy.brewery.client;
 
+import de.cristelknight.doapi.common.registry.DoApiBlocks;
 import dev.architectury.event.events.client.ClientPlayerEvent;
 import dev.architectury.event.events.client.ClientTickEvent;
 import dev.architectury.registry.client.level.entity.EntityModelLayerRegistry;
@@ -7,23 +8,24 @@ import dev.architectury.registry.client.level.entity.EntityRendererRegistry;
 import dev.architectury.registry.client.rendering.BlockEntityRendererRegistry;
 import dev.architectury.registry.client.rendering.ColorHandlerRegistry;
 import dev.architectury.registry.client.rendering.RenderTypeRegistry;
-import net.minecraft.client.renderer.entity.ThrownItemRenderer;
-import net.satisfy.brewery.client.model.RopeKnotEntityModel;
-import net.satisfy.brewery.client.render.*;
-import net.satisfy.brewery.client.model.BeerElementalModel;
-import net.satisfy.brewery.client.render.BeerElementalRenderer;
-import net.satisfy.brewery.client.render.BeerElementalAttackRenderer;
-import net.satisfy.brewery.event.PlayerJoinEvent;
-import net.satisfy.brewery.item.ItemPredicate;
-import net.satisfy.brewery.networking.BreweryNetworking;
-import net.satisfy.brewery.registry.*;
-import net.satisfy.brewery.util.rope.RopeHelper;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.satisfy.brewery.client.model.BeerElementalModel;
+import net.satisfy.brewery.client.model.RopeKnotEntityModel;
+import net.satisfy.brewery.client.render.*;
+import net.satisfy.brewery.event.PlayerJoinEvent;
+import net.satisfy.brewery.item.ItemPredicate;
+import net.satisfy.brewery.networking.BreweryNetworking;
+import net.satisfy.brewery.registry.ArmorRegistry;
+import net.satisfy.brewery.registry.BlockEntityRegistry;
+import net.satisfy.brewery.registry.EntityRegistry;
+import net.satisfy.brewery.registry.ModelRegistry;
+import net.satisfy.brewery.util.rope.RopeHelper;
 
 import static net.satisfy.brewery.registry.ObjectRegistry.*;
 
@@ -37,12 +39,10 @@ public class BreweryClient {
         registerRenderer();
 
         RenderTypeRegistry.register(RenderType.cutout(),
-                WILD_HOPS.get(), BEER_MUG.get(), BEER_WHEAT.get(), BEER_HOPS.get(),
-                BEER_BARLEY.get(), BEER_HALEY.get(), BEER_OAT.get(), BEER_NETTLE.get(),
-                HOPS_CROP_BODY.get(), HOPS_CROP.get(), WHISKEY_MAGGOALLAN.get(),
-                WHISKEY_CARRASCONLABEL.get(), WHISKEY_LILITUSINGLEMALT.get(),
-                WHISKEY_JOJANNIK.get(), WHISKEY_MAGGOALLAN.get(),
-                WHISKEY_CRISTELWALKER.get()
+                WILD_HOPS.get(), BEER_MUG.get(), BEER_WHEAT.get(), BEER_HOPS.get(), BEER_BARLEY.get(), BEER_HALEY.get(), BEER_OAT.get(), BEER_NETTLE.get(),
+                HOPS_CROP_BODY.get(), HOPS_CROP.get(), WHISKEY_MAGGOALLAN.get(), WHISKEY_CARRASCONLABEL.get(), WHISKEY_LILITUSINGLEMALT.get(),
+                WHISKEY_JOJANNIK.get(), WHISKEY_MAGGOALLAN.get(), WHISKEY_CRISTELWALKER.get(), DoApiBlocks.WALL_STANDARD.get(), WHISKEY_AK.get(),
+                DoApiBlocks.STANDARD.get(), WHISKEY_HIGHLAND_HEARTH.get(), WHISKEY_JAMESONS_MALT.get(), WHISKEY_SMOKEY_REVERIE.get()
         );
 
 
@@ -73,7 +73,7 @@ public class BreweryClient {
         EntityRendererRegistry.register(EntityRegistry.BEER_ELEMENTAL, BeerElementalRenderer::new);
         EntityRendererRegistry.register(EntityRegistry.BEER_ELEMENTAL_ATTACK, BeerElementalAttackRenderer::new);
         EntityRendererRegistry.register(EntityRegistry.DARK_BREW, ThrownItemRenderer::new);
-           }
+    }
 
     public static void registerModelLayers() {
         EntityModelLayerRegistry.register(BeerElementalModel.BEER_ELEMENTAL_MODEL_LAYER, BeerElementalModel::createBodyLayer);

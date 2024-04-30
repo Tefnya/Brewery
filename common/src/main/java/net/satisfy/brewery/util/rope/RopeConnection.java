@@ -117,8 +117,6 @@ public class RopeConnection {
         }
     }
 
-
-
     private void createCollision() {
         if (!collisions.isEmpty()) return;
         if (from.level().isClientSide()) return;

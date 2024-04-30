@@ -39,7 +39,7 @@ public class ArmorMaterialRegistry {
         }
 
         public int getDefenseForType(ArmorItem.Type type) {
-            return delegate.getDefenseForType(type);
+            return 1;
         }
 
         public int getEnchantmentValue() {

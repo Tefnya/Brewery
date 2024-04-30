@@ -118,11 +118,6 @@ public class BeerMugFlowerPotBlock extends FacingBlock implements EntityBlock {
         return new BeerMugBlockEntity(pos, state);
     }
 
-    @Override
-    public void appendHoverText(ItemStack itemStack, BlockGetter world, List<Component> tooltip, TooltipFlag tooltipContext) {
-        tooltip.add(Component.translatable("tooltip.brewery.canbeplaced").withStyle(ChatFormatting.ITALIC, ChatFormatting.GRAY));
-    }
-
     static {
         SHAPE = voxelShapeSupplier.get();
     }

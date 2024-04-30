@@ -52,7 +52,6 @@ public class MobEffectRegistry {
     static {
         DRUNK = registerEffect("drunk", DrunkEffect::new);
         BLACKOUT = registerEffect("blackout", () -> new BlackoutEffect().setFactorDataFactory(() -> new MobEffectInstance.FactorData(22)));
-
         MINING = registerEffect("mining", () -> new MiningEffect(MobEffectCategory.BENEFICIAL, 0));
         PACIFY = registerEffect("pacify", () -> new PacifyEffect(MobEffectCategory.BENEFICIAL, 0));
         REPULSION = registerEffect("repulsion", () -> new RepulsionEffect(MobEffectCategory.BENEFICIAL, 0));

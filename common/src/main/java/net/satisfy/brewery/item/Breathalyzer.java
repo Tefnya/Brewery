@@ -70,10 +70,10 @@ public class Breathalyzer extends Item {
             assert itemStack.getTag() != null;
             String drunkenness = itemStack.getTag().getString("brewery.drunkenness");
             Component tooltip = switch (drunkenness) {
-                case "DANGER" -> Component.literal(drunkenness).withStyle(ChatFormatting.RED);
-                case "WARNING" -> Component.literal(drunkenness).withStyle(ChatFormatting.GOLD);
-                case "EASY" -> Component.literal(drunkenness).withStyle(ChatFormatting.GREEN);
-                default -> Component.literal(drunkenness);
+                case "DANGER" -> Component.translatable(drunkenness).withStyle(ChatFormatting.RED);
+                case "WARNING" -> Component.translatable(drunkenness).withStyle(ChatFormatting.GOLD);
+                case "EASY" -> Component.translatable(drunkenness).withStyle(ChatFormatting.GREEN);
+                default -> Component.translatable(drunkenness);
             };
             list.add(tooltip);
         }

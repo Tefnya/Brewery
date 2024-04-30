@@ -1,10 +1,10 @@
 {
   "parent": "brewery:main/kill_beer_elemental",
   "criteria": {
-    "saturated": {
+    "satiation": {
       "conditions": {
         "effects": {
-          "brewery:saturated": {}
+          "farm_and_charm:satiation": {}
         }
       },
       "trigger": "minecraft:effects_changed"
@@ -27,7 +27,7 @@
   },
   "requirements": [
     [
-      "saturated"
+      "satiation"
     ]
   ]
 }

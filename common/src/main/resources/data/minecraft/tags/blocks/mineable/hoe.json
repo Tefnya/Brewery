@@ -3,6 +3,7 @@
   "values": [
     "brewery:dried_wheat",
     "brewery:dried_corn",
-    "brewery:dried_barley"
+    "brewery:dried_barley",
+    "brewery:dried_oat"
   ]
 }

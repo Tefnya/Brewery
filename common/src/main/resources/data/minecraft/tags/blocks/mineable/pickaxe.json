@@ -2,7 +2,6 @@
   "replace": false,
   "values": [
     "brewery:copper_brewingstation",
-    "farm_and_charm:silo_copper",
     "brewery:netherite_brewingstation",
     "brewery:brew_whistle",
     "brewery:brew_oven",

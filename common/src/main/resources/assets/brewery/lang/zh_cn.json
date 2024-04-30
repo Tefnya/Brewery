@@ -102,7 +102,7 @@
   "tooltip.brewfest.brewfestdrop": "酿酒师村民售卖",
   "tooltip.brewery.workstation": "村民的工作站",
   "tooltip.brewery.crafting": "配方原料",
-  "tooltip.brewery.rope_1": "可系在栅栏或绊线钩上",
+  "tooltip.brewery.rope": "可系在栅栏或绊线钩上",
   "tooltip.brewery.rope_2": "啤酒花支架",
   "tooltip.brewery.ingredient": "配方原料",
   "advancement.brewery.root": "欢迎来到盛节精酿",

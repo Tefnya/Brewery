@@ -51,7 +51,7 @@ public class TabRegistry {
                 out.accept(ObjectRegistry.WHISKEY_AK.get());
                 out.accept(ObjectRegistry.WHISKEY_HIGHLAND_HEARTH.get());
                 out.accept(ObjectRegistry.WHISKEY_SMOKEY_REVERIE.get());
-                out.accept(ObjectRegistry.WHISKEY_TERAS_MALT.get());
+                out.accept(ObjectRegistry.WHISKEY_JAMESONS_MALT.get());
                 out.accept(ObjectRegistry.PORK_KNUCKLE.get());
                 out.accept(ObjectRegistry.FRIED_CHICKEN.get());
                 out.accept(ObjectRegistry.DUMPLINGS.get());

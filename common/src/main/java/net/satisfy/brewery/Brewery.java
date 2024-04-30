@@ -26,21 +26,12 @@ public class Brewery {
         RecipeTypeRegistry.init();
         registerEvents();
 
-
-        HealingTouchEvent healingTouchEvent = new HealingTouchEvent();
-        PlayerEvent.ATTACK_ENTITY.register(healingTouchEvent);
-        RenewingTouchEvent renewingTouchEvent = new RenewingTouchEvent();
-        PlayerEvent.ATTACK_ENTITY.register(renewingTouchEvent);
-        ToxicTouchEvent toxicTouchEvent = new ToxicTouchEvent();
-        PlayerEvent.ATTACK_ENTITY.register(toxicTouchEvent);
-        PartyStarterEvent partyStarterEvent = new PartyStarterEvent();
-        PlayerEvent.ATTACK_ENTITY.register(partyStarterEvent);
-        ProtectiveTouchEvent protectiveTouchEvent = new ProtectiveTouchEvent();
-        PlayerEvent.ATTACK_ENTITY.register(protectiveTouchEvent);
     }
 
     private static void registerEvents() {
+        PartyStarterEvent partyStarterEvent = new PartyStarterEvent();
         PlayerEvent.PLAYER_RESPAWN.register(new PlayerRespawnEvent());
+        PlayerEvent.ATTACK_ENTITY.register(partyStarterEvent);
         PlayerEvent.PLAYER_CLONE.register(new PlayerCloneEvent());
         InteractionEvent.RIGHT_CLICK_BLOCK.register(new BlockClickEvent());
     }

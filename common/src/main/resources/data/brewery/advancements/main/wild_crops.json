@@ -34,7 +34,7 @@
         "items": [
           {
             "items": [
-              "brewery:barley_seeds"
+              "farm_and_charm:barley_seeds"
             ]
           }
         ]
@@ -58,7 +58,7 @@
         "items": [
           {
             "items": [
-              "brewery:barley"
+              "farm_and_charm:barley"
             ]
           }
         ]

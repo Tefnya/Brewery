@@ -12,6 +12,7 @@ import net.minecraftforge.registries.RegisterEvent;
 import net.satisfy.brewery.client.model.BeerElementalModel;
 import net.satisfy.brewery.client.model.RopeKnotEntityModel;
 import net.satisfy.brewery.client.render.*;
+import net.satisfy.brewery.registry.EntityRegistry;
 import net.satisfy.brewery.registry.ModelRegistry;
 
 @Mod.EventBusSubscriber(modid = Brewery.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)

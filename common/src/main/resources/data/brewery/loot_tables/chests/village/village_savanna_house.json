@@ -20,7 +20,7 @@
               }
             }
           ],
-          "name": "brewery:barley"
+          "name": "farm_and_charm:barley"
         },
         {
           "type": "minecraft:item",
@@ -35,7 +35,7 @@
               }
             }
           ],
-          "name": "brewery:barley_seeds"
+          "name": "farm_and_charm:barley_seeds"
         },
         {
           "type": "minecraft:empty",
@@ -54,7 +54,7 @@
               }
             }
           ],
-          "name": "brewery:barley_seeds"
+          "name": "farm_and_charm:barley_seeds"
         },
         {
           "type": "minecraft:empty",

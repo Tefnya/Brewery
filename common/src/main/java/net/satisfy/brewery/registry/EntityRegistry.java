@@ -24,7 +24,7 @@ public class EntityRegistry {
 
     public static final RegistrySupplier<EntityType<DarkBrewEntity>> DARK_BREW = create("dark_brew",
             () -> EntityType.Builder.<DarkBrewEntity>of(DarkBrewEntity::new, MobCategory.MISC)
-                    .sized(0.25f, 0.25f)
+                    .sized(0.5f, 0.5f)
                     .build(new BreweryIdentifier("dark_brew").toString())
     );
 

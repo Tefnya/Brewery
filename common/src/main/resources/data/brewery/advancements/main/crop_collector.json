@@ -2,7 +2,7 @@
   "parent": "brewery:main/wild_crops",
   "display": {
     "icon": {
-      "item": "brewery:barley"
+      "item": "farm_and_charm:barley"
     },
     "title": {
       "translate": "advancement.brewery.crop_collector"
@@ -19,25 +19,25 @@
     "experience": 75
   },
   "criteria": {
-    "brewery:barley": {
+    "farm_and_charm:barley": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "brewery:barley"
+              "farm_and_charm:barley"
             ]
           }
         ]
       }
     },
-    "brewery:corn": {
+    "farm_and_charm:corn": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "brewery:corn"
+              "farm_and_charm:corn"
             ]
           }
         ]
@@ -58,10 +58,10 @@
   },
   "requirements": [
     [
-      "brewery:barley"
+      "farm_and_charm:barley"
     ],
     [
-      "brewery:corn"
+      "farm_and_charm:corn"
     ],
     [
       "brewery:hops"

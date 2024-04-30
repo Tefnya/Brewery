@@ -101,7 +101,7 @@
   "tooltip.brewfest.brewfestdrop": "Vendido por aldeanos Maestros Cerveceros",
   "tooltip.brewery.workstation": "Estación de Trabajo para Aldeanos",
   "tooltip.brewery.crafting": "Ingrediente de Fabricación",
-  "tooltip.brewery.rope_1": "Se puede adjuntar a Postes de Valla y Ganchos de Trampa",
+  "tooltip.brewery.rope": "Se puede adjuntar a Postes de Valla y Ganchos de Trampa",
   "tooltip.brewery.rope_2": "Estabilización para lúpulos",
   "tooltip.brewery.ingredient": "Ingrediente de Fabricación",
   "advancement.brewery.root": "Bienvenido a Brewery",

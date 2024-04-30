@@ -31,6 +31,10 @@ public class MobEffectRegistry {
     public static final RegistrySupplier<MobEffect> HALEY;
     public static final RegistrySupplier<MobEffect> MINING;
     public static final RegistrySupplier<MobEffect> PACIFY;
+    public static final RegistrySupplier<MobEffect> COMBUSTION;
+    public static final RegistrySupplier<MobEffect> EXPLOSION;
+    public static final RegistrySupplier<MobEffect> REPULSION;
+    public static final RegistrySupplier<MobEffect> LIGHTNING_STRIKE;
 
 
     private static RegistrySupplier<MobEffect> registerEffect(String name, Supplier<MobEffect> effect){
@@ -48,8 +52,13 @@ public class MobEffectRegistry {
     static {
         DRUNK = registerEffect("drunk", DrunkEffect::new);
         BLACKOUT = registerEffect("blackout", () -> new BlackoutEffect().setFactorDataFactory(() -> new MobEffectInstance.FactorData(22)));
+
         MINING = registerEffect("mining", () -> new MiningEffect(MobEffectCategory.BENEFICIAL, 0));
         PACIFY = registerEffect("pacify", () -> new PacifyEffect(MobEffectCategory.BENEFICIAL, 0));
+        REPULSION = registerEffect("repulsion", () -> new RepulsionEffect(MobEffectCategory.BENEFICIAL, 0));
+        LIGHTNING_STRIKE = registerEffect("lightning_strike", () -> new LightningStrikeEffect(MobEffectCategory.BENEFICIAL, 0));
+        EXPLOSION = registerEffect("explosion", () -> new ExplosionEffect(MobEffectCategory.BENEFICIAL, 0));
+        COMBUSTION = registerEffect("combustion", () -> new CombustionEffect(MobEffectCategory.BENEFICIAL, 0));
         TOXICTOUCH = registerEffect("toxictouch", () -> new ToxicTouchEffect(MobEffectCategory.BENEFICIAL, 0));
         RENEWINGTOUCH = registerEffect("renewingtouch", () -> new RenewingTouchEffect(MobEffectCategory.BENEFICIAL, 0));
         HEALINGTOUCH = registerEffect("healingtouch", () -> new HealingTouchEffect(MobEffectCategory.BENEFICIAL, 0));

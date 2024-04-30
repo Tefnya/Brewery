@@ -56,7 +56,7 @@ public abstract class DisclaimerMixin extends Screen {
 
             guiGraphics.pose().pushPose();
             guiGraphics.pose().translate(0.0, 0.0, 2);
-            guiGraphics.drawString(this.font, Component.literal(info).withStyle(ChatFormatting.WHITE), x, this.height - this.font.lineHeight * y - 4, 0xFFFF55);
+            guiGraphics.drawString(this.font, Component.translatable(info).withStyle(ChatFormatting.WHITE), x, this.height - this.font.lineHeight * y - 4, 0xFFFF55);
             guiGraphics.pose().popPose();
 
         }

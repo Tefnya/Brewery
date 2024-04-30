@@ -1,5 +1,5 @@
 {
-  "parent": "brewery:main/drying_expertise",
+  "parent": "farm_and_charm:main/introduction_drying",
   "display": {
     "icon": {
       "item": "brewery:dried_barley"

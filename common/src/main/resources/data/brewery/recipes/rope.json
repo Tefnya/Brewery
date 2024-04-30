@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "B": {
-      "item": "brewery:barley"
+      "item": "farm_and_charm:barley"
     },
     "#": {
       "item": "minecraft:string"

@@ -101,7 +101,7 @@
   "tooltip.brewfest.brewfestdrop": "Продаётся у жителей-пивоваров",
   "tooltip.brewery.workstation": "Рабочее место для жителей",
   "tooltip.brewery.crafting": "Ингредиент",
-  "tooltip.brewery.rope_1": "Привязывается к забору или на крюк",
+  "tooltip.brewery.rope": "Привязывается к забору или на крюк",
   "tooltip.brewery.rope_2": "Служит для подвязки хмеля",
   "tooltip.brewery.ingredient": "Ингредиент",
   "advancement.brewery.root": "Приветствуем в Brewery!",

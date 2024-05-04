@@ -15,6 +15,7 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemNameBlockItem;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -54,7 +55,7 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> WILD_HOPS = registerWithoutItem("wild_hops", () -> new TallFlowerBlock(BlockBehaviour.Properties.copy(Blocks.ROSE_BUSH)));
     public static final RegistrySupplier<Block> HOPS_CROP = registerWithoutItem("hops_crop", () -> new HopsCropHeadBlock(getBushSettings().randomTicks()));
     public static final RegistrySupplier<Block> HOPS_CROP_BODY = registerWithoutItem("hops_crop_body", () -> new HopsCropBodyBlock(getBushSettings().randomTicks()));
-    public static final RegistrySupplier<Item> HOPS_SEEDS = registerItem("hops_seeds", () -> new BlockItem(HOPS_CROP.get(), getSettings()));
+    public static final RegistrySupplier<Item> HOPS_SEEDS = registerItem("hops_seeds", () -> new ItemNameBlockItem(HOPS_CROP.get(), getSettings()));
     public static final RegistrySupplier<Item> HOPS = registerItem("hops", () -> new Item(getSettings().food(Foods.APPLE)));
     public static final RegistrySupplier<Block> DRIED_WHEAT = registerWithItem("dried_wheat", () -> new FacingBlock(BlockBehaviour.Properties.copy(Blocks.RED_WOOL)));
     public static final RegistrySupplier<Block> DRIED_BARLEY = registerWithItem("dried_barley", () -> new FacingBlock(BlockBehaviour.Properties.copy(Blocks.RED_WOOL)));
@@ -97,9 +98,9 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> WHISKEY_JOJANNIK = registerWithItemeverage("whiskey_jojannik", () -> new BeverageBlock(getBeverageSettings(), 1), MobEffectRegistry.TOXICTOUCH);
     public static final RegistrySupplier<Block> WHISKEY_CRISTELWALKER = registerWithItemeverage("whiskey_cristelwalker", () -> new BeverageBlock(getBeverageSettings(), 3), MobEffectRegistry.PROTECTIVETOUCH);
     public static final RegistrySupplier<Block> WHISKEY_AK = registerWithItemeverage("whiskey_ak", () -> new BeverageBlock(getBeverageSettings(), 3), MobEffectRegistry.LIGHTNING_STRIKE);
-    public static final RegistrySupplier<Block> WHISKEY_HIGHLAND_HEARTH = registerWithItemeverage("whiskey_highland_hearth", () -> new BeverageBlock(getBeverageSettings(), 3), MobEffectRegistry.REPULSION);
-    public static final RegistrySupplier<Block> WHISKEY_JAMESONS_MALT = registerWithItemeverage("whiskey_jamesons_malt", () -> new BeverageBlock(getBeverageSettings(), 3), MobEffectRegistry.EXPLOSION);
-    public static final RegistrySupplier<Block> WHISKEY_SMOKEY_REVERIE = registerWithItemeverage("whiskey_smokey_reverie", () -> new BeverageBlock(getBeverageSettings(), 3), MobEffectRegistry.COMBUSTION);
+    public static final RegistrySupplier<Block> WHISKEY_HIGHLAND_HEARTH = registerWithItemeverage("whiskey_highland_hearth", () -> new BeverageBlock(getBeverageSettings(), 1), MobEffectRegistry.REPULSION);
+    public static final RegistrySupplier<Block> WHISKEY_JAMESONS_MALT = registerWithItemeverage("whiskey_jamesons_malt", () -> new BeverageBlock(getBeverageSettings(), 2), MobEffectRegistry.EXPLOSION);
+    public static final RegistrySupplier<Block> WHISKEY_SMOKEY_REVERIE = registerWithItemeverage("whiskey_smokey_reverie", () -> new BeverageBlock(getBeverageSettings(), 2), MobEffectRegistry.COMBUSTION);
     public static final RegistrySupplier<Block> PORK_KNUCKLE_BLOCK = registerWithoutItem("pork_knuckle", () -> new FoodBlock(Block.Properties.of(), new MobEffectInstance(SUSTENANCE.get(), 3600, 1), 9, 0.9f));
     public static final RegistrySupplier<Block> FRIED_CHICKEN_BLOCK = registerWithoutItem("fried_chicken", () -> new FoodBlock(Block.Properties.of(), new MobEffectInstance(SUSTENANCE.get(), 3600, 1), 7, 0.7f));
     public static final RegistrySupplier<Block> HALF_CHICKEN_BLOCK = registerWithoutItem("half_chicken", () -> new FoodBlock(Block.Properties.of(), new MobEffectInstance(SUSTENANCE.get(), 3600, 1), 3, 0.3f));
@@ -166,7 +167,7 @@ public class ObjectRegistry {
 
 
     private static Item.Properties getFoodItemSettings(int nutrition, float saturationMod, MobEffect effect, int duration) {
-        return getFoodItemSettings(nutrition, saturationMod, effect, duration, false, false);
+        return getFoodItemSettings(nutrition, saturationMod, effect, duration, true, false);
     }
 
     private static Item.Properties getFoodItemSettings(int nutrition, float saturationMod, MobEffect effect, int duration, boolean alwaysEat, boolean fast) {

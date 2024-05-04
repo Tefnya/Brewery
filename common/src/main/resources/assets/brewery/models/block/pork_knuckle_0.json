@@ -6,7 +6,7 @@
 		"4": "brewery:block/pork_knuckle_1",
 		"5": "brewery:block/pork_knuckle_3",
 		"6": "brewery:block/pork_knuckle_2",
-		"particle": "brewery:block/plate_top"
+		"particle": "brewery:block/pork_knuckle_2"
 	},
 	"elements": [
 		{

@@ -1,18 +1,18 @@
 {
   "variants": {
     "bites=0,facing=north": {
-      "model": "brewery:block/dumplings_2"
+      "model": "brewery:block/dumplings_0"
     },
     "bites=0,facing=east": {
-      "model": "brewery:block/dumplings_2",
+      "model": "brewery:block/dumplings_0",
       "y": 90
     },
     "bites=0,facing=south": {
-      "model": "brewery:block/dumplings_2",
+      "model": "brewery:block/dumplings_0",
       "y": 180
     },
     "bites=0,facing=west": {
-      "model": "brewery:block/dumplings_2",
+      "model": "brewery:block/dumplings_0",
       "y": 270
     },
     "bites=1,facing=west": {
@@ -30,34 +30,34 @@
       "model": "brewery:block/dumplings_1",
       "y": 180
     },
-    "bites=2,facing=west": {
-      "model": "brewery:block/dumplings_0",
-      "y": 270
-    },
     "bites=2,facing=north": {
-      "model": "brewery:block/dumplings_0"
+      "model": "brewery:block/dumplings_2"
     },
     "bites=2,facing=east": {
-      "model": "brewery:block/dumplings_0",
+      "model": "brewery:block/dumplings_2",
       "y": 90
     },
     "bites=2,facing=south": {
-      "model": "brewery:block/dumplings_0",
+      "model": "brewery:block/dumplings_2",
       "y": 180
     },
+    "bites=2,facing=west": {
+      "model": "brewery:block/dumplings_2",
+      "y": 270
+    },
     "bites=3,facing=west": {
-      "model": "minecraft:block/air",
+      "model": "brewery:block/dumplings_3",
       "y": 270
     },
     "bites=3,facing=north": {
-      "model": "minecraft:block/air"
+      "model": "brewery:block/dumplings_3"
     },
     "bites=3,facing=east": {
-      "model": "minecraft:block/air",
+      "model": "brewery:block/dumplings_3",
       "y": 90
     },
     "bites=3,facing=south": {
-      "model": "minecraft:block/air",
+      "model": "brewery:block/dumplings_3",
       "y": 180
     }
   }

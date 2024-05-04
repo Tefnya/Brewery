@@ -33,6 +33,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
+import static satisfy.farm_and_charm.registry.ObjectRegistry.FERTILIZED_FARM_BLOCK;
+
+@SuppressWarnings("deprecation")
 public abstract class HopsCropBlock extends Block {
     protected final VoxelShape shape;
     public static final IntegerProperty AGE;
@@ -67,7 +70,6 @@ public abstract class HopsCropBlock extends Block {
         return height;
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public @NotNull VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
         return this.shape;
@@ -79,23 +81,25 @@ public abstract class HopsCropBlock extends Block {
         return !blockState.is(getHeadBlock()) && !blockState.is(getBodyBlock()) ? this.defaultBlockState() : getBodyBlock().defaultBlockState();
     }
 
-    protected BlockState getStateForAge(int age) {
+    public @NotNull BlockState getStateForAge(int age) {
         return this.defaultBlockState().setValue(AGE, Math.min(age, MAX_AGE));
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public boolean canSurvive(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
         BlockPos belowPos = blockPos.relative(Direction.DOWN);
         BlockState belowState = levelReader.getBlockState(belowPos);
-        return belowState.is(getHeadBlock()) || belowState.is(getBodyBlock()) || belowState.is(Blocks.FARMLAND);
+        return mayPlaceOn(belowState) || belowState.is(getHeadBlock()) || belowState.is(getBodyBlock());
+    }
+
+    protected boolean mayPlaceOn(BlockState blockState) {
+        return blockState.is(Blocks.FARMLAND) || blockState.is(FERTILIZED_FARM_BLOCK.get());
     }
 
     protected boolean canGrow(BlockState blockState) {
         return blockState.getValue(AGE) < MAX_AGE;
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public @NotNull InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
         if (player.getItemInHand(interactionHand).is(Items.BONE_MEAL)) {
@@ -118,7 +122,6 @@ public abstract class HopsCropBlock extends Block {
         level.setBlock(blockPos, blockState.setValue(AGE, 1), 2);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public void tick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
         if (!blockState.canSurvive(serverLevel, blockPos)) {
@@ -131,7 +134,6 @@ public abstract class HopsCropBlock extends Block {
         return canGrow(blockState);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
         if (serverLevel.getRawBrightness(blockPos, 0) >= 9) {

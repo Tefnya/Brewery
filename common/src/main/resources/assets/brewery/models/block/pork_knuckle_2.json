@@ -6,7 +6,7 @@
 		"4": "brewery:block/pork_knuckle_1",
 		"5": "brewery:block/pork_knuckle_3",
 		"6": "brewery:block/pork_knuckle_2",
-		"particle": "brewery:block/plate_top"
+		"particle": "brewery:block/pork_knuckle_2"
 	},
 	"elements": [
 		{
@@ -25,7 +25,7 @@
 		{
 			"from": [4, 1, 4],
 			"to": [12, 4, 12],
-			"rotation": {"angle": 0, "axis": "z", "origin": [7.75, 3.925, 9]},
+			"rotation": {"angle": 0, "axis": "y", "origin": [7.75, 3.925, 9]},
 			"faces": {
 				"north": {"uv": [0, 0, 8, 3], "texture": "#4"},
 				"east": {"uv": [0, 8, 8, 11], "texture": "#6"},

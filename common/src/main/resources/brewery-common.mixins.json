@@ -11,6 +11,7 @@
   ],
   "mixins": [
     "AlcoholPlayerMixin",
+    "MixinTomatoCropBlock",
     "MobFollowPlayerMixin",
     "PlayerMixin",
     "VillagerDiscountMixin",

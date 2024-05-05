@@ -42,7 +42,7 @@
   "item.brewery.beer_elemental_spawn_egg": "Бочонок призыва пивного элементаля",
   "item.brewery.beer_standard": "Пивной стандарт",
   "block.brewery.gingerbread": "Пряник",
-  "block.brewery.hops_crop": "Семена хмеля",
+  "item.brewery.hops_crop": "Семена хмеля",
   "block.brewery.barley_crop": "Семена ячменя",
   "block.brewery.corn_crop": "Семена кукурузы",
   "block.brewery.dried_barley": "Мешок сухого ячменя",

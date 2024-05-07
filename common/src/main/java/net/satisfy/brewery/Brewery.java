@@ -15,6 +15,7 @@ public class Brewery {
 
     public static void init() {
         LOGGER.debug("Initiate " + MOD_ID);
+        DataFixerRegistry.init();
         ObjectRegistry.init();
         TabRegistry.init();
         BlockEntityRegistry.init();

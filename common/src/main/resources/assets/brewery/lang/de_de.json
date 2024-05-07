@@ -162,5 +162,6 @@
   "tooltip.brewfest.brewfestboots": "[Braufest Stiefel]",
   "tooltip.brewfest.brewfestbreastplate": "[Braufest Gewand]",
   "tooltip.brewfest.brewfesthelmet": "[Braufest Hut]",
-  "tooltip.brewfest.brewfestleggings": "[Braufest Hose]"
+  "tooltip.brewfest.brewfestleggings": "[Braufest Hose]",
+  "item.brewery.hops_seeds": "Hopfensamen"
 }

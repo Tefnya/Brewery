@@ -77,6 +77,7 @@ public class BrewstationBlockEntity extends BlockEntity implements ImplementedIn
         this.components.addAll(Arrays.asList(components));
     }
 
+
     public InteractionResult addIngredient(ItemStack itemStack) {
         for (int i = 0; i < 3; i++) {
             ItemStack stack = this.ingredients.get(i);
@@ -290,6 +291,8 @@ public class BrewstationBlockEntity extends BlockEntity implements ImplementedIn
         return this.ingredients;
     }
 
+
+    //CONTAINER
     @Override
     public NonNullList<ItemStack> getItems() {
         return ingredients;

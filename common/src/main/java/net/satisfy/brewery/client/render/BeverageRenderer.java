@@ -3,7 +3,7 @@ package net.satisfy.brewery.client.render;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import de.cristelknight.doapi.client.ClientUtil;
-import de.cristelknight.doapi.client.render.block.storage.StorageTypeRenderer;
+import de.cristelknight.doapi.client.render.block.storage.api.StorageTypeRenderer;
 import de.cristelknight.doapi.common.block.entity.StorageBlockEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -13,7 +13,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import net.satisfy.brewery.block.BeverageBlock;
 import net.satisfy.brewery.item.DrinkBlockItem;
-
 
 @Environment(EnvType.CLIENT)
 public class BeverageRenderer implements StorageTypeRenderer {

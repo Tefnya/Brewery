@@ -35,15 +35,15 @@ import net.satisfy.brewery.block.property.BrewMaterial;
 import net.satisfy.brewery.item.*;
 import net.satisfy.brewery.item.armor.*;
 import net.satisfy.brewery.util.BreweryIdentifier;
-import satisfy.farm_and_charm.block.FoodBlock;
-import satisfy.farm_and_charm.item.food.EffectBlockItem;
-import satisfy.farm_and_charm.item.food.EffectItem;
+import net.satisfy.farm_and_charm.block.FoodBlock;
+import net.satisfy.farm_and_charm.item.food.EffectBlockItem;
+import net.satisfy.farm_and_charm.item.food.EffectItem;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-import static satisfy.farm_and_charm.registry.MobEffectRegistry.SATIATION;
-import static satisfy.farm_and_charm.registry.MobEffectRegistry.SUSTENANCE;
+import static net.satisfy.farm_and_charm.registry.MobEffectRegistry.*;
+
 
 @SuppressWarnings("all")
 public class ObjectRegistry {

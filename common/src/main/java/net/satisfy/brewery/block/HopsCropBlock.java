@@ -33,7 +33,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-import static satisfy.farm_and_charm.registry.ObjectRegistry.FERTILIZED_FARM_BLOCK;
+import static net.satisfy.farm_and_charm.registry.ObjectRegistry.FERTILIZED_FARM_BLOCK;
 
 @SuppressWarnings("deprecation")
 public abstract class HopsCropBlock extends Block {

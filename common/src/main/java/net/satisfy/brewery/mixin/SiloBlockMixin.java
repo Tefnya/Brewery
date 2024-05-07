@@ -1,12 +1,12 @@
 package net.satisfy.brewery.mixin;
 
 import net.minecraft.world.item.Items;
+import net.satisfy.farm_and_charm.block.SiloBlock;
+import net.satisfy.farm_and_charm.registry.ObjectRegistry;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import satisfy.farm_and_charm.block.SiloBlock;
-import satisfy.farm_and_charm.registry.ObjectRegistry;
 
 @Mixin(SiloBlock.class)
 public class SiloBlockMixin {

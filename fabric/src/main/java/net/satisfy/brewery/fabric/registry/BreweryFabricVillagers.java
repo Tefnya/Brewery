@@ -24,14 +24,14 @@ public class BreweryFabricVillagers {
     public static void init() {
         TradeOfferHelper.registerVillagerOffers(BREWER, 1, factories -> {
             factories.add(new VillagerUtil.SellItemFactory(ObjectRegistry.HOPS_SEEDS.get(), 2, 3, 5));
-            factories.add(new VillagerUtil.SellItemFactory(satisfy.farm_and_charm.registry.ObjectRegistry.KERNELS.get(), 2, 3, 5));
-            factories.add(new VillagerUtil.SellItemFactory(satisfy.farm_and_charm.registry.ObjectRegistry.BARLEY_SEEDS.get(), 2, 3, 5));
+            factories.add(new VillagerUtil.SellItemFactory(net.satisfy.farm_and_charm.registry.ObjectRegistry.KERNELS.get(), 2, 3, 5));
+            factories.add(new VillagerUtil.SellItemFactory(net.satisfy.farm_and_charm.registry.ObjectRegistry.BARLEY_SEEDS.get(), 2, 3, 5));
         });
         TradeOfferHelper.registerVillagerOffers(BREWER, 2, factories -> {
             factories.add(new VillagerUtil.SellItemFactory(ObjectRegistry.HOPS.get(), 4, 2, 7));
-            factories.add(new VillagerUtil.SellItemFactory(satisfy.farm_and_charm.registry.ObjectRegistry.CORN.get(), 4, 2, 7));
-            factories.add(new VillagerUtil.SellItemFactory(satisfy.farm_and_charm.registry.ObjectRegistry.BARLEY.get(), 4, 2, 7));
-            factories.add(new VillagerUtil.SellItemFactory(satisfy.farm_and_charm.registry.ObjectRegistry.OAT.get(), 4, 2, 7));
+            factories.add(new VillagerUtil.SellItemFactory(net.satisfy.farm_and_charm.registry.ObjectRegistry.CORN.get(), 4, 2, 7));
+            factories.add(new VillagerUtil.SellItemFactory(net.satisfy.farm_and_charm.registry.ObjectRegistry.BARLEY.get(), 4, 2, 7));
+            factories.add(new VillagerUtil.SellItemFactory(net.satisfy.farm_and_charm.registry.ObjectRegistry.OAT.get(), 4, 2, 7));
         });
         TradeOfferHelper.registerVillagerOffers(BREWER, 3, factories -> {
             factories.add(new VillagerUtil.SellItemFactory(ObjectRegistry.PORK_KNUCKLE.get(), 7, 1, 10));

@@ -66,6 +66,17 @@ public class HangingRopeEntity extends Entity implements IRopeEntity, EntitySpaw
         return new HangingRopeEntity(level, x, y, z, connection, active);
     }
 
+    public static void notifyBlock(BlockPos blockPos, ServerLevel serverLevel, Block block) {
+        for (int below = 0; below < HangingRopeEntity.MAX_LENGTH; below++) {
+            BlockPos belowPos = blockPos.below(below);
+            BlockState blockState = serverLevel.getBlockState(belowPos);
+            if (blockState.is(block)) {
+                serverLevel.scheduleTick(belowPos, blockState.getBlock(), 1);
+                return;
+            }
+        }
+    }
+
     @Environment(EnvType.CLIENT)
     public Vec3 getRopeVec() {
         return new Vec3(0, -length, 0);
@@ -122,17 +133,6 @@ public class HangingRopeEntity extends Entity implements IRopeEntity, EntitySpaw
             return InteractionResult.SUCCESS;
         }
         return InteractionResult.PASS;
-    }
-
-    public static void notifyBlock(BlockPos blockPos, ServerLevel serverLevel, Block block) {
-        for (int below = 0; below < HangingRopeEntity.MAX_LENGTH; below++) {
-            BlockPos belowPos = blockPos.below(below);
-            BlockState blockState = serverLevel.getBlockState(belowPos);
-            if (blockState.is(block)) {
-                serverLevel.scheduleTick(belowPos, blockState.getBlock(), 1);
-                return;
-            }
-        }
     }
 
     private void sendChangePacket(ServerLevel serverLevel) {

@@ -127,7 +127,7 @@ public class BeerElementalModel<T extends Monster> extends EntityModel<T> {
     @Override
     public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float age, float headYaw, float headPitch) {
         float f = age * Mth.PI * 0.02F;
-        for(int i = 0; i < 4; ++i) {
+        for (int i = 0; i < 4; ++i) {
             upperBodyParts[i].y = Mth.cos((i * 2.0F + age) * 0.25F) - 2.0F;
             upperBodyParts[i].x = Mth.cos(f) * 9.0F;
             upperBodyParts[i].z = Mth.sin(f) * 9.0F;
@@ -135,7 +135,7 @@ public class BeerElementalModel<T extends Monster> extends EntityModel<T> {
         }
 
         f = age * Mth.PI * 0.02F + 45 * Mth.DEG_TO_RAD;
-        for(int i = 4; i < 8; ++i) {
+        for (int i = 4; i < 8; ++i) {
             upperBodyParts[i].y = Mth.cos((i * 2.0F + age) * 0.25F) + 2.0F;
             upperBodyParts[i].x = Mth.cos(f) * 7.0F;
             upperBodyParts[i].z = Mth.sin(f) * 7.0F;
@@ -144,7 +144,7 @@ public class BeerElementalModel<T extends Monster> extends EntityModel<T> {
 
 
         f = age * Mth.PI * -0.02F + 27 * Mth.DEG_TO_RAD;
-        for(int i = 8; i < 12; ++i) {
+        for (int i = 8; i < 12; ++i) {
             upperBodyParts[i].y = Mth.cos((i * 1.5F + age) * 0.5F) + 11.0F;
             upperBodyParts[i].x = Mth.cos(f) * 5.0F;
             upperBodyParts[i].z = Mth.sin(f) * 5.0F;

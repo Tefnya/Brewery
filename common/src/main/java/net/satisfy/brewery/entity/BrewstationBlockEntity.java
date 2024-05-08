@@ -43,21 +43,21 @@ import java.util.List;
 import java.util.Set;
 
 public class BrewstationBlockEntity extends BlockEntity implements ImplementedInventory, BlockEntityTicker<BrewstationBlockEntity> {
-    @NotNull
-    private Set<BlockPos> components = new HashSet<>(4);
     private static final int MAX_BREW_TIME = 60 * 20;
     private static final int MIN_TIME_FOR_EVENT = 5 * 20;
     private static final int MAX_TIME_FOR_EVENT = 15 * 20;
     private static final int SOUND_DURATION = 3 * 20;
+    private final Set<BrewEvent> runningEvents = new HashSet<>();
+    private final SoundEvent spawnEntitySound = DoApiSoundEventRegistry.BREWSTATION_PROCESS_FAILED.get();
+    @NotNull
+    private Set<BlockPos> components = new HashSet<>(4);
     private int soundTime;
     private int brewTime;
     private int timeToNextEvent = Integer.MIN_VALUE;
-    private final Set<BrewEvent> runningEvents = new HashSet<>();
     private int solved;
     private int totalEvents;
     private NonNullList<ItemStack> ingredients;
     private ItemStack beer = ItemStack.EMPTY;
-    private final SoundEvent spawnEntitySound = DoApiSoundEventRegistry.BREWSTATION_PROCESS_FAILED.get();
 
     public BrewstationBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(BlockEntityRegistry.BREWINGSTATION_BLOCK_ENTITY.get(), blockPos, blockState);
@@ -69,14 +69,6 @@ public class BrewstationBlockEntity extends BlockEntity implements ImplementedIn
         if (this.level instanceof ServerLevel serverLevel)
             serverLevel.getChunkSource().blockChanged(this.getBlockPos());
     }
-
-    public void setComponents(BlockPos... components) {
-        if (components.length != 4) {
-            return;
-        }
-        this.components.addAll(Arrays.asList(components));
-    }
-
 
     public InteractionResult addIngredient(ItemStack itemStack) {
         for (int i = 0; i < 3; i++) {
@@ -130,7 +122,7 @@ public class BrewstationBlockEntity extends BlockEntity implements ImplementedIn
             soundTime = 0;
         }
         soundTime++;
-        if(timeToNextEvent == Integer.MIN_VALUE) setTimeToEvent();
+        if (timeToNextEvent == Integer.MIN_VALUE) setTimeToEvent();
 
         BrewHelper.checkRunningEvents(this);
 
@@ -160,7 +152,6 @@ public class BrewstationBlockEntity extends BlockEntity implements ImplementedIn
             timeToNextEvent = BreweryMath.getRandomHighNumber(this.level.getRandom(), MIN_TIME_FOR_EVENT, MAX_TIME_FOR_EVENT);
         }
     }
-
 
     private boolean canBrew(Recipe<?> recipe) {
         if (recipe == null || this.level == null)
@@ -206,7 +197,6 @@ public class BrewstationBlockEntity extends BlockEntity implements ImplementedIn
         }
     }
 
-
     private void spawnElementals() {
         assert this.level != null;
         BlockState blockState = this.level.getBlockState(this.getBlockPos());
@@ -223,7 +213,7 @@ public class BrewstationBlockEntity extends BlockEntity implements ImplementedIn
         }
     }
 
-    public void endBrewing(){
+    public void endBrewing() {
         BrewHelper.finishEvents(this);
         this.solved = 0;
         this.brewTime = 0;
@@ -231,7 +221,6 @@ public class BrewstationBlockEntity extends BlockEntity implements ImplementedIn
         this.soundTime = 3 * 20;
         this.timeToNextEvent = Integer.MIN_VALUE;
     }
-
 
     public boolean isPartOf(BlockPos blockPos) {
         return components.contains(blockPos);
@@ -287,6 +276,13 @@ public class BrewstationBlockEntity extends BlockEntity implements ImplementedIn
         return components;
     }
 
+    public void setComponents(BlockPos... components) {
+        if (components.length != 4) {
+            return;
+        }
+        this.components.addAll(Arrays.asList(components));
+    }
+
     public List<ItemStack> getIngredient() {
         return this.ingredients;
     }
@@ -297,6 +293,7 @@ public class BrewstationBlockEntity extends BlockEntity implements ImplementedIn
     public NonNullList<ItemStack> getItems() {
         return ingredients;
     }
+
     @Override
     public boolean stillValid(Player player) {
         assert this.level != null;

@@ -34,7 +34,7 @@ public class FogRendererMixin {
             MobEffectInstance effect = player.getEffect(MobEffectRegistry.BLACKOUT.get());
             if (effect != null && effect.getDuration() <= AlcoholManager.BEGIN_TIME) {
                 if (effect.getDuration() < 10) {
-                    return  1.0F - (float)effect.getDuration() / 10.0F;
+                    return 1.0F - (float) effect.getDuration() / 10.0F;
                 } else {
                     return 0.0F;
                 }
@@ -73,7 +73,7 @@ public class FogRendererMixin {
     @Unique
     private static float power(float base, int exponent) {
         float value = 1;
-        for(int i = 0; i < exponent; i++) {
+        for (int i = 0; i < exponent; i++) {
             value *= base;
         }
         return value;

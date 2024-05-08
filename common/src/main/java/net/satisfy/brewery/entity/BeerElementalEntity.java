@@ -28,6 +28,13 @@ public class BeerElementalEntity extends Monster {
         this.xpReward = 8;
     }
 
+    public static AttributeSupplier.Builder createAttributes() {
+        return Mob.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 80.0D)
+                .add(Attributes.MOVEMENT_SPEED, 0.4D)
+                .add(Attributes.ATTACK_DAMAGE, 8.0D);
+    }
+
     @Override
     public @NotNull EntityDimensions getDimensions(Pose pose) {
         return EntityDimensions.scalable(1F, 2F);
@@ -54,7 +61,7 @@ public class BeerElementalEntity extends Monster {
                 this.level().playLocalSound(this.getX() + 0.5, this.getY() + 0.5, this.getZ() + 0.5, SoundEvents.BLAZE_BURN, this.getSoundSource(), 1.0F + this.random.nextFloat(), this.random.nextFloat() * 0.7F + 0.3F, false);
             }
 
-            for(int i = 0; i < 2; ++i) {
+            for (int i = 0; i < 2; ++i) {
                 this.level().addParticle(ParticleTypes.UNDERWATER, this.getRandomX(0.5), this.getRandomY(), this.getRandomZ(0.5), 0.0, 0.0, 0.0);
             }
         }
@@ -62,25 +69,18 @@ public class BeerElementalEntity extends Monster {
         super.aiStep();
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 80.0D)
-                .add(Attributes.MOVEMENT_SPEED, 0.4D)
-                .add(Attributes.ATTACK_DAMAGE, 8.0D);
-    }
-
     @Override
     protected void customServerAiStep() {
         nextHeightOffsetChangeTick--;
         if (nextHeightOffsetChangeTick <= 0) {
             nextHeightOffsetChangeTick = 100;
-            allowedHeightOffset = (float)random.triangle(0.5D, 6.891D);
+            allowedHeightOffset = (float) random.triangle(0.5D, 6.891D);
         }
 
         LivingEntity target = getTarget();
         if (target != null) {
-            if(target.getEyeY() > getEyeY() + (double)this.allowedHeightOffset) {
-                if(canAttack(target)) {
+            if (target.getEyeY() > getEyeY() + (double) this.allowedHeightOffset) {
+                if (canAttack(target)) {
                     Vec3 velocity = getDeltaMovement();
                     velocity = velocity.add(0.0D, (0.3D - velocity.y) * 0.3D, 0.0D);
                     setDeltaMovement(velocity);
@@ -109,7 +109,6 @@ public class BeerElementalEntity extends Monster {
     public boolean causeFallDamage(float f, float g, DamageSource damageSource) {
         return false;
     }
-
 
 
     private static class BeerElementalAttackGoal extends Goal {
@@ -176,7 +175,8 @@ public class BeerElementalEntity extends Monster {
                     }
 
                     if (attackStep > 1) {
-                        if (!elemental.isSilent()) elemental.playSound(DoApiSoundEventRegistry.BEER_ELEMENTAL_ATTACK.get(), 1.0F, 1.0F);
+                        if (!elemental.isSilent())
+                            elemental.playSound(DoApiSoundEventRegistry.BEER_ELEMENTAL_ATTACK.get(), 1.0F, 1.0F);
 
 
                         double dX = target.getX() - elemental.getX();

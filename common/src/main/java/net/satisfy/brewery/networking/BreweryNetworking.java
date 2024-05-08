@@ -32,7 +32,7 @@ public class BreweryNetworking {
     }
 
 
-    public static FriendlyByteBuf createPacketBuf(){
+    public static FriendlyByteBuf createPacketBuf() {
         return new FriendlyByteBuf(Unpooled.buffer());
     }
 }

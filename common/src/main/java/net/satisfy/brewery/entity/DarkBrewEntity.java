@@ -65,7 +65,7 @@ public class DarkBrewEntity extends ThrowableItemProjectile {
         if (status == 3) {
             ParticleOptions particleEffect = this.getParticleParameters();
 
-            for(int i = 0; i < 8; ++i) {
+            for (int i = 0; i < 8; ++i) {
                 this.level().addParticle(particleEffect, this.getX(), this.getY(), this.getZ(), 0.0, 0.0, 0.0);
             }
         }
@@ -75,13 +75,13 @@ public class DarkBrewEntity extends ThrowableItemProjectile {
         super.onHitEntity(entityHitResult);
         Entity entity = entityHitResult.getEntity();
         int damage = 2;
-        entity.hurt(entity.damageSources().thrown(this, this.getOwner()), (float)damage);
+        entity.hurt(entity.damageSources().thrown(this, this.getOwner()), (float) damage);
     }
 
     protected void onHit(HitResult hitResult) {
         super.onHit(hitResult);
         if (!this.level().isClientSide) {
-            this.level().broadcastEntityEvent(this, (byte)3);
+            this.level().broadcastEntityEvent(this, (byte) 3);
             this.playSound(SoundEvents.WOOD_BREAK, 1.0F, 1.0F);
             BeerElementalEntity beerElemental = new BeerElementalEntity(EntityRegistry.BEER_ELEMENTAL.get(), this.level());
             beerElemental.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), this.getXRot());
@@ -90,5 +90,5 @@ public class DarkBrewEntity extends ThrowableItemProjectile {
             this.discard();
         }
     }
- }
+}
 

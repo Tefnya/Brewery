@@ -45,8 +45,28 @@ import java.util.function.Supplier;
 
 public class BrewKettleBlock extends BrewingstationBlock implements EntityBlock {
     public static final EnumProperty<Liquid> LIQUID;
-    private static final Supplier<VoxelShape> voxelShapeSupplier;
     public static final Map<Direction, VoxelShape> SHAPE;
+    private static final Supplier<VoxelShape> voxelShapeSupplier;
+
+    static {
+        LIQUID = BlockStateRegistry.LIQUID;
+        voxelShapeSupplier = () -> {
+            VoxelShape shape = Shapes.empty();
+            shape = Shapes.or(shape, Shapes.box(0, 0, 0.125, 0.875, 0.125, 1));
+            shape = Shapes.or(shape, Shapes.box(0, 0.125, 0, 1, 1, 0.125));
+            shape = Shapes.or(shape, Shapes.box(0.875, 0.125, 0.125, 1, 1, 1));
+            shape = Shapes.or(shape, Shapes.box(0, 0.125, 0.125, 0.125, 1, 1));
+            shape = Shapes.or(shape, Shapes.box(0.125, 0.125, 0.9375, 0.875, 1, 1));
+            shape = Shapes.or(shape, Shapes.box(0.125, 0.5625, 0.09375, 0.875, 0.5625, 0.96875));
+            return shape;
+        };
+        SHAPE = Util.make(new HashMap<>(), map -> {
+            for (Direction direction : Direction.Plane.HORIZONTAL.stream().toList()) {
+                map.put(direction, GeneralUtil.rotateShape(Direction.NORTH, direction, voxelShapeSupplier.get()));
+            }
+        });
+    }
+
     private final BrewMaterial brewMaterial;
 
     public BrewKettleBlock(BrewMaterial brewMaterial, Properties properties) {
@@ -249,24 +269,5 @@ public class BrewKettleBlock extends BrewingstationBlock implements EntityBlock 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
         builder.add(LIQUID);
-    }
-
-    static {
-        LIQUID = BlockStateRegistry.LIQUID;
-        voxelShapeSupplier = () -> {
-            VoxelShape shape = Shapes.empty();
-            shape = Shapes.or(shape, Shapes.box(0, 0, 0.125, 0.875, 0.125, 1));
-            shape = Shapes.or(shape, Shapes.box(0, 0.125, 0, 1, 1, 0.125));
-            shape = Shapes.or(shape, Shapes.box(0.875, 0.125, 0.125, 1, 1, 1));
-            shape = Shapes.or(shape, Shapes.box(0, 0.125, 0.125, 0.125, 1, 1));
-            shape = Shapes.or(shape, Shapes.box(0.125, 0.125, 0.9375, 0.875, 1, 1));
-            shape = Shapes.or(shape, Shapes.box(0.125, 0.5625, 0.09375, 0.875, 0.5625, 0.96875));
-            return shape;
-        };
-        SHAPE = Util.make(new HashMap<>(), map -> {
-            for (Direction direction : Direction.Plane.HORIZONTAL.stream().toList()) {
-                map.put(direction, GeneralUtil.rotateShape(Direction.NORTH, direction, voxelShapeSupplier.get()));
-            }
-        });
     }
 }

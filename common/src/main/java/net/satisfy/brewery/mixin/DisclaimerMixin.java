@@ -22,6 +22,15 @@ import java.net.URL;
 public abstract class DisclaimerMixin extends Screen {
     @Unique
     private static final Component[] DISCLAIMERS;
+
+    static {
+        DISCLAIMERS = new Component[]{
+                Component.translatable("disclaimer.brewery.drugs"),
+                Component.translatable("disclaimer.brewery.drive"),
+                Component.translatable("disclaimer.brewery.alcohol")
+        };
+    }
+
     @Unique
     private final Component disclaimer = DISCLAIMERS[RandomSource.create().nextInt(0, DISCLAIMERS.length)];
     @Unique
@@ -60,14 +69,5 @@ public abstract class DisclaimerMixin extends Screen {
 
         }
         super.render(guiGraphics, i, j, f);
-    }
-
-
-    static {
-        DISCLAIMERS = new Component[]{
-                Component.translatable("disclaimer.brewery.drugs"),
-                Component.translatable("disclaimer.brewery.drive"),
-                Component.translatable("disclaimer.brewery.alcohol")
-        };
     }
 }

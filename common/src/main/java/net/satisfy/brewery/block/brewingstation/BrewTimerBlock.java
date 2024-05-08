@@ -35,15 +35,35 @@ public class BrewTimerBlock extends BrewingstationBlock {
     public static final BooleanProperty TIME;
     public static final BooleanProperty ACTIVATED;
     public static final BooleanProperty PRESSED;
+    public static final Map<Direction, VoxelShape> SHAPE;
     private static final int PRESS_DURATION = 3 * 20;
-    private static int pressedTime;
     private static final boolean canBePressed = false;
     private static final Supplier<VoxelShape> voxelShapeSupplier;
+    private static int pressedTime;
 
-    public static final Map<Direction, VoxelShape> SHAPE;
+    static {
+        TIME = BlockStateRegistry.TIME;
+        PRESSED = BooleanProperty.create("pressed");
+        ACTIVATED = BooleanProperty.create("activated");
+        voxelShapeSupplier = () -> {
+            VoxelShape shape = Shapes.empty();
+            shape = Shapes.or(shape, Shapes.box(0.125, 0.5, 0.9375, 0.5, 0.875, 1));
+            shape = Shapes.or(shape, Shapes.box(0.6875, 0.6875, 0.9375, 0.8125, 0.8125, 1));
+            shape = Shapes.or(shape, Shapes.box(0.6875, 0.5, 0.9375, 0.8125, 0.625, 1));
+            shape = Shapes.or(shape, Shapes.box(0, 0.125, 0.875, 1, 1, 0.9375));
+            shape = Shapes.or(shape, Shapes.box(0.875, 0.125, 0, 1, 1, 0.875));
+            shape = Shapes.or(shape, Shapes.box(0, 0, 0, 0.875, 0.125, 0.875));
+            shape = Shapes.or(shape, Shapes.box(0, 0.9375, 0, 0.875, 1, 0.875));
+            return shape;
+        };
+        SHAPE = Util.make(new HashMap<>(), map -> {
+            for (Direction direction : Direction.Plane.HORIZONTAL.stream().toList()) {
+                map.put(direction, GeneralUtil.rotateShape(Direction.NORTH, direction, voxelShapeSupplier.get()));
+            }
+        });
+    }
 
     private long lastSoundTime = 0;
-
 
     public BrewTimerBlock(Properties properties) {
         super(properties);
@@ -58,7 +78,6 @@ public class BrewTimerBlock extends BrewingstationBlock {
         }
         return InteractionResult.CONSUME;
     }
-
 
     @Override
     @SuppressWarnings("deprecation")
@@ -96,28 +115,6 @@ public class BrewTimerBlock extends BrewingstationBlock {
                 level.setBlock(blockPos, blockState.setValue(ACTIVATED, true), 3);
             }
         }
-    }
-
-    static {
-        TIME = BlockStateRegistry.TIME;
-        PRESSED = BooleanProperty.create("pressed");
-        ACTIVATED = BooleanProperty.create("activated");
-        voxelShapeSupplier = () -> {
-            VoxelShape shape = Shapes.empty();
-            shape = Shapes.or(shape, Shapes.box(0.125, 0.5, 0.9375, 0.5, 0.875, 1));
-            shape = Shapes.or(shape, Shapes.box(0.6875, 0.6875, 0.9375, 0.8125, 0.8125, 1));
-            shape = Shapes.or(shape, Shapes.box(0.6875, 0.5, 0.9375, 0.8125, 0.625, 1));
-            shape = Shapes.or(shape, Shapes.box(0, 0.125, 0.875, 1, 1, 0.9375));
-            shape = Shapes.or(shape, Shapes.box(0.875, 0.125, 0, 1, 1, 0.875));
-            shape = Shapes.or(shape, Shapes.box(0, 0, 0, 0.875, 0.125, 0.875));
-            shape = Shapes.or(shape, Shapes.box(0, 0.9375, 0, 0.875, 1, 0.875));
-            return shape;
-        };
-        SHAPE = Util.make(new HashMap<>(), map -> {
-            for (Direction direction : Direction.Plane.HORIZONTAL.stream().toList()) {
-                map.put(direction, GeneralUtil.rotateShape(Direction.NORTH, direction, voxelShapeSupplier.get()));
-            }
-        });
     }
 }
 

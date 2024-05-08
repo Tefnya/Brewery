@@ -30,10 +30,17 @@ import java.util.Objects;
 public class DrinkBlockItem extends BlockItem {
     private final MobEffect effect;
     private final int baseDuration;
+
     public DrinkBlockItem(MobEffect effect, int duration, Block block, Properties settings) {
         super(block, settings);
         this.effect = effect;
         this.baseDuration = duration;
+    }
+
+    public static void addQuality(ItemStack itemStack, int quality) {
+        CompoundTag nbtData = new CompoundTag();
+        nbtData.putInt("brewery.beer_quality", Math.min(Math.max(quality, 0), 3));
+        itemStack.setTag(nbtData);
     }
 
     @Override
@@ -53,12 +60,11 @@ public class DrinkBlockItem extends BlockItem {
 
     @Override
     protected boolean updateCustomBlockEntityTag(BlockPos blockPos, Level level, @Nullable Player player, ItemStack itemStack, BlockState blockState) {
-        if(level.getBlockEntity(blockPos) instanceof StorageBlockEntity wineEntity){
+        if (level.getBlockEntity(blockPos) instanceof StorageBlockEntity wineEntity) {
             wineEntity.setStack(0, itemStack.copyWithCount(1));
         }
         return super.updateCustomBlockEntityTag(blockPos, level, player, itemStack, blockState);
     }
-
 
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand interactionHand) {
@@ -79,7 +85,7 @@ public class DrinkBlockItem extends BlockItem {
                 MobEffectInstance effectInstance = calculateEffectForQuality(quality);
                 serverPlayer.addEffect(effectInstance);
             } else {
-                MobEffectInstance effectInstance = new MobEffectInstance(effect, baseDuration , 0);
+                MobEffectInstance effectInstance = new MobEffectInstance(effect, baseDuration, 0);
                 serverPlayer.addEffect(effectInstance);
             }
         }
@@ -103,13 +109,6 @@ public class DrinkBlockItem extends BlockItem {
         };
 
         return new MobEffectInstance(effect, baseDuration * durationMultiplier, effectLevel - 1);
-    }
-
-
-    public static void addQuality(ItemStack itemStack, int quality) {
-        CompoundTag nbtData = new CompoundTag();
-        nbtData.putInt("brewery.beer_quality", Math.min(Math.max(quality, 0), 3));
-        itemStack.setTag(nbtData);
     }
 
     public void addCount(ItemStack resultSack, int solved) {

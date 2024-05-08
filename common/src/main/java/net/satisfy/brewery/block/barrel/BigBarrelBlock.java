@@ -17,13 +17,14 @@ import org.jetbrains.annotations.NotNull;
 public class BigBarrelBlock extends HorizontalDirectionalBlock {
 
     public static final EnumProperty<DoubleBlockHalf> HALF;
-    public BigBarrelBlock(Properties properties) {
-        super(properties);
-        this.registerDefaultState(this.defaultBlockState());
-    }
 
     static {
         HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
+    }
+
+    public BigBarrelBlock(Properties properties) {
+        super(properties);
+        this.registerDefaultState(this.defaultBlockState());
     }
 
     @Override

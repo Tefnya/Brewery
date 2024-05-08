@@ -32,31 +32,34 @@ public class BarCounterBlock extends Block {
 
     public static final DirectionProperty FACING;
     public static final EnumProperty<GeneralUtil.LineConnectingType> TYPE;
-
-    public BarCounterBlock(Properties settings) {
-        super(settings);
-        this.registerDefaultState(((this.stateDefinition.any().setValue(FACING, Direction.NORTH)).setValue(TYPE, GeneralUtil.LineConnectingType.NONE)));
-    }
-
     private static final Supplier<VoxelShape> voxelShapeSupplier = () -> {
         VoxelShape shape = Shapes.empty();
         shape = Shapes.or(shape, Shapes.box(0, 0, 0.1875, 1, 1, 1));
         shape = Shapes.or(shape, Shapes.box(0, 0.8125, 0, 1, 1, 0.1875));
         return shape;
     };
-
     public static final Map<Direction, VoxelShape> SHAPE = Util.make(new HashMap<>(), map -> {
         for (Direction direction : Direction.Plane.HORIZONTAL.stream().toList()) {
             map.put(direction, GeneralUtil.rotateShape(Direction.NORTH, direction, voxelShapeSupplier.get()));
         }
     });
 
+    static {
+        FACING = BlockStateProperties.HORIZONTAL_FACING;
+        TYPE = LINE_CONNECTING_TYPE;
+    }
+
+    public BarCounterBlock(Properties settings) {
+        super(settings);
+        this.registerDefaultState(((this.stateDefinition.any().setValue(FACING, Direction.NORTH)).setValue(TYPE, GeneralUtil.LineConnectingType.NONE)));
+    }
+
     @Override
     public @NotNull VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
         return SHAPE.get(state.getValue(FACING));
     }
 
-        @Nullable
+    @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         Direction facing = context.getHorizontalDirection().getOpposite();
@@ -115,7 +118,6 @@ public class BarCounterBlock extends Block {
         builder.add(FACING, TYPE);
     }
 
-
     @Override
     public @NotNull BlockState rotate(BlockState state, Rotation rotation) {
         return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
@@ -124,10 +126,5 @@ public class BarCounterBlock extends Block {
     @Override
     public @NotNull BlockState mirror(BlockState state, Mirror mirror) {
         return state.rotate(mirror.getRotation(state.getValue(FACING)));
-    }
-
-    static {
-        FACING = BlockStateProperties.HORIZONTAL_FACING;
-        TYPE = LINE_CONNECTING_TYPE;
     }
 }

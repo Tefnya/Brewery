@@ -1,13 +1,13 @@
 package net.satisfy.brewery.forge;
 
 import de.cristelknight.doapi.common.util.VillagerUtil;
-import net.satisfy.brewery.Brewery;
-import net.satisfy.brewery.forge.registry.BreweryForgeVillagers;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.satisfy.brewery.registry.*;
+import net.satisfy.brewery.Brewery;
+import net.satisfy.brewery.forge.registry.BreweryForgeVillagers;
+import net.satisfy.brewery.registry.ObjectRegistry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +20,8 @@ public class BreweryEvents {
     @Mod.EventBusSubscriber(modid = Brewery.MOD_ID)
     public static class ForgeEvents {
         @SubscribeEvent
-        public static void addCustomTrades(VillagerTradesEvent event){
-            if(event.getType().equals(BreweryForgeVillagers.BREWER.get())){
+        public static void addCustomTrades(VillagerTradesEvent event) {
+            if (event.getType().equals(BreweryForgeVillagers.BREWER.get())) {
                 Map<Integer, List<VillagerTrades.ItemListing>> trades = event.getTrades();
 
                 List<VillagerTrades.ItemListing> level1 = trades.computeIfAbsent(1, k -> new ArrayList<>());

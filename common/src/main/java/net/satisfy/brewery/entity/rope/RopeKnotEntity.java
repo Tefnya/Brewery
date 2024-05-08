@@ -64,6 +64,37 @@ public class RopeKnotEntity extends HangingEntity implements IRopeEntity {
         return new RopeKnotEntity(level, blockPos);
     }
 
+    public static boolean canAttachTo(BlockState blockState) {
+        return blockState != null && (blockState.is(BlockTags.FENCES) || blockState.is(Blocks.TRIPWIRE_HOOK));
+    }
+
+    public static List<RopeConnection> getHeldRopesInRange(Player player, Vec3 target) {
+        AABB searchBox = AABB.ofSize(target, MAX_RANGE * 2, MAX_RANGE * 2, MAX_RANGE * 2);
+        List<RopeKnotEntity> otherKnots = player.level().getEntitiesOfClass(RopeKnotEntity.class, searchBox);
+
+        List<RopeConnection> attachableRopes = new ArrayList<>();
+
+        for (RopeKnotEntity source : otherKnots) {
+            for (RopeConnection connection : source.getConnections()) {
+                if (connection.to() != player) continue;
+                attachableRopes.add(connection);
+            }
+        }
+        return attachableRopes;
+    }
+
+    @Nullable
+    public static RopeKnotEntity getHopRopeKnotEntity(Level level, BlockPos pos) {
+        List<RopeKnotEntity> results = level.getEntitiesOfClass(RopeKnotEntity.class, AABB.ofSize(Vec3.atLowerCornerOf(pos), 2, 2, 2));
+
+        for (RopeKnotEntity current : results) {
+            if (new BlockPos(current.pos).equals(pos)) {
+                return current;
+            }
+        }
+        return null;
+    }
+
     public Set<RopeConnection> getConnections() {
         return this.connections;
     }
@@ -81,10 +112,6 @@ public class RopeKnotEntity extends HangingEntity implements IRopeEntity {
             }
         }
         return false;
-    }
-
-    public static boolean canAttachTo(BlockState blockState) {
-        return blockState != null && (blockState.is(BlockTags.FENCES) || blockState.is(Blocks.TRIPWIRE_HOOK));
     }
 
     @Override
@@ -148,33 +175,6 @@ public class RopeKnotEntity extends HangingEntity implements IRopeEntity {
             }
         }
         return hasMadeConnection;
-    }
-
-    public static List<RopeConnection> getHeldRopesInRange(Player player, Vec3 target) {
-        AABB searchBox = AABB.ofSize(target, MAX_RANGE * 2, MAX_RANGE * 2, MAX_RANGE * 2);
-        List<RopeKnotEntity> otherKnots = player.level().getEntitiesOfClass(RopeKnotEntity.class, searchBox);
-
-        List<RopeConnection> attachableRopes = new ArrayList<>();
-
-        for (RopeKnotEntity source : otherKnots) {
-            for (RopeConnection connection : source.getConnections()) {
-                if (connection.to() != player) continue;
-                attachableRopes.add(connection);
-            }
-        }
-        return attachableRopes;
-    }
-
-    @Nullable
-    public static RopeKnotEntity getHopRopeKnotEntity(Level level, BlockPos pos) {
-        List<RopeKnotEntity> results = level.getEntitiesOfClass(RopeKnotEntity.class, AABB.ofSize(Vec3.atLowerCornerOf(pos), 2, 2, 2));
-
-        for (RopeKnotEntity current : results) {
-            if (new BlockPos(current.pos).equals(pos)) {
-                return current;
-            }
-        }
-        return null;
     }
 
     @Override

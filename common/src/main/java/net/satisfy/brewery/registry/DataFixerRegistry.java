@@ -6,7 +6,7 @@ import net.satisfy.brewery.Brewery;
 
 public class DataFixerRegistry {
 
-    public static void init(){
+    public static void init() {
         StringPairs p = DataFixers.getOrCreate(Brewery.MOD_ID);
         p.add("brewery:barley_crop", "farm_and_charm:barley_crop");
         p.add("brewery:barley_seeds", "farm_and_charm:barley_seeds");

@@ -12,7 +12,7 @@
     "B": {
       "item": "minecraft:barrel"
     }
-},
+  },
   "result": {
     "item": "brewery:wall_cabinet",
     "count": 2

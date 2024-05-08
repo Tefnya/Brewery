@@ -79,22 +79,22 @@ public class BrewHelper {
         Supplier<BrewEvent> type = BrewEvents.byId(eventLocation);
         assert type != null;
         BrewEvent event = type.get();
-        event.setTimeForEvent(entity.getLevel().getRandom().nextInt(8 * 20,20 * 20));
+        event.setTimeForEvent(entity.getLevel().getRandom().nextInt(8 * 20, 20 * 20));
         return event;
     }
 
-    public static void finishEvents(BrewstationBlockEntity entity){
+    public static void finishEvents(BrewstationBlockEntity entity) {
         Set<BrewEvent> eventSet = entity.getRunningEvents();
-        if(eventSet.isEmpty()) return;
+        if (eventSet.isEmpty()) return;
         Iterator<BrewEvent> iterator = eventSet.iterator();
         while (iterator.hasNext()) {
             BrewEvent event = iterator.next();
-            if(event == null) continue;
+            if (event == null) continue;
             endEvent(entity, iterator, event);
         }
     }
 
-    public static void checkRunningEvents(BrewstationBlockEntity entity){
+    public static void checkRunningEvents(BrewstationBlockEntity entity) {
         Set<BrewEvent> eventSet = entity.getRunningEvents();
         if (eventSet.isEmpty()) return;
         Iterator<BrewEvent> iterator = eventSet.iterator();
@@ -105,8 +105,7 @@ public class BrewHelper {
                 if (event.isFinish(entity.getComponents(), entity.getLevel())) {
                     endEvent(entity, iterator, event);
                     entity.growSolved();
-                }
-                else if (event.getTimeLeft() <= 0) {
+                } else if (event.getTimeLeft() <= 0) {
                     endEvent(entity, iterator, event);
                 }
             }
@@ -124,7 +123,7 @@ public class BrewHelper {
         Set<BrewEvent> events = entity.getRunningEvents();
         if (events.isEmpty()) return;
         ListTag list = new ListTag();
-        for(BrewEvent event : events){
+        for (BrewEvent event : events) {
             CompoundTag tag = event.save(new CompoundTag());
             tag.putString("id", Objects.requireNonNull(BrewEvents.getId(event)).toString());
             tag.putInt("timeLeft", event.getTimeLeft());
@@ -136,12 +135,12 @@ public class BrewHelper {
     public static void load(BrewstationBlockEntity entity, CompoundTag compoundTag) {
         if (!compoundTag.contains("runningEvents")) return;
         ListTag list = compoundTag.getList("runningEvents", Tag.TAG_COMPOUND);
-        for(Tag tag : list){
-            if(tag instanceof CompoundTag cTag){
+        for (Tag tag : list) {
+            if (tag instanceof CompoundTag cTag) {
                 String id = cTag.getString("id");
                 ResourceLocation location = ResourceLocation.tryParse(id);
                 Supplier<BrewEvent> type = BrewEvents.byId(location);
-                if(type == null) continue;
+                if (type == null) continue;
                 BrewEvent event = type.get();
                 event.load(compoundTag);
                 event.setTimeForEvent(cTag.getInt("timeLeft"));
@@ -150,13 +149,13 @@ public class BrewHelper {
         }
     }
 
-    public static void resetWater(Set<BlockPos> components, Level level){
+    public static void resetWater(Set<BlockPos> components, Level level) {
         if (components == null || level == null) return;
         BlockPos basinPos = BrewHelper.getBlock(BrewKettleBlock.class, components, level);
         if (basinPos != null) {
             BlockState basinState = level.getBlockState(basinPos);
             Liquid liquid = basinState.getValue(BlockStateRegistry.LIQUID);
-            if(liquid.equals(Liquid.FILLED)) return;
+            if (liquid.equals(Liquid.FILLED)) return;
             level.setBlockAndUpdate(basinPos, basinState.setValue(BlockStateRegistry.LIQUID, Liquid.FILLED));
         }
     }

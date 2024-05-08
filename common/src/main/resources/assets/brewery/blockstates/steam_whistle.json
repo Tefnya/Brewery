@@ -1,6 +1,8 @@
 {
   "variants": {
-    "": { "model": "brewery:block/steam_whistle" }
+    "": {
+      "model": "brewery:block/steam_whistle"
+    }
   }
 }
 

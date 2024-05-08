@@ -12,6 +12,7 @@ public class WindowMixin {
 
     @Inject(method = "onFramebufferResize", at = @At("TAIL"))
     private void updateShaderSize(CallbackInfo ci) {
-        if (MotionBlur.enabled) MotionBlur.shader.resize(MotionBlur.client.getWindow().getWidth(), MotionBlur.client.getWindow().getHeight());
+        if (MotionBlur.enabled)
+            MotionBlur.shader.resize(MotionBlur.client.getWindow().getWidth(), MotionBlur.client.getWindow().getHeight());
     }
 }

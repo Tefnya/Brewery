@@ -30,53 +30,11 @@ public class RopeConnection {
     public static final double VISIBLE_RANGE = 2048.0D;
     private final RopeKnotEntity from;
     private final Entity to;
-    private boolean alive = true;
-    public boolean removeSilently = false;
     private final List<Integer> collisions = new ArrayList<>();
     private final List<Integer> hangingRopes = new ArrayList<>();
+    public boolean removeSilently = false;
+    private boolean alive = true;
     private int activeRopes;
-
-    public RopeKnotEntity from() {
-        return from;
-    }
-
-    public Entity to() {
-        return to;
-    }
-
-    public boolean dead() {
-        return !alive;
-    }
-
-    public int activeHangingRopes() {
-        return this.activeRopes;
-    }
-
-    public Level getLevel() {
-        return from.level();
-    }
-
-    public double getSquaredDistance() {
-        return this.from.distanceToSqr(to);
-    }
-    public Vec3 getConnectionVec(float tickDelta) {
-        Vec3 fromPos = from.position().add(from.getLeashOffset());
-        Vec3 toPos = to.getRopeHoldPosition(tickDelta);
-        return toPos.subtract(fromPos);
-    }
-
-    public void setActive(boolean active, int id) {
-        int index = this.hangingRopes.indexOf(id);
-        if (index >= 0) {
-            if (active) {
-                this.activeRopes &= ~(1 << index);
-            } else {
-                this.activeRopes |= (1 << index);
-            }
-        } else {
-            Brewery.LOGGER.debug("Cant change hanging entity, storage doesnt contain reference to Entity {} .", id);
-        }
-    }
 
     private RopeConnection(RopeKnotEntity from, Entity to, int activeRopes) {
         this.from = from;
@@ -104,6 +62,58 @@ public class RopeConnection {
             connection.sendAttachRopePacket(serverLevel);
         }
         return connection;
+    }
+
+    private static Set<ServerPlayer> getTrackingPlayers(ServerLevel serverLevel, RopeConnection connection) {
+        Set<ServerPlayer> trackingPlayers = new HashSet<>();
+        RopeKnotEntity from = connection.from();
+        Entity to = connection.to();
+        trackingPlayers.addAll(serverLevel.players().stream().filter((player) -> player.distanceToSqr(from.position().x(), from.position().y(), from.position().z()) <= VISIBLE_RANGE).toList());
+        trackingPlayers.addAll(serverLevel.players().stream().filter((player) -> player.distanceToSqr(to.position().x(), to.position().y(), to.position().z()) <= VISIBLE_RANGE).toList());
+        return trackingPlayers;
+    }
+
+    public RopeKnotEntity from() {
+        return from;
+    }
+
+    public Entity to() {
+        return to;
+    }
+
+    public boolean dead() {
+        return !alive;
+    }
+
+    public int activeHangingRopes() {
+        return this.activeRopes;
+    }
+
+    public Level getLevel() {
+        return from.level();
+    }
+
+    public double getSquaredDistance() {
+        return this.from.distanceToSqr(to);
+    }
+
+    public Vec3 getConnectionVec(float tickDelta) {
+        Vec3 fromPos = from.position().add(from.getLeashOffset());
+        Vec3 toPos = to.getRopeHoldPosition(tickDelta);
+        return toPos.subtract(fromPos);
+    }
+
+    public void setActive(boolean active, int id) {
+        int index = this.hangingRopes.indexOf(id);
+        if (index >= 0) {
+            if (active) {
+                this.activeRopes &= ~(1 << index);
+            } else {
+                this.activeRopes |= (1 << index);
+            }
+        } else {
+            Brewery.LOGGER.debug("Cant change hanging entity, storage doesnt contain reference to Entity {} .", id);
+        }
     }
 
     private void sendAttachRopePacket(ServerLevel serverLevel) {
@@ -259,15 +269,6 @@ public class RopeConnection {
             }
         }
         collisions.clear();
-    }
-
-    private static Set<ServerPlayer> getTrackingPlayers(ServerLevel serverLevel, RopeConnection connection) {
-        Set<ServerPlayer> trackingPlayers = new HashSet<>();
-        RopeKnotEntity from = connection.from();
-        Entity to = connection.to();
-        trackingPlayers.addAll(serverLevel.players().stream().filter((player) -> player.distanceToSqr(from.position().x(), from.position().y(), from.position().z()) <= VISIBLE_RANGE).toList());
-        trackingPlayers.addAll(serverLevel.players().stream().filter((player) -> player.distanceToSqr(to.position().x(), to.position().y(), to.position().z()) <= VISIBLE_RANGE).toList());
-        return trackingPlayers;
     }
 
     @Override

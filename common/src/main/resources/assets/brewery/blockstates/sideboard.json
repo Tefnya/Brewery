@@ -15,7 +15,6 @@
       "model": "brewery:block/sideboard",
       "y": 270
     },
-
     "facing=north,type=left": {
       "model": "brewery:block/sideboard_connected_left"
     },
@@ -31,7 +30,6 @@
       "model": "brewery:block/sideboard_connected_left",
       "y": 270
     },
-
     "facing=north,type=right": {
       "model": "brewery:block/sideboard_connected_right"
     },

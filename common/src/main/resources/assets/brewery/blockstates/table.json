@@ -15,7 +15,6 @@
       "model": "brewery:block/table_single",
       "y": 270
     },
-
     "facing=north,type=middle,has_tablecloth=false": {
       "model": "brewery:block/table_middle"
     },
@@ -31,7 +30,6 @@
       "model": "brewery:block/table_middle",
       "y": 270
     },
-
     "facing=north,type=left,has_tablecloth=false": {
       "model": "brewery:block/table_extended"
     },
@@ -47,7 +45,6 @@
       "model": "brewery:block/table_extended",
       "y": 270
     },
-
     "facing=north,type=right,has_tablecloth=false": {
       "model": "brewery:block/table_extended_right",
       "y": 180
@@ -78,7 +75,6 @@
       "model": "brewery:block/table_with_tablecloth_single",
       "y": 270
     },
-
     "facing=north,type=middle,has_tablecloth=true": {
       "model": "brewery:block/table_with_tablecloth_middle"
     },
@@ -94,7 +90,6 @@
       "model": "brewery:block/table_with_tablecloth_middle",
       "y": 270
     },
-
     "facing=north,type=left,has_tablecloth=true": {
       "model": "brewery:block/table_with_tablecloth_extended"
     },
@@ -110,7 +105,6 @@
       "model": "brewery:block/table_with_tablecloth_extended",
       "y": 270
     },
-
     "facing=north,type=right,has_tablecloth=true": {
       "model": "brewery:block/table_with_tablecloth_extended",
       "y": 180

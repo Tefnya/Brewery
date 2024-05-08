@@ -36,6 +36,17 @@ public class TableBlock extends LineConnectingBlock implements SimpleWaterlogged
     public static final VoxelShape TOP_SHAPE;
     public static final VoxelShape[] LEG_SHAPES;
 
+    static {
+        WATERLOGGED = BlockStateProperties.WATERLOGGED;
+        TOP_SHAPE = Block.box(0.0, 13.0, 0.0, 16.0, 16.0, 16.0);
+        LEG_SHAPES = new VoxelShape[]{
+                Block.box(7.0, 0.0, 7.0, 9.0, 13.0, 9.0),
+                Block.box(7.0, 0.0, 7.0, 9.0, 13.0, 9.0),
+                Block.box(7.0, 0.0, 7.0, 9.0, 13.0, 9.0),
+                Block.box(7.0, 0.0, 7.0, 9.0, 13.0, 9.0)
+        };
+    }
+
     public TableBlock(BlockBehaviour.Properties settings) {
         super(settings);
         this.registerDefaultState(this.stateDefinition.any().setValue(WATERLOGGED, false).setValue(HAS_TABLECLOTH, false));
@@ -93,16 +104,5 @@ public class TableBlock extends LineConnectingBlock implements SimpleWaterlogged
     @Override
     public @NotNull FluidState getFluidState(BlockState state) {
         return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
-    }
-
-    static {
-        WATERLOGGED = BlockStateProperties.WATERLOGGED;
-        TOP_SHAPE = Block.box(0.0, 13.0, 0.0, 16.0, 16.0, 16.0);
-        LEG_SHAPES = new VoxelShape[]{
-                Block.box(7.0, 0.0, 7.0, 9.0, 13.0, 9.0),
-                Block.box(7.0, 0.0, 7.0, 9.0, 13.0, 9.0),
-                Block.box(7.0, 0.0, 7.0, 9.0, 13.0, 9.0),
-                Block.box(7.0, 0.0, 7.0, 9.0, 13.0, 9.0)
-        };
     }
 }

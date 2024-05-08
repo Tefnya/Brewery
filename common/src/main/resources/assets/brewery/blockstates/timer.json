@@ -1,6 +1,8 @@
 {
   "variants": {
-    "": { "model": "brewery:block/timer" }
+    "": {
+      "model": "brewery:block/timer"
+    }
   }
 }
 

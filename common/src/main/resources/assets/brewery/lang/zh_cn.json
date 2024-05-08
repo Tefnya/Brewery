@@ -91,7 +91,7 @@
   "tooltip.brewery.stuffed.duration.block.brewery.potato_salad": "满足（5:00）",
   "tooltip.brewery.stuffed.duration.block.brewery.dumplings": "满足（5:00）",
   "tooltip.brewery.stuffed.duration.item.brewery.pretzel": "满足（1:40）",
-    "tooltip.brewery.cantbeplacedhere": "此方块无法放置在这里。需要2x2x2的空间",
+  "tooltip.brewery.cantbeplacedhere": "此方块无法放置在这里。需要2x2x2的空间",
   "tooltip.brewfest.brewfest_set": "啤酒节套装",
   "tooltip.brewfest.brewfesthelmet": "[啤酒节帽子]",
   "tooltip.brewfest.brewfestbreastplate": "[啤酒节服装]",

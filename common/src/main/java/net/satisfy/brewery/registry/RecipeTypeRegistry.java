@@ -13,11 +13,9 @@ import java.util.function.Supplier;
 
 public class RecipeTypeRegistry {
     private static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(Brewery.MOD_ID, Registries.RECIPE_SERIALIZER);
-    private static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(Brewery.MOD_ID, Registries.RECIPE_TYPE);
-
-    public static final RegistrySupplier<RecipeType<BrewingRecipe>> BREWING_RECIPE_TYPE = create();
-
     public static final RegistrySupplier<RecipeSerializer<BrewingRecipe>> BREWING_RECIPE_SERIALIZER = create(BrewingRecipe.Serializer::new);
+    private static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(Brewery.MOD_ID, Registries.RECIPE_TYPE);
+    public static final RegistrySupplier<RecipeType<BrewingRecipe>> BREWING_RECIPE_TYPE = create();
 
     private static <T extends Recipe<?>> RegistrySupplier<RecipeSerializer<T>> create(Supplier<RecipeSerializer<T>> serializer) {
         return RECIPE_SERIALIZERS.register("brewing", serializer);

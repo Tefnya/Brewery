@@ -26,10 +26,10 @@ public class BreweryForgeVillagers {
             new VillagerProfession("brewer", x -> x.get() == BREWER_POI.get(), x -> x.get() == BREWER_POI.get(), ImmutableSet.of(), ImmutableSet.of(), SoundEvents.VILLAGER_WORK_FARMER));
 
 
-    public static void registerPOIs(){
+    public static void registerPOIs() {
         try {
             ObfuscationReflectionHelper.findMethod(PoiType.class, "registerBlockStates", PoiType.class).invoke(null, BREWER_POI.get());
-        } catch (InvocationTargetException | IllegalAccessException exception){
+        } catch (InvocationTargetException | IllegalAccessException exception) {
             exception.printStackTrace();
         }
     }

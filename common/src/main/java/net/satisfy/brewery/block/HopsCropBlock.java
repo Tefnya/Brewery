@@ -37,9 +37,14 @@ import static net.satisfy.farm_and_charm.registry.ObjectRegistry.FERTILIZED_FARM
 
 @SuppressWarnings("deprecation")
 public abstract class HopsCropBlock extends Block {
-    protected final VoxelShape shape;
     public static final IntegerProperty AGE;
     private static final int MAX_AGE = 3;
+
+    static {
+        AGE = BlockStateProperties.AGE_3;
+    }
+
+    protected final VoxelShape shape;
 
     protected HopsCropBlock(BlockBehaviour.Properties arg, VoxelShape shape) {
         super(arg);
@@ -154,9 +159,5 @@ public abstract class HopsCropBlock extends Block {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(AGE);
-    }
-
-    static {
-        AGE = BlockStateProperties.AGE_3;
     }
 }

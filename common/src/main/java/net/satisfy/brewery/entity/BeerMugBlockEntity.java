@@ -16,8 +16,8 @@ import net.satisfy.brewery.registry.BlockEntityRegistry;
 import org.jetbrains.annotations.NotNull;
 
 public class BeerMugBlockEntity extends BlockEntity {
+    public static final String FLOWER_KEY = "flower";
     private Item flower;
-    public static final String FLOWER_KEY ="flower";
 
     public BeerMugBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.BEER_MUG_BLOCK_ENTITY.get(), pos, state);
@@ -54,7 +54,7 @@ public class BeerMugBlockEntity extends BlockEntity {
 
     public Item readFlower(CompoundTag nbt) {
         super.load(nbt);
-        if(nbt.contains(FLOWER_KEY)) {
+        if (nbt.contains(FLOWER_KEY)) {
             CompoundTag nbtCompound = nbt.getCompound(FLOWER_KEY);
             if (!nbtCompound.isEmpty()) {
                 return ItemStack.of(nbtCompound).getItem();
@@ -76,7 +76,7 @@ public class BeerMugBlockEntity extends BlockEntity {
 
     @Override
     public void setChanged() {
-        if(level instanceof ServerLevel serverLevel) {
+        if (level instanceof ServerLevel serverLevel) {
             Packet<ClientGamePacketListener> updatePacket = getUpdatePacket();
 
             for (ServerPlayer player : GeneralUtil.tracking(serverLevel, getBlockPos())) {

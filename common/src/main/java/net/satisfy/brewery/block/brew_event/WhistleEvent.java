@@ -33,9 +33,9 @@ public class WhistleEvent extends BrewEvent {
     public void onTick(BrewstationBlockEntity entity) {
         Level level = entity.getLevel();
         assert level != null;
-        if(!level.isClientSide()) return;
+        if (!level.isClientSide()) return;
         RandomSource randomSource = level.getRandom();
-        if(!(getTimeLeft() % 3 == 0 && randomSource.nextFloat() < 0.05F)) return;
+        if (!(getTimeLeft() % 3 == 0 && randomSource.nextFloat() < 0.05F)) return;
 
         BlockPos blockPos = BrewHelper.getBlock(BrewWhistleBlock.class, entity.getComponents(), level);
         BlockState blockState = level.getBlockState(blockPos);

@@ -11,7 +11,15 @@ public abstract class BrewEvent {
 
     private int timeLeft;
 
-    public void tick(BrewstationBlockEntity entity){
+    protected BrewEvent() {
+        this(0);
+    }
+
+    protected BrewEvent(int time) {
+        timeLeft = time;
+    }
+
+    public void tick(BrewstationBlockEntity entity) {
         onTick(entity);
         timeLeft--;
     }
@@ -30,14 +38,6 @@ public abstract class BrewEvent {
 
     public void onTick(BrewstationBlockEntity entity) {
 
-    }
-
-    protected BrewEvent() {
-        this(0);
-    }
-
-    protected BrewEvent(int time){
-        timeLeft = time;
     }
 
     public abstract void start(Set<BlockPos> components, Level level);

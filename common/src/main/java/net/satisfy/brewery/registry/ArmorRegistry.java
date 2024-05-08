@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ArmorRegistry {
-    public static void registerArmorModelLayers(){
+    public static void registerArmorModelLayers() {
         EntityModelLayerRegistry.register(BrewfestHatModel.LAYER_LOCATION, BrewfestHatModel::getTexturedModelData);
         EntityModelLayerRegistry.register(LederhosenInner.LAYER_LOCATION, LederhosenInner::createBodyLayer);
         EntityModelLayerRegistry.register(LederhosenOuter.LAYER_LOCATION, LederhosenOuter::createBodyLayer);
@@ -39,7 +39,7 @@ public class ArmorRegistry {
                 .setInnerModel(new LederhosenInner<>(modelLoader.bakeLayer(LederhosenInner.LAYER_LOCATION))));
     }
 
-    public static  <T extends LivingEntity> void registerHatModels(Map<Item, EntityModel<T>> models, EntityModelSet modelLoader) {
+    public static <T extends LivingEntity> void registerHatModels(Map<Item, EntityModel<T>> models, EntityModelSet modelLoader) {
         models.put(ObjectRegistry.BREWFEST_HAT.get(), new BrewfestHatModel<>(modelLoader.bakeLayer(BrewfestHatModel.LAYER_LOCATION)));
         models.put(ObjectRegistry.BREWFEST_HAT_RED.get(), new BrewfestHatModel<>(modelLoader.bakeLayer(BrewfestHatModel.LAYER_LOCATION)));
     }

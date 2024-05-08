@@ -18,8 +18,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Entity.class)
 public abstract class AlcoholPlayerMixin implements AlcoholPlayer {
-    @Shadow private Vec3 deltaMovement;
-    @Shadow @Final protected RandomSource random;
+    @Shadow
+    @Final
+    protected RandomSource random;
+    @Shadow
+    private Vec3 deltaMovement;
     @NotNull
     private AlcoholLevel alcoholLevel = new AlcoholLevel();
 
@@ -46,7 +49,7 @@ public abstract class AlcoholPlayerMixin implements AlcoholPlayer {
         this.alcoholLevel = new AlcoholLevel(drunkenness, immunity);
     }
 
-    @Inject(method="getDeltaMovement", at = @At(value = "HEAD"), cancellable = true)
+    @Inject(method = "getDeltaMovement", at = @At(value = "HEAD"), cancellable = true)
     public void alcoholMovement(CallbackInfoReturnable<Vec3> cir) {
         if (this.getAlcohol().isDrunk() && this.random.nextFloat() < 0.05f) {
             cir.setReturnValue(AlcoholManager.stagger(deltaMovement, this.random));

@@ -36,13 +36,44 @@ import java.util.function.Supplier;
 public class BrewWhistleBlock extends BrewingstationBlock {
     public static final BooleanProperty WHISTLE;
     public static final EnumProperty<DoubleBlockHalf> HALF;
+    public static final Map<Direction, VoxelShape> BOTTOM_SHAPE;
+    public static final Map<Direction, VoxelShape> TOP_SHAPE;
     private static final Supplier<VoxelShape> bottomVoxelShapeSupplier;
-    private long lastSoundTime = 0;
     private static final Supplier<VoxelShape> topVoxelShapeSupplier;
 
-    public static final Map<Direction, VoxelShape> BOTTOM_SHAPE;
+    static {
+        WHISTLE = BlockStateRegistry.WHISTLE;
+        HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
+        bottomVoxelShapeSupplier = () -> {
+            VoxelShape shape = Shapes.empty();
+            shape = Shapes.or(shape, Shapes.box(0, 0.125, 0, 1, 1, 0.125));
+            shape = Shapes.or(shape, Shapes.box(0, 0.125, 0.125, 0.125, 1, 1));
+            shape = Shapes.or(shape, Shapes.box(0.125, 0, 0.125, 1, 0.125, 1));
+            shape = Shapes.or(shape, Shapes.box(0.125, 0.9375, 0.125, 1, 1, 1));
+            return shape;
+        };
+        topVoxelShapeSupplier = () -> {
+            VoxelShape shape = Shapes.empty();
+            shape = Shapes.or(shape, Shapes.box(0.1875, 0, 0.25, 0.4375, 1, 0.5));
+            shape = Shapes.or(shape, Shapes.box(0.125, 0.5, 0.1875, 0.5, 0.5625, 0.5625));
+            shape = Shapes.or(shape, Shapes.box(0.125, 0.875, 0.1875, 0.5, 0.9375, 0.5625));
+            shape = Shapes.or(shape, Shapes.box(0.125, 0.5, 0.5625, 0.5, 0.75, 0.625));
+            shape = Shapes.or(shape, Shapes.box(0.15625, 0.59375, 0.21875, 0.46875, 0.84375, 0.53125));
+            return shape;
+        };
+        BOTTOM_SHAPE = Util.make(new HashMap<>(), map -> {
+            for (Direction direction : Direction.Plane.HORIZONTAL) {
+                map.put(direction, GeneralUtil.rotateShape(Direction.NORTH, direction, bottomVoxelShapeSupplier.get()));
+            }
+        });
+        TOP_SHAPE = Util.make(new HashMap<>(), map -> {
+            for (Direction direction : Direction.Plane.HORIZONTAL) {
+                map.put(direction, GeneralUtil.rotateShape(Direction.NORTH, direction, topVoxelShapeSupplier.get()));
+            }
+        });
+    }
 
-    public static final Map<Direction, VoxelShape> TOP_SHAPE;
+    private long lastSoundTime = 0;
 
     public BrewWhistleBlock(Properties properties) {
         super(properties);
@@ -67,7 +98,7 @@ public class BrewWhistleBlock extends BrewingstationBlock {
 
     @Override
     public void playerWillDestroy(Level level, BlockPos blockPos, BlockState blockState, Player player) {
-        if(blockState.getValue(HALF).equals(DoubleBlockHalf.UPPER)) {
+        if (blockState.getValue(HALF).equals(DoubleBlockHalf.UPPER)) {
             blockPos = blockPos.below();
         }
         super.playerWillDestroy(level, blockPos, blockState, player);
@@ -75,12 +106,11 @@ public class BrewWhistleBlock extends BrewingstationBlock {
 
     @Override
     public @NotNull ItemStack getCloneItemStack(BlockGetter blockGetter, BlockPos blockPos, BlockState blockState) {
-        if(blockState.getValue(HALF).equals(DoubleBlockHalf.UPPER)) {
+        if (blockState.getValue(HALF).equals(DoubleBlockHalf.UPPER)) {
             blockPos = blockPos.below();
         }
         return super.getCloneItemStack(blockGetter, blockPos, blockState);
     }
-
 
     @Override
     public @NotNull VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
@@ -127,39 +157,5 @@ public class BrewWhistleBlock extends BrewingstationBlock {
             world.playLocalSound(x, y, z, DoApiSoundEventRegistry.BREWSTATION_WHISTLE.get(), SoundSource.BLOCKS, 1.0F, 1.0F, false);
             lastSoundTime = currentTime;
         }
-    }
-
-
-
-    static {
-        WHISTLE = BlockStateRegistry.WHISTLE;
-        HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
-        bottomVoxelShapeSupplier = () -> {
-            VoxelShape shape = Shapes.empty();
-            shape = Shapes.or(shape, Shapes.box(0, 0.125, 0, 1, 1, 0.125));
-            shape = Shapes.or(shape, Shapes.box(0, 0.125, 0.125, 0.125, 1, 1));
-            shape = Shapes.or(shape, Shapes.box(0.125, 0, 0.125, 1, 0.125, 1));
-            shape = Shapes.or(shape, Shapes.box(0.125, 0.9375, 0.125, 1, 1, 1));
-            return shape;
-        };
-        topVoxelShapeSupplier = () -> {
-            VoxelShape shape = Shapes.empty();
-            shape = Shapes.or(shape, Shapes.box(0.1875, 0, 0.25, 0.4375, 1, 0.5));
-            shape = Shapes.or(shape, Shapes.box(0.125, 0.5, 0.1875, 0.5, 0.5625, 0.5625));
-            shape = Shapes.or(shape, Shapes.box(0.125, 0.875, 0.1875, 0.5, 0.9375, 0.5625));
-            shape = Shapes.or(shape, Shapes.box(0.125, 0.5, 0.5625, 0.5, 0.75, 0.625));
-            shape = Shapes.or(shape, Shapes.box(0.15625, 0.59375, 0.21875, 0.46875, 0.84375, 0.53125));
-            return shape;
-        };
-        BOTTOM_SHAPE = Util.make(new HashMap<>(), map -> {
-            for (Direction direction : Direction.Plane.HORIZONTAL) {
-                map.put(direction, GeneralUtil.rotateShape(Direction.NORTH, direction, bottomVoxelShapeSupplier.get()));
-            }
-        });
-        TOP_SHAPE = Util.make(new HashMap<>(), map -> {
-            for (Direction direction : Direction.Plane.HORIZONTAL) {
-                map.put(direction, GeneralUtil.rotateShape(Direction.NORTH, direction, topVoxelShapeSupplier.get()));
-            }
-        });
     }
 }

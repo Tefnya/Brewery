@@ -40,6 +40,10 @@ public class BeerMugFlowerPotBlock extends FacingBlock implements EntityBlock {
         return shape;
     };
 
+    static {
+        SHAPE = voxelShapeSupplier.get();
+    }
+
     public BeerMugFlowerPotBlock(Properties settings) {
         super(settings);
     }
@@ -52,7 +56,7 @@ public class BeerMugFlowerPotBlock extends FacingBlock implements EntityBlock {
     @Override
     public @NotNull InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (hand == InteractionHand.OFF_HAND) return InteractionResult.PASS;
-        BeerMugBlockEntity be = (BeerMugBlockEntity)world.getBlockEntity(pos);
+        BeerMugBlockEntity be = (BeerMugBlockEntity) world.getBlockEntity(pos);
         if (be == null) return InteractionResult.PASS;
 
         ItemStack handStack = player.getItemInHand(hand);
@@ -83,7 +87,6 @@ public class BeerMugFlowerPotBlock extends FacingBlock implements EntityBlock {
         return super.use(state, world, pos, player, hand, hit);
     }
 
-
     public boolean fitInPot(ItemStack item) {
         return item.is(ItemTags.SMALL_FLOWERS);
     }
@@ -97,7 +100,7 @@ public class BeerMugFlowerPotBlock extends FacingBlock implements EntityBlock {
                 if (flower != null) {
                     Containers.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), flower.getDefaultInstance());
                 }
-                world.updateNeighbourForOutputSignal(pos,this);
+                world.updateNeighbourForOutputSignal(pos, this);
             }
             super.onRemove(state, world, pos, newState, moved);
         }
@@ -112,9 +115,5 @@ public class BeerMugFlowerPotBlock extends FacingBlock implements EntityBlock {
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new BeerMugBlockEntity(pos, state);
-    }
-
-    static {
-        SHAPE = voxelShapeSupplier.get();
     }
 }

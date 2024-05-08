@@ -26,6 +26,31 @@ import java.util.function.Supplier;
 @SuppressWarnings("deprecation")
 public class BigBarrelMainHeadBlock extends BigBarrelBlock {
     public static final EnumProperty<DoubleBlockHalf> HALF;
+    private static final Supplier<VoxelShape> bottomVoxelShapeSupplier = () -> {
+        VoxelShape shape = Shapes.empty();
+        shape = Shapes.or(shape, Shapes.box(0, 0, 0.5625, 0.875, 0.25, 0.8125));
+        shape = Shapes.or(shape, Shapes.box(0, 0.25, 0, 0.875, 1, 1));
+        return shape;
+    };
+    public static final Map<Direction, VoxelShape> BOTTOM_SHAPE = Util.make(new HashMap<>(), map -> {
+        for (Direction direction : Direction.Plane.HORIZONTAL) {
+            map.put(direction, GeneralUtil.rotateShape(Direction.NORTH, direction, bottomVoxelShapeSupplier.get()));
+        }
+    });
+    private static final Supplier<VoxelShape> topVoxelShapeSupplier = () -> {
+        VoxelShape shape = Shapes.empty();
+        shape = Shapes.or(shape, Shapes.box(0, 0, 0, 0.875, 1, 1));
+        return shape;
+    };
+    public static final Map<Direction, VoxelShape> TOP_SHAPE = Util.make(new HashMap<>(), map -> {
+        for (Direction direction : Direction.Plane.HORIZONTAL) {
+            map.put(direction, GeneralUtil.rotateShape(Direction.NORTH, direction, topVoxelShapeSupplier.get()));
+        }
+    });
+
+    static {
+        HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
+    }
 
     public BigBarrelMainHeadBlock(Properties properties) {
         super(properties);
@@ -68,35 +93,6 @@ public class BigBarrelMainHeadBlock extends BigBarrelBlock {
         super.createBlockStateDefinition(builder);
         builder.add(HALF);
     }
-
-    static {
-        HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
-    }
-
-    private static final Supplier<VoxelShape> bottomVoxelShapeSupplier = () -> {
-        VoxelShape shape = Shapes.empty();
-        shape = Shapes.or(shape, Shapes.box(0, 0, 0.5625, 0.875, 0.25, 0.8125));
-        shape = Shapes.or(shape, Shapes.box(0, 0.25, 0, 0.875, 1, 1));
-        return shape;
-    };
-
-    private static final Supplier<VoxelShape> topVoxelShapeSupplier = () -> {
-        VoxelShape shape = Shapes.empty();
-        shape = Shapes.or(shape, Shapes.box(0, 0, 0, 0.875, 1, 1));
-        return shape;
-    };
-
-    public static final Map<Direction, VoxelShape> BOTTOM_SHAPE = Util.make(new HashMap<>(), map -> {
-        for (Direction direction : Direction.Plane.HORIZONTAL) {
-            map.put(direction, GeneralUtil.rotateShape(Direction.NORTH, direction, bottomVoxelShapeSupplier.get()));
-        }
-    });
-
-    public static final Map<Direction, VoxelShape> TOP_SHAPE = Util.make(new HashMap<>(), map -> {
-        for (Direction direction : Direction.Plane.HORIZONTAL) {
-            map.put(direction, GeneralUtil.rotateShape(Direction.NORTH, direction, topVoxelShapeSupplier.get()));
-        }
-    });
 
     @Override
     public @NotNull VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {

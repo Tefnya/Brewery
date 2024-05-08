@@ -16,6 +16,7 @@ public class BreweryMath {
         int range = upperBound - lowerBound + 1;
         return upperBound - (int) (Math.pow(rnd.nextDouble(), 1.5) * range);
     }
+
     public static BlockPos ofFloored(final Vec3 vec) {
         return ofFloored(vec.x(), vec.y(), vec.z());
     }

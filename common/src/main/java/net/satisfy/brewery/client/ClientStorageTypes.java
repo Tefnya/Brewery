@@ -8,11 +8,11 @@ import net.satisfy.brewery.registry.StorageTypeRegistry;
 
 public class ClientStorageTypes {
 
-    public static void registerStorageType(ResourceLocation location, StorageTypeRenderer renderer){
+    public static void registerStorageType(ResourceLocation location, StorageTypeRenderer renderer) {
         StorageBlockEntityRenderer.registerStorageType(location, renderer);
     }
 
-    public static void init(){
+    public static void init() {
         registerStorageType(StorageTypeRegistry.BEVERAGE, new BeverageRenderer());
     }
 

@@ -20,7 +20,7 @@ public class BrewEvents {
     public static final ResourceLocation WHISTLE_EVENT = registerBrewEvent("whistle", WhistleEvent::new);
     public static final ResourceLocation TIMER_EVENT = registerBrewEvent("timer", TimerEvent::new);
 
-    public static void loadClass(){
+    public static void loadClass() {
     }
 
     public static ResourceLocation registerBrewEvent(String id, Supplier<BrewEvent> brewEventSupplier) {
@@ -29,11 +29,11 @@ public class BrewEvents {
         return resourceLocation;
     }
 
-    public static List<ResourceLocation> toLocations(Collection<BrewEvent> events){
+    public static List<ResourceLocation> toLocations(Collection<BrewEvent> events) {
         return events.stream().map(BrewEvents::getId).collect(Collectors.toList());
     }
 
-    public static List<BrewEvent> toEvents(List<Supplier<BrewEvent>> events){
+    public static List<BrewEvent> toEvents(List<Supplier<BrewEvent>> events) {
         return events.stream().map(Supplier::get).collect(Collectors.toList());
     }
 

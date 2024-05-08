@@ -65,9 +65,9 @@ public class AlcoholManager {
 
     public static Vec3 stagger(Vec3 deltaMovement, RandomSource random) {
         double x = deltaMovement.x == 0 && deltaMovement.z != 0 ? 0.1 : deltaMovement.x;
-        x *= ((double)random.nextInt(2 + 1) - 1) / 4.0;
+        x *= ((double) random.nextInt(2 + 1) - 1) / 4.0;
         double z = deltaMovement.z == 0 && deltaMovement.x != 0 ? 0.1 : deltaMovement.z;
-        z *= ((double)random.nextInt(2 + 1) - 1) / 4.0;
+        z *= ((double) random.nextInt(2 + 1) - 1) / 4.0;
         return deltaMovement.add(x, 0, z);
     }
 }

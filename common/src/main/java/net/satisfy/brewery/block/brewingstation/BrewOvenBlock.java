@@ -37,10 +37,25 @@ import java.util.function.Supplier;
 
 public class BrewOvenBlock extends BrewingstationBlock {
     public static final EnumProperty<Heat> HEAT;
-    private static final Supplier<VoxelShape> voxelShapeSupplier;
     public static final Map<Direction, VoxelShape> SHAPE;
-    private long lastSoundTime = 0;
+    private static final Supplier<VoxelShape> voxelShapeSupplier;
 
+    static {
+        HEAT = BlockStateRegistry.HEAT;
+        voxelShapeSupplier = () -> {
+            VoxelShape shape = Shapes.empty();
+            shape = Shapes.or(shape, Shapes.box(0.125, 0, 0, 1, 0.125, 0.875));
+            shape = Shapes.or(shape, Shapes.box(0, 0.125, 0, 1, 1, 0.9375));
+            return shape;
+        };
+        SHAPE = Util.make(new HashMap<>(), map -> {
+            for (Direction direction : Direction.Plane.HORIZONTAL.stream().toList()) {
+                map.put(direction, GeneralUtil.rotateShape(Direction.NORTH, direction, voxelShapeSupplier.get()));
+            }
+        });
+    }
+
+    private long lastSoundTime = 0;
 
     public BrewOvenBlock(Properties properties) {
         super(properties.lightLevel(state -> hasHeat(state) ? 13 : 0));
@@ -50,7 +65,7 @@ public class BrewOvenBlock extends BrewingstationBlock {
     private static boolean hasHeat(BlockState state) {
         return state.getValue(HEAT) != Heat.OFF;
     }
-    
+
     @SuppressWarnings("deprecation")
     @Override
     public @NotNull InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
@@ -75,7 +90,6 @@ public class BrewOvenBlock extends BrewingstationBlock {
         }
         super.stepOn(world, pos, state, entity);
     }
-
 
     @Override
     public void animateTick(BlockState blockState, Level level, BlockPos blockPos, RandomSource randomSource) {
@@ -113,8 +127,6 @@ public class BrewOvenBlock extends BrewingstationBlock {
         }
     }
 
-
-
     @SuppressWarnings("deprecation")
     @Override
     public @NotNull VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
@@ -125,20 +137,5 @@ public class BrewOvenBlock extends BrewingstationBlock {
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
         builder.add(HEAT);
-    }
-
-    static {
-        HEAT = BlockStateRegistry.HEAT;
-        voxelShapeSupplier = () -> {
-            VoxelShape shape = Shapes.empty();
-            shape = Shapes.or(shape, Shapes.box(0.125, 0, 0, 1, 0.125, 0.875));
-            shape = Shapes.or(shape, Shapes.box(0, 0.125, 0, 1, 1, 0.9375));
-            return shape;
-        };
-        SHAPE = Util.make(new HashMap<>(), map -> {
-            for (Direction direction : Direction.Plane.HORIZONTAL.stream().toList()) {
-                map.put(direction, GeneralUtil.rotateShape(Direction.NORTH, direction, voxelShapeSupplier.get()));
-            }
-        });
     }
 }

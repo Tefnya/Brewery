@@ -16,9 +16,6 @@ import java.util.function.Supplier;
 
 public class MobEffectRegistry {
 
-    private static final DeferredRegister<MobEffect> MOB_EFFECTS = DeferredRegister.create(Brewery.MOD_ID, Registries.MOB_EFFECT);
-    private static final Registrar<MobEffect> MOB_EFFECTS_REGISTRAR = MOB_EFFECTS.getRegistrar();
-
     public static final RegistrySupplier<MobEffect> DRUNK;
     public static final RegistrySupplier<MobEffect> BLACKOUT;
     public static final RegistrySupplier<MobEffect> RENEWINGTOUCH;
@@ -35,19 +32,8 @@ public class MobEffectRegistry {
     public static final RegistrySupplier<MobEffect> EXPLOSION;
     public static final RegistrySupplier<MobEffect> REPULSION;
     public static final RegistrySupplier<MobEffect> LIGHTNING_STRIKE;
-
-
-    private static RegistrySupplier<MobEffect> registerEffect(String name, Supplier<MobEffect> effect){
-        if(Platform.isForge()){
-            return MOB_EFFECTS.register(name, effect);
-        }
-        return MOB_EFFECTS_REGISTRAR.register(new BreweryIdentifier(name), effect);
-    }
-
-    public static void init(){
-        Brewery.LOGGER.debug("Mob effects");
-        MOB_EFFECTS.register();
-    }
+    private static final DeferredRegister<MobEffect> MOB_EFFECTS = DeferredRegister.create(Brewery.MOD_ID, Registries.MOB_EFFECT);
+    private static final Registrar<MobEffect> MOB_EFFECTS_REGISTRAR = MOB_EFFECTS.getRegistrar();
 
     static {
         DRUNK = registerEffect("drunk", DrunkEffect::new);
@@ -66,5 +52,17 @@ public class MobEffectRegistry {
         SNOWWHITE = registerEffect("snowwhite", () -> new SnowWhiteEffect(MobEffectCategory.BENEFICIAL, 0));
         PINTCHARISMA = registerEffect("pintcharisma", () -> new PintCharismaEffect(MobEffectCategory.BENEFICIAL, 0));
         HALEY = registerEffect("haley", () -> new HaleyEffect(MobEffectCategory.BENEFICIAL, 0));
+    }
+
+    private static RegistrySupplier<MobEffect> registerEffect(String name, Supplier<MobEffect> effect) {
+        if (Platform.isForge()) {
+            return MOB_EFFECTS.register(name, effect);
+        }
+        return MOB_EFFECTS_REGISTRAR.register(new BreweryIdentifier(name), effect);
+    }
+
+    public static void init() {
+        Brewery.LOGGER.debug("Mob effects");
+        MOB_EFFECTS.register();
     }
 }

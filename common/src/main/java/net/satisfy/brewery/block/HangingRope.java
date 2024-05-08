@@ -34,9 +34,30 @@ public class HangingRope extends Block implements SimpleWaterloggedBlock {
     public static final BooleanProperty TOP;
     private static final VoxelShape SHAPE;
 
+    static {
+        WATERLOGGED = BlockStateProperties.WATERLOGGED;
+        TOP = BooleanProperty.create("top");
+        SHAPE = Block.box(6.5, 0.0, 6.5, 9.5, 16.0, 9.5);
+    }
+
     public HangingRope(Properties properties) {
         super(properties);
         this.registerDefaultState(this.defaultBlockState().setValue(TOP, false).setValue(WATERLOGGED, false));
+    }
+
+    public static void tryLowerRope(ServerLevel serverLevel, BlockPos blockPos) {
+        BlockPos belowPos = blockPos.below();
+        if (canLower(serverLevel.getBlockState(belowPos))) {
+            lowerRope(serverLevel, belowPos);
+        }
+    }
+
+    private static boolean canLower(BlockState blockState) {
+        return blockState.isAir();
+    }
+
+    private static void lowerRope(ServerLevel serverLevel, BlockPos blockPos) {
+        serverLevel.setBlock(blockPos, ObjectRegistry.HANGING_ROPE.get().defaultBlockState(), 3);
     }
 
     @Nullable
@@ -78,21 +99,6 @@ public class HangingRope extends Block implements SimpleWaterloggedBlock {
         super.neighborChanged(blockState, level, blockPos, block, blockPos2, bl);
     }
 
-    public static void tryLowerRope(ServerLevel serverLevel, BlockPos blockPos) {
-        BlockPos belowPos = blockPos.below();
-        if (canLower(serverLevel.getBlockState(belowPos))) {
-            lowerRope(serverLevel, belowPos);
-        }
-    }
-
-    private static boolean canLower(BlockState blockState) {
-        return blockState.isAir();
-    }
-
-    private static void lowerRope(ServerLevel serverLevel, BlockPos blockPos) {
-        serverLevel.setBlock(blockPos, ObjectRegistry.HANGING_ROPE.get().defaultBlockState(), 3);
-    }
-
     public @NotNull BlockState updateShape(BlockState blockState, Direction direction, BlockState blockState2, LevelAccessor levelAccessor, BlockPos blockPos, BlockPos blockPos2) {
         if (blockState.getValue(WATERLOGGED)) {
             levelAccessor.scheduleTick(blockPos, Fluids.WATER, Fluids.WATER.getTickDelay(levelAccessor));
@@ -110,12 +116,5 @@ public class HangingRope extends Block implements SimpleWaterloggedBlock {
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(TOP, WATERLOGGED);
-    }
-
-
-    static {
-        WATERLOGGED = BlockStateProperties.WATERLOGGED;
-        TOP = BooleanProperty.create("top");
-        SHAPE = Block.box(6.5, 0.0, 6.5, 9.5, 16.0, 9.5);
     }
 }

@@ -1,5 +1,7 @@
 {
   "variants": {
-    "": { "model": "brewery:block/oven" }
+    "": {
+      "model": "brewery:block/oven"
+    }
   }
 }

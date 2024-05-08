@@ -35,6 +35,7 @@ public class BreweryJEIClientPlugin implements IModPlugin {
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
         RecipeManager rm = Objects.requireNonNull(Minecraft.getInstance().level).getRecipeManager();
-        List<BrewingRecipe> recipesbrewing = rm.getAllRecipesFor(RecipeTypeRegistry.BREWING_RECIPE_TYPE.get());registration.addRecipes(BREWING_TYPE, recipesbrewing);
+        List<BrewingRecipe> recipesbrewing = rm.getAllRecipesFor(RecipeTypeRegistry.BREWING_RECIPE_TYPE.get());
+        registration.addRecipes(BREWING_TYPE, recipesbrewing);
     }
 }

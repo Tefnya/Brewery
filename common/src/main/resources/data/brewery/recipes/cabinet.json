@@ -13,7 +13,7 @@
     "B": {
       "item": "minecraft:barrel"
     }
-},
+  },
   "result": {
     "item": "brewery:cabinet",
     "count": 3

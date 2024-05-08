@@ -47,10 +47,10 @@ public class BreweryClient {
 
 
         ColorHandlerRegistry.registerBlockColors((state, world, pos, tintIndex) -> {
-                    if (world == null || pos == null) {
-                        return -1;
-                    }
-                    return BiomeColors.getAverageWaterColor(world, pos);
+            if (world == null || pos == null) {
+                return -1;
+            }
+            return BiomeColors.getAverageWaterColor(world, pos);
         }, WOODEN_BREWINGSTATION, COPPER_BREWINGSTATION, NETHERITE_BREWINGSTATION);
 
         ClientStorageTypes.init();
@@ -59,7 +59,7 @@ public class BreweryClient {
         ClientTickEvent.CLIENT_LEVEL_PRE.register((clientLevel) -> RopeHelper.tick());
     }
 
-    public static void preInitClient(){
+    public static void preInitClient() {
         registerEntityModelLayers();
     }
 
@@ -83,7 +83,7 @@ public class BreweryClient {
         return Minecraft.getInstance().player;
     }
 
-    public static void registerEntityModelLayers(){
+    public static void registerEntityModelLayers() {
         ArmorRegistry.registerArmorModelLayers();
     }
 }

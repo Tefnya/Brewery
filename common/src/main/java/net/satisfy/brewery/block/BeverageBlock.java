@@ -34,10 +34,8 @@ import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("deprecation")
 public class BeverageBlock extends StorageBlock {
-    private static final VoxelShape SHAPE = Shapes.box(0.125, 0, 0.125, 0.875, 0.875, 0.875);
-
     public static final BooleanProperty FAKE_MODEL = BooleanProperty.create("fake_model");
-
+    private static final VoxelShape SHAPE = Shapes.box(0.125, 0, 0.125, 0.875, 0.875, 0.875);
     private final int maxCount;
 
     public BeverageBlock(Properties settings, int maxCount) {
@@ -46,18 +44,39 @@ public class BeverageBlock extends StorageBlock {
         this.registerDefaultState(this.defaultBlockState().setValue(FAKE_MODEL, true));
     }
 
+    public static Pair<Integer, Integer> getFilledAmountAndBiggest(NonNullList<ItemStack> inventory) {
+        int count = 0;
+        int biggest = Integer.MAX_VALUE;
+        for (ItemStack stack : inventory) {
+            if (!stack.isEmpty()) {
+                count++;
+                if (stack.getItem() instanceof DrinkBlockItem item && item.getBlock() instanceof BeverageBlock wine && wine.maxCount < biggest) {
+                    biggest = wine.maxCount;
+                }
+            }
+        }
+        return new Pair<>(count, biggest);
+    }
+
+    public static int getCount(ItemStack itemStack) {
+        if (itemStack.getItem() instanceof DrinkBlockItem item && item.getBlock() instanceof BeverageBlock wine) {
+            return wine.maxCount;
+        }
+        return Integer.MIN_VALUE;
+    }
+
     @Override
     public @NotNull InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         final ItemStack stack = player.getItemInHand(hand);
         BlockEntity blockEntity = world.getBlockEntity(pos);
 
-        if(blockEntity instanceof StorageBlockEntity wineEntity){
+        if (blockEntity instanceof StorageBlockEntity wineEntity) {
             NonNullList<ItemStack> inventory = wineEntity.getInventory();
 
             if (canInsertStack(stack) && willFitStack(stack, inventory)) {
                 int posInE = getFirstEmptySlot(inventory);
-                if(posInE == Integer.MIN_VALUE) return InteractionResult.PASS;
-                if(!world.isClientSide()){
+                if (posInE == Integer.MIN_VALUE) return InteractionResult.PASS;
+                if (!world.isClientSide()) {
                     wineEntity.setStack(posInE, stack.split(1));
                     if (player.isCreative()) {
                         stack.grow(1);
@@ -67,8 +86,8 @@ public class BeverageBlock extends StorageBlock {
                 return InteractionResult.sidedSuccess(world.isClientSide());
             } else if (stack.isEmpty() && !isEmpty(inventory)) {
                 int posInE = getLastFullSlot(inventory);
-                if(posInE == Integer.MIN_VALUE) return InteractionResult.PASS;
-                if(!world.isClientSide()){
+                if (posInE == Integer.MIN_VALUE) return InteractionResult.PASS;
+                if (!world.isClientSide()) {
                     ItemStack wine = wineEntity.removeStack(posInE);
                     if (!player.getInventory().add(wine)) {
                         player.drop(wine, false);
@@ -84,27 +103,26 @@ public class BeverageBlock extends StorageBlock {
         return InteractionResult.PASS;
     }
 
-    public boolean isEmpty(NonNullList<ItemStack> inventory){
-        for(ItemStack stack : inventory){
-            if(!stack.isEmpty()) return false;
+    public boolean isEmpty(NonNullList<ItemStack> inventory) {
+        for (ItemStack stack : inventory) {
+            if (!stack.isEmpty()) return false;
         }
         return true;
     }
 
-    public int getFirstEmptySlot(NonNullList<ItemStack> inventory){
-        for(ItemStack stack : inventory){
-            if(stack.isEmpty()) return inventory.indexOf(stack);
+    public int getFirstEmptySlot(NonNullList<ItemStack> inventory) {
+        for (ItemStack stack : inventory) {
+            if (stack.isEmpty()) return inventory.indexOf(stack);
         }
         return Integer.MIN_VALUE;
     }
 
-    public int getLastFullSlot(NonNullList<ItemStack> inventory){
-        for(int i = inventory.size() - 1; i >=0; i--){
-            if(!inventory.get(i).isEmpty()) return i;
+    public int getLastFullSlot(NonNullList<ItemStack> inventory) {
+        for (int i = inventory.size() - 1; i >= 0; i--) {
+            if (!inventory.get(i).isEmpty()) return i;
         }
         return Integer.MIN_VALUE;
     }
-
 
     @Override
     public @NotNull VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
@@ -129,14 +147,17 @@ public class BeverageBlock extends StorageBlock {
         }
         return super.updateShape(blockState, direction, blockState2, levelAccessor, blockPos, blockPos2);
     }
+
     @Override
     public int size() {
         return maxCount;
     }
+
     @Override
     public ResourceLocation type() {
         return StorageTypeRegistry.BEVERAGE;
     }
+
     @Override
     public boolean canInsertStack(ItemStack itemStack) {
         return itemStack.getItem() instanceof DrinkBlockItem;
@@ -147,30 +168,9 @@ public class BeverageBlock extends StorageBlock {
         int biggest = p.getSecond();
         int count = p.getFirst();
         int stackCount = getCount(itemStack);
-        if(biggest == Integer.MAX_VALUE) return true;
+        if (biggest == Integer.MAX_VALUE) return true;
 
         return stackCount > count && count < biggest;
-    }
-
-    public static Pair<Integer, Integer> getFilledAmountAndBiggest(NonNullList<ItemStack> inventory){
-        int count = 0;
-        int biggest = Integer.MAX_VALUE;
-        for(ItemStack stack : inventory){
-            if(!stack.isEmpty()){
-                count++;
-                if(stack.getItem() instanceof DrinkBlockItem item && item.getBlock() instanceof BeverageBlock wine && wine.maxCount < biggest){
-                    biggest = wine.maxCount;
-                }
-            }
-        }
-        return new Pair<>(count, biggest);
-    }
-
-    public static int getCount(ItemStack itemStack){
-        if(itemStack.getItem() instanceof DrinkBlockItem item && item.getBlock() instanceof BeverageBlock wine){
-            return wine.maxCount;
-        }
-        return Integer.MIN_VALUE;
     }
 
     @Override

@@ -92,6 +92,17 @@ public class BrewingRecipe implements Recipe<Container> {
 
     public static class Serializer implements RecipeSerializer<BrewingRecipe> {
 
+        public static NonNullList<Ingredient> deserializeIngredients(JsonArray json) {
+            NonNullList<Ingredient> ingredients = NonNullList.create();
+            for (int i = 0; i < json.size(); i++) {
+                Ingredient ingredient = Ingredient.fromJson(json.get(i));
+                if (!ingredient.isEmpty()) {
+                    ingredients.add(ingredient);
+                }
+            }
+            return ingredients;
+        }
+
         @Override
         public @NotNull BrewingRecipe fromJson(ResourceLocation resourceLocation, JsonObject jsonObject) {
             final var ingredients = deserializeIngredients(GsonHelper.getAsJsonArray(jsonObject, "ingredients"));
@@ -103,17 +114,6 @@ public class BrewingRecipe implements Recipe<Container> {
                 BrewMaterial brewMaterial = BrewMaterial.valueOf(jsonObject.get("material").getAsString());
                 return new BrewingRecipe(resourceLocation, ingredients, ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(jsonObject, "result")), brewMaterial);
             }
-        }
-
-        public static NonNullList<Ingredient> deserializeIngredients(JsonArray json) {
-            NonNullList<Ingredient> ingredients = NonNullList.create();
-            for (int i = 0; i < json.size(); i++) {
-                Ingredient ingredient = Ingredient.fromJson(json.get(i));
-                if (!ingredient.isEmpty()) {
-                    ingredients.add(ingredient);
-                }
-            }
-            return ingredients;
         }
 
         @Override

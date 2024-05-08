@@ -39,12 +39,12 @@ public class EntityRegistry {
 
     public static final RegistrySupplier<EntityType<RopeCollisionEntity>> ROPE_COLLISION = create("rope_collision", ()
             -> EntityType.Builder.of(RopeCollisionEntity::new, MobCategory.MISC)
-                    .sized(4 / 16f, 4 / 16f)
-                    .clientTrackingRange(10)
-                    .noSave()
-                    .noSummon()
-                    .fireImmune()
-                    .build(new BreweryIdentifier("rope_collision").toString())
+            .sized(4 / 16f, 4 / 16f)
+            .clientTrackingRange(10)
+            .noSave()
+            .noSummon()
+            .fireImmune()
+            .build(new BreweryIdentifier("rope_collision").toString())
     );
 
     public static final RegistrySupplier<EntityType<HangingRopeEntity>> HANGING_ROPE = create("hanging_rope",

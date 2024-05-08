@@ -29,7 +29,7 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 @SuppressWarnings("deprecation")
-public class BigBarrelMainBlock extends BigBarrelBlock{
+public class BigBarrelMainBlock extends BigBarrelBlock {
     public static final EnumProperty<DoubleBlockHalf> HALF;
     private static final Supplier<VoxelShape> bottomVoxelShapeSupplier = () -> {
         VoxelShape shape = Shapes.empty();
@@ -63,14 +63,12 @@ public class BigBarrelMainBlock extends BigBarrelBlock{
     }
 
 
-
     @Override
     public void onPlace(BlockState blockState, Level level, BlockPos blockPos, BlockState blockState2, boolean bl) {
         if (blockState.getValue(HALF) == DoubleBlockHalf.LOWER) {
             level.setBlockAndUpdate(blockPos.above(), blockState.setValue(HALF, DoubleBlockHalf.UPPER));
         }
     }
-
 
 
     public @NotNull BlockState updateShape(BlockState blockState, Direction direction, BlockState blockState2, LevelAccessor levelAccessor, BlockPos blockPos, BlockPos blockPos2) {

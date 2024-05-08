@@ -23,6 +23,7 @@ import net.satisfy.brewery.util.BreweryMath;
 @Environment(EnvType.CLIENT)
 public class HangingRopeRenderer extends EntityRenderer<HangingRopeEntity> {
     private final RopeRender hopRopeRenderer = new RopeRender();
+
     public HangingRopeRenderer(EntityRendererProvider.Context context) {
         super(context);
     }
@@ -65,7 +66,7 @@ public class HangingRopeRenderer extends EntityRenderer<HangingRopeEntity> {
 
     @Override
     @SuppressWarnings("all")
-    public  ResourceLocation getTextureLocation(HangingRopeEntity entity) {
+    public ResourceLocation getTextureLocation(HangingRopeEntity entity) {
         return null;
     }
 }

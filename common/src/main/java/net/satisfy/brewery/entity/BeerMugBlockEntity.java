@@ -76,10 +76,10 @@ public class BeerMugBlockEntity extends BlockEntity {
 
     @Override
     public void setChanged() {
-        if(level != null && !level.isClientSide()) {
+        if(level != null && !level.isClientSide() && level instanceof ServerLevel serverLevel) {
             Packet<ClientGamePacketListener> updatePacket = getUpdatePacket();
 
-            for (ServerPlayer player : GeneralUtil.tracking((ServerLevel) level, getBlockPos())) {
+            for (ServerPlayer player : GeneralUtil.tracking((ServerLevel) serverLevel, getBlockPos())) {
                 player.connection.send(updatePacket);
             }
         }

@@ -31,7 +31,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.satisfy.brewery.item.DrinkBlockItem;
 import net.satisfy.brewery.registry.StorageTypeRegistry;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("deprecation")
 public class BeverageBlock extends StorageBlock {
@@ -187,11 +186,5 @@ public class BeverageBlock extends StorageBlock {
     @Override
     public Direction[] unAllowedDirections() {
         return new Direction[0];
-    }
-
-    @Nullable
-    @Override
-    public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
-        return null;
     }
 }

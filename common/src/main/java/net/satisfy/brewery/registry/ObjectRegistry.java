@@ -119,11 +119,11 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Item> FRIED_CHICKEN = registerItem("fried_chicken", () -> new EffectBlockItem(FRIED_CHICKEN_BLOCK.get(), getFoodItemSettings(8, 0.8f, SUSTENANCE.get(), 4000)));
     public static final RegistrySupplier<Block> HALF_CHICKEN_BLOCK = registerWithoutItem("half_chicken", () -> new FoodBlock(Block.Properties.of(), new MobEffectInstance(SUSTENANCE.get(), 3600, 1), 3, 0.3f));
     public static final RegistrySupplier<Item> HALF_CHICKEN = registerItem("half_chicken", () -> new EffectBlockItem(HALF_CHICKEN_BLOCK.get(), getFoodItemSettings(8, 0.8f, SUSTENANCE.get(), 4000)));
-    public static final RegistrySupplier<Block> MASHED_POTATOES_BLOCK = registerWithoutItem("mashed_potatoes", () -> new FoodBlock(Block.Properties.of(), new MobEffectInstance(SATIATION.get(), 3600, 1), 4, 0.7f));
-    public static final RegistrySupplier<Item> MASHED_POTATOES = registerItem("mashed_potatoes", () -> new EffectBlockItem(MASHED_POTATOES_BLOCK.get(), getFoodItemSettings(8, 0.8f, SATIATION.get(), 4000)));
-    public static final RegistrySupplier<Block> POTATO_SALAD_BLOCK = registerWithoutItem("potato_salad", () -> new FoodBlock(Block.Properties.of(), new MobEffectInstance(SATIATION.get(), 3600, 1), 5, 0.8f));
-    public static final RegistrySupplier<Item> POTATO_SALAD = registerItem("potato_salad", () -> new EffectBlockItem(POTATO_SALAD_BLOCK.get(), getFoodItemSettings(7, 0.8f, SATIATION.get(), 6000)));
-    public static final RegistrySupplier<Block> DUMPLINGS_BLOCK = registerWithoutItem("dumplings", () -> new FoodBlock(Block.Properties.of(), new MobEffectInstance(SATIATION.get(), 3600, 1), 5, 0.6f));
+    public static final RegistrySupplier<Block> MASHED_POTATOES_BLOCK = registerWithoutItem("mashed_potatoes", () -> new FoodBlock(Block.Properties.of(), new MobEffectInstance(SATIATION.get(), 3600, 1), 4, 0.6f));
+    public static final RegistrySupplier<Item> MASHED_POTATOES = registerItem("mashed_potatoes", () -> new EffectBlockItem(MASHED_POTATOES_BLOCK.get(), getFoodItemSettings(4, 0.6f, SATIATION.get(), 4000)));
+    public static final RegistrySupplier<Block> POTATO_SALAD_BLOCK = registerWithoutItem("potato_salad", () -> new FoodBlock(Block.Properties.of(), new MobEffectInstance(SATIATION.get(), 3600, 1), 8, 0.8f));
+    public static final RegistrySupplier<Item> POTATO_SALAD = registerItem("potato_salad", () -> new EffectBlockItem(POTATO_SALAD_BLOCK.get(), getFoodItemSettings(8, 0.8f, SATIATION.get(), 6000)));
+    public static final RegistrySupplier<Block> DUMPLINGS_BLOCK = registerWithoutItem("dumplings", () -> new FoodBlock(Block.Properties.of(), new MobEffectInstance(SATIATION.get(), 3600, 1), 7, 0.8f));
     public static final RegistrySupplier<Item> DUMPLINGS = registerItem("dumplings", () -> new EffectBlockItem(DUMPLINGS_BLOCK.get(), getFoodItemSettings(7, 0.8f, SATIATION.get(), 6000)));
     public static final RegistrySupplier<Block> GINGERBREAD = registerWithItem("gingerbread", () -> new WallDecorationBlock(BlockBehaviour.Properties.copy(Blocks.FLOWER_POT)));
 

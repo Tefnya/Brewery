@@ -17,7 +17,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -29,11 +28,10 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.satisfy.brewery.entity.rope.HangingRopeEntity;
 import net.satisfy.brewery.registry.ObjectRegistry;
+import net.satisfy.farm_and_charm.registry.TagRegistry;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
-
-import static net.satisfy.farm_and_charm.registry.ObjectRegistry.FERTILIZED_FARM_BLOCK;
 
 @SuppressWarnings("deprecation")
 public abstract class HopsCropBlock extends Block {
@@ -98,7 +96,7 @@ public abstract class HopsCropBlock extends Block {
     }
 
     protected boolean mayPlaceOn(BlockState blockState) {
-        return blockState.is(Blocks.FARMLAND) || blockState.is(FERTILIZED_FARM_BLOCK.get());
+        return blockState.is(TagRegistry.FARMLAND);
     }
 
     protected boolean canGrow(BlockState blockState) {

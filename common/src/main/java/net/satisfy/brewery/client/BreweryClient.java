@@ -16,6 +16,7 @@ import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.satisfy.brewery.client.model.BeerElementalModel;
+import net.satisfy.brewery.client.model.BrewfestHatModel;
 import net.satisfy.brewery.client.model.RopeKnotEntityModel;
 import net.satisfy.brewery.client.render.*;
 import net.satisfy.brewery.event.PlayerJoinEvent;
@@ -66,6 +67,7 @@ public class BreweryClient {
     private static void registerRenderer() {
         BlockEntityRendererRegistry.register(BlockEntityRegistry.BEER_MUG_BLOCK_ENTITY.get(), BeerMugBlockEntityRenderer::new);
         BlockEntityRendererRegistry.register(BlockEntityRegistry.BREWINGSTATION_BLOCK_ENTITY.get(), BrewingstationRenderer::new);
+        EntityModelLayerRegistry.register(BrewfestHatModel.LAYER_LOCATION, BrewfestHatModel::createBodyLayer);
         EntityModelLayerRegistry.register(ModelRegistry.ROPE_KNOT, RopeKnotEntityModel::createBodyLayer);
         EntityRendererRegistry.register(EntityRegistry.ROPE_KNOT, RopeKnotRenderer::new);
         EntityRendererRegistry.register(EntityRegistry.HANGING_ROPE, HangingRopeRenderer::new);

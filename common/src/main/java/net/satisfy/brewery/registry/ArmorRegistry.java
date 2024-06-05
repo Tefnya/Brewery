@@ -6,7 +6,9 @@ import dev.architectury.registry.client.level.entity.EntityModelLayerRegistry;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.EntityModelSet;
+import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -15,33 +17,46 @@ import net.satisfy.brewery.client.model.*;
 import net.satisfy.brewery.item.armor.IBrewfestArmorSet;
 import net.satisfy.brewery.util.BreweryIdentifier;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class ArmorRegistry {
+    private static final Map<Item, BrewfestHatModel<?>> models = new HashMap<>();
+
     public static void registerArmorModelLayers() {
-        EntityModelLayerRegistry.register(BrewfestHatModel.LAYER_LOCATION, BrewfestHatModel::getTexturedModelData);
         EntityModelLayerRegistry.register(LederhosenInner.LAYER_LOCATION, LederhosenInner::createBodyLayer);
         EntityModelLayerRegistry.register(LederhosenOuter.LAYER_LOCATION, LederhosenOuter::createBodyLayer);
         EntityModelLayerRegistry.register(DirndlInner.LAYER_LOCATION, DirndlInner::createBodyLayer);
         EntityModelLayerRegistry.register(DirndlOuter.LAYER_LOCATION, DirndlOuter::createBodyLayer);
-
     }
 
+    public static Model getHatModel(Item item, ModelPart baseHead) {
+        EntityModelSet modelSet = Minecraft.getInstance().getEntityModels();
+        BrewfestHatModel<?> model = models.computeIfAbsent(item, key -> {
+            if (key == ObjectRegistry.BREWFEST_HAT.get() || key == ObjectRegistry.BREWFEST_HAT_RED.get()) {
+                return new BrewfestHatModel<>(modelSet.bakeLayer(BrewfestHatModel.LAYER_LOCATION));
+            } else {
+                return null;
+            }
+        });
+
+        assert model != null;
+        model.copyHead(baseHead);
+
+        return model;
+    }
+
+
     public static <T extends LivingEntity> void registerArmorModels(CustomArmorManager<T> armors, EntityModelSet modelLoader) {
-        armors.addArmor(new CustomArmorSet<T>(ObjectRegistry.BREWFEST_HAT.get(), ObjectRegistry.BREWFEST_REGALIA.get(), ObjectRegistry.BREWFEST_BOOTS.get(), ObjectRegistry.BREWFEST_TROUSERS.get())
+        armors.addArmor(new CustomArmorSet<T>(ObjectRegistry.BREWFEST_REGALIA.get(), ObjectRegistry.BREWFEST_BOOTS.get(), ObjectRegistry.BREWFEST_TROUSERS.get())
                 .setTexture(new BreweryIdentifier("lederhosen"))
                 .setOuterModel(new LederhosenOuter<>(modelLoader.bakeLayer(LederhosenOuter.LAYER_LOCATION)))
                 .setInnerModel(new LederhosenInner<>(modelLoader.bakeLayer(LederhosenInner.LAYER_LOCATION))));
-        armors.addArmor(new CustomArmorSet<T>(ObjectRegistry.BREWFEST_HAT_RED.get(), ObjectRegistry.BREWFEST_BLOUSE.get(), ObjectRegistry.BREWFEST_DRESS.get(), ObjectRegistry.BREWFEST_SHOES.get())
+        armors.addArmor(new CustomArmorSet<T>(ObjectRegistry.BREWFEST_BLOUSE.get(), ObjectRegistry.BREWFEST_DRESS.get(), ObjectRegistry.BREWFEST_SHOES.get())
                 .setTexture(new BreweryIdentifier("dirndl"))
                 .setOuterModel(new LederhosenOuter<>(modelLoader.bakeLayer(LederhosenOuter.LAYER_LOCATION)))
                 .setInnerModel(new LederhosenInner<>(modelLoader.bakeLayer(LederhosenInner.LAYER_LOCATION))));
-    }
-
-    public static <T extends LivingEntity> void registerHatModels(Map<Item, EntityModel<T>> models, EntityModelSet modelLoader) {
-        models.put(ObjectRegistry.BREWFEST_HAT.get(), new BrewfestHatModel<>(modelLoader.bakeLayer(BrewfestHatModel.LAYER_LOCATION)));
-        models.put(ObjectRegistry.BREWFEST_HAT_RED.get(), new BrewfestHatModel<>(modelLoader.bakeLayer(BrewfestHatModel.LAYER_LOCATION)));
     }
 
     public static void appendTooltip(List<Component> tooltip) {

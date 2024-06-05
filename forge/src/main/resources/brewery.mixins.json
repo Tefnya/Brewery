@@ -1,11 +1,12 @@
 {
   "required": true,
-  "package": "net.brewery.mixin.forge",
+  "package": "net.satisfy.brewery.forge.mixin",
   "compatibilityLevel": "JAVA_17",
   "minVersion": "0.8",
   "client": [
   ],
   "mixins": [
+    "HatItemMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -15,7 +15,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.phys.Vec3;
 import net.satisfy.brewery.client.model.RopeKnotEntityModel;
-import net.satisfy.brewery.entity.rope.RopeKnotEntity;
+import net.satisfy.brewery.block.entity.rope.RopeKnotEntity;
 import net.satisfy.brewery.registry.ModelRegistry;
 import net.satisfy.brewery.util.BreweryIdentifier;
 import net.satisfy.brewery.util.BreweryMath;

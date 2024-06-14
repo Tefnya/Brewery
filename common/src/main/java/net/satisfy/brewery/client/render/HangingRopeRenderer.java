@@ -15,7 +15,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.satisfy.brewery.entity.rope.HangingRopeEntity;
+import net.satisfy.brewery.block.entity.rope.HangingRopeEntity;
 import net.satisfy.brewery.registry.EntityRegistry;
 import net.satisfy.brewery.util.BreweryIdentifier;
 import net.satisfy.brewery.util.BreweryMath;

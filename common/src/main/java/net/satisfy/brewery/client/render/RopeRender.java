@@ -47,7 +47,7 @@ public class RopeRender {
     private void createModel(final RopeModel.Builder builder, final Vec3 ropeVec, final int degrees, final UVCord uv) {
         float length = (float) ropeVec.length();
         Vec3 ropeNormal = ropeVec.normalize();
-        Quaternionf quaternion = new Quaternionf().rotateAxis(degrees, (float) ropeNormal.x(), (float) ropeNormal.y(), (float) ropeNormal.z());
+        Quaternionf quaternion = new Quaternionf().rotateAxis((float) Math.toRadians(degrees), (float) ropeNormal.x(), (float) ropeNormal.y(), (float) ropeNormal.z());
         Vector3f crossVec = ropeNormal.equals(POSITIVE_Y) || ropeNormal.equals(NEGATIVE_Y) ? new Vector3f(1.0f, 0.0f, 0.0f) : new Vector3f(
                 (float) ropeNormal.cross(POSITIVE_Y).normalize().x,
                 (float) ropeNormal.cross(POSITIVE_Y).normalize().y,

@@ -1,4 +1,4 @@
-package net.satisfy.brewery.entity.rope;
+package net.satisfy.brewery.block.entity.rope;
 
 import dev.architectury.extensions.network.EntitySpawnExtension;
 import dev.architectury.networking.NetworkManager;

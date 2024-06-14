@@ -33,7 +33,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.satisfy.brewery.block.property.BrewMaterial;
 import net.satisfy.brewery.block.property.Liquid;
-import net.satisfy.brewery.entity.BrewstationBlockEntity;
+import net.satisfy.brewery.block.entity.BrewstationBlockEntity;
 import net.satisfy.brewery.registry.BlockStateRegistry;
 import net.satisfy.brewery.registry.ObjectRegistry;
 import org.jetbrains.annotations.NotNull;

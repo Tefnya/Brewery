@@ -5,8 +5,8 @@ import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.satisfy.brewery.Brewery;
-import net.satisfy.brewery.entity.BeerMugBlockEntity;
-import net.satisfy.brewery.entity.BrewstationBlockEntity;
+import net.satisfy.brewery.block.entity.BeerMugBlockEntity;
+import net.satisfy.brewery.block.entity.BrewstationBlockEntity;
 
 import java.util.function.Supplier;
 
@@ -21,9 +21,4 @@ public class BlockEntityRegistry {
         Brewery.LOGGER.debug("Registering Mod BlockEntities for " + Brewery.MOD_ID);
         BLOCK_ENTITY_TYPES.register();
     }    public static final RegistrySupplier<BlockEntityType<BeerMugBlockEntity>> BEER_MUG_BLOCK_ENTITY = create("beer_mug", () -> BlockEntityType.Builder.of(BeerMugBlockEntity::new, ObjectRegistry.BEER_MUG.get()).build(null));
-
-
-
-
-
 }

@@ -5,7 +5,7 @@ import it.unimi.dsi.fastutil.objects.ObjectList;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.Vec3;
-import net.satisfy.brewery.entity.rope.RopeKnotEntity;
+import net.satisfy.brewery.block.entity.rope.RopeKnotEntity;
 
 public class RopeHelper {
     public static final int HANGING_AMOUNT = 1;
@@ -15,8 +15,8 @@ public class RopeHelper {
         incompleteRopes.removeIf(IncompleteRopeConnection::tryCompleteOrRemove);
     }
 
-    public static void createConnection(Minecraft client, int fromId, int toIds) {
-        createConnections(client, fromId, new int[]{toIds});
+    public static void createConnection(Minecraft client, int fromId, int toId) {
+        createConnections(client, fromId, new int[]{toId});
     }
 
     public static void createConnections(Minecraft client, int fromId, int[] toIds) {
@@ -27,7 +27,7 @@ public class RopeHelper {
                 Entity to = client.level.getEntity(toId);
                 if (to == null) {
                     incompleteRopes.add(new IncompleteRopeConnection(fromKnot, toId));
-                } else {
+                } else if (to instanceof Entity) {
                     RopeConnection.create(fromKnot, to);
                 }
             }

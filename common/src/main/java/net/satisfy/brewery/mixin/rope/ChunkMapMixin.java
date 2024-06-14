@@ -11,7 +11,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.chunk.LevelChunk;
-import net.satisfy.brewery.entity.rope.RopeKnotEntity;
+import net.satisfy.brewery.block.entity.rope.RopeKnotEntity;
 import net.satisfy.brewery.networking.BreweryNetworking;
 import net.satisfy.brewery.util.rope.RopeConnection;
 import org.apache.commons.lang3.mutable.MutableObject;

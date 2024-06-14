@@ -4,7 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.phys.Vec3;
-import net.satisfy.brewery.entity.rope.RopeKnotEntity;
+import net.satisfy.brewery.block.entity.rope.RopeKnotEntity;
 import net.satisfy.brewery.util.rope.RopeConnection;
 
 import java.util.HashSet;

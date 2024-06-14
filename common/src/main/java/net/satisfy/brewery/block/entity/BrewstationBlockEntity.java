@@ -1,4 +1,4 @@
-package net.satisfy.brewery.entity;
+package net.satisfy.brewery.block.entity;
 
 import de.cristelknight.doapi.common.registry.DoApiSoundEventRegistry;
 import de.cristelknight.doapi.common.util.GeneralUtil;
@@ -11,7 +11,6 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.ContainerHelper;
@@ -30,6 +29,7 @@ import net.satisfy.brewery.block.brew_event.BrewHelper;
 import net.satisfy.brewery.block.property.BrewMaterial;
 import net.satisfy.brewery.block.property.Heat;
 import net.satisfy.brewery.block.property.Liquid;
+import net.satisfy.brewery.entity.BeerElementalEntity;
 import net.satisfy.brewery.item.DrinkBlockItem;
 import net.satisfy.brewery.recipe.BrewingRecipe;
 import net.satisfy.brewery.registry.*;
@@ -43,31 +43,32 @@ import java.util.List;
 import java.util.Set;
 
 public class BrewstationBlockEntity extends BlockEntity implements ImplementedInventory, BlockEntityTicker<BrewstationBlockEntity> {
+    @NotNull
+    private Set<BlockPos> components = new HashSet<>(4);
     private static final int MAX_BREW_TIME = 60 * 20;
     private static final int MIN_TIME_FOR_EVENT = 5 * 20;
     private static final int MAX_TIME_FOR_EVENT = 15 * 20;
     private static final int SOUND_DURATION = 3 * 20;
-    private final Set<BrewEvent> runningEvents = new HashSet<>();
-    private final SoundEvent spawnEntitySound = DoApiSoundEventRegistry.BREWSTATION_PROCESS_FAILED.get();
-    @NotNull
-    private Set<BlockPos> components = new HashSet<>(4);
     private int soundTime;
     private int brewTime;
     private int timeToNextEvent = Integer.MIN_VALUE;
+    private final Set<BrewEvent> runningEvents = new HashSet<>();
     private int solved;
     private int totalEvents;
     private NonNullList<ItemStack> ingredients;
     private ItemStack beer = ItemStack.EMPTY;
+    private final SoundEvent spawnEntitySound = DoApiSoundEventRegistry.BREWSTATION_PROCESS_FAILED.get();
 
     public BrewstationBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(BlockEntityRegistry.BREWINGSTATION_BLOCK_ENTITY.get(), blockPos, blockState);
         ingredients = NonNullList.withSize(3, ItemStack.EMPTY);
     }
 
-    @SuppressWarnings("unused")
-    public void updateInClientWorld() {
-        if (this.level instanceof ServerLevel serverLevel)
-            serverLevel.getChunkSource().blockChanged(this.getBlockPos());
+    public void setComponents(BlockPos... components) {
+        if (components.length != 4) {
+            return;
+        }
+        this.components.addAll(Arrays.asList(components));
     }
 
     public InteractionResult addIngredient(ItemStack itemStack) {
@@ -122,7 +123,7 @@ public class BrewstationBlockEntity extends BlockEntity implements ImplementedIn
             soundTime = 0;
         }
         soundTime++;
-        if (timeToNextEvent == Integer.MIN_VALUE) setTimeToEvent();
+        if(timeToNextEvent == Integer.MIN_VALUE) setTimeToEvent();
 
         BrewHelper.checkRunningEvents(this);
 
@@ -153,12 +154,13 @@ public class BrewstationBlockEntity extends BlockEntity implements ImplementedIn
         }
     }
 
-    private boolean canBrew(Recipe<?> recipe) {
+    private boolean canBrew(@Nullable Recipe<?> recipe) {
         if (recipe == null || this.level == null)
             return false;
+        BlockState blockState = this.level.getBlockState(this.getBlockPos());
         return recipe instanceof BrewingRecipe brewingRecipe &&
-                this.level.getBlockState(this.getBlockPos()).getValue(BlockStateRegistry.MATERIAL).getLevel() >= brewingRecipe.getMaterial().getLevel() &&
-                this.level.getBlockState(this.getBlockPos()).getValue(BlockStateRegistry.LIQUID) != Liquid.EMPTY &&
+                blockState.getValue(BlockStateRegistry.MATERIAL).getLevel() >= brewingRecipe.getMaterial().getLevel() &&
+                blockState.getValue(BlockStateRegistry.LIQUID) != Liquid.EMPTY &&
                 this.level.getBlockState(BrewHelper.getBlock(ObjectRegistry.BREW_OVEN.get(), this.components, this.level)).getValue(BlockStateRegistry.HEAT) != Heat.OFF;
     }
 
@@ -208,7 +210,6 @@ public class BrewstationBlockEntity extends BlockEntity implements ImplementedIn
                 this.level.addFreshEntity(beerElemental);
 
                 this.level.playSound(null, spawnPos, spawnEntitySound, SoundSource.BLOCKS, 1.0F, 1.0F);
-
             }
         }
     }
@@ -276,19 +277,10 @@ public class BrewstationBlockEntity extends BlockEntity implements ImplementedIn
         return components;
     }
 
-    public void setComponents(BlockPos... components) {
-        if (components.length != 4) {
-            return;
-        }
-        this.components.addAll(Arrays.asList(components));
-    }
-
     public List<ItemStack> getIngredient() {
         return this.ingredients;
     }
 
-
-    //CONTAINER
     @Override
     public NonNullList<ItemStack> getItems() {
         return ingredients;

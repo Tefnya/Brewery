@@ -3,7 +3,7 @@ package net.satisfy.brewery.util.rope;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.world.entity.Entity;
-import net.satisfy.brewery.entity.rope.RopeKnotEntity;
+import net.satisfy.brewery.block.entity.rope.RopeKnotEntity;
 
 @Environment(EnvType.CLIENT)
 public class IncompleteRopeConnection {

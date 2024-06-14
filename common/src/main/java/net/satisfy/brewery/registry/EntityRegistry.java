@@ -11,9 +11,9 @@ import net.satisfy.brewery.Brewery;
 import net.satisfy.brewery.entity.BeerElementalAttackEntity;
 import net.satisfy.brewery.entity.BeerElementalEntity;
 import net.satisfy.brewery.entity.DarkBrewEntity;
-import net.satisfy.brewery.entity.rope.HangingRopeEntity;
-import net.satisfy.brewery.entity.rope.RopeCollisionEntity;
-import net.satisfy.brewery.entity.rope.RopeKnotEntity;
+import net.satisfy.brewery.block.entity.rope.HangingRopeEntity;
+import net.satisfy.brewery.block.entity.rope.RopeCollisionEntity;
+import net.satisfy.brewery.block.entity.rope.RopeKnotEntity;
 import net.satisfy.brewery.util.BreweryIdentifier;
 
 import java.util.function.Supplier;

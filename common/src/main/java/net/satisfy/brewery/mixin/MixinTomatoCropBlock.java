@@ -3,7 +3,7 @@ package net.satisfy.brewery.mixin;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.phys.AABB;
-import net.satisfy.brewery.entity.rope.HangingRopeEntity;
+import net.satisfy.brewery.block.entity.rope.HangingRopeEntity;
 import net.satisfy.farm_and_charm.block.crops.TomatoCropBlock;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

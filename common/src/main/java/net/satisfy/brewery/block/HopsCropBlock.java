@@ -26,7 +26,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.satisfy.brewery.entity.rope.HangingRopeEntity;
+import net.satisfy.brewery.block.entity.rope.HangingRopeEntity;
 import net.satisfy.brewery.registry.ObjectRegistry;
 import net.satisfy.farm_and_charm.registry.TagRegistry;
 import org.jetbrains.annotations.NotNull;

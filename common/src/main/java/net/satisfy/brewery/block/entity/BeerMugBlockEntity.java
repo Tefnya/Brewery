@@ -1,4 +1,4 @@
-package net.satisfy.brewery.entity;
+package net.satisfy.brewery.block.entity;
 
 import de.cristelknight.doapi.common.util.GeneralUtil;
 import net.minecraft.core.BlockPos;

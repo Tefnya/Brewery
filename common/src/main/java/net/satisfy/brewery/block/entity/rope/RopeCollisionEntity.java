@@ -1,4 +1,4 @@
-package net.satisfy.brewery.entity.rope;
+package net.satisfy.brewery.block.entity.rope;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

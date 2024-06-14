@@ -1,4 +1,4 @@
-package net.satisfy.brewery.entity.rope;
+package net.satisfy.brewery.block.entity.rope;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectList;

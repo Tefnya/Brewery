@@ -14,9 +14,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.satisfy.brewery.Brewery;
 import net.satisfy.brewery.block.HopsCropHeadBlock;
-import net.satisfy.brewery.entity.rope.HangingRopeEntity;
-import net.satisfy.brewery.entity.rope.RopeCollisionEntity;
-import net.satisfy.brewery.entity.rope.RopeKnotEntity;
+import net.satisfy.brewery.block.entity.rope.HangingRopeEntity;
+import net.satisfy.brewery.block.entity.rope.RopeCollisionEntity;
+import net.satisfy.brewery.block.entity.rope.RopeKnotEntity;
 import net.satisfy.brewery.networking.BreweryNetworking;
 import net.satisfy.brewery.registry.EntityRegistry;
 import net.satisfy.brewery.registry.ObjectRegistry;
@@ -112,7 +112,7 @@ public class RopeConnection {
                 this.activeRopes |= (1 << index);
             }
         } else {
-            Brewery.LOGGER.debug("Cant change hanging entity, storage doesnt contain reference to Entity {} .", id);
+            Brewery.LOGGER.debug("Cannot change hanging entity, storage does not contain reference to Entity {}.", id);
         }
     }
 

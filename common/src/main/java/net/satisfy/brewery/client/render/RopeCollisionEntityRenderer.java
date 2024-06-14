@@ -5,7 +5,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
-import net.satisfy.brewery.entity.rope.RopeCollisionEntity;
+import net.satisfy.brewery.block.entity.rope.RopeCollisionEntity;
 
 @Environment(EnvType.CLIENT)
 public class RopeCollisionEntityRenderer extends EntityRenderer<RopeCollisionEntity> {

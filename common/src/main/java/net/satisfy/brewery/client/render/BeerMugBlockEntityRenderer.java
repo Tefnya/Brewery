@@ -9,7 +9,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.state.BlockState;
 import net.satisfy.brewery.block.BeerMugFlowerPotBlock;
-import net.satisfy.brewery.entity.BeerMugBlockEntity;
+import net.satisfy.brewery.block.entity.BeerMugBlockEntity;
 
 @SuppressWarnings("unused")
 public class BeerMugBlockEntityRenderer implements BlockEntityRenderer<BeerMugBlockEntity> {

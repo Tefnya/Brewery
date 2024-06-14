@@ -4,7 +4,7 @@ import dev.architectury.networking.NetworkManager;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.Entity;
 import net.satisfy.brewery.Brewery;
-import net.satisfy.brewery.entity.rope.HangingRopeEntity;
+import net.satisfy.brewery.block.entity.rope.HangingRopeEntity;
 
 public class ChangeHangingRopeS2CPacket implements NetworkManager.NetworkReceiver {
     @Override

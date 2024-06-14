@@ -1,4 +1,4 @@
-package net.satisfy.brewery.entity.rope;
+package net.satisfy.brewery.block.entity.rope;
 
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.DamageTypeTags;
@@ -19,7 +19,6 @@ public interface IRopeEntity {
             return InteractionResult.PASS;
         }
 
-// If source is an explosion, return SUCCESS
         if (source.is(DamageTypeTags.IS_EXPLOSION)) {
             return InteractionResult.SUCCESS;
         }

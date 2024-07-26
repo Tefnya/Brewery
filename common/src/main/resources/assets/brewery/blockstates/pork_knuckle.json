@@ -15,10 +15,6 @@
       "model": "brewery:block/pork_knuckle_0",
       "y": 270
     },
-    "bites=1,facing=west": {
-      "model": "brewery:block/pork_knuckle_1",
-      "y": 270
-    },
     "bites=1,facing=north": {
       "model": "brewery:block/pork_knuckle_1"
     },
@@ -29,6 +25,10 @@
     "bites=1,facing=south": {
       "model": "brewery:block/pork_knuckle_1",
       "y": 180
+    },
+    "bites=1,facing=west": {
+      "model": "brewery:block/pork_knuckle_1",
+      "y": 270
     },
     "bites=2,facing=north": {
       "model": "brewery:block/pork_knuckle_2"
@@ -45,10 +45,6 @@
       "model": "brewery:block/pork_knuckle_2",
       "y": 270
     },
-    "bites=3,facing=west": {
-      "model": "brewery:block/pork_knuckle_3",
-      "y": 270
-    },
     "bites=3,facing=north": {
       "model": "brewery:block/pork_knuckle_3"
     },
@@ -59,6 +55,100 @@
     "bites=3,facing=south": {
       "model": "brewery:block/pork_knuckle_3",
       "y": 180
+    },
+    "bites=3,facing=west": {
+      "model": "brewery:block/pork_knuckle_3",
+      "y": 270
+    },
+    "bites=4,facing=north": {
+      "model": "brewery:block/pork_knuckle_0"
+    },
+    "bites=4,facing=east": {
+      "model": "brewery:block/pork_knuckle_0",
+      "y": 90
+    },
+    "bites=4,facing=south": {
+      "model": "brewery:block/pork_knuckle_0",
+      "y": 180
+    },
+    "bites=4,facing=west": {
+      "model": "brewery:block/pork_knuckle_0",
+      "y": 270
+    },
+    "bites=5,facing=north": {
+      "model": "brewery:block/pork_knuckle_0"
+    },
+    "bites=5,facing=east": {
+      "model": "brewery:block/pork_knuckle_0",
+      "y": 90
+    },
+    "bites=5,facing=south": {
+      "model": "brewery:block/pork_knuckle_0",
+      "y": 180
+    },
+    "bites=5,facing=west": {
+      "model": "brewery:block/pork_knuckle_0",
+      "y": 270
+    },
+    "bites=6,facing=north": {
+      "model": "brewery:block/pork_knuckle_0"
+    },
+    "bites=6,facing=east": {
+      "model": "brewery:block/pork_knuckle_0",
+      "y": 90
+    },
+    "bites=6,facing=south": {
+      "model": "brewery:block/pork_knuckle_0",
+      "y": 180
+    },
+    "bites=6,facing=west": {
+      "model": "brewery:block/pork_knuckle_0",
+      "y": 270
+    },
+    "bites=7,facing=north": {
+      "model": "brewery:block/pork_knuckle_0"
+    },
+    "bites=7,facing=east": {
+      "model": "brewery:block/pork_knuckle_0",
+      "y": 90
+    },
+    "bites=7,facing=south": {
+      "model": "brewery:block/pork_knuckle_0",
+      "y": 180
+    },
+    "bites=7,facing=west": {
+      "model": "brewery:block/pork_knuckle_0",
+      "y": 270
+    },
+    "bites=8,facing=north": {
+      "model": "brewery:block/pork_knuckle_0"
+    },
+    "bites=8,facing=east": {
+      "model": "brewery:block/pork_knuckle_0",
+      "y": 90
+    },
+    "bites=8,facing=south": {
+      "model": "brewery:block/pork_knuckle_0",
+      "y": 180
+    },
+    "bites=8,facing=west": {
+      "model": "brewery:block/pork_knuckle_0",
+      "y": 270
+    },
+    "bites=9,facing=north": {
+      "model": "brewery:block/pork_knuckle_0"
+    },
+    "bites=9,facing=east": {
+      "model": "brewery:block/pork_knuckle_0",
+      "y": 90
+    },
+    "bites=9,facing=south": {
+      "model": "brewery:block/pork_knuckle_0",
+      "y": 180
+    },
+    "bites=9,facing=west": {
+      "model": "brewery:block/pork_knuckle_0",
+      "y": 270
     }
   }
 }

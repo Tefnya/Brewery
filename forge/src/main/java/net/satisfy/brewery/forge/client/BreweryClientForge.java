@@ -10,6 +10,7 @@ import net.minecraftforge.registries.RegisterEvent;
 import net.satisfy.brewery.Brewery;
 import net.satisfy.brewery.client.BreweryClient;
 import net.satisfy.brewery.client.model.BeerElementalModel;
+import net.satisfy.brewery.client.model.BrewfestHatModel;
 import net.satisfy.brewery.client.model.RopeKnotEntityModel;
 import net.satisfy.brewery.client.render.*;
 import net.satisfy.brewery.registry.EntityRegistry;
@@ -30,15 +31,12 @@ public class BreweryClientForge {
 
     public static void entityRendererSetup() {
         EntityModelLayerRegistry.register(ModelRegistry.BEER_ELEMENTAL, BeerElementalModel::createBodyLayer);
-        EntityRendererRegistry.register(EntityRegistry.BEER_ELEMENTAL, BeerElementalRenderer::new);
-
-        EntityRendererRegistry.register(EntityRegistry.BEER_ELEMENTAL_ATTACK, BeerElementalAttackRenderer::new);
-
-        EntityRendererRegistry.register(EntityRegistry.ROPE_COLLISION, RopeCollisionEntityRenderer::new);
-
+        EntityModelLayerRegistry.register(BrewfestHatModel.LAYER_LOCATION, BrewfestHatModel::createBodyLayer);
         EntityModelLayerRegistry.register(ModelRegistry.ROPE_KNOT, RopeKnotEntityModel::createBodyLayer);
+        EntityRendererRegistry.register(EntityRegistry.BEER_ELEMENTAL, BeerElementalRenderer::new);
+        EntityRendererRegistry.register(EntityRegistry.BEER_ELEMENTAL_ATTACK, BeerElementalAttackRenderer::new);
+        EntityRendererRegistry.register(EntityRegistry.ROPE_COLLISION, RopeCollisionEntityRenderer::new);
         EntityRendererRegistry.register(EntityRegistry.ROPE_KNOT, RopeKnotRenderer::new);
         EntityRendererRegistry.register(EntityRegistry.HANGING_ROPE, HangingRopeRenderer::new);
-
     }
 }

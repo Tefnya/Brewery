@@ -35,7 +35,7 @@ public class BrewfestHatModel<T extends Entity> extends EntityModel<T> {
     @Override
     public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
         poseStack.pushPose();
-        poseStack.scale(1.05F, 1.05F, 1.05F);
+        poseStack.scale(1.08F, 1.08F, 1.08F);
         brewfest_hat.render(poseStack, buffer, packedLight, packedOverlay);
         poseStack.popPose();
     }

@@ -33,19 +33,22 @@ public class ArmorRegistry {
 
     public static Model getHatModel(Item item, ModelPart baseHead) {
         EntityModelSet modelSet = Minecraft.getInstance().getEntityModels();
-        BrewfestHatModel<?> model = models.computeIfAbsent(item, key -> {
-            if (key == ObjectRegistry.BREWFEST_HAT.get() || key == ObjectRegistry.BREWFEST_HAT_RED.get()) {
-                return new BrewfestHatModel<>(modelSet.bakeLayer(BrewfestHatModel.LAYER_LOCATION));
-            } else {
-                return null;
-            }
-        });
 
-        assert model != null;
+        BrewfestHatModel<?> brewfestHatModel = models.computeIfAbsent(ObjectRegistry.BREWFEST_HAT.get(), key ->
+                new BrewfestHatModel<>(modelSet.bakeLayer(BrewfestHatModel.LAYER_LOCATION))
+        );
+
+        BrewfestHatModel<?> brewfestHatRedModel = models.computeIfAbsent(ObjectRegistry.BREWFEST_HAT_RED.get(), key ->
+                new BrewfestHatModel<>(modelSet.bakeLayer(BrewfestHatModel.LAYER_LOCATION))
+        );
+
+        BrewfestHatModel<?> model = (item == ObjectRegistry.BREWFEST_HAT.get()) ? brewfestHatModel : brewfestHatRedModel;
+
         model.copyHead(baseHead);
 
         return model;
     }
+
 
 
     public static <T extends LivingEntity> void registerArmorModels(CustomArmorManager<T> armors, EntityModelSet modelLoader) {

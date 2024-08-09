@@ -27,3 +27,4 @@ public class BreweryForge {
         event.enqueueWork(CompostablesRegistry::init);
     }
 }
+

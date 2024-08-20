@@ -16,6 +16,7 @@ import java.util.Arrays;
 
 @SuppressWarnings("unused")
 public class BeerElementalModel<T extends Monster> extends EntityModel<T> {
+
     public static final ModelLayerLocation BEER_ELEMENTAL_MODEL_LAYER = new ModelLayerLocation(new ResourceLocation(Brewery.MOD_ID, "beer_elemental"), "main");
     private final ModelPart[] upperBodyParts;
 

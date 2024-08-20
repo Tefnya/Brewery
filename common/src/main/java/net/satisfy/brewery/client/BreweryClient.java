@@ -36,8 +36,6 @@ public class BreweryClient {
     public static void onInitializeClient() {
         BreweryNetworking.registerS2CPackets();
         ItemPredicate.register();
-        registerModelLayers();
-        registerRenderer();
 
         RenderTypeRegistry.register(RenderType.cutout(),
                 WILD_HOPS.get(), BEER_MUG.get(), BEER_WHEAT.get(), BEER_HOPS.get(), BEER_BARLEY.get(), BEER_HALEY.get(), BEER_OAT.get(), BEER_NETTLE.get(),
@@ -56,17 +54,17 @@ public class BreweryClient {
 
         ClientStorageTypes.init();
 
+        BlockEntityRendererRegistry.register(BlockEntityRegistry.BEER_MUG_BLOCK_ENTITY.get(), BeerMugBlockEntityRenderer::new);
+        BlockEntityRendererRegistry.register(BlockEntityRegistry.BREWINGSTATION_BLOCK_ENTITY.get(), BrewingstationRenderer::new);
+
         ClientPlayerEvent.CLIENT_PLAYER_JOIN.register(new PlayerJoinEvent());
         ClientTickEvent.CLIENT_LEVEL_PRE.register((clientLevel) -> RopeHelper.tick());
     }
 
-    public static void preInitClient() {
-        registerEntityModelLayers();
-    }
 
-    private static void registerRenderer() {
-        BlockEntityRendererRegistry.register(BlockEntityRegistry.BEER_MUG_BLOCK_ENTITY.get(), BeerMugBlockEntityRenderer::new);
-        BlockEntityRendererRegistry.register(BlockEntityRegistry.BREWINGSTATION_BLOCK_ENTITY.get(), BrewingstationRenderer::new);
+    public static void preInitClient() {
+        ArmorRegistry.registerArmorModelLayers();
+        EntityModelLayerRegistry.register(BeerElementalModel.BEER_ELEMENTAL_MODEL_LAYER, BeerElementalModel::createBodyLayer);
         EntityModelLayerRegistry.register(BrewfestHatModel.LAYER_LOCATION, BrewfestHatModel::createBodyLayer);
         EntityModelLayerRegistry.register(ModelRegistry.ROPE_KNOT, RopeKnotEntityModel::createBodyLayer);
         EntityRendererRegistry.register(EntityRegistry.ROPE_KNOT, RopeKnotRenderer::new);
@@ -77,15 +75,10 @@ public class BreweryClient {
         EntityRendererRegistry.register(EntityRegistry.DARK_BREW, ThrownItemRenderer::new);
     }
 
-    public static void registerModelLayers() {
-        EntityModelLayerRegistry.register(BeerElementalModel.BEER_ELEMENTAL_MODEL_LAYER, BeerElementalModel::createBodyLayer);
-    }
+
 
     public static LocalPlayer getPlayer() {
         return Minecraft.getInstance().player;
     }
 
-    public static void registerEntityModelLayers() {
-        ArmorRegistry.registerArmorModelLayers();
-    }
 }

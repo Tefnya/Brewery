@@ -20,7 +20,6 @@ public class BreweryForge {
         Brewery.init();
         modEventBus.addListener(this::commonSetup);
         BreweryForgeVillagers.register(modEventBus);
-        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> BreweryClientForge::entityRendererSetup);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {

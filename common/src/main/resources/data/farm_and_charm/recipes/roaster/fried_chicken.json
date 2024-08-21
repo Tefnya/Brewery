@@ -11,10 +11,10 @@
       "tag": "farm_and_charm:tomato"
     },
     {
-      "item": "farm_and_charm:flour"
+      "tag": "farm_and_charm:flour"
     },
     {
-      "item": "farm_and_charm:butter"
+      "tag": "farm_and_charm:butter"
     }
   ],
   "container": {

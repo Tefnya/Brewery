@@ -8,7 +8,7 @@
       "item": "farm_and_charm:yeast"
     },
     {
-      "item": "farm_and_charm:butter"
+      "tag": "farm_and_charm:butter"
     }
   ],
   "item": "brewery:pretzel",

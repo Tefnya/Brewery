@@ -51,8 +51,8 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Item> BREATHALYZER = registerItem("breathalyzer", () -> new Breathalyzer(getSettings()));
     public static final RegistrySupplier<Item> ROPE = registerItem("rope", () -> new RopeItem(getSettings()));
     public static final RegistrySupplier<Item> DARK_BREW = registerItem("dark_brew", () -> new DarkBrewItem(getSettings()));
-    public static final RegistrySupplier<Item> SAUSAGE = registerItem("sausage", () -> new EffectItem(getFoodItemSettings(8, 0.8f, SUSTENANCE.get(), 6000), 6000));
-    public static final RegistrySupplier<Item> PRETZEL = registerItem("pretzel", () -> new EffectItem(getFoodItemSettings(4, 0.47f, SUSTENANCE.get(), 2000), 2000));
+    public static final RegistrySupplier<Item> SAUSAGE = registerItem("sausage", () -> new EffectItem(getFoodItemSettings(8, 0.8f, SUSTENANCE.get(), 6000), 6000, true));
+    public static final RegistrySupplier<Item> PRETZEL = registerItem("pretzel", () -> new EffectItem(getFoodItemSettings(4, 0.47f, SUSTENANCE.get(), 2000), 2000, false));
     public static final RegistrySupplier<Item> BEER_ELEMENTAL_SPAWN_EGG = registerItem("beer_elemental_spawn_egg", () -> new ArchitecturySpawnEggItem(EntityRegistry.BEER_ELEMENTAL, -1, -1, getSettings()));
     public static final RegistrySupplier<Item> BREWFEST_HAT = registerItem("brewfest_hat", () -> new BrewfestHatItem(ArmorMaterialRegistry.BREWFEST_ARMOR, ArmorItem.Type.HELMET, getSettings().rarity(Rarity.EPIC), new BreweryIdentifier("textures/models/armor/brewfest_hat.png")));
     public static final RegistrySupplier<Item> BREWFEST_HAT_RED = registerItem("brewfest_hat_red", () -> new BrewfestHatItem(ArmorMaterialRegistry.BREWFEST_ARMOR, ArmorItem.Type.HELMET, getSettings().rarity(Rarity.EPIC), new BreweryIdentifier("textures/models/armor/brewfest_hat_red.png")));

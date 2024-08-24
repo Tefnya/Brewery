@@ -3,6 +3,7 @@ package net.satisfy.brewery.compat.jei;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.recipe.RecipeType;
+import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.client.Minecraft;
@@ -12,6 +13,7 @@ import net.satisfy.brewery.Brewery;
 import net.satisfy.brewery.compat.jei.category.BrewingStationCategory;
 import net.satisfy.brewery.recipe.BrewingRecipe;
 import net.satisfy.brewery.registry.RecipeTypeRegistry;
+import net.satisfy.brewery.registry.ObjectRegistry;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -37,5 +39,12 @@ public class BreweryJEIClientPlugin implements IModPlugin {
         RecipeManager rm = Objects.requireNonNull(Minecraft.getInstance().level).getRecipeManager();
         List<BrewingRecipe> recipesbrewing = rm.getAllRecipesFor(RecipeTypeRegistry.BREWING_RECIPE_TYPE.get());
         registration.addRecipes(BREWING_TYPE, recipesbrewing);
+    }
+
+    @Override
+    public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
+        registration.addRecipeCatalyst(ObjectRegistry.WOODEN_BREWINGSTATION.get().asItem().getDefaultInstance(), BREWING_TYPE);
+        registration.addRecipeCatalyst(ObjectRegistry.COPPER_BREWINGSTATION.get().asItem().getDefaultInstance(), BREWING_TYPE);
+        registration.addRecipeCatalyst(ObjectRegistry.NETHERITE_BREWINGSTATION.get().asItem().getDefaultInstance(), BREWING_TYPE);
     }
 }

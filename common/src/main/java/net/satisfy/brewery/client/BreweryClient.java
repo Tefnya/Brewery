@@ -1,6 +1,5 @@
 package net.satisfy.brewery.client;
 
-import de.cristelknight.doapi.common.registry.DoApiBlocks;
 import dev.architectury.event.events.client.ClientPlayerEvent;
 import dev.architectury.event.events.client.ClientTickEvent;
 import dev.architectury.registry.client.level.entity.EntityModelLayerRegistry;
@@ -15,20 +14,18 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
-import net.satisfy.brewery.client.model.BeerElementalModel;
-import net.satisfy.brewery.client.model.BrewfestHatModel;
-import net.satisfy.brewery.client.model.RopeKnotEntityModel;
-import net.satisfy.brewery.client.render.*;
-import net.satisfy.brewery.event.PlayerJoinEvent;
-import net.satisfy.brewery.item.ItemPredicate;
-import net.satisfy.brewery.networking.BreweryNetworking;
-import net.satisfy.brewery.registry.ArmorRegistry;
-import net.satisfy.brewery.registry.BlockEntityRegistry;
-import net.satisfy.brewery.registry.EntityRegistry;
-import net.satisfy.brewery.registry.ModelRegistry;
-import net.satisfy.brewery.util.rope.RopeHelper;
+import net.satisfy.brewery.client.model.*;
+import net.satisfy.brewery.client.renderer.block.*;
+import net.satisfy.brewery.client.renderer.entity.*;
+import net.satisfy.brewery.core.event.PlayerJoinEvent;
+import net.satisfy.brewery.core.item.ItemPredicate;
+import net.satisfy.brewery.core.networking.BreweryNetworking;
+import net.satisfy.brewery.core.registry.EntityTypeRegistry;
+import net.satisfy.brewery.core.registry.ModelRegistry;
+import net.satisfy.brewery.core.registry.StorageTypeRegistry;
+import net.satisfy.brewery.core.util.rope.RopeHelper;
 
-import static net.satisfy.brewery.registry.ObjectRegistry.*;
+import static net.satisfy.brewery.core.registry.ObjectRegistry.*;
 
 @Environment(EnvType.CLIENT)
 public class BreweryClient {
@@ -40,8 +37,8 @@ public class BreweryClient {
         RenderTypeRegistry.register(RenderType.cutout(),
                 WILD_HOPS.get(), BEER_MUG.get(), BEER_WHEAT.get(), BEER_HOPS.get(), BEER_BARLEY.get(), BEER_HALEY.get(), BEER_OAT.get(), BEER_NETTLE.get(),
                 HOPS_CROP_BODY.get(), HOPS_CROP.get(), WHISKEY_MAGGOALLAN.get(), WHISKEY_CARRASCONLABEL.get(), WHISKEY_LILITUSINGLEMALT.get(),
-                WHISKEY_JOJANNIK.get(), WHISKEY_MAGGOALLAN.get(), WHISKEY_CRISTELWALKER.get(), DoApiBlocks.WALL_STANDARD.get(), WHISKEY_AK.get(),
-                DoApiBlocks.STANDARD.get(), WHISKEY_HIGHLAND_HEARTH.get(), WHISKEY_JAMESONS_MALT.get(), WHISKEY_SMOKEY_REVERIE.get()
+                WHISKEY_JOJANNIK.get(), WHISKEY_MAGGOALLAN.get(), WHISKEY_CRISTELWALKER.get(), WHISKEY_AK.get(), WHISKEY_HIGHLAND_HEARTH.get(),
+                WHISKEY_JAMESONS_MALT.get(), WHISKEY_SMOKEY_REVERIE.get()
         );
 
 
@@ -52,32 +49,43 @@ public class BreweryClient {
             return BiomeColors.getAverageWaterColor(world, pos);
         }, WOODEN_BREWINGSTATION, COPPER_BREWINGSTATION, NETHERITE_BREWINGSTATION);
 
-        ClientStorageTypes.init();
-
-        BlockEntityRendererRegistry.register(BlockEntityRegistry.BEER_MUG_BLOCK_ENTITY.get(), BeerMugBlockEntityRenderer::new);
-        BlockEntityRendererRegistry.register(BlockEntityRegistry.BREWINGSTATION_BLOCK_ENTITY.get(), BrewingstationRenderer::new);
+        BlockEntityRendererRegistry.register(EntityTypeRegistry.BREWERY_BANNER.get(), CompletionistBannerRenderer::new);
+        BlockEntityRendererRegistry.register(EntityTypeRegistry.STORAGE_ENTITY.get(), context -> new StorageBlockEntityRenderer());
+        BlockEntityRendererRegistry.register(EntityTypeRegistry.BEER_MUG_BLOCK_ENTITY.get(), BeerMugRenderer::new);
+        BlockEntityRendererRegistry.register(EntityTypeRegistry.BREWINGSTATION_BLOCK_ENTITY.get(), BrewingstationRenderer::new);
+        StorageBlockEntityRenderer.registerStorageType(StorageTypeRegistry.BEVERAGE, new BeverageRenderer());
 
         ClientPlayerEvent.CLIENT_PLAYER_JOIN.register(new PlayerJoinEvent());
         ClientTickEvent.CLIENT_LEVEL_PRE.register((clientLevel) -> RopeHelper.tick());
     }
 
 
+
     public static void preInitClient() {
-        ArmorRegistry.registerArmorModelLayers();
-        EntityModelLayerRegistry.register(BeerElementalModel.BEER_ELEMENTAL_MODEL_LAYER, BeerElementalModel::createBodyLayer);
-        EntityModelLayerRegistry.register(BrewfestHatModel.LAYER_LOCATION, BrewfestHatModel::createBodyLayer);
-        EntityModelLayerRegistry.register(ModelRegistry.ROPE_KNOT, RopeKnotEntityModel::createBodyLayer);
-        EntityRendererRegistry.register(EntityRegistry.ROPE_KNOT, RopeKnotRenderer::new);
-        EntityRendererRegistry.register(EntityRegistry.HANGING_ROPE, HangingRopeRenderer::new);
-        EntityRendererRegistry.register(EntityRegistry.ROPE_COLLISION, RopeCollisionEntityRenderer::new);
-        EntityRendererRegistry.register(EntityRegistry.BEER_ELEMENTAL, BeerElementalRenderer::new);
-        EntityRendererRegistry.register(EntityRegistry.BEER_ELEMENTAL_ATTACK, BeerElementalAttackRenderer::new);
-        EntityRendererRegistry.register(EntityRegistry.DARK_BREW, ThrownItemRenderer::new);
+        registerEntityRenderers();
+        registerEntityModelLayers();
     }
 
+    private static void registerEntityRenderers() {
+        EntityRendererRegistry.register(EntityTypeRegistry.ROPE_KNOT, RopeKnotRenderer::new);
+        EntityRendererRegistry.register(EntityTypeRegistry.HANGING_ROPE, HangingRopeRenderer::new);
+        EntityRendererRegistry.register(EntityTypeRegistry.ROPE_COLLISION, RopeCollisionEntityRenderer::new);
+        EntityRendererRegistry.register(EntityTypeRegistry.BEER_ELEMENTAL, BeerElementalRenderer::new);
+        EntityRendererRegistry.register(EntityTypeRegistry.BEER_ELEMENTAL_ATTACK, BeerElementalAttackRenderer::new);
+        EntityRendererRegistry.register(EntityTypeRegistry.DARK_BREW, ThrownItemRenderer::new);
+    }
 
+    public static void registerEntityModelLayers() {
+        EntityModelLayerRegistry.register(BrewfestHatModel.LAYER_LOCATION, BrewfestHatModel::createBodyLayer);
+        EntityModelLayerRegistry.register(BrewfestChestplateModel.LAYER_LOCATION, BrewfestChestplateModel::createBodyLayer);
+        EntityModelLayerRegistry.register(BrewfestLeggingsModel.LAYER_LOCATION, BrewfestLeggingsModel::createBodyLayer);
+        EntityModelLayerRegistry.register(BrewfestBootsModel.LAYER_LOCATION, BrewfestBootsModel::createBodyLayer);
+        EntityModelLayerRegistry.register(BeerElementalModel.BEER_ELEMENTAL_MODEL_LAYER, BeerElementalModel::createBodyLayer);
+        EntityModelLayerRegistry.register(ModelRegistry.ROPE_KNOT, RopeKnotEntityModel::createBodyLayer);
+        EntityModelLayerRegistry.register(CompletionistBannerRenderer.LAYER_LOCATION, CompletionistBannerRenderer::createBodyLayer);
+    }
 
-    public static LocalPlayer getPlayer() {
+        public static LocalPlayer getPlayer() {
         return Minecraft.getInstance().player;
     }
 

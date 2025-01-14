@@ -7,7 +7,7 @@
         {
           "type": "minecraft:item",
           "expand": true,
-          "name": "brewery:beer_standard"
+          "name": "brewery:brewery_banner"
         }
       ],
       "rolls": {

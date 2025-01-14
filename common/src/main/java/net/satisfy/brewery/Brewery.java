@@ -2,31 +2,24 @@ package net.satisfy.brewery;
 
 import dev.architectury.event.events.common.InteractionEvent;
 import dev.architectury.event.events.common.PlayerEvent;
-import net.satisfy.brewery.block.brew_event.BrewEvents;
-import net.satisfy.brewery.event.*;
-import net.satisfy.brewery.networking.BreweryNetworking;
-import net.satisfy.brewery.registry.*;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import net.satisfy.brewery.core.event.brew_event.BrewEvents;
+import net.satisfy.brewery.core.event.*;
+import net.satisfy.brewery.core.networking.BreweryNetworking;
+import net.satisfy.brewery.core.registry.*;
 
 public class Brewery {
     public static final String MOD_ID = "brewery";
-    public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
 
     public static void init() {
-        LOGGER.debug("Initiate " + MOD_ID);
-        DataFixerRegistry.init();
         ObjectRegistry.init();
         TabRegistry.init();
-        BlockEntityRegistry.init();
-        EntityRegistry.init();
+        EntityTypeRegistry.init();
         MobEffectRegistry.init();
         BrewEvents.loadClass();
         CommonEvents.init();
         BreweryNetworking.registerC2SPackets();
         RecipeTypeRegistry.init();
         registerEvents();
-
     }
 
     private static void registerEvents() {

@@ -6,7 +6,7 @@ license = "Custom"
 modId = "brewery"
 version = "${version}"
 displayName = "[Let's Do] Brewery"
-authors = "BaumeisterJO, satisfy"
+authors = "satisfy"
 description = '''
 Ozapft is! Brau Bier, beiss in a Bretzn – willkomme zum Braufescht!'''
 logoFile = "pack.png"
@@ -27,12 +27,6 @@ side = "BOTH"
 modId = "architectury"
 mandatory = true
 versionRange = "[9.1.12,)"
-ordering = "AFTER"
-side = "BOTH"
-[[dependencies.brewery]]
-modId = "doapi"
-mandatory = true
-versionRange = "[1.2.9,)"
 ordering = "AFTER"
 side = "BOTH"
 [[dependencies.brewery]]

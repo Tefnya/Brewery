@@ -17,7 +17,6 @@ subprojects {
     dependencies {
         minecraft "com.mojang:minecraft:${rootProject.minecraft_version}"
         mappings loom.officialMojangMappings()
-        implementation "org.joml:joml:${rootProject.jomlVersion}"
     }
 }
 
@@ -45,10 +44,6 @@ allprojects {
                 name = "Jared's maven"
                 url = "https://maven.blamejared.com/"
             }
-        }
-        mavenCentral()
-        maven {
-            url "https://oss.sonatype.org/content/repositories/snapshots/"
         }
     }
 

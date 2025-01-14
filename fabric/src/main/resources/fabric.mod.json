@@ -5,7 +5,10 @@
   "name": "[Let's Do] Brewery",
   "description": "Ozapft is! Brau Bier, beiss in a Bretzn – willkomme zum Braufescht!",
   "authors": [
-    "BaumeisterJO, satisfy, EC"
+    "satisfy"
+  ],
+  "credits": [
+    "MissLilitu, BaumeisterJO, EC"
   ],
   "contact": {
     "homepage": "https://www.curseforge.com/minecraft/mc-mods/lets-do-brewery",
@@ -21,14 +24,11 @@
     "client": [
       "net.satisfy.brewery.fabric.client.BreweryClientFabric"
     ],
-    "doapi": [
-      "net.satisfy.brewery.util.api.BreweryDoAPI"
-    ],
     "rei_client": [
-      "net.satisfy.brewery.fabric.rei.BreweryREIClientPluginFabric"
+      "net.satisfy.brewery.fabric.core.rei.BreweryREIClientPluginFabric"
     ],
     "jei_mod_plugin": [
-      "net.satisfy.brewery.compat.jei.BreweryJEIClientPlugin"
+      "net.satisfy.brewery.core.compat.jei.BreweryJEIClientPlugin"
     ]
   },
   "mixins": [
@@ -38,7 +38,6 @@
     "fabric": "*",
     "minecraft": ">=1.20.1",
     "architectury": ">=6.5.82",
-    "doapi": ">=1.2.9",
     "farm_and_charm": ">=0.0.1"
   }
 }

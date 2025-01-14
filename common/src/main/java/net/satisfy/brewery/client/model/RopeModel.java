@@ -66,8 +66,8 @@ public record RopeModel(float[] vertices, float[] uvs) {
         }
 
         public RopeModel build() {
-            if (vertices.size() != size * 3) Brewery.LOGGER.error("Wrong count of vertices");
-            if (uvs.size() != size * 2) Brewery.LOGGER.error("Wrong count of uvs");
+            if (vertices.size() != size * 3);
+            if (uvs.size() != size * 2);
 
             return new RopeModel(toFloatArray(vertices), toFloatArray(uvs));
         }

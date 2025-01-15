@@ -10,10 +10,7 @@ import net.satisfy.brewery.Brewery;
 import net.satisfy.brewery.core.util.BreweryIdentifier;
 
 public class SoundEventRegistry {
-
-    public static void init() {}
-
-    private static final Registrar<SoundEvent> SOUND_EVENTS = DeferredRegister.create(Brewery.MOD_ID, Registries.SOUND_EVENT).getRegistrar();
+    public static final Registrar<SoundEvent> SOUND_EVENTS = DeferredRegister.create(Brewery.MOD_ID, Registries.SOUND_EVENT).getRegistrar();
 
     public static final RegistrySupplier<SoundEvent> BREATH = create("breath");
     public static final RegistrySupplier<SoundEvent> BREWSTATION_OVEN = create("brewstation_oven");
@@ -32,7 +29,10 @@ public class SoundEventRegistry {
     public static final RegistrySupplier<SoundEvent> DRAWER_CLOSE = create("drawer_close");
 
     private static RegistrySupplier<SoundEvent> create(String name) {
-        ResourceLocation id = new BreweryIdentifier(name);
+        final ResourceLocation id = new BreweryIdentifier(name);
         return SOUND_EVENTS.register(id, () -> SoundEvent.createVariableRangeEvent(id));
     }
+
+    public static void init() {}
+
 }

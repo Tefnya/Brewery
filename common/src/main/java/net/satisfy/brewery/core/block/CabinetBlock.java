@@ -13,6 +13,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -30,8 +31,7 @@ public class CabinetBlock extends BaseEntityBlock {
     private final SoundEvent openSound;
     private final SoundEvent closeSound;
 
-    public CabinetBlock(Properties settings, SoundEvent openSound, SoundEvent closeSound) {
-
+    public CabinetBlock(BlockBehaviour.Properties settings, SoundEvent openSound, SoundEvent closeSound) {
         super(settings);
         this.openSound = openSound;
         this.closeSound = closeSound;

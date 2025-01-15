@@ -12,13 +12,14 @@ public class Brewery {
 
     public static void init() {
         ObjectRegistry.init();
-        TabRegistry.init();
         EntityTypeRegistry.init();
         MobEffectRegistry.init();
+        SoundEventRegistry.init();
         BrewEvents.loadClass();
         CommonEvents.init();
         BreweryNetworking.registerC2SPackets();
         RecipeTypeRegistry.init();
+        TabRegistry.init();
         registerEvents();
     }
 

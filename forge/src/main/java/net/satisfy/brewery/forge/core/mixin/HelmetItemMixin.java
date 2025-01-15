@@ -11,6 +11,7 @@ import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.satisfy.brewery.core.item.BrewfestHatItem;
+import net.satisfy.brewery.core.registry.ArmorRegistry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
@@ -20,17 +21,17 @@ import org.spongepowered.asm.mixin.Shadow;
 import java.util.function.Consumer;
 
 @Mixin(BrewfestHatItem.class)
-public abstract class HatItemMixin extends ArmorItem
-{
-    @Shadow @Final
+public abstract class HelmetItemMixin extends ArmorItem {
+    @Shadow
+    @Final
     private ResourceLocation hatTexture;
+
     @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         consumer.accept(
                 new IClientItemExtensions() {
                     @Override
-                    public @NotNull Model getGenericArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original)
-                    {
+                    public @NotNull Model getGenericArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
                         return ArmorRegistry.getHatModel(itemStack.getItem(), original.getHead());
                     }
                 }
@@ -42,7 +43,7 @@ public abstract class HatItemMixin extends ArmorItem
         return hatTexture.toString();
     }
 
-    private HatItemMixin(ArmorMaterial arg, Type arg2, Properties arg3) {
-        super(arg, arg2, arg3);
+    private HelmetItemMixin(ArmorMaterial armorMaterial, Type armorType, Properties itemProperties) {
+        super(armorMaterial, armorType, itemProperties);
     }
 }

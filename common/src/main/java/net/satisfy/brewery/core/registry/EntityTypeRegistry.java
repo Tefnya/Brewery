@@ -40,7 +40,6 @@ public class EntityTypeRegistry {
     public static final RegistrySupplier<BlockEntityType<SideBoardBlockEntity>> SIDEBOARD_BLOCK_ENTITY = registerBlockEntity("sideboard", () -> BlockEntityType.Builder.of(SideBoardBlockEntity::new, ObjectRegistry.SIDEBOARD.get()).build(null));
     public static final RegistrySupplier<BlockEntityType<CompletionistBannerEntity>> BREWERY_BANNER = registerBlockEntity("brewery_banner", () -> BlockEntityType.Builder.of(CompletionistBannerEntity::new, ObjectRegistry.BREWERY_BANNER.get(), ObjectRegistry.BREWERY_WALL_BANNER.get()).build(null));
 
-
     public static void registerBeerElemental(Supplier<? extends EntityType<? extends Monster>> typeSupplier) {
         EntityAttributeRegistry.register(typeSupplier, BeerElementalEntity::createAttributes);
     }

@@ -12,7 +12,7 @@ import net.satisfy.brewery.core.util.BreweryIdentifier;
 import org.jetbrains.annotations.NotNull;
 
 public class BrewfestBootsModel<T extends Entity> extends EntityModel<T> {
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new BreweryIdentifier("fur_boots"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new BreweryIdentifier("brewfest_boots"), "main");
     private final ModelPart right_leg;
     private final ModelPart left_leg;
 

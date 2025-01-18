@@ -9,7 +9,6 @@ import net.satisfy.brewery.core.registry.*;
 
 public class Brewery {
     public static final String MOD_ID = "brewery";
-
     public static void init() {
         ObjectRegistry.init();
         EntityTypeRegistry.init();

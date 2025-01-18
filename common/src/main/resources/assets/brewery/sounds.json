@@ -77,25 +77,25 @@
     ]
   },
   "drawer_open": {
-    "subtitle": "sound.brewery.drawer_open",
+    "subtitle": "brewery.sound.drawer_open",
     "sounds": [
       "brewery:drawer_open"
     ]
   },
   "drawer_close": {
-    "subtitle": "sound.brewery.drawer_close",
+    "subtitle": "brewery.sound.drawer_close",
     "sounds": [
       "brewery:drawer_close"
     ]
   },
   "cabinet_open": {
-    "subtitle": "sound.brewery.cabinet_open",
+    "subtitle": "brewery.sound.cabinet_open",
     "sounds": [
       "brewery:cabinet_open"
     ]
   },
   "cabinet_close": {
-    "subtitle": "sound.brewery.cabinet_close",
+    "subtitle": "brewery.sound.cabinet_close",
     "sounds": [
       "brewery:cabinet_close"
     ]

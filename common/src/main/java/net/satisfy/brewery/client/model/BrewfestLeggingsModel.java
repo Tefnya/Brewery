@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class BrewfestLeggingsModel<T extends Entity> extends EntityModel<T> {
 
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new BreweryIdentifier("fur_leggings"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new BreweryIdentifier("brewfest_leggings"), "main");
     private final ModelPart body;
     private final ModelPart right_leg;
     private final ModelPart left_leg;

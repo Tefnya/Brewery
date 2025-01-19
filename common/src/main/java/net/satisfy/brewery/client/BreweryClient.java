@@ -38,7 +38,7 @@ public class BreweryClient {
                 WILD_HOPS.get(), BEER_MUG.get(), BEER_WHEAT.get(), BEER_HOPS.get(), BEER_BARLEY.get(), BEER_HALEY.get(), BEER_OAT.get(), BEER_NETTLE.get(),
                 HOPS_CROP_BODY.get(), HOPS_CROP.get(), WHISKEY_MAGGOALLAN.get(), WHISKEY_CARRASCONLABEL.get(), WHISKEY_LILITUSINGLEMALT.get(),
                 WHISKEY_JOJANNIK.get(), WHISKEY_MAGGOALLAN.get(), WHISKEY_CRISTELWALKER.get(), WHISKEY_AK.get(), WHISKEY_HIGHLAND_HEARTH.get(),
-                WHISKEY_JAMESONS_MALT.get(), WHISKEY_SMOKEY_REVERIE.get()
+                WHISKEY_JAMESONS_MALT.get(), WHISKEY_SMOKEY_REVERIE.get(), BREWERY_BANNER.get(), BREWERY_WALL_BANNER.get()
         );
 
 
@@ -58,7 +58,6 @@ public class BreweryClient {
         ClientPlayerEvent.CLIENT_PLAYER_JOIN.register(new PlayerJoinEvent());
         ClientTickEvent.CLIENT_LEVEL_PRE.register((clientLevel) -> RopeHelper.tick());
     }
-
 
 
     public static void preInitClient() {
@@ -85,7 +84,7 @@ public class BreweryClient {
         EntityModelLayerRegistry.register(CompletionistBannerRenderer.LAYER_LOCATION, CompletionistBannerRenderer::createBodyLayer);
     }
 
-        public static LocalPlayer getPlayer() {
+    public static LocalPlayer getPlayer() {
         return Minecraft.getInstance().player;
     }
 
